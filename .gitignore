@@ -2,6 +2,21 @@
 __pycache__/
 *.py[cod]
 
+# Application specific
+db.sqlite3
+**/*/settings/local.py
+media/*
+static/*
+
+# Vim temp files
+*.swp
+*.swo
+*~
+.~lock.*
+
+# Ctags
+tags
+
 # C extensions
 *.so
 
