@@ -1,0 +1,341 @@
+/** BASIC */
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #EEE2C3 url(/static/images/bg01.jpg) repeat left top;
+}
+
+/** FORMS */
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+/** HEADINGS */
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0px;
+}
+
+h1, h2 {
+	color: #614829;
+}
+
+h1 span, h2 span {
+	padding: 0px 40px 0px 0px;
+	background: url(/static/images/homepage03.gif) no-repeat right center;
+}
+
+h1 {
+	margin-bottom: 20px;
+	font-size: 14px;
+}
+
+h2 {
+	margin-bottom: 15px;
+	font-size: 13px;
+}
+
+h3 {
+	margin-bottom: 5px;
+	font-size: 11px;
+	color: #9C5234;
+}
+
+/** TEXTS */
+
+body, th, td, input, textarea, select {
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #463f2e;
+}
+
+p, blockquote, ul, ol, dl {
+	margin-top: 0px;
+	margin-bottom: 1em;
+	text-align: justify;
+}
+
+.list1 {
+	margin-left: 0px;
+	padding-left: 0px;
+	list-style: none;
+}
+
+.list1 li {
+	display: block;
+	font-size: 10px;
+	height: 17px;
+	margin-bottom: 3px;
+	padding: 3px 0px 0px 10px;
+	background: url(/static/images/homepage11.jpg) no-repeat left top;
+}
+
+.list1 li a {
+	text-decoration: none;
+	font-size: 10px;
+}
+
+.list1 li a:hover {
+	text-decoration: underline;
+}
+
+#sidebar .aactive {
+	background: url(/static/images/homepage11b.jpg) no-repeat left top;
+}
+
+
+.list2 {
+	margin-left: 0px;
+	padding-left: 0px;
+	list-style: none;
+}
+
+.list2 li {
+	display: block;
+	height: 13px;
+	margin-bottom: 3px;
+	padding: 3px 0px 0px 0px;
+}
+
+.list2 li a {
+	text-decoration: underline;
+}
+
+.list2 li a:hover {
+	text-decoration: none;
+}
+
+/** LINKS */
+
+a {
+	color: #994D2E;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.more {
+	margin: 10px 0px 20px 0px;
+	padding: 0px 0px 0px 68px;
+	background: url(/static/images/homepage09.gif) no-repeat left center;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 9px;
+}
+
+.more a {
+	padding-right: 15px;
+	background: url(/static/images/homepage10.gif) no-repeat right center;
+	text-decoration: none;
+}
+
+.more a:hover {
+	text-decoration: underline;
+}
+
+/** STYLES */
+
+.style1 {
+}
+
+.style1 li {
+
+background: url(/static/images/homepage11b.jpg) no-repeat left top;
+}
+.style1 a {
+}
+
+.style1 a:hover {
+}
+
+/** BACKGROUNDS */
+
+.bg1 {
+}
+
+/** MISC */
+
+.align-justify { text-align: justify; }
+.align-right { text-align: right; }
+
+img { border: none; }
+
+img.left {
+	float: left;
+	margin: -5px 5px 0px -5px;
+}
+
+img.right {
+	float: right;
+	margin: -5px -5px 0px 5px;
+}
+
+hr { display: none; }
+
+.hr1 {
+	height: 31px;
+	background: url(/static/images/homepage04.gif) repeat-x left center;
+}
+
+/** WRAPPER */
+
+#wrapper {
+	height: 100%;
+	min-height: 100%;
+	background: url(/static/images/bg02.jpg) repeat-x left top;
+}
+
+html>body #wrapper {
+	height: auto;
+}
+
+/** HEADER */
+
+#header {
+	width: 980px;
+	height: 200px;
+}
+
+/** LOGO */
+
+#logo {
+	width: 272px;
+	height: 200px;
+}
+
+#logo h1, #logo p {
+}
+
+/** MENU */
+
+#menu {
+	width: 708px;
+	height: 200px;
+	background: url(/static/images/homepage02.jpg) no-repeat left top;
+}
+
+#menu a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#menu a:hover {
+	text-decoration: underline;
+}
+
+/** PAGE */
+
+#page {
+	width: 980px;
+	background: url(/static/images/subpage2_01.jpg) repeat-y left top;
+}
+
+#page-bg {
+	background: url(/static/images/subpage2_02.jpg) no-repeat left top;
+}
+
+/** SIDEBAR > BOXED */
+
+.boxed {
+	background: url(/static/images/homepage16.jpg) repeat-y left top;
+}
+
+.boxed-top {
+	background: url(/static/images/homepage15.jpg) no-repeat left top;
+}
+
+.boxed-bottom {
+	padding: 29px 10px 10px 16px;
+	background: url(/static/images/homepage17.jpg) no-repeat left bottom;
+}
+
+.boxed h2, .boxed-first h2 {
+	margin-bottom: 5px;
+	font-size: 10px;
+}
+
+.boxed .more, .boxed-first .more {
+	padding: 0px;
+	background: none;
+}
+
+.boxed-first {
+	background: url(/static/images/homepage13.jpg) repeat-y left top;
+}
+
+.boxed-top-first {
+	background: url(/static/images/homepage12.jpg) no-repeat left top;
+}
+
+.boxed-bottom-first {
+	padding: 29px 10px 20px 16px;
+	background: url(/static/images/homepage14.jpg) no-repeat left bottom;
+}
+
+.boxed-second {
+	background: url(/static/images/subpage1_06.jpg) repeat-y left top;
+}
+
+.boxed-top-second {
+	background: url(/static/images/subpage1_05.jpg) no-repeat left top;
+}
+
+.boxed-bottom-second {
+	padding: 29px 10px 20px 16px;
+	background: url(/static/images/subpage1_07.jpg) no-repeat left bottom;
+}
+
+
+
+/** FOOTER */
+
+#footer {
+	width: 980px;
+	height: 80px;
+	background: url(/static/images/subpage2_03.jpg) no-repeat left top;
+}
+
+#footer p {
+	margin: 0px;
+	padding: 40px 0px 0px 0px;
+	text-align: center;
+	font-size: 9px;
+	color: #9A8661;
+}
+
+table {
+
+margin-left: 20px;
+margin-right: 20px;
+border: thin solid black;
+caption-side: bottom;
+border-collapse: collapse;
+text-align: left;
+}
+
+td, th {
+border: thin dotted gray;
+padding: 5px;
+
+}
+
+th {
+background-color: #cc6600;
+}
+caption {
+font-style: italic;
+padding-top: 8px;
+
+}
+
+.cellcolor {
+background-color: #fcba7a;
+}

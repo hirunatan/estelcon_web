@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'webapp',
+    'static_pages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,9 +58,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'estelcon_web.urls'
+ROOT_URLCONF = 'webapp.urls'
 
-WSGI_APPLICATION = 'estelcon_web.wsgi.application'
+WSGI_APPLICATION = 'webapp.wsgi.application'
 
 
 # Database
