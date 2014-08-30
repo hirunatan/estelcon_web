@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     # Link with the Django user
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User, related_name='profile')
     # Additional info
     alias = models.CharField(u'Pseudónimo', max_length=100, blank = True)
     smial = models.CharField(u'Smial', max_length=100, blank = True)

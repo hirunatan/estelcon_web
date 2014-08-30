@@ -12,7 +12,7 @@ class UserProfileView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data(**kwargs)
 
-        context['profile'] = self.request.user.get_profile()
+        context['profile'] = self.request.user.profile
         context['owner_of'] = Activity.objects.filter(owners__exact = self.request.user)
         context['organizer_of'] = Activity.objects.filter(organizers__exact = self.request.user)
         context['participant_of'] = Activity.objects.filter(participants__exact = self.request.user)

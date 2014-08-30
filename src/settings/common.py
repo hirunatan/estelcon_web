@@ -94,7 +94,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-# User profile
-AUTH_PROFILE_MODULE = 'core.UserProfile'
-
