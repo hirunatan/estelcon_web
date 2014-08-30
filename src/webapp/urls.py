@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('static_pages.urls')),
+    url(r'', include('webapp.plain_pages.urls')),
 )
 
 # Static files in development environment

@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'core',
     'webapp',
-    'static_pages',
+    'webapp.plain_pages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -60,7 +60,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'webapp.urls'
 
-WSGI_APPLICATION = 'webapp.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
