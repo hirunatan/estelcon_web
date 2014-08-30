@@ -1,7 +1,10 @@
-from django.conf.urls import patterns, include, url
-from django.views.generic import TemplateView
+# -*- encoding: utf-8 -*-
+
+from django.conf.urls import patterns, url
+
+from .views import statichtml
 
 urlpatterns = patterns('',
-    (r'^(?P<html_id>.*).html$','webapp.plain_pages.views.statichtml'),
-    (r'^$', 'webapp.plain_pages.views.statichtml'),
+    url(r'^(?P<html_id>.*).html$', statichtml),
+    url(r'^$', statichtml),
 )

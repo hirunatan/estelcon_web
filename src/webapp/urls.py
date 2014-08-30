@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
@@ -6,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('webapp.user_profiles.urls')),
     url(r'', include('webapp.plain_pages.urls')),
 )
 
