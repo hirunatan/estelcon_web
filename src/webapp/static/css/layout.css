@@ -8,7 +8,7 @@
 
 #logo {
 	float: left;
-	background: url(/static/images/homepage01.jpg) no-repeat left top;
+	background: url(../images/homepage01.jpg) no-repeat left top;
 }
 
 #logo h1{
@@ -38,7 +38,7 @@ text-decoration: none;
 
 
 .single #logo {
-	background: url(/static/images/subpage2_04.jpg) no-repeat left top;
+	background: url(../images/subpage2_04.jpg) no-repeat left top;
 }
 
 /** MENU */
@@ -62,7 +62,7 @@ text-decoration: none;
 	float: left;
 	height: 20px;
 	padding: 4px 4px 0px 50px;
-	background: url(/static/images/subpage1_01.jpg) no-repeat left center;
+	background: url(../images/subpage1_01.jpg) no-repeat left center;
 }
 
 #menu .first a {
@@ -107,7 +107,7 @@ text-decoration: none;
 	float: right;
 	width: 207px;
 	padding: 0px 0px 0px 18px;
-	background: url(/static/images/homepage05.gif) repeat-y left top;
+	background: url(../images/homepage05.gif) repeat-y left top;
 }
 
 /** SIDEBAR */

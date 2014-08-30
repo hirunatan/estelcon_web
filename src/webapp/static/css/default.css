@@ -7,7 +7,7 @@ html, body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #EEE2C3 url(/static/images/bg01.jpg) repeat left top;
+	background: #EEE2C3 url(../images/bg01.jpg) repeat left top;
 }
 
 /** FORMS */
@@ -29,7 +29,7 @@ h1, h2 {
 
 h1 span, h2 span {
 	padding: 0px 40px 0px 0px;
-	background: url(/static/images/homepage03.gif) no-repeat right center;
+	background: url(../images/homepage03.gif) no-repeat right center;
 }
 
 h1 {
@@ -74,7 +74,7 @@ p, blockquote, ul, ol, dl {
 	height: 17px;
 	margin-bottom: 3px;
 	padding: 3px 0px 0px 10px;
-	background: url(/static/images/homepage11.jpg) no-repeat left top;
+	background: url(../images/homepage11.jpg) no-repeat left top;
 }
 
 .list1 li a {
@@ -87,7 +87,7 @@ p, blockquote, ul, ol, dl {
 }
 
 #sidebar .aactive {
-	background: url(/static/images/homepage11b.jpg) no-repeat left top;
+	background: url(../images/homepage11b.jpg) no-repeat left top;
 }
 
 
@@ -125,7 +125,7 @@ a:hover {
 .more {
 	margin: 10px 0px 20px 0px;
 	padding: 0px 0px 0px 68px;
-	background: url(/static/images/homepage09.gif) no-repeat left center;
+	background: url(../images/homepage09.gif) no-repeat left center;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 9px;
@@ -133,7 +133,7 @@ a:hover {
 
 .more a {
 	padding-right: 15px;
-	background: url(/static/images/homepage10.gif) no-repeat right center;
+	background: url(../images/homepage10.gif) no-repeat right center;
 	text-decoration: none;
 }
 
@@ -148,7 +148,7 @@ a:hover {
 
 .style1 li {
 
-background: url(/static/images/homepage11b.jpg) no-repeat left top;
+background: url(../images/homepage11b.jpg) no-repeat left top;
 }
 .style1 a {
 }
@@ -182,7 +182,7 @@ hr { display: none; }
 
 .hr1 {
 	height: 31px;
-	background: url(/static/images/homepage04.gif) repeat-x left center;
+	background: url(../images/homepage04.gif) repeat-x left center;
 }
 
 /** WRAPPER */
@@ -190,7 +190,7 @@ hr { display: none; }
 #wrapper {
 	height: 100%;
 	min-height: 100%;
-	background: url(/static/images/bg02.jpg) repeat-x left top;
+	background: url(../images/bg02.jpg) repeat-x left top;
 }
 
 html>body #wrapper {
@@ -219,7 +219,7 @@ html>body #wrapper {
 #menu {
 	width: 708px;
 	height: 200px;
-	background: url(/static/images/homepage02.jpg) no-repeat left top;
+	background: url(../images/homepage02.jpg) no-repeat left top;
 }
 
 #menu a {
@@ -235,26 +235,26 @@ html>body #wrapper {
 
 #page {
 	width: 980px;
-	background: url(/static/images/subpage2_01.jpg) repeat-y left top;
+	background: url(../images/subpage2_01.jpg) repeat-y left top;
 }
 
 #page-bg {
-	background: url(/static/images/subpage2_02.jpg) no-repeat left top;
+	background: url(../images/subpage2_02.jpg) no-repeat left top;
 }
 
 /** SIDEBAR > BOXED */
 
 .boxed {
-	background: url(/static/images/homepage16.jpg) repeat-y left top;
+	background: url(../images/homepage16.jpg) repeat-y left top;
 }
 
 .boxed-top {
-	background: url(/static/images/homepage15.jpg) no-repeat left top;
+	background: url(../images/homepage15.jpg) no-repeat left top;
 }
 
 .boxed-bottom {
 	padding: 29px 10px 10px 16px;
-	background: url(/static/images/homepage17.jpg) no-repeat left bottom;
+	background: url(../images/homepage17.jpg) no-repeat left bottom;
 }
 
 .boxed h2, .boxed-first h2 {
@@ -268,29 +268,29 @@ html>body #wrapper {
 }
 
 .boxed-first {
-	background: url(/static/images/homepage13.jpg) repeat-y left top;
+	background: url(../images/homepage13.jpg) repeat-y left top;
 }
 
 .boxed-top-first {
-	background: url(/static/images/homepage12.jpg) no-repeat left top;
+	background: url(../images/homepage12.jpg) no-repeat left top;
 }
 
 .boxed-bottom-first {
 	padding: 29px 10px 20px 16px;
-	background: url(/static/images/homepage14.jpg) no-repeat left bottom;
+	background: url(../images/homepage14.jpg) no-repeat left bottom;
 }
 
 .boxed-second {
-	background: url(/static/images/subpage1_06.jpg) repeat-y left top;
+	background: url(../images/subpage1_06.jpg) repeat-y left top;
 }
 
 .boxed-top-second {
-	background: url(/static/images/subpage1_05.jpg) no-repeat left top;
+	background: url(../images/subpage1_05.jpg) no-repeat left top;
 }
 
 .boxed-bottom-second {
 	padding: 29px 10px 20px 16px;
-	background: url(/static/images/subpage1_07.jpg) no-repeat left bottom;
+	background: url(../images/subpage1_07.jpg) no-repeat left bottom;
 }
 
 
@@ -300,7 +300,7 @@ html>body #wrapper {
 #footer {
 	width: 980px;
 	height: 80px;
-	background: url(/static/images/subpage2_03.jpg) no-repeat left top;
+	background: url(../images/subpage2_03.jpg) no-repeat left top;
 }
 
 #footer p {
