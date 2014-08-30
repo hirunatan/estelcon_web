@@ -87,14 +87,14 @@ class Activity(models.Model):
     show_owners = models.BooleanField(u'Mostrar responsables')
     requires_inscription = models.BooleanField(u'Requiere inscripción')
 
-    owners = models.ManyToManyField(User, verbose_name = u'Responsables', related_name = 'owners')
+    owners = models.ManyToManyField(User, verbose_name = u'Responsables', related_name = 'owner_of')
     organizers = models.ManyToManyField(User,
                                         verbose_name = u'Organizadores',
-					related_name = u'organizers',
+					related_name = u'organizer_of',
 					blank = True)
     participants = models.ManyToManyField(User,
                                           verbose_name = u'Participantes',
-					  related_name = u'participants',
+					  related_name = u'participant_of',
 					  blank = True)
 
     class Admin:

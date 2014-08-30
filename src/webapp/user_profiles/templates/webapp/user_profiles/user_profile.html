@@ -80,27 +80,27 @@
   {% endif %}
 </p>
 
-{% if owner_of or organizer_of or participant_of %}
+{% if owned_by or organized_by or participant_in %}
   <div align="center">-----------------------------------------------------------------------------------------------------------------------------</div><br/>
 {% endif %}
 
-{% if owner_of %}
+{% if owned_by %}
   <p><b>Eres RESPONSABLE de las siguientes actividades</b>:
-  {% for activity in owner_of %}
+  {% for activity in owned_by %}
   <br/><a href="/merethaderthad_actividad/{{ activity.id }}">{{ activity.title }}</a>
   {% endfor %}
 {% endif %}
 
-{% if organizer_of %}
+{% if organized_by %}
   <p><b>Eres ORGANIZADOR de las siguientes actividades</b>:
-  {% for activity in organizer_of %}
+  {% for activity in organized_by %}
   <br/><a href="/merethaderthad_actividad/{{ activity.id }}">{{ activity.title }}</a>
   {% endfor %}
 {% endif %}
 
-{% if participant_of %}
+{% if participant_in %}
   <p><b>Estás inscrito en las siguientes actividades</b>:
-  {% for activity in participant_of %}
+  {% for activity in participant_in %}
   <br/><a href="/merethaderthad_actividad/{{ activity.id }}">{{ activity.title }}</a>
   {% endfor %}
 {% endif %}
