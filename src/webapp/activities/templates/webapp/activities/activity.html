@@ -1,0 +1,124 @@
+{% extends "webapp/common/base_subsection.html" %}
+
+{% block subsecciones %}
+<ul class="list1">
+    <li><a href="/merethaderthad_modelo.html">Modelo de Mereth Aderthad</a></li>
+    <li><a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a></li>
+	<li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
+    <li class="aactive"><a href="/merethaderthad_programa">Programa de actividades</li>
+    <li><a href="/merethaderthad_inscripcion">Formulario de inscripción</a></li>
+    <li><a href="/merethaderthad_ficha">Ficha personal</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+<h1><span>La Mereth Aderthad</span> <span>Programa de actividades</span> Actividad</h1>
+
+{% if not activity %}
+
+  <p>No se encuentra la actividad</p>
+
+{% else %}
+
+  {% if is_owner %}
+  <p>(Eres el RESPONSABLE de esta actividad. Puedes ver toda la información y además modificarla.)</p>
+  {% endif %}
+  {% if is_organizer %}
+  <p>(Eres un ORGANIZADOR de esta actividad. Puedes ver toda la información.)</p>
+  {% endif %}
+  {% if is_participant %}
+  <p>(Estás inscrito en esta actividad.)</p>
+  {% endif %}
+
+  {% if is_owner %}
+
+    <div align="right"><a href="/merethaderthad_actividad_editar/{{ activity.id }}">Modificar datos de esta actividad</a></div>
+
+  {% endif %}
+
+  <h2>{{ activity.title }}</h2>
+  {% if activity.subtitle %}
+    <h3>{{ activity.subtitle }}</h3>
+  {% endif %}
+
+  {% if activity.show_owners %}
+    Por: <em>
+    {% for owner in activity.owners.all %}
+      {% if not forloop.first and not forloop.last %}, {% endif %}
+      {% if not forloop.first and forloop.last %} y {% endif %}
+      {{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}
+    {% endfor %}
+    </em>
+  {% endif %}
+
+  {% if activity.text %}
+    <p/>
+    <p>{{ activity.text|safe|linebreaks }}</p>
+  {% endif %}
+
+  {% if is_owner or is_organizer or is_admin %}
+
+    {% if activity.duration %}
+    <p/>
+    <p><b>Duración</b>: {{ activity.duration }}.</p>
+    {% endif %}
+
+    {% if activity.max_places %}
+    <p><b>Nº máximo de plazas</b>: {{ activity.max_places }}.</p>
+    {% endif %}
+
+    {% if activity.logistics %}
+      <p/>
+      <p><b>Necesidades logísticas</b>:<br/>
+      {{ activity.logistics|linebreaks }}</p>
+    {% endif %}
+
+    {% if activity.notes_organization %}
+      <p/>
+      <p><b>Comentarios de o hacia la organización</b>:<br/>
+      {{ activity.notes_organization|linebreaks }}</p>
+    {% endif %}
+
+    {% if activity.owners.all %}
+      <p/>
+      <p><b>Responsables</b>:
+      {% for owner in activity.owners.all %}
+        <br/><a href="mailto:{{ owner.email }}">
+	{{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}
+	</a>
+      {% endfor %}
+      </p>
+    {% endif %}
+
+    {% if activity.organizers.all %}
+      <p/>
+      <p><b>Organizadores</b>:
+      {% for organizer in activity.organizers.all %}
+        <br/><a href="mailto:{{ organizer.email }}">
+        {{ organizer.get_full_name }} {% if organizer.profile.alias %}"{{ organizer.profile.alias }}"{% endif %}
+	</a>
+      {% endfor %}
+      </p>
+    {% endif %}
+
+    {% if activity.participants.all %}
+      <p/>
+      <p><b>Lista de personas inscritas</b>:
+      {% for participant in activity.participants.all %}
+        <br/><a href="mailto:{{ participant.email }}">
+        {{ participant.get_full_name }} {% if participant.profile.alias %}"{{ participant.profile.alias }}"{% endif %}
+	</a>
+      {% endfor %}
+      </p>
+      <p>Para enviar un mail a todos (se recomienda poner las direcciones en copia oculta, CCO o BCC):</p>
+      <p><textarea class="vLargeTextField" rows="3" cols="85">{% for participant in activity.participants.all %}{% if not forloop.first %}, {% endif %}{{ participant.email }}{% endfor %}</textarea></p>
+    {% endif %}
+
+  {% endif %}
+
+{% endif %}
+
+<div align="right"><a href="/merethaderthad_programa">Volver atrás</a></div>
+
+{% endblock %}

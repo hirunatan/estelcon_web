@@ -213,3 +213,34 @@ def get_schedule():
 
     return (activ_without_hour, days)
 
+
+def get_activity_and_status(activity_id, user):
+    try:
+        activity = Activity.objects.get(pk = activity_id)
+    except Activity.DoesNotExist:
+	return (None, {})
+
+    is_owner = False
+    is_organizer = False
+    is_participant = False
+    is_admin = False
+
+    if user.is_authenticated():
+        if user in activity.owners.all():
+	    is_owner = True
+        if user in activity.organizers.all():
+	    is_organizer = True
+        if user in activity.participants.all():
+	    is_participant = True
+        if user.is_staff:
+	    is_admin = True
+
+    user_status =  {
+        'is_owner': is_owner,
+        'is_organizer': is_organizer,
+        'is_participant': is_participant,
+        'is_admin': is_admin
+    }
+
+    return (activity, user_status)
+
