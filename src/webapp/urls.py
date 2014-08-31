@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('webapp.user_profiles.urls')),
+    url(r'', include('webapp.activities.urls')),
     url(r'', include('webapp.plain_pages.urls')),
 )
 

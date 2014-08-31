@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'webapp',
     'webapp.common',
     'webapp.user_profiles',
+    'webapp.activities',
     'webapp.plain_pages',
 )
 
