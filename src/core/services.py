@@ -63,3 +63,45 @@ El equipo organizador.
         fail_silently = True
     )
 
+
+def change_user_inscription_data(user, new_data):
+    profile = user.profile
+    profile.notes_food=new_data['notes_food']
+    profile.notes_transport=new_data['notes_transport']
+    profile.notes_general=new_data['notes_general']
+    profile.dinner_menu=new_data['dinner_menu']
+    profile.shirts_S=new_data['shirts_S']
+    profile.shirts_M=new_data['shirts_M']
+    profile.shirts_L=new_data['shirts_L']
+    profile.shirts_XL=new_data['shirts_XL']
+    profile.shirts_XXL=new_data['shirts_XXL']
+    profile.save()
+
+    mail_managers(
+        subject = u'[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
+        message =
+u'''
+%s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web.
+Su ficha puede consultarse directamente en %s
+'''
+% (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
+    )
+
+    send_mail(
+        subject = u'[Estelcon] Notificación de modificación de ficha personal',
+        message =
+u'''
+Datos modificados.
+
+Se ha registrado correctamente el cambio de tus datos de inscripción. Puedes consultarlos entrando en
+tu ficha personal. Un saludo.
+
+El equipo organizador.
+%s
+'''
+% (settings.PROTOCOL + '://' + settings.SITE_URL),
+        from_email = settings.MAIL_FROM,
+        recipient_list = [user.email],
+        fail_silently = True
+    )
+

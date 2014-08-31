@@ -69,3 +69,38 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
                 del cleaned_data['password2']
         return cleaned_data
 
+
+
+class UserProfileEditInscriptionForm(forms.Form):
+    notes_food = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    notes_transport = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    notes_general = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    dinner_menu = forms.ChoiceField(
+        required = True,
+        choices = (('carne','carne'), ('pescado','pescado'), ('otros','otros')),
+    )
+    shirts_S = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_M = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_L = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_XL = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_XXL = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+

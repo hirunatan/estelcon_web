@@ -1,0 +1,80 @@
+{% extends "webapp/common/base_subsection.html" %}
+
+{% block subsecciones %}
+<ul class="list1">
+    <li><a href="/merethaderthad_modelo.html">Modelo de Mereth Aderthad</a></li>
+    <li><a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a></li>
+<li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
+<li><a href="/merethaderthad_programa">Programa de actividades</a></li>
+
+    <li><a href="/merethaderthad_inscripcion">Formulario de inscripción</a></li>
+    <li class="aactive"><a href="/merethaderthad_ficha">Ficha personal</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1><span>La Mereth Aderthad</span> <span>Ficha personal</span> Modificar</h1>
+<p>Aquí puedes modificar cualquier parte de tu información de inscripción, excepto los días
+de asistencia. Si deseas cambiar este dato contacta con la organización.</p>
+
+<form method="post" action=".">
+  {% csrf_token %}
+  <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
+    <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
+    {{ form.notes_food }}
+    {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
+    <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
+    {{ form.dinner_menu }}
+    {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+   <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
+  <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
+    <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
+    {{ form.notes_transport }}
+    {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
+    <label for="id_notes_general">¿Algún otro comentario?<label><br/>
+    {{ form.notes_general }}
+    {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+
+  <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
+  optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
+  Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de
+  una, simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
+  <p>Las camisetas costarán 10€ y se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis
+  nada más llegar.</p>
+   <table title="Indica cuántas camisetas quieres de esta talla.">
+    <tr>
+  <td><label for="id_shirts_S">Camisetas talla S: <label></td>
+      <td>{{ form.shirts_S }}
+      {% if form.shirts_S.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_S.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr>
+<tr>
+      <td><label for="id_shirts_M">Camisetas talla M: <label></td>
+      <td>{{ form.shirts_M }}
+      {% if form.shirts_M.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_M.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_shirts_L">Camisetas talla L: <label></td>
+      <td>{{ form.shirts_L }}
+      {% if form.shirts_L.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_L.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_shirts_XL">Camisetas talla XL: <label></td>
+      <td>{{ form.shirts_XL }}
+      {% if form.shirts_XL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_shirts_XXL">Camisetas talla XXL: <label></td>
+      <td>{{ form.shirts_XXL }}
+      {% if form.shirts_XXL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XXL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr>
+  </table>
+  <br/>
+  <p>
+    <input type="submit" value="enviar"/>
+  </p>
+  <div align="right"><a href="{% url 'user-profile' %}">Cancelar</a></div>
+</form>
+{% endblock %}

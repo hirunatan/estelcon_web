@@ -9,7 +9,7 @@ from django.contrib import messages
 
 from core import services
 
-from .forms import UserProfileEditPersonalForm
+from .forms import UserProfileEditPersonalForm, UserProfileEditInscriptionForm
 
 class UserProfileView(TemplateView):
     template_name = 'webapp/user_profiles/user_profile.html'
@@ -55,4 +55,30 @@ class UserProfileEditPersonalView(FormView):
         services.change_user_personal_data(self.request.user, form.cleaned_data)
         messages.info(self.request, u'Datos modificados correctamente')
         return super(UserProfileEditPersonalView, self).form_valid(form)
+
+
+class UserProfileEditInscriptionView(FormView):
+    template_name = 'webapp/user_profiles/user_profile_edit_inscription.html'
+    form_class = UserProfileEditInscriptionForm
+    success_url = reverse_lazy('user-profile')
+
+    def get_initial(self):
+        user = self.request.user
+        profile = user.profile
+        return {
+            'notes_food': profile.notes_food,
+            'notes_transport': profile.notes_transport,
+            'notes_general': profile.notes_general,
+            'dinner_menu': profile.dinner_menu,
+            'shirts_S': profile.shirts_S,
+            'shirts_M': profile.shirts_M,
+            'shirts_L': profile.shirts_L,
+            'shirts_XL': profile.shirts_XL,
+            'shirts_XXL': profile.shirts_XXL
+        }
+
+    def form_valid(self, form):
+        services.change_user_inscription_data(self.request.user, form.cleaned_data)
+        messages.info(self.request, u'Datos modificados correctamente')
+        return super(UserProfileEditInscriptionView, self).form_valid(form)
 
