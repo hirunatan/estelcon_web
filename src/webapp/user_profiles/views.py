@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
@@ -25,10 +24,6 @@ class UserProfileView(TemplateView):
         context['activities_to_participate'] = services.get_activities_to_participate_by(user)
 
         return context
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(UserProfileView, self).dispatch(*args, **kwargs)
 
 
 class UserProfileEditPersonalView(FormView):
