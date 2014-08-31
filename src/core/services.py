@@ -37,23 +37,27 @@ def change_user_personal_data(user, new_data):
 
     mail_managers(
         subject = u'[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
-        message = u'''
-                   %s, con usuario %s y email %s, ha modificado sus datos personales en la web.
-                   Su ficha puede consultarse directamente en %s
-                   ''' % (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
+        message =
+u'''
+%s, con usuario %s y email %s, ha modificado sus datos personales en la web.
+Su ficha puede consultarse directamente en %s
+'''
+% (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
     )
 
     send_mail(
         subject = u'[Estelcon] Notificación de modificación de ficha personal',
-        message = u'''
-                   Datos modificados.
+        message =
+u'''
+Datos modificados.
 
-                   Se ha registrado correctamente el cambio de tus datos personales. Puedes consultarlos entrando en
-                   tu ficha personal. Un saludo.
+Se ha registrado correctamente el cambio de tus datos personales. Puedes consultarlos entrando en
+tu ficha personal. Un saludo.
 
-                   El equipo organizador.
-                   %s
-                   ''' % (settings.PROTOCOL + '://' + settings.SITE_URL),
+El equipo organizador.
+%s
+'''
+% (settings.PROTOCOL + '://' + settings.SITE_URL),
         from_email = settings.MAIL_FROM,
         recipient_list = [user.email],
         fail_silently = True
