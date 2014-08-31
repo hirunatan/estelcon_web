@@ -72,6 +72,13 @@ class UserProfile(models.Model):
         verbose_name_plural = u'Fichas de usuario'
 	ordering = ('id',)
 
+    def get_admin_url(self):
+        from django.conf import settings
+        from django.core.urlresolvers import reverse
+        return settings.PROTOCOL + '://' + settings.SITE_URL + \
+                reverse('admin:auth_user_change', args=(self.user.id,))
+
+
 
 class Activity(models.Model):
     title = models.CharField(u'Título', max_length=100)

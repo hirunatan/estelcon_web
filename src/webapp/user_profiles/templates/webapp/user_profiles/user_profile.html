@@ -17,11 +17,13 @@
 
 <div align="right"><a href="/merethaderthad_salida">Desconectar</a></div>
 
-{% if message %}
-<h3>{{ message }}</h3>
+{% if messages %}
+    {% for message in messages %}
+        <h3>{{ message }}</h3>
+    {% endfor %}
 {% endif %}
 
-<p>Estos son tus datos personales (<a href="/merethaderthad_ficha_editar_pers">modificar</a>):</p>
+<p>Estos son tus datos personales (<a href="{% url 'user-profile-edit-personal' %}">modificar</a>):</p>
 
 <p>
 <b>Nombre y apellidos</b>: {{ user.first_name }} {{ user.last_name }}<br/>
