@@ -2,12 +2,38 @@
 
 from django import forms
 from django.core import validators
+from django.contrib.auth import authenticate
 
 
 user_validator = validators.RegexValidator(
     regex = r'^[a-zA-Z0-9_]{3,15}$',
     message = u'Debe ser una palabra de 3 a 15 letras o números, o guión bajo "_"',
 )
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        max_length=30, required=True,
+    )
+    password = forms.CharField(
+        max_length=30, required=True,
+        widget = forms.PasswordInput,
+    )
+
+    def clean(self):
+        cleaned_data = super(LoginForm, self).clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        user = authenticate(username = username, password = password)
+
+        if user is None:
+            raise validators.ValidationError(u'Este usuario no existe o la contraseña es incorrecta.')
+        if not user.is_active:
+            raise validators.ValidationError(u'Este usuario está desactivado.')
+
+        cleaned_data['user'] = user
+
+        return cleaned_data
+
 
 class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because edits data of two models at the same time
     username = forms.CharField(

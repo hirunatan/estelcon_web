@@ -3,12 +3,33 @@
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
+from django.contrib.auth import login
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 
 from core import services
 
-from .forms import UserProfileEditPersonalForm, UserProfileEditInscriptionForm
+from .forms import LoginForm, UserProfileEditPersonalForm, UserProfileEditInscriptionForm
+
+
+class LoginView(FormView):
+    template_name = 'webapp/user_profiles/login.html'
+    form_class = LoginForm
+    success_url = reverse_lazy('user-profile')
+
+    def get_context_data(self, **kwargs):
+        context = super(LoginView, self).get_context_data(**kwargs)
+
+        context['payment_code'] = self.request.GET.get('payment_code', '')
+        context['quota'] = self.request.GET.get('quota', 0)
+        context['queue'] = self.request.GET.get('queue', 0)
+
+        return context
+
+    def form_valid(self, form):
+        login(self.request, form.cleaned_data['user'])
+        return super(LoginView, self).form_valid(form)
+
 
 class UserProfileView(TemplateView):
     template_name = 'webapp/user_profiles/user_profile.html'

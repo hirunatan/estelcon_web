@@ -95,3 +95,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# Authentication
+
+LOGIN_URL = 'login'
+
