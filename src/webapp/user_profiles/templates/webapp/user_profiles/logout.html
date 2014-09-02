@@ -1,0 +1,21 @@
+{% extends "webapp/common/base_subsection.html" %}
+
+{% block subsecciones %}
+<ul class="list1">
+    <li><a href="/merethaderthad_modelo.html">Modelo de Mereth Aderthad</a></li>
+    <li><a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a></li>
+<li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
+    <li>Programa de actividades</li>
+    <li><a href="/merethaderthad_inscripcion">Formulario de inscripción</a></li>
+    <li class="aactive"><a href="/merethaderthad_ficha">Ficha personal</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1><span>La Mereth Aderthad</span> Ficha personal</h1>
+<p>Te has desconectado con éxito.</p>
+
+<p>Ahora puedes seguir navegando por la web, o si quieres, volverte a registrar con tu usuario
+y contraseña entrando en la <a href="{% url 'user-profile' %}">Ficha personal</a>.</p>
+
+{% endblock %}

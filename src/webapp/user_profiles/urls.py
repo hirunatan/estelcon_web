@@ -3,11 +3,15 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 
-from .views import LoginView, UserProfileView, UserProfileEditPersonalView, UserProfileEditInscriptionView
+from .views import (
+    LoginView, LogoutView, UserProfileView, UserProfileEditPersonalView, UserProfileEditInscriptionView
+)
 
 urlpatterns = patterns('',
     url(r'^merethaderthad_entrada/$', LoginView.as_view(),
         name='login'),
+    url(r'^merethaderthad_salida/$', LogoutView.as_view(),
+        name='logout'),
     url(r'^merethaderthad_ficha/$', login_required(UserProfileView.as_view()),
         name='user-profile'),
     url(r'^merethaderthad_ficha_editar_pers/$', login_required(UserProfileEditPersonalView.as_view()),

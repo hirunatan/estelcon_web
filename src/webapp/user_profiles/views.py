@@ -3,7 +3,7 @@
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 
@@ -29,6 +29,14 @@ class LoginView(FormView):
     def form_valid(self, form):
         login(self.request, form.cleaned_data['user'])
         return super(LoginView, self).form_valid(form)
+
+
+class LogoutView(TemplateView):
+    template_name = 'webapp/user_profiles/logout.html'
+
+    def get(self, *args, **kwargs):
+        logout(self.request)
+        return super(LogoutView, self).get(*args, **kwargs)
 
 
 class UserProfileView(TemplateView):
