@@ -54,6 +54,7 @@ class UserProfile(models.Model):
 
     get_full_name.short_description = u'Nombre completo'
 
+    # TODO ojo, este se usa en más sitios
     def get_payment_code(self):
     	return u'EC%d' % (self.user.id + 100)
 

@@ -12,6 +12,124 @@ user_validator = validators.RegexValidator(
 )
 
 
+class SignupForm(forms.Form):
+    username = forms.CharField(
+        max_length=30, required=True,
+        validators=[user_validator,]
+    )
+    email = forms.EmailField( # Note that it is allowed to have several users with same email. This is useful, for example,
+        required=True,        # for the case in that a single person manages the inscription of several friends.
+    )
+    password1 = forms.CharField(
+        min_length = 5, max_length=30, required=True,
+        widget = forms.PasswordInput,
+    )
+    password2 = forms.CharField(
+        min_length = 5, max_length=30, required=True,
+        widget = forms.PasswordInput,
+    )
+    first_name = forms.CharField(
+        max_length=100, required=True,
+    )
+    last_name = forms.CharField(
+        max_length=100, required=True,
+    )
+    alias = forms.CharField(
+        max_length=100, required=False,
+    )
+    smial = forms.CharField(
+        max_length=100, required=False,
+    )
+    phone = forms.CharField(
+        max_length=100, required=True,
+    )
+    city = forms.CharField(
+        max_length=100, required=False,
+    )
+    age = forms.IntegerField(
+        min_value = 1, max_value = 100, required=True,
+    )
+    notes_food = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    notes_transport = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    notes_general = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    dinner_menu = forms.ChoiceField(
+        required = True,
+        choices = (('carne','carne'), ('pescado','pescado'), ('otros','otros')),
+    )
+    day_1 = forms.BooleanField(
+        initial = True, required = False,
+    )
+    day_2 = forms.BooleanField(
+        initial = True, required = False,
+    )
+    day_3 = forms.BooleanField(
+        initial = True, required = False,
+    )
+    shirts_S = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_M = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_L = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_XL = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    shirts_XXL = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if services.retrieve_user(username):
+            raise validators.ValidationError(
+                u'Ese usuario ya existe, por favor introduce otro nombre.',
+            )
+        return username
+
+    def clean(self):
+        cleaned_data = super(SignupForm, self).clean()
+
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        if password1 or password2:
+            if password1 != password2:
+                # See https://docs.djangoproject.com/en/1.6/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
+                self._errors['password1'] = self.error_class([u'Las dos contraseñas no coinciden.'])
+                if password1:
+                    del cleaned_data['password1']
+                if password2:
+                    del cleaned_data['password2']
+
+        day_1 = cleaned_data.get('day_1')
+        day_2 = cleaned_data.get('day_2')
+        day_3 = cleaned_data.get('day_3')
+        if not day_1 and not day_2 and not day_3:
+            err = self.error_class([u'Debes indicar al menos uno de estos.'])
+            self._errors['day_1'] = err
+            self._errors['day_2'] = err
+            self._errors['day_3'] = err
+            if day_1 is not None:
+                del cleaned_data['day_1']
+            if day_2 is not None:
+                del cleaned_data['day_2']
+            if day_3 is not None:
+                del cleaned_data['day_3']
+
+        return cleaned_data
+
+
 class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=30, required=True,

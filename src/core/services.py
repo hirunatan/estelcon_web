@@ -9,14 +9,134 @@ from datetime import datetime, timedelta
 
 from .models import UserProfile, Activity
 
+MAX_USERS = 186
+
+def create_new_user(user_data, home_url):
+
+    quota = 0
+    if user_data['day_1']:
+    	quota += 35
+    if user_data['day_2']:
+    	quota += 35
+    if user_data['day_3']:
+    	quota += 70
+
+    queue = max(0, UserProfile.objects.count() - MAX_USERS)
+
+    user = User.objects.create_user(username=user_data['username'],
+                                    email=user_data['email'],
+                                    password=user_data['password1'])
+    user.first_name=user_data['first_name']
+    user.last_name=user_data['last_name']
+    user.is_staff = False
+    user.is_active = True
+    user.is_superuser = False
+    user.save()
+
+    profile = UserProfile.objects.create(
+        user = user,
+        alias = user_data['alias'],
+        smial = user_data['smial'],
+        phone = user_data['phone'],
+        city = user_data['city'],
+        age = user_data['age'],
+        payment = '',
+        notes_food = user_data['notes_food'],
+        notes_transport = user_data['notes_transport'],
+        notes_general = user_data['notes_general'],
+        dinner_menu = user_data['dinner_menu'],
+        shirts_S = user_data['shirts_S'],
+        shirts_M = user_data['shirts_M'],
+        shirts_L = user_data['shirts_L'],
+        shirts_XL = user_data['shirts_XL'],
+        shirts_XXL = user_data['shirts_XXL'],
+        day_1 = user_data['day_1'],
+        day_2 = user_data['day_2'],
+        day_3 = user_data['day_3'],
+        quota = quota,
+        payed = 0,
+    )
+
+    if not queue:
+        profile.payment = \
+u'''
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de La Caixa
+2100 1923 91 01 00148021 a nombre de PABLO RUIZ MUZQUIZ, indicando en el ingreso el código %s.
+''' % (profile.quota, profile.get_payment_code())
+    else:
+	profile.payment = \
+u'''
+En cola de espera con posición %d. La cuota es de %d€ y el código %s, pero no debes hacer
+ningún ingreso hasta que se pueda confirmar tu asistencia.
+''' % (queue, profile.quota, profile.get_payment_code())
+    profile.save()
+
+    mail_managers(
+        subject = u'[Estelcon Admin] Nueva inscripción en la Esteclcon: %s (%s)' % (user.username, user.get_full_name()),
+        message =
+u'''
+Se ha creado una nueva ficha para %s, con usuario %s y email %s.
+Su ficha puede consultarse directamente en %s
+'''
+% (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
+    )
+
+    if not queue:
+	message_user = \
+u'''
+¡Gracias por inscribirte en la XIV Mereth Aderthad, %s!.
+
+Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
+cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
+
+La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en
+la cuenta de La Caixa 2100 1923 91 01 00148021 a nombre de PABLO RUIZ MUZQUIZ, indicando en el ingreso el código %s.
+
+Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
+
+El equipo organizador.
+%s
+''' % (user.first_name, profile.quota, profile.get_payment_code(), home_url)
+    else:
+	message_user = \
+u'''
+¡Gracias por inscribirte en la XIV Mereth Aderthad, %s!.
+
+Sin embargo, lamentamos comunicarte que el número de plazas máximo que teníamos establecido ha sido alcanzado, por
+lo que no podemos garantizar tu asistencia. ¡Lo sentimos muchísimo!
+
+Pero de todas formas, te ponemos en cola de espera por si aparece un hueco vacante y podemos dar paso a tu inscripción.
+Tu posición en la cola es la %d. Hemos registrado tus datos y se ha creado un usuario con el que puedes acceder a la
+web y consultar el estado de tu petición. La cuota que te corresponde es de %d€ y el código de pago es %s, pero no
+hagas ningún ingreso todavía hasta que se pueda confirmar tu asistencia.
+
+Esperamos que tengas suerte y puedas disfrutar de esta Mereth Aderthad.
+
+El equipo organizador.
+%s
+''' % (user.first_name, queue, profile.quota, profile.get_payment_code(), home_url)
+
+    send_mail(
+        subject = u'[Estelcon] Notificación de inscripción en la Estelcon',
+        message = message_user,
+        from_email = settings.MAIL_FROM,
+        recipient_list = [user.email],
+        fail_silently = True
+    )
+
+    return (user, queue)
+
+
 def retrieve_user(username):
     try:
         return User.objects.get(username = username)
     except User.DoesNotExist:
         return None
 
+
 def authenticate_user(username, password):
     return authenticate(username = username, password = password)
+
 
 def send_password_reminder(user, change_password_url_pattern):
     profile = user.profile
@@ -37,12 +157,14 @@ Para cambiar tu contraseña visita el siguiente enlace:
         fail_silently = True
     )
 
+
 def validate_reminder_code(reminder_code):
     try:
         profile = UserProfile.objects.get(lost = reminder_code)
         return profile.user
     except UserProfile.DoesNotExist:
         return None
+
 
 def change_user_password(user, password):
     user.set_password(password)
@@ -52,17 +174,22 @@ def change_user_password(user, password):
     profile.reset_reminder_code()
     profile.save()
 
+
 def get_activities_owned_by(user):
     return Activity.objects.filter(owners = user)
+
 
 def get_activities_organized_by(user):
     return Activity.objects.filter(organizers = user)
 
+
 def get_activities_in_which_participates(user):
     return Activity.objects.filter(participants = user)
 
+
 def get_activities_to_participate_by(user):
     return Activity.objects.filter(requires_inscription = True).exclude(participants = user)
+
 
 def change_user_personal_data(user, new_data, home_url):
     user.username = new_data['username'];
@@ -236,7 +363,7 @@ def get_schedule():
 		    ncol = ncol + 1
 
 		#if has_data:
-		blocks.append((block.strftime("%H:%M"), columns))
+		blocks.append((block.strftime('%H:%M'), columns))
 		block = block + timedelta(minutes=30)
 
 	    # Remove all empty blocks at the beginning and the end of the day
@@ -252,7 +379,7 @@ def get_schedule():
 		        break
 		    del blocks[i]
 
-	    days.append((day.strftime("%A %d").decode("iso-8859-15").upper(), blocks))
+	    days.append((day.strftime('%A %d').decode('iso-8859-15').upper(), blocks))
 	    day = day + timedelta(days=1)
 
     return (activ_without_hour, days)

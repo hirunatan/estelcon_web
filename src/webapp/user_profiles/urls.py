@@ -4,11 +4,13 @@ from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 
 from .views import (
-    LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
+    SignupView, LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
     UserProfileView, UserProfileEditPersonalView, UserProfileEditInscriptionView
 )
 
 urlpatterns = patterns('',
+    url(r'^merethaderthad_inscripcion/$', SignupView.as_view(),
+        name='login'),
     url(r'^merethaderthad_entrada/$', LoginView.as_view(),
         name='login'),
     url(r'^merethaderthad_salida/$', LogoutView.as_view(),

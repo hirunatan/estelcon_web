@@ -1,0 +1,217 @@
+{% extends "webapp/common/base_subsection.html" %}
+
+{% block subsecciones %}
+<ul class="list1">
+    <li><a href="/merethaderthad_modelo.html">Modelo de Mereth Aderthad</a></li>
+    <li><a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a></li>
+<li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
+<li><a href="/merethaderthad_programa">Programa de actividades</a></li>
+
+    <li class="aactive"><a href="/merethaderthad_inscripcion">Formulario de inscripción</a></li>
+    <li><a href="/merethaderthad_ficha">Ficha personal</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1><span>La Mereth Aderthad</span> Formulario de inscripción</h1>
+
+{% comment %}
+<p><b>---El plazo de inscripción a la Mereth ha finalizado, con lo cual ya no se admiten nuevas
+solicitudes. Si deseas comentarnos algo, escribenos a info@estelcon2008.org.</b><p>
+
+<p><b>En el caso (esperemos que no) de que descubras que no puedes venir, puedes escribirnos también a esa
+dirección. En ese caso, es importante que conozcas la política de devoluciones que, salvo excepciones, será:</b>
+<ul>
+<li>Hasta el 16 de septiembre: Devolución íntegra.</li>
+<li>Del 16/09 al 23/09. Devolución del 75% de lo ingresado</li>
+<li>Del 23/09 al 30/09. Devolución del 50% de lo ingresado</li>
+<li>Del 30/09 al 08/10. Devolución del 25% de lo ingresado</li>
+<li>A partir del 09/10 no se devolvería nada.</li>
+<li>Las devoluciones se harán por transferencia a la cuenta que se nos indique, descontando la comisión
+que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de otra entidad).</li>
+</ul>
+{% endcomment %}
+
+<p><em>Muchas gracias por decidirte a asistir a la XIV Mereth Aderthad. Recuerda que las fechas
+son <b>16, 17, 18 y 19 de octubre de este a&ntilde;o 2008</b>.</em></p>
+<p><b>La política de precios es la siguiente</b>: la inscripción completa incluye alojamiento y 
+pensión completa desde la cena del jueves hasta la comida del domingo inclusive, más todos los 
+gastos y actividades. Para los que no puedan ir todos los días, hemos habilitado también pagos 
+parciales. Toda asistencia parcial será por días completos, incluyendo desde la cena de un día 
+hasta la comida del siguiente. Para casos especiales contactad por favor con la organización.</p>
+<ul>
+<li>Mereth completa: <b>140€</b></li>
+<li>Desde la cena del jueves a la comida del viernes: <b>35€</b></li>
+<li>Desde la cena del viernes a la comida del sábado: <b>35€</b></li>
+<li>Desde la cena (de gala) del sábado a la comida del domingo: <b>70€</b></li>
+</ul>
+<p><b>Es importante también que conozcas la política de devoluciones</b> que, salvo excepciones, será: 
+<ul>
+<li>Hasta el 16 de septiembre: Devolución íntegra.</li>
+<li>Del 16/09 al 23/09. Devolución del 75% de lo ingresado</li>
+<li>Del 23/09 al 30/09. Devolución del 50% de lo ingresado</li>
+<li>Del 30/09 al 08/10. Devolución del 25% de lo ingresado</li>
+<li>A partir del 09/10 no se devolvería nada.</li>
+<li>Las devoluciones se harán por transferencia a la cuenta que se nos indique, descontando la comisión
+que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de otra entidad).</li>
+</ul>
+<p><b>El plazo de inscripción y pago finaliza el 16 de septiembre.</b></p>
+<p>El proceso de inscripción es el siguiente:</p>
+<ol>
+  <li>Comprobar las <a href="/cuestionespracticas_normas.html">normas de la EstelCon</a>.</li>
+  <li>Rellenar este formulario. Los campos marcados con un * son obligatorios. Hay que indicar un usuario y contraseña que servirá para acceder después a la ficha personal, apuntarse a las actividades y modificar los datos si se desea.</li>
+  <li>Se mostrará un código de pago que hay que apuntar. Por ejemplo, EC245.</li>
+  <li>Hacer el ingreso correspondiente en la cuenta bancaria que se indicará al completar la ficha. En el ingreso hay que indicar el código de pago apuntado en el paso anterior.</li>
+  <li>En pocos días, entrando en la ficha personal aparecerá reflejado que hemos aceptado y comprobado el pago.</li>
+  <li>Si se desea pagar por varias personas a la vez, hay que rellenar primero una ficha por cada uno, y en el ingreso indicar todos los códigos de pago. Se admite poner la misma dirección de correo de contacto en todas las fichas, si una persona quiere coordinar lo de todos.</li>
+  <li><b>La diferencia entre asistente y participante no tiene cabida en el proceso de inscripción. Es posteriormente, al proponer actividades, donde esta distinción se hace patente</b>.</li>
+</ol>
+<p>MANTÉN INMÓVIL DURANTE 1 SEG. EL CURSOR DEL RATÓN SOBRE LOS RECUADROS DE TEXTO PARA OBTENER MÁS INFORMACIÓN.</p>
+
+<form method="post" action=".">
+  {% csrf_token %}
+  <table style="vertical-align:top">
+    <tr>
+      <td><p title="Introduce un nombre corto y sin espacios. Será sensible a las mayúsculas y minúsculas.">
+        <label for="id_username">Nombre de usuario: *</label><br/>
+        {{ form.username }}
+        {% if form.username.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.username.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Introduce tu dirección de correo electrónico.">
+        <label for="id_email">Correo electrónico: *</label><br/>
+        {{ form.email }}
+        {% if form.email.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.email.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+     </tr><tr>
+      <td><p title="Para evitar errores, sólo se admiten letras y números, sin eñes ni acentos.">
+        <label for="id_password1">Contraseña: *</label><br/>
+        {{ form.password1 }}
+        {% if form.password1.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.password1.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Repite la contraseña para confirmar que está bien escrita.">
+        <label for="id_password2">Confirmar contraseña: *</label><br/>
+        {{ form.password2 }}
+        {% if form.password2.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.password2.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr><tr>
+      <td><p title="Introduce tu nombre.">
+        <label for="id_first_name">Nombre: *</label><br/>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.first_name.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Introduce tus apellidos.">
+        <label for="id_last_name">Apellidos: *</label><br/>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.last_name.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr><tr>
+      <td><p title="Introduce tu pseudónimo en la STE, si lo tienes. Si no, puedes dejarlo en blanco.">
+        <label for="id_alias">Pseudónimo:</label><br/>
+        {{ form.alias }}
+        {% if form.alias.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.alias.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Nombre del smial al que perteneces, o en blanco si no eres de la STE.">
+        <label for="id_smial">Smial:</label><br/>
+        {{ form.smial }}
+        {% if form.smial.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.smial.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr><tr>
+      <td><p title="Introduce un teléfono de contacto.">
+        <label for="id_phone">Teléfono: *</label><br/>
+        {{ form.phone }}
+        {% if form.phone.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.phone.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Introduce la población donde resides habitualmente.">
+        <label for="id_city">Población:</label><br/>
+        {{ form.city }}
+        {% if form.city.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.city.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr>
+    </tr><tr>
+      <td><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada.">
+        <label for="id_age">Edad: *</label><br/>
+        {{ form.age }}
+        {% if form.age.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.age.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr>
+  </table>
+  <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
+    <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
+    {{ form.notes_food }}
+    {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
+    <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
+    {{ form.dinner_menu }}
+    {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+   <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
+    <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
+    {{ form.notes_transport }}
+    {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
+    <label for="id_notes_general">¿Algún otro comentario?<label><br/>
+    {{ form.notes_general }}
+    {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p>Ahora, si no puedes asistir a la Estelcon completa, indícanos los días que vas a venir:</p>
+  <table title="Indica los días completos que vas a asistir.">
+    <tr>
+      <td><label for="id_day_1">Jueves/Viernes: <label></td>
+      <td>{{ form.day_1 }}
+      {% if form.day_1.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_1.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_day_2">Viernes/Sábado: <label></td>
+      <td>{{ form.day_2 }}
+      {% if form.day_2.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_2.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_day_3">Sábado/Domingo + Cena: <label></td>
+      <td>{{ form.day_3 }}
+      {% if form.day_3.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_3.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr>
+  </table>
+  <br/>
+  <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
+  optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
+  Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de
+  una, simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
+  <p>Las camisetas costarán 10€ y se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis
+  nada más llegar.</p>
+  <table title="Indica cuántas camisetas quieres de esta talla.">
+    <tr>
+      <td><label for="id_shirts_S">Camisetas talla S: <label></td>
+      <td>{{ form.shirts_S }}
+      {% if form.shirts_S.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_S.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_shirts_M">Camisetas talla M: <label></td>
+      <td>{{ form.shirts_M }}
+      {% if form.shirts_M.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_M.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_shirts_L">Camisetas talla L: <label></td>
+      <td>{{ form.shirts_L }}
+      {% if form.shirts_L.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_L.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_shirts_XL">Camisetas talla XL: <label></td>
+      <td>{{ form.shirts_XL }}
+      {% if form.shirts_XL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_shirts_XXL">Camisetas talla XXL: <label></td>
+      <td>{{ form.shirts_XXL }}
+      {% if form.shirts_XXL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XXL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr>
+  </table>
+  <br/>
+  <p>
+    <input type="submit" value="enviar"/>
+  </p>
+  <p><em>En cumplimiento de la Ley de Protección de Datos, te informamos que los datos aquí introducidos
+  serán incorporados a un fichero automatizado, que obrará en poder del Smial de Hammo y será utilizado
+  exclusivamente para gestionar la asistencia y las actividades de la EstelCon, siendo destruido al
+  finalizar la misma. Puedes ejercer tus derechos de acceso, rectificación, cancelación y oposición en
+  esta misma web, donde puedes consultarlos y modificarlos con los formularios correspondientes, o bien
+  dirigirte a los organizadores de la EstelCon tal como se indica en la sección de contacto de la
+  portada.</em></p>
+</form>
+
+{% endblock %}

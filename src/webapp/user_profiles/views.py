@@ -11,9 +11,31 @@ from django.conf import settings
 from core import services
 
 from .forms import (
-    LoginForm, ForgotPasswordForm, ChangePasswordForm,
+    SignupForm, LoginForm, ForgotPasswordForm, ChangePasswordForm,
     UserProfileEditPersonalForm, UserProfileEditInscriptionForm
 )
+
+
+class SignupView(FormView):
+    template_name = 'webapp/user_profiles/signup.html'
+    form_class = SignupForm
+
+    def form_valid(self, form):
+        (user, queue) = services.create_new_user(
+            user_data = form.cleaned_data,
+            home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
+        )
+        self.user = user
+        self.queue = queue
+        return super(SignupView, self).form_valid(form)
+
+    def get_success_url(self):
+        profile = self.user.profile
+        return reverse('login') + '?payment_code=%s&quota=%d&queue=%d' % (
+            profile.get_payment_code(),
+            profile.quota,
+            self.queue,
+        )
 
 
 class LoginView(FormView):
@@ -26,7 +48,10 @@ class LoginView(FormView):
 
         context['payment_code'] = self.request.GET.get('payment_code', '')
         context['quota'] = self.request.GET.get('quota', 0)
-        context['queue'] = self.request.GET.get('queue', 0)
+        try:
+            context['queue'] = int(self.request.GET.get('queue', 0))
+        except ValueError:
+            context['queue'] = 0
 
         return context
 
