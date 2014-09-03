@@ -2,13 +2,15 @@
 
 from django import forms
 from django.core import validators
-from django.contrib.auth import authenticate
+
+from core import services
 
 
 user_validator = validators.RegexValidator(
     regex = r'^[a-zA-Z0-9_]{3,15}$',
     message = u'Debe ser una palabra de 3 a 15 letras o números, o guión bajo "_"',
 )
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -21,9 +23,10 @@ class LoginForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(LoginForm, self).clean()
+
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
-        user = authenticate(username = username, password = password)
+        user = services.authenticate_user(username, password)
 
         if user is None:
             raise validators.ValidationError(u'Este usuario no existe o la contraseña es incorrecta.')
@@ -31,6 +34,65 @@ class LoginForm(forms.Form):
             raise validators.ValidationError(u'Este usuario está desactivado.')
 
         cleaned_data['user'] = user
+
+        return cleaned_data
+
+
+class ForgotPasswordForm(forms.Form):
+    username = forms.CharField(
+        max_length=30, required=True,
+    )
+
+    def clean(self):
+        cleaned_data = super(ForgotPasswordForm, self).clean()
+
+        username = self.cleaned_data['username']
+
+        user = services.retrieve_user(username)
+        if not user:
+            self._errors['username'] = self.error_class([u'Ese nombre de usuario no existe.'])
+            del cleaned_data['username']
+        else:
+            cleaned_data['user'] = user
+
+        return cleaned_data
+
+
+class ChangePasswordForm(forms.Form):
+    password1 = forms.CharField(
+        min_length = 5, max_length=30, required=True,
+        widget = forms.PasswordInput,
+    )
+    password2 = forms.CharField(
+        min_length = 5, max_length=30, required=True,
+        widget = forms.PasswordInput,
+    )
+    reminder_code = forms.CharField(
+        required=True,
+        widget = forms.HiddenInput,
+    )
+
+    def clean(self):
+        cleaned_data = super(ChangePasswordForm, self).clean()
+
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        if password1 or password2:
+            if password1 != password2:
+                # See https://docs.djangoproject.com/en/1.6/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
+                self._errors['password1'] = self.error_class([u'Las dos contraseñas no coinciden.'])
+                if password1:
+                    del cleaned_data['password1']
+                if password2:
+                    del cleaned_data['password2']
+
+        reminder_code = self.cleaned_data['reminder_code']
+        user = services.validate_reminder_code(reminder_code)
+        if not user:
+            self._errors['reminder_code'] = self.error_class([u'El código de recuperación de contraseña no es válido o está caducado. Por favor, vuelve a la página de entrada y empieza de nuevo.'])
+            del cleaned_data['reminder_code']
+        else:
+            cleaned_data['user'] = user
 
         return cleaned_data
 
@@ -76,10 +138,9 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
     def clean_username(self):
         username = self.cleaned_data['username']
         if username != self.initial['username']:
-            from django.contrib.auth.models import User
-            if User.objects.filter(username = username).count() > 0:
+            if services.retrieve_user(username):
                 raise validators.ValidationError(
-                    u'Ese usuario ya existe, por favor introduce otro nombre',
+                    u'Ese usuario ya existe, por favor introduce otro nombre.',
                 )
         return username
 
@@ -90,11 +151,12 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
         if password1 or password2:
             if password1 != password2:
                 # See https://docs.djangoproject.com/en/1.6/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
-                self._errors['password1'] = self.error_class([u'Las dos contraseñas no coinciden'])
-                del cleaned_data['password1']
-                del cleaned_data['password2']
+                self._errors['password1'] = self.error_class([u'Las dos contraseñas no coinciden.'])
+                if password1:
+                    del cleaned_data['password1']
+                if password2:
+                    del cleaned_data['password2']
         return cleaned_data
-
 
 
 class UserProfileEditInscriptionForm(forms.Form):

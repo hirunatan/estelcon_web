@@ -4,12 +4,16 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.auth import login, logout
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib import messages
+from django.conf import settings
 
 from core import services
 
-from .forms import LoginForm, UserProfileEditPersonalForm, UserProfileEditInscriptionForm
+from .forms import (
+    LoginForm, ForgotPasswordForm, ChangePasswordForm,
+    UserProfileEditPersonalForm, UserProfileEditInscriptionForm
+)
 
 
 class LoginView(FormView):
@@ -37,6 +41,40 @@ class LogoutView(TemplateView):
     def get(self, *args, **kwargs):
         logout(self.request)
         return super(LogoutView, self).get(*args, **kwargs)
+
+
+class ForgotPasswordView(FormView):
+    template_name = 'webapp/user_profiles/forgot_password.html'
+    form_class = ForgotPasswordForm
+    success_url = reverse_lazy('forgot-password')
+
+    def form_valid(self, form):
+        services.send_password_reminder(
+            user = form.cleaned_data['user'],
+            change_password_url_pattern = settings.PROTOCOL + '://' + settings.SITE_URL +
+                reverse('change-password') + '?reminder_code=%s',
+        )
+        messages.info(self.request, u'Se ha enviado a tu dirección de correo un mensaje con instrucciones para crear una nueva contraseña.')
+        return super(ForgotPasswordView, self).form_valid(form)
+
+
+class ChangePasswordView(FormView):
+    template_name = 'webapp/user_profiles/change_password.html'
+    form_class = ChangePasswordForm
+    success_url = reverse_lazy('user-profile')
+
+    def get_initial(self):
+        return {
+            'reminder_code': self.request.GET.get('reminder_code', '')
+        }
+
+    def form_valid(self, form):
+        services.change_user_password(
+            user = form.cleaned_data['user'],
+            password = form.cleaned_data['password1']
+        )
+        messages.info(self.request, u'Tu contraseña ha sido cambiada. Ya puedes entrar con ella.')
+        return super(ChangePasswordView, self).form_valid(form)
 
 
 class UserProfileView(TemplateView):
@@ -76,7 +114,11 @@ class UserProfileEditPersonalView(FormView):
         }
 
     def form_valid(self, form):
-        services.change_user_personal_data(self.request.user, form.cleaned_data)
+        services.change_user_personal_data(
+            user = self.request.user,
+            new_data = form.cleaned_data,
+            home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
+        )
         messages.info(self.request, u'Datos modificados correctamente')
         return super(UserProfileEditPersonalView, self).form_valid(form)
 
@@ -102,7 +144,11 @@ class UserProfileEditInscriptionView(FormView):
         }
 
     def form_valid(self, form):
-        services.change_user_inscription_data(self.request.user, form.cleaned_data)
+        services.change_user_inscription_data(
+            user = self.request.user,
+            new_data = form.cleaned_data,
+            home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
+        )
         messages.info(self.request, u'Datos modificados correctamente')
         return super(UserProfileEditInscriptionView, self).form_valid(form)
 

@@ -2,11 +2,55 @@
 
 from django.core.mail import send_mail, mail_managers
 from django.conf import settings
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 from datetime import datetime, timedelta
 
 from .models import UserProfile, Activity
 
+def retrieve_user(username):
+    try:
+        return User.objects.get(username = username)
+    except User.DoesNotExist:
+        return None
+
+def authenticate_user(username, password):
+    return authenticate(username = username, password = password)
+
+def send_password_reminder(user, change_password_url_pattern):
+    profile = user.profile
+    profile.generate_reminder_code()
+    profile.save()
+
+    send_mail(
+        subject = u'[Estelcon] Olvido de contraseña',
+        message =
+u'''
+Para cambiar tu contraseña visita el siguiente enlace:
+
+%s
+'''
+% (change_password_url_pattern % profile.lost),
+        from_email = settings.MAIL_FROM,
+        recipient_list = [user.email],
+        fail_silently = True
+    )
+
+def validate_reminder_code(reminder_code):
+    try:
+        profile = UserProfile.objects.get(lost = reminder_code)
+        return profile.user
+    except UserProfile.DoesNotExist:
+        return None
+
+def change_user_password(user, password):
+    user.set_password(password)
+    user.save()
+
+    profile = user.profile
+    profile.reset_reminder_code()
+    profile.save()
 
 def get_activities_owned_by(user):
     return Activity.objects.filter(owners = user)
@@ -20,7 +64,7 @@ def get_activities_in_which_participates(user):
 def get_activities_to_participate_by(user):
     return Activity.objects.filter(requires_inscription = True).exclude(participants = user)
 
-def change_user_personal_data(user, new_data):
+def change_user_personal_data(user, new_data, home_url):
     user.username = new_data['username'];
     user.email = new_data['email'];
     if new_data['password1']:
@@ -59,14 +103,14 @@ tu ficha personal. Un saludo.
 El equipo organizador.
 %s
 '''
-% (settings.PROTOCOL + '://' + settings.SITE_URL),
+% home_url,
         from_email = settings.MAIL_FROM,
         recipient_list = [user.email],
         fail_silently = True
     )
 
 
-def change_user_inscription_data(user, new_data):
+def change_user_inscription_data(user, new_data, home_url):
     profile = user.profile
     profile.notes_food=new_data['notes_food']
     profile.notes_transport=new_data['notes_transport']
@@ -101,7 +145,7 @@ tu ficha personal. Un saludo.
 El equipo organizador.
 %s
 '''
-% (settings.PROTOCOL + '://' + settings.SITE_URL),
+% home_url,
         from_email = settings.MAIL_FROM,
         recipient_list = [user.email],
         fail_silently = True

@@ -3,6 +3,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from random import choice
+import string
+
 # Create your models here.
 
 class UserProfile(models.Model):
@@ -78,6 +81,12 @@ class UserProfile(models.Model):
         return settings.PROTOCOL + '://' + settings.SITE_URL + \
                 reverse('admin:auth_user_change', args=(self.user.id,))
 
+    def generate_reminder_code(self):
+        chars = string.letters + string.digits
+        self.lost = ''.join([choice(chars) for i in range(50)])
+
+    def reset_reminder_code(self):
+        self.lost = ''
 
 
 class Activity(models.Model):
