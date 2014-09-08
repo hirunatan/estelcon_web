@@ -6,8 +6,14 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
+from django.conf import settings
 
 from core import services
+
+from .forms import (
+    ProposalForm
+)
+
 
 class ScheduleView(TemplateView):
     template_name = 'webapp/activities/schedule.html'
@@ -39,4 +45,24 @@ class ActivityView(TemplateView):
     def get(self, request, *args, **kwargs):
         self.activity_id = kwargs['activity_id']
         return super(ActivityView, self).get(request, *args, **kwargs)
+
+
+class ProposalView(FormView):
+    template_name = 'webapp/activities/proposal.html'
+    form_class = ProposalForm
+    success_url = reverse_lazy('proposal-sent')
+
+    def form_valid(self, form):
+        services.send_proposal(
+            user = self.request.user,
+            data = form.cleaned_data,
+            home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
+        )
+        messages.info(self.request, u'Se ha enviado la propuesta a los organizadores.')
+        return super(ProposalView, self).form_valid(form)
+
+
+class ProposalSentView(TemplateView):
+    template_name = 'webapp/activities/proposal_sent.html'
+
 

@@ -72,7 +72,7 @@ ningún ingreso hasta que se pueda confirmar tu asistencia.
     profile.save()
 
     mail_managers(
-        subject = u'[Estelcon Admin] Nueva inscripción en la Esteclcon: %s (%s)' % (user.username, user.get_full_name()),
+        subject = u'[Estelcon Admin] Nueva inscripción en la Estelcon: %s (%s)' % (user.username, user.get_full_name()),
         message =
 u'''
 Se ha creado una nueva ficha para %s, con usuario %s y email %s.
@@ -414,4 +414,68 @@ def get_activity_and_status(activity_id, user):
     }
 
     return (activity, user_status)
+
+
+def send_proposal(user, data, home_url):
+
+    mail_managers(
+        subject = u'[Estelcon Admin] Actividad propuesta: %s' % (data['title']),
+        message =
+u'''
+El usuario %s (%s) ha propuesto una actividad.
+
+Título: %s
+Subtítulo: %s
+Duración: %s
+Nº máximo de plazas: %d
+Mostrar responsables: %s
+Requiere inscripción: %s
+
+Responsables:
+%s
+
+Organizadores:
+%s
+
+Texto:
+%s
+
+Necesidades logísticas:
+%s
+
+Notas para la organización:
+%s'''
+% (
+    user.username,  user.get_full_name(), data['title'], data['subtitle'],
+    data['duration'], data['max_places'] or 0, data['show_owners'],
+    data['requires_inscription'], data['owners'], data['organizers'],
+    data['text'], data['logistics'], data['notes_organization']),
+)
+
+    send_mail(
+        subject = u'[Estelcon] Actividad propuesta para la Estelcon',
+        message =
+u'''
+Se ha enviado a los organizadores tu propuesta de actividad con título
+'%s'.
+
+Estudiaremos la actividad que propones y le buscaremos un hueco en la Estelcon. En cuanto
+lo hagamos, podrás ver cómo aparece en el Programa de actividades, incluyendo una ficha
+rellena con los datos que nos has enviado (al menos con la parte pública). Y si tú o
+cualquiera de las personas designadas como responsables accedéis a la web con vuestro
+usuario y contraseña, podréis consultar y modificar todos los datos.
+
+Si tenemos alguna duda o consulta que hacerte, contactaremos contigo a través del correo
+electrónico o el teléfono que indicaste al registrarte.
+
+¡Muchas gracias por participar! Entre todos haremos una gran Mereth Aderthad.
+
+El equipo organizador.
+%s
+'''
+% (data['title'], home_url),
+        from_email = settings.MAIL_FROM,
+        recipient_list = [user.email],
+        fail_silently = True
+    )
 
