@@ -11,7 +11,7 @@ from django.conf import settings
 from core import services
 
 from .forms import (
-    ProposalForm
+    ActivitySubscribeForm, ProposalForm
 )
 
 
@@ -29,22 +29,63 @@ class ScheduleView(TemplateView):
 class ActivityView(TemplateView):
     template_name = 'webapp/activities/activity.html'
 
+    def get(self, request, *args, **kwargs):
+        (self.activity, self.user_status) = services.get_activity_and_status(kwargs['activity_id'], self.request.user)
+        return super(ActivityView, self).get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(ActivityView, self).get_context_data(**kwargs)
 
-        (activity, user_status) = services.get_activity_and_status(self.activity_id, self.request.user)
-        context['activity'] = activity
-        if activity:
-            context['is_owner'] = user_status['is_owner']
-            context['is_organizer'] = user_status['is_organizer']
-            context['is_participant'] = user_status['is_participant']
-            context['is_admin'] = user_status['is_admin']
+        context['activity'] = self.activity
+        if self.activity:
+            context['is_owner'] = self.user_status['is_owner']
+            context['is_organizer'] = self.user_status['is_organizer']
+            context['is_participant'] = self.user_status['is_participant']
+            context['is_admin'] = self.user_status['is_admin']
 
         return context
 
-    def get(self, request, *args, **kwargs):
-        self.activity_id = kwargs['activity_id']
-        return super(ActivityView, self).get(request, *args, **kwargs)
+
+class ActivitySubscribeView(FormView):
+    template_name = 'webapp/activities/activity_subscribe.html'
+    form_class = ActivitySubscribeForm
+    success_url = reverse_lazy('user-profile')
+
+    def dispatch(self, request, *args, **kwargs):
+        (self.activity, self.user_status) = services.get_activity_and_status(kwargs['activity_id'], self.request.user)
+        return super(ActivitySubscribeView, self).dispatch(request, *args, **kwargs)
+
+    def get_initial(self):
+        return {
+            'id': self.activity.id if self.activity else 0,
+            'title': self.activity.title if self.activity else '',
+        }
+
+    def get_context_data(self, **kwargs):
+        context = super(ActivitySubscribeView, self).get_context_data(**kwargs)
+
+        if self.activity \
+                and self.activity.requires_inscription \
+                and not self.user_status['is_owner'] \
+                and not self.user_status['is_organizer'] \
+                and not self.user_status['is_participant']:
+            context['activity'] = self.activity
+        else:
+            context['activity'] = None
+
+        return context
+
+    def form_valid(self, form):
+        services.subscribe_to_activity(
+            user = self.request.user,
+            activity_id = form.cleaned_data['id'],
+        )
+        messages.info(self.request, u'Te has inscrito en la actividad.')
+        return super(ActivitySubscribeView, self).form_valid(form)
+
+
+class ProposalSentView(TemplateView):
+    template_name = 'webapp/activities/proposal_sent.html'
 
 
 class ProposalView(FormView):

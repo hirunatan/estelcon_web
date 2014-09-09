@@ -416,6 +416,79 @@ def get_activity_and_status(activity_id, user):
     return (activity, user_status)
 
 
+def subscribe_to_activity(user, activity_id):
+    #TODO: refactor to receive an actual activity object instead of an id
+    try:
+        activity = Activity.objects.get(pk = activity_id)
+    except Activity.DoesNotExist:
+	return
+
+    # User is always added, even if the limit is reached
+    activity.participants.add(user)
+    activity.save()
+
+    # Subscription limit control
+    maxplacesreached = False
+    if len(activity.participants.all()) > activity.max_places:
+        maxplacesreached = True
+
+    mail_managers(
+        subject = u'[Estelcon Admin] Inscripción en actividad %s' % (activity.title),
+        message =
+u'''
+El usuario %s (%s) se ha inscrito en la actividad %s.
+'''
+% (user.username, user.get_full_name(), activity.title),
+    )
+
+    for owner in activity.owners.all():
+	send_mail(
+            subject = u'[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
+            message =
+u'''
+El usuario %s (%s) se ha inscrito en la actividad %s.
+'''
+% (user.username, user.get_full_name(), activity.title),
+            from_email = settings.MAIL_FROM,
+            recipient_list = [owner.email],
+            fail_silently = False
+        )
+        if maxplacesreached:
+	    send_mail(
+                subject = u'[Estelcon] ATENCION: Tu actividad ha superado el máximo de plazas.',
+                message =
+u'''
+Ponte en contacto con la organización, por favor, ya que tu actividad '%s' ya ha sobrepasado el máximo de plazas.
+Actualmente tienes %d inscritos en una actividad con un máximo establecido por ti de %d.
+'''
+% (activity.title, len(activity.participants.all()), activity.max_places),
+                from_email = settings.MAIL_FROM,
+                recipient_list = [owner.email],
+                fail_silently = False
+            )
+
+    if maxplacesreached:
+        message_participants_maxplaces = u'ATENCION, tu inscripción ha superado el número máximo de plazas disponibles. Los responsables ya han sido notificados de este hecho y tomarán una decisión en breve. Si no recibes contestación en pocos días no dudes en escribir directamente a info@estelcon2008.org.'
+    else:
+        message_participants_maxplaces = u'Te encuentras dentro del número máximo de plazas.'
+
+    send_mail(
+        subject = u'[Estelcon] Inscripción en actividad de la Estelcon',
+        message =
+u'''
+Se ha registrado tu inscripción en la actividad con título '%s'.
+
+Si en el futuro deseas cancelarla, escribe directamente a info@estelcon2008.org.
+
+%s
+'''
+% (activity.title, message_participants_maxplaces),
+        from_email = settings.MAIL_FROM,
+        recipient_list = [user.email],
+        fail_silently = True
+    )
+
+
 def send_proposal(user, data, home_url):
 
     mail_managers(

@@ -3,6 +3,17 @@
 from django import forms
 
 
+class ActivitySubscribeForm(forms.Form):
+    id = forms.IntegerField(
+        min_value = 0, required=True,
+        widget = forms.HiddenInput,
+    )
+    title = forms.CharField(
+        max_length=100, required=True,
+        widget = forms.HiddenInput,
+    )
+
+
 class ProposalForm(forms.Form):
     title = forms.CharField(
         max_length=100, required=True,
