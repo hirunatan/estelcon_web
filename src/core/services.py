@@ -11,6 +11,8 @@ from .models import UserProfile, Activity
 
 MAX_USERS = 186
 
+#TODO: usar templates para los textos de los correos
+
 def create_new_user(user_data, home_url):
 
     quota = 0
@@ -468,7 +470,12 @@ Actualmente tienes %d inscritos en una actividad con un máximo establecido por 
             )
 
     if maxplacesreached:
-        message_participants_maxplaces = u'ATENCION, tu inscripción ha superado el número máximo de plazas disponibles. Los responsables ya han sido notificados de este hecho y tomarán una decisión en breve. Si no recibes contestación en pocos días no dudes en escribir directamente a info@estelcon2008.org.'
+        message_participants_maxplaces = \
+u'''
+ATENCION, tu inscripción ha superado el número máximo de plazas disponibles. Los responsables
+ya han sido notificados de este hecho y tomarán una decisión en breve. Si no recibes
+contestación en pocos días no dudes en escribir directamente a la organización.
+'''
     else:
         message_participants_maxplaces = u'Te encuentras dentro del número máximo de plazas.'
 
@@ -478,11 +485,57 @@ Actualmente tienes %d inscritos en una actividad con un máximo establecido por 
 u'''
 Se ha registrado tu inscripción en la actividad con título '%s'.
 
-Si en el futuro deseas cancelarla, escribe directamente a info@estelcon2008.org.
+Si en el futuro deseas cancelarla, escribe a la organización.
 
 %s
 '''
 % (activity.title, message_participants_maxplaces),
+        from_email = settings.MAIL_FROM,
+        recipient_list = [user.email],
+        fail_silently = True
+    )
+
+
+def change_activity(user, activity, home_url):
+
+    mail_managers(
+        subject = u'[Estelcon Admin] Modificación de actividad "%s"' % (activity.title),
+        message =
+u'''
+El usuario %s (%s) ha modificado una actividad
+
+Título: %s
+Subtítulo: %s
+Duración: %s
+Nº máximo de plazas: %d
+Mostrar responsables: %s
+
+Texto:
+%s
+
+Necesidades logísticas:
+%s
+
+Notas para la organización:
+%s'''
+% (
+    user.username,  user.get_full_name(), activity.title, activity.subtitle,
+    activity.duration, activity.max_places or 0, activity.show_owners,
+    activity.text, activity.logistics, activity.notes_organization),
+)
+
+    send_mail(
+        subject = u'[Estelcon] Se ha modificado la actividad "%s"' % (activity.title),
+        message =
+u'''
+Se ha modificado correctamente la actividad con título '%s'.
+
+¡Muchas gracias por participar! Entre todos haremos una gran Mereth Aderthad.
+
+El equipo organizador.
+%s
+'''
+% (activity.title, home_url),
         from_email = settings.MAIL_FROM,
         recipient_list = [user.email],
         fail_silently = True

@@ -3,12 +3,13 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 from django.conf import settings
 
 from core import services
+from core.models import Activity
 
 from .forms import (
     ActivitySubscribeForm, ProposalForm
@@ -82,6 +83,26 @@ class ActivitySubscribeView(FormView):
         )
         messages.info(self.request, u'Te has inscrito en la actividad.')
         return super(ActivitySubscribeView, self).form_valid(form)
+
+
+class ActivityEditView(UpdateView):
+    template_name = 'webapp/activities/activity_edit.html'
+    model = Activity
+    pk_url_kwarg = 'activity_id'
+    fields = ['id', 'title', 'subtitle', 'duration', 'max_places', 'show_owners', 'text', 'logistics', 'notes_organization']
+
+    def form_valid(self, form):
+        result = super(ActivityEditView, self).form_valid(form)
+        services.change_activity(
+            user = self.request.user,
+            activity = self.object,
+            home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
+        )
+        messages.info(self.request, u'Datos modificados correctamente')
+        return result
+
+    def get_success_url(self):
+        return reverse_lazy('activity', args=[self.object.id])
 
 
 class ProposalSentView(TemplateView):

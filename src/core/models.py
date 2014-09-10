@@ -122,6 +122,9 @@ class Activity(models.Model):
         verbose_name_plural = u'Actividades'
         ordering = ['start', 'end']
 
+    def get_absolute_url(self):
+        return reverse('activity', kwargs={'activity_id': self.id})
+
     def day_start(self):
         if self.start == None:
 	    return u' SIN HORARIO'

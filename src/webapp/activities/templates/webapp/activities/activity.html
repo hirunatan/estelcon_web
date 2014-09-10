@@ -15,6 +15,12 @@
 
 <h1><span>La Mereth Aderthad</span> <span>Programa de actividades</span> Actividad</h1>
 
+{% if messages %}
+    {% for message in messages %}
+        <h3>{{ message }}</h3>
+    {% endfor %}
+{% endif %}
+
 {% if not activity %}
 
   <p>No se encuentra la actividad</p>
