@@ -64,13 +64,13 @@ def create_new_user(user_data, home_url):
 u'''
 Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de La Caixa
 2100 1923 91 01 00148021 a nombre de PABLO RUIZ MUZQUIZ, indicando en el ingreso el código %s.
-''' % (profile.quota, profile.get_payment_code())
+''' % (profile.quota, profile.payment_code)
     else:
 	profile.payment = \
 u'''
 En cola de espera con posición %d. La cuota es de %d€ y el código %s, pero no debes hacer
 ningún ingreso hasta que se pueda confirmar tu asistencia.
-''' % (queue, profile.quota, profile.get_payment_code())
+''' % (queue, profile.quota, profile.payment_code)
     profile.save()
 
     mail_managers(
@@ -98,7 +98,7 @@ Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
 El equipo organizador.
 %s
-''' % (user.first_name, profile.quota, profile.get_payment_code(), home_url)
+''' % (user.first_name, profile.quota, profile.payment_code, home_url)
     else:
 	message_user = \
 u'''
@@ -116,7 +116,7 @@ Esperamos que tengas suerte y puedas disfrutar de esta Mereth Aderthad.
 
 El equipo organizador.
 %s
-''' % (user.first_name, queue, profile.quota, profile.get_payment_code(), home_url)
+''' % (user.first_name, queue, profile.quota, profile.payment_code, home_url)
 
     send_mail(
         subject = u'[Estelcon] Notificación de inscripción en la Estelcon',

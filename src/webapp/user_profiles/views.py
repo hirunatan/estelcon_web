@@ -32,7 +32,7 @@ class SignupView(FormView):
     def get_success_url(self):
         profile = self.user.profile
         return reverse('login') + '?payment_code=%s&quota=%d&queue=%d' % (
-            profile.get_payment_code(),
+            profile.payment_code,
             profile.quota,
             self.queue,
         )

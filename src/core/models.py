@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from random import choice
 import string
 
-# Create your models here.
 
 class UserProfile(models.Model):
     # Link with the Django user
@@ -34,47 +33,21 @@ class UserProfile(models.Model):
     payed = models.IntegerField(u'Pagado')
     lost = models.CharField(u'(dato interno)', max_length=50, blank=True)   # For lost password recovery
 
-    def is_under_age(self):
-        return (self.age < 18)
-
-    is_under_age.short_description = u'Menor de edad'
-
-    def get_username(self):
-    	return self.user.username
-
-    get_username.short_description = u'Usuario'
-
-    def get_email(self):
-    	return self.user.email
-
-    get_email.short_description = u'Dirección de correo'
-
-    def get_full_name(self):
-    	return self.user.get_full_name()
-
-    get_full_name.short_description = u'Nombre completo'
-
-    # TODO ojo, este se usa en más sitios
-    def get_payment_code(self):
-    	return u'EC%d' % (self.user.id + 100)
-
-    get_payment_code.short_description = u'Código de pago'
-
-    def get_payment_status(self):
-    	return self.payment[:40]
-
-    get_payment_status.short_description = u'Estado de pago'
-
-    def __unicode__(self):
-        return self.user.username + u' - ' + self.user.email + u' - ' + self.user.get_full_name() + u' - ' + self.payment[:40] + u'...'
-
-    class Admin:
-        list_display = ('user', 'get_email', 'get_full_name', 'get_payment_code', 'is_under_age', 'quota', 'payed', 'payment')
-
     class Meta:
         verbose_name = u'Ficha de usuario'
         verbose_name_plural = u'Fichas de usuario'
 	ordering = ('id',)
+
+    def __unicode__(self):
+        return self.user.username + u' - ' + self.user.email + u' - ' + self.user.get_full_name() + u' - ' + self.payment[:40] + u'...'
+
+    @property
+    def payment_code(self):
+    	return u'EC%d' % (self.user.id + 100)
+
+    @property
+    def is_under_age(self):
+        return (self.age < 18)
 
     def get_admin_url(self):
         from django.conf import settings
@@ -113,9 +86,6 @@ class Activity(models.Model):
                                           verbose_name = u'Participantes',
 					  related_name = u'participant_of',
 					  blank = True)
-
-    class Admin:
-        pass
 
     class Meta:
         verbose_name = u'Actividad'
