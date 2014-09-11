@@ -1,12 +1,16 @@
 # -*- encoding: utf-8 -*-
 
 from django.conf.urls import patterns, url
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from .views import (
     SignupView, LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
-    UserProfileView, UserProfileEditPersonalView, UserProfileEditInscriptionView
+    UserProfileView, UserProfileEditPersonalView, UserProfileEditInscriptionView,
+    UserListingsIndexView, UserListingView
 )
+
+def user_is_staff(user):
+    return user.is_staff
 
 urlpatterns = patterns('',
     url(r'^merethaderthad_inscripcion/$', SignupView.as_view(),
@@ -25,5 +29,9 @@ urlpatterns = patterns('',
         name='user-profile-edit-personal'),
     url(r'^merethaderthad_ficha_editar_inscr/$', login_required(UserProfileEditInscriptionView.as_view()),
         name='user-profile-edit-inscription'),
+    url(r'^listados/$', user_passes_test(user_is_staff)(UserListingsIndexView.as_view()),
+        name='user-listings-index'),
+    url(r'^listados/(?P<listing_id>\d+)/$', user_passes_test(user_is_staff)(UserListingView.as_view()),
+        name='user-listing'),
 )
 

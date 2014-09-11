@@ -7,6 +7,7 @@ from django.contrib.auth import login, logout
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib import messages
 from django.conf import settings
+from django.http import HttpResponseNotFound, HttpResponseForbidden
 
 from core import services
 
@@ -176,4 +177,35 @@ class UserProfileEditInscriptionView(FormView):
         )
         messages.info(self.request, u'Datos modificados correctamente')
         return super(UserProfileEditInscriptionView, self).form_valid(form)
+
+
+class UserListingsIndexView(TemplateView):
+    template_name = 'webapp/user_profiles/listings_index.html'
+
+
+class UserListingView(TemplateView):
+    template_name = 'webapp/user_profiles/listings_general.html'
+
+    def get(self, *args, **kwargs):
+        try:
+            listing_id = int(kwargs.get('listing_id', 0))
+        except ValueError:
+            listing_id = 0
+
+        if listing_id:
+            self.listing_data = services.user_listing(listing_id)
+
+        if not listing_id or self.listing_data is None:
+            return HttpResponseNotFound(u'Número de listado incorrecto: %d' % listing_id)
+
+        return super(UserListingView, self).get(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(UserListingView, self).get_context_data(**kwargs)
+
+        (block, rows) = self.listing_data
+        context['block'] = block
+        context['rows'] = rows
+
+        return context
 

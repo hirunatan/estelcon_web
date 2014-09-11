@@ -605,3 +605,95 @@ El equipo organizador.
         fail_silently = True
     )
 
+
+def user_listing(listing_id):
+    if listing_id == 1:
+        return listing_all_users()
+    elif listing_id == 2:
+        return listing_unpaid_users()
+    elif listing_id == 3:
+        return listing_paid_users()
+    elif listing_id == 4:
+        return listing_reserved_shirts()
+    elif listing_id == 5:
+        return listing_users_with_shirts()
+    else:
+        return None
+
+
+def listing_all_users():
+    profiles = UserProfile.objects.all()
+
+    rows = [(p.user.get_full_name(), p.user.email) for p in profiles]
+    rows.sort(key=lambda p: p[0].lower())
+
+    rows = [("Nombre", "Email")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_unpaid_users():
+    profiles = UserProfile.objects.filter(payment__contains=u'Pendiente de verificación del pago')
+
+    rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
+    rows.sort(key=lambda p: p[0].lower())
+
+    rows = [("Nombre", "Email", "Por pagar", "Pagado")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_paid_users():
+    profiles = UserProfile.objects.exclude(payment__contains=u'Pendiente de verificación del pago')
+
+    rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
+    rows.sort(key=lambda p: p[0].lower())
+
+    rows = [("Nombre", "Email", "Por pagar", "Pagado")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_reserved_shirts():
+    profiles = UserProfile.objects.all()
+
+    sums = reduce(lambda sums, row: (sums[0]+row.shirts_S,
+                                     sums[1]+row.shirts_M,
+				     sums[2]+row.shirts_L,
+				     sums[3]+row.shirts_XL,
+				     sums[4]+row.shirts_XXL),
+		  profiles,
+		  (0, 0, 0, 0, 0))
+
+    rows = [("TallaS", "TallaM", "TallaL", "TallaXL", "TallaXXL"), sums]
+    return (None, rows)
+
+
+def listing_users_with_shirts():
+    profiles = UserProfile.objects.all()
+
+    rows = []
+
+    rows1 = [("talla S", p.user.get_full_name(), p.shirts_S) for p in profiles if p.shirts_S > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla M", p.user.get_full_name(), p.shirts_M) for p in profiles if p.shirts_M > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla L", p.user.get_full_name(), p.shirts_L) for p in profiles if p.shirts_L > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla XL", p.user.get_full_name(), p.shirts_XL) for p in profiles if p.shirts_XL > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla XXL", p.user.get_full_name(), p.shirts_XXL) for p in profiles if p.shirts_XXL > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows = [("Talla", "Nombre", "Cantidad")] + rows
+    return (None, rows)
+
