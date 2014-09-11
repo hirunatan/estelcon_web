@@ -8,7 +8,7 @@
 
 #logo {
 	float: left;
-	background: url(../images/homepage01.jpg) no-repeat left top;
+	background: url(../images/Logo.png) no-repeat left top;
 }
 
 #logo h1{
@@ -37,10 +37,6 @@ text-decoration: none;
 }
 
 
-.single #logo {
-	background: url(../images/subpage2_04.jpg) no-repeat left top;
-}
-
 /** MENU */
 
 #menu {
@@ -62,7 +58,7 @@ text-decoration: none;
 	float: left;
 	height: 20px;
 	padding: 4px 4px 0px 50px;
-	background: url(../images/subpage1_01.jpg) no-repeat left center;
+	background: transparent no-repeat left center;
 }
 
 #menu .first a {
@@ -131,20 +127,20 @@ table {
 
 margin-left: 20px;
 margin-right: 20px;
-border: thin solid black;
+border: thin solid #190e09;
 caption-side: bottom;
 border-collapse: collapse;
 text-align: left;
 }
 
 td, th {
-border: thin dotted gray;
+border: thin dotted #190e09;
 padding: 5px;
 
 }
 
 th {
-background-color: #cc6600;
+background-color: #190e09;
 }
 caption {
 font-style: italic;
@@ -153,5 +149,25 @@ padding-top: 8px;
 }
 
 .cellcolor {
-background-color: #fcba7a;
+background-color: #e6dad1;
+border: 1px solid #190e09;
 }
+
+/** IMAGES */
+
+.zoom{
+		border: 2px solid #190e09;
+		transition: 1.5s ease;
+ 		-moz-transition: 1.5s ease; /* Firefox */
+ 		-webkit-transition: 1.5s ease; /* Chrome - Safari */
+ 		-o-transition: 1.5s ease; /* Opera */
+	}
+	.zoom:hover{
+		border: none;
+		transform : scale(2);
+		-moz-transform : scale(2); /* Firefox */
+		-webkit-transform : scale(2); /* Chrome - Safari */
+		-o-transform : scale(2); /* Opera */
+		-ms-transform : scale(2); /* IE9 */
+	}
+	
