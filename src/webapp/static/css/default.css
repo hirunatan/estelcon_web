@@ -51,9 +51,9 @@ h3 {
 /** TEXTS */
 
 body, th, td, input, textarea, select {
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-family: TeX Gyre Cursor, Droid Sans, Gentium Basic, DejaVu Serif;
 	font-size: 11px;
-	color: #463f2e;
+	color: #190e09;
 }
 
 p, blockquote, ul, ol, dl {
@@ -237,17 +237,17 @@ html>body #wrapper {
 
 #page {
 	width: 980px;
-	background: url(../images/subpage2_01.png) repeat-y left top;
+	background: url(../images/subpage2_011.png) repeat-y left top;
 }
 
 #page-bg {
-	background: url(../images/subpage2_02.png) no-repeat left top;
+	background: url(../images/subpage2_022.png) no-repeat left top;
 }
 
 /** SIDEBAR > BOXED */
 
 .boxed {
-	background: url(../images/homepage16.png) repeat-y left top;
+	background: url(../images/homepage16.png) repeat-y left center;
 }
 
 .boxed-top {
@@ -270,7 +270,7 @@ html>body #wrapper {
 }
 
 .boxed-first {
-	background: url(../images/homepage16.png) repeat-y left top;
+	background: url(../images/homepage16.png) repeat-y left center;
 }
 
 .boxed-top-first {
@@ -283,7 +283,7 @@ html>body #wrapper {
 }
 
 .boxed-second {
-	background: url(../images/subpage1_06.png) repeat-y left top;
+	background: url(../images/subpage1_06.png) repeat-y left center;
 }
 
 .boxed-top-second {
@@ -302,7 +302,7 @@ html>body #wrapper {
 #footer {
 	width: 980px;
 	height: 80px;
-	background: url(../images/subpage2_03.png) no-repeat left top;
+	background: url(../images/subpage2_033.png) no-repeat left top;
 }
 
 #footer p {
@@ -340,4 +340,161 @@ padding-top: 8px;
 
 .cellcolor {
 background-color: #e6dad1;
+}
+
+/** FONTS*/
+
+@font-face {
+font-family: 'DejaVu Serif';
+src: url('/fonts/DejaVuSerif-Bold-webfont.eot');
+src: local('☺'), url('/fonts/DejaVuSerif-Bold-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-Bold-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: normal;
+}
+
+
+@font-face {
+font-family: 'DejaVu Serif';
+src: url('/fonts/DejaVuSerif-BoldItalic-webfont.eot');
+src: local('☺'), url('/fonts/DejaVuSerif-BoldItalic-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-BoldItalic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-BoldItalic-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: italic;
+}
+
+
+@font-face {
+font-family: 'DejaVu Serif';
+src: url('/fonts/DejaVuSerif-webfont.eot');
+src: local('☺'), url('/fonts/DejaVuSerif-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: normal;
+}
+
+
+@font-face {
+font-family: 'DejaVu Serif';
+src: url('/fonts/DejaVuSerifCondensed-Italic-webfont.eot');
+src: local('☺'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: italic;
+}
+
+
+@font-face {
+font-family: 'DejaVu Serif';
+src: url('/fonts/DejaVuSerifCondensed-Bold-webfont.eot');
+src: local('☺'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: normal;
+}
+
+
+@font-face {
+font-family: 'DejaVu Serif';
+src: url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.eot');
+src: local('☺'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: italic;
+}
+
+
+@font-face {
+font-family: 'DejaVu Serif';
+src: url('/fonts/DejaVuSerif-Italic-webfont.eot');
+src: local('☺'), url('/fonts/DejaVuSerif-Italic-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-Italic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-Italic-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: italic;
+}
+
+
+
+@font-face {
+font-family: 'Gentium Basic';
+src: url('/fonts/GenBasB-webfont.eot');
+src: local('☺'), url('/fonts/GenBasB-webfont.woff') format('woff'), url('/fonts/GenBasB-webfont.ttf') format('truetype'), url('/fonts/GenBasB-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: normal;
+}
+
+
+@font-face {
+font-family: 'Gentium Basic';
+src: url('/fonts/GenBasBI-webfont.eot');
+src: local('☺'), url('/fonts/GenBasBI-webfont.woff') format('woff'), url('/fonts/GenBasBI-webfont.ttf') format('truetype'), url('/fonts/GenBasBI-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: italic;
+}
+
+
+@font-face {
+font-family: 'Gentium Basic';
+src: url('/fonts/GenBasI-webfont.eot');
+src: local('☺'), url('/fonts/GenBasI-webfont.woff') format('woff'), url('/fonts/GenBasI-webfont.ttf') format('truetype'), url('/fonts/GenBasI-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: italic;
+}
+
+
+@font-face {
+font-family: 'Gentium Basic';
+src: url('/fonts/GenBasR-webfont.eot');
+src: local('☺'), url('/fonts/GenBasR-webfont.woff') format('woff'), url('/fonts/GenBasR-webfont.ttf') format('truetype'), url('/fonts/GenBasR-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: normal;
+}
+
+
+
+@font-face {
+font-family: 'Droid Sans';
+src: url('/fonts/DroidSans-Bold-webfont.eot');
+src: local('☺'), url('/fonts/DroidSans-Bold-webfont.woff') format('woff'), url('/fonts/DroidSans-Bold-webfont.ttf') format('truetype'), url('/fonts/DroidSans-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: normal;
+}
+
+
+@font-face {
+font-family: 'Droid Sans';
+src: url('/fonts/DroidSans-webfont.eot');
+src: local('☺'), url('/fonts/DroidSans-webfont.woff') format('woff'), url('/fonts/DroidSans-webfont.ttf') format('truetype'), url('/fonts/DroidSans-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: normal;
+}
+
+
+
+@font-face {
+font-family: 'TeX Gyre Cursor';
+src: url('/fonts/texgyrecursor-bold-webfont.eot');
+src: local('☺'), url('/fonts/texgyrecursor-bold-webfont.woff') format('woff'), url('/fonts/texgyrecursor-bold-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-bold-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: normal;
+}
+
+
+@font-face {
+font-family: 'TeX Gyre Cursor';
+src: url('/fonts/texgyrecursor-bolditalic-webfont.eot');
+src: local('☺'), url('/fonts/texgyrecursor-bolditalic-webfont.woff') format('woff'), url('/fonts/texgyrecursor-bolditalic-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-bolditalic-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 700;
+font-style: italic;
+}
+
+
+@font-face {
+font-family: 'TeX Gyre Cursor';
+src: url('/fonts/texgyrecursor-italic-webfont.eot');
+src: local('☺'), url('/fonts/texgyrecursor-italic-webfont.woff') format('woff'), url('/fonts/texgyrecursor-italic-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-italic-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: italic;
+}
+
+
+@font-face {
+font-family: 'TeX Gyre Cursor';
+src: url('/fonts/texgyrecursor-regular-webfont.eot');
+src: local('☺'), url('/fonts/texgyrecursor-regular-webfont.woff') format('woff'), url('/fonts/texgyrecursor-regular-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-regular-webfont.svg#webfontX4pGz9fc') format('svg');
+font-weight: 400;
+font-style: normal;
 }
