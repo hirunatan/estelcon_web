@@ -247,7 +247,7 @@ html>body #wrapper {
 /** SIDEBAR > BOXED */
 
 .boxed {
-	background: url(../images/homepage16.png) repeat-y left center;
+	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-top {
@@ -270,7 +270,7 @@ html>body #wrapper {
 }
 
 .boxed-first {
-	background: url(../images/homepage16.png) repeat-y left center;
+	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-top-first {
@@ -283,7 +283,7 @@ html>body #wrapper {
 }
 
 .boxed-second {
-	background: url(../images/subpage1_06.png) repeat-y left center;
+	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 
 .boxed-top-second {
