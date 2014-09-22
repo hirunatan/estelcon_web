@@ -52,7 +52,7 @@ h3 {
 
 body, th, td, input, textarea, select {
 	font-family: TeX Gyre Cursor, Droid Sans, Gentium Basic, DejaVu Serif;
-	font-size: 11px;
+	font-size: 12px;
 	color: #190e09;
 }
 
@@ -241,7 +241,7 @@ html>body #wrapper {
 }
 
 #page-bg {
-	background: url(../images/subpage2_022.png) no-repeat left top;
+	background: url(../images/subpage2_022.png) repeat-y left top;
 }
 
 /** SIDEBAR > BOXED */
