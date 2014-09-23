@@ -159,9 +159,12 @@ class UserProfileEditInscriptionView(FormView):
         profile = user.profile
         return {
             'notes_food': profile.notes_food,
-            'notes_transport': profile.notes_transport,
-            'notes_general': profile.notes_general,
             'dinner_menu': profile.dinner_menu,
+            'notes_transport': profile.notes_transport,
+            'room_choice': profile.room_choice,
+            'room_preferences': profile.room_preferences,
+            'squire': profile.squire,
+            'notes_general': profile.notes_general,
             'shirts_S': profile.shirts_S,
             'shirts_M': profile.shirts_M,
             'shirts_L': profile.shirts_L,

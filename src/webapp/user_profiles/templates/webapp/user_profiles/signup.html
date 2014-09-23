@@ -135,6 +135,7 @@ que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de ot
       </p></td>
     </tr>
   </table>
+  <br/>
   <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
     <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
     {{ form.notes_food }}
@@ -145,33 +146,71 @@ que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de ot
     {{ form.dinner_menu }}
     {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
-   <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
+  <p>Dinos si asistes a la Estelcon completa, o si no, los días que vas a venir:</p>
+  <table title="Indica los días completos que vas a asistir.">
+    <tr>
+      <td><label for="id_day_1">Viernes/Sábado<label></td>
+      <td>{{ form.day_1 }}
+      {% if form.day_1.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_1.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_day_2">Sábado/Domingo<label></td>
+      <td>{{ form.day_2 }}
+      {% if form.day_2.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_2.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr><tr>
+      <td><label for="id_day_3">Domingo/Lunes + Cena<label></td>
+      <td>{{ form.day_3 }}
+      {% if form.day_3.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_3.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+    </tr>
+  </table>
+  <br/>
+  <p title="Ahora indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
     <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
     {{ form.notes_transport }}
     {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Indica qué tipo de habitación prefieres (la doble tiene un incremento de precio).">
+    <label for="id_notes_food">Elige un tipo de alojamiento</label><br/>
+    {{ form.room_choice }}
+    {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Si prefieres compartir habitación con alguien, o cualquier otro comentario al respecto, indicalo aquí.">
+    <label for="id_room_preferences">¿Tienes alguna preferencia sobre con quién compartir habitación?<label><br/>
+    {{ form.room_preferences }}
+    {% if form.room_preferences.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_preferences.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p>¿Traes niños a tu cargo?</p>
+  <table title="Si traes niños a tu cargo, indica aquí cuántos son y sus nombres. Luego tendrás que rellenar una inscripción por cada uno. Si venis los dos padres, sólo hace falta rellenar esta información una vez.">
+      <tr>
+          <td><label for="id_children_count">Nº de niños</label></td>
+          <td>{{ form.children_count }}
+          {% if form.children_count.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_count.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+      </tr><tr>
+          <td><label for="id_children_names">Nombres (uno por fila)</label></td>
+          <td>{{ form.children_names }}
+          {% if form.children_names.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_names.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+      </tr>
+  </table>
+  <br/>
+  <p title="Indica si ya eres socio/a, con la cuota al día.">
+    <label for="id_is_ste_member">¿Eres socio/a de la STE?</label><br/>
+    {{ form.is_ste_member }}
+    {% if form.is_ste_member.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.is_ste_member.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Como oferta de Estelcon, añadiendo 2€ a la inscripción te puedes convertir en socio/a de la STE, de cuota reducida (recibirías la revista por correo electrónico en lugar de en papel).">
+    <label for="id_want_ste_member">En caso de que no, ¿quieres asociarte por 2€ más?</label><br/>
+    {{ form.want_ste_member }}
+    {% if form.want_ste_member.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.want_ste_member.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
+    <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label><br/>
+    {{ form.squire }}
+    {% if form.squire.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.squire.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
   <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
     <label for="id_notes_general">¿Algún otro comentario?<label><br/>
     {{ form.notes_general }}
     {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
-  <p>Ahora, si no puedes asistir a la Estelcon completa, indícanos los días que vas a venir:</p>
-  <table title="Indica los días completos que vas a asistir.">
-    <tr>
-      <td><label for="id_day_1">Jueves/Viernes: <label></td>
-      <td>{{ form.day_1 }}
-      {% if form.day_1.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_1.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr><tr>
-      <td><label for="id_day_2">Viernes/Sábado: <label></td>
-      <td>{{ form.day_2 }}
-      {% if form.day_2.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_2.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr><tr>
-      <td><label for="id_day_3">Sábado/Domingo + Cena: <label></td>
-      <td>{{ form.day_3 }}
-      {% if form.day_3.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_3.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr>
-  </table>
-  <br/>
   <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
   optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
   Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de

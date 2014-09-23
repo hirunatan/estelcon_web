@@ -53,17 +53,9 @@ class SignupForm(forms.Form):
         required = False,
         widget = forms.Textarea,
     )
-    notes_transport = forms.CharField(
-        required = False,
-        widget = forms.Textarea,
-    )
-    notes_general = forms.CharField(
-        required = False,
-        widget = forms.Textarea,
-    )
     dinner_menu = forms.ChoiceField(
         required = True,
-        choices = (('carne','carne'), ('pescado','pescado'), ('otros','otros')),
+        choices=((u'ternasco',u'Ternasco asado'), (u'merluza',u'Lomo de merluza en salsa verde con hortalizas'), (u'otros',u'Otros'))
     )
     day_1 = forms.BooleanField(
         initial = True, required = False,
@@ -73,6 +65,38 @@ class SignupForm(forms.Form):
     )
     day_3 = forms.BooleanField(
         initial = True, required = False,
+    )
+    notes_transport = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    room_choice = forms.ChoiceField(
+        required = True,
+        choices=((u'doble', u'Habitación doble'), (u'triple', u'Habitación triple'), (u'otros', u'Otros'))
+    )
+    room_preferences = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    children_count = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+    )
+    children_names = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+    is_ste_member = forms.BooleanField(
+        initial = True, required = False,
+    )
+    want_ste_member = forms.BooleanField(
+        initial = False, required = False,
+    )
+    squire = forms.BooleanField(
+        initial = False, required = False,
+    )
+    notes_general = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
     )
     shirts_S = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
@@ -101,6 +125,14 @@ class SignupForm(forms.Form):
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
 
+        self._clean_passwords(cleaned_data)
+        self._clean_days(cleaned_data)
+        self._clean_children(cleaned_data)
+        self._clean_ste_member(cleaned_data)
+
+        return cleaned_data
+
+    def _clean_passwords(self, cleaned_data):
         password1 = cleaned_data.get('password1')
         password2 = cleaned_data.get('password2')
         if password1 or password2:
@@ -112,6 +144,7 @@ class SignupForm(forms.Form):
                 if password2:
                     del cleaned_data['password2']
 
+    def _clean_days(self, cleaned_data):
         day_1 = cleaned_data.get('day_1')
         day_2 = cleaned_data.get('day_2')
         day_3 = cleaned_data.get('day_3')
@@ -127,7 +160,28 @@ class SignupForm(forms.Form):
             if day_3 is not None:
                 del cleaned_data['day_3']
 
-        return cleaned_data
+    def _clean_children(self, cleaned_data):
+        children_count = cleaned_data.get('children_count')
+        children_names = cleaned_data.get('children_names')
+        if children_count is not None and children_names is not None:
+            children_list = [name.strip() for name in children_names.split('\n') if name.strip()]
+            if children_count != len(children_list):
+                self._errors['children_count'] = self.error_class([u'El número no coincide'])
+                self._errors['children_names'] = self.error_class([u'Tienes que un nombre en cada fila'])
+                if children_count is not None:
+                    del cleaned_data['children_count']
+                if children_names is not None:
+                    del cleaned_data['children_names']
+
+    def _clean_ste_member(self, cleaned_data):
+        is_ste_member = cleaned_data.get('is_ste_member')
+        want_ste_member = cleaned_data.get('want_ste_member')
+        if is_ste_member and want_ste_member:
+            self._errors['want_ste_member'] = self.error_class([u'No puedes hacerte socio si ya lo eres'])
+            if is_ste_member is not None:
+                del cleaned_data['is_ste_member']
+            if want_ste_member is not None:
+                del cleaned_data['want_ste_member']
 
 
 class LoginForm(forms.Form):
@@ -282,17 +336,28 @@ class UserProfileEditInscriptionForm(forms.Form):
         required = False,
         widget = forms.Textarea,
     )
+    dinner_menu = forms.ChoiceField(
+        required = True,
+        choices=((u'ternasco',u'Ternasco asado'), (u'merluza',u'Lomo de merluza en salsa verde con hortalizas'), (u'otros',u'Otros'))
+    )
     notes_transport = forms.CharField(
         required = False,
         widget = forms.Textarea,
     )
-    notes_general = forms.CharField(
+    room_choice = forms.ChoiceField(
+        required = True,
+        choices=((u'doble', u'Habitación doble'), (u'triple', u'Habitación triple'), (u'otros', u'Otros'))
+    )
+    room_preferences = forms.CharField(
         required = False,
         widget = forms.Textarea,
     )
-    dinner_menu = forms.ChoiceField(
-        required = True,
-        choices = (('carne','carne'), ('pescado','pescado'), ('otros','otros')),
+    squire = forms.BooleanField(
+        initial = False, required = False,
+    )
+    notes_general = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
     )
     shirts_S = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
