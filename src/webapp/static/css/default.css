@@ -247,11 +247,14 @@ html>body #wrapper {
 /** SIDEBAR > BOXED */
 
 .boxed {
-	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-top {
 	background: url(../images/homepage15.png) no-repeat left top;
+}
+
+.boxed-content {
+	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-bottom {
@@ -270,11 +273,14 @@ html>body #wrapper {
 }
 
 .boxed-first {
-	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-top-first {
 	background: url(../images/homepage15.png) no-repeat left top;
+}
+
+.boxed-content-first {
+background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-bottom-first {
@@ -283,11 +289,14 @@ html>body #wrapper {
 }
 
 .boxed-second {
-	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 
 .boxed-top-second {
 	background: url(../images/subpage1_05.png) no-repeat left top;
+}
+
+.boxed-content-second {
+	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 
 .boxed-bottom-second {
