@@ -84,7 +84,7 @@ p, blockquote, ul, ol, dl {
 
 .list1 li a:hover {
 	text-decoration: underline;
-	text-transform: uppercase;
+	text-transform: none;
 }
 
 #sidebar .aactive {
