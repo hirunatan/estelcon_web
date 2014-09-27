@@ -84,7 +84,7 @@ p, blockquote, ul, ol, dl {
 
 .list1 li a:hover {
 	text-decoration: underline;
-	text-transform: uppercase;
+	text-transform: none;
 }
 
 #sidebar .aactive {
@@ -259,6 +259,10 @@ html>body #wrapper {
 	background: url(../images/homepage16.png) repeat-y left top;
 }
 
+.boxed-content {
+	background: url(../images/homepage16.png) repeat-y left top;
+}
+
 .boxed-bottom {
 	background: url(../images/homepage17.png) no-repeat left bottom;
         min-height: 25px;
@@ -288,6 +292,10 @@ html>body #wrapper {
 	background: url(../images/homepage16.png) repeat-y left top;
 }
 
+.boxed-content-first {
+background: url(../images/homepage16.png) repeat-y left top;
+}
+
 .boxed-bottom-first {
 	background: url(../images/homepage17.png) no-repeat left bottom;
         min-height: 25px;
@@ -303,6 +311,10 @@ html>body #wrapper {
 
 .boxed-content-second {
 	padding: 10px 20px 5px 16px;
+	background: url(../images/subpage1_06.png) repeat-y left top;
+}
+
+.boxed-content-second {
 	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 
