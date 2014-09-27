@@ -32,20 +32,44 @@ que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de ot
 </ul>
 {% endcomment %}
 
-<p><em>Muchas gracias por decidirte a asistir a la XIV Mereth Aderthad. Recuerda que las fechas
-son <b>16, 17, 18 y 19 de octubre de este a&ntilde;o 2008</b>.</em></p>
-<p><b>La política de precios es la siguiente</b>: la inscripción completa incluye alojamiento y 
-pensión completa desde la cena del jueves hasta la comida del domingo inclusive, más todos los 
-gastos y actividades. Para los que no puedan ir todos los días, hemos habilitado también pagos 
-parciales. Toda asistencia parcial será por días completos, incluyendo desde la cena de un día 
-hasta la comida del siguiente. Para casos especiales contactad por favor con la organización.</p>
+<p><em>Muchas gracias por decidirte a asistir a la XIX Mereth Aderthad 2014. Recuerda que las fechas
+son <b>5, 6, 7 y 8 de diciembre de este a&ntilde;o 2014</b>.</em></p>
+<p><b>La política de precios es la siguiente</b>: la inscripción completa incluye alojamiento y
+pensión completa desde la cena del viernes hasta la comida del lunes inclusive, más todos los
+gastos y actividades, y la cena de gala del domingo. Para los que no puedan ir todos los días, hemos habilitado también pagos parciales. Toda
+asistencia parcial será por días completos, incluyendo desde la cena de un día hasta la comida del
+siguiente. Para casos especiales contactad por favor con la organización.
+</p>
+<p><b>Precios en habitación triple:</b></p>
 <ul>
-<li>Mereth completa: <b>140€</b></li>
-<li>Desde la cena del jueves a la comida del viernes: <b>35€</b></li>
-<li>Desde la cena del viernes a la comida del sábado: <b>35€</b></li>
-<li>Desde la cena (de gala) del sábado a la comida del domingo: <b>70€</b></li>
+<li>Mereth completa: <b>145€</b></li>
+<li>Precios desglosados:
+    <ul>
+    <li>Desde la cena del viernes a la comida del sábado: <b>39,6€</b></li>
+    <li>Desde la cena del sábado a la comida del domingo: <b>39,6€</b></li>
+    <li>Desde la cena (de gala) del domingo a la comida del lunes: <b>54,6€</b></li>
+    <li>Al total de días que sean, añadir <b>11,2€</b></li>
+    </ul>
 </ul>
-<p><b>Es importante también que conozcas la política de devoluciones</b> que, salvo excepciones, será: 
+<p><b>Precios en habitación doble:</b></p>
+<ul>
+<li>Mereth completa: <b>166€</b></li>
+<li>Precios desglosados:
+    <ul>
+    <li>Desde la cena del viernes a la comida del sábado: <b>46,6€</b></li>
+    <li>Desde la cena del sábado a la comida del domingo: <b>46,6€</b></li>
+    <li>Desde la cena (de gala) del domingo a la comida del lunes: <b>61,6€</b></li>
+    <li>Al total de días que sean, añadir <b>11,2€</b></li>
+    </ul>
+</ul>
+<p><b>Descuentos y condiciones para niños:</b></p>
+<ul>
+<li>Menores de 18 años deben venir con sus padres o tener autorización.</li>
+<li>Niños entre 2 y 12 años tienen un <b>descuento del 25%</b> respecto de los precios indicados arriba.</li>
+<li>Niños menores de 2 años no tienen coste y no necesitan inscripción si no requieren cama ni comida (sí que hay que mencionarlos
+    en el formulario de inscripción de sus padres).</b>
+</ul>
+<p><b>Es importante también que conozcas la política de devoluciones</b> que, salvo excepciones, será:
 <ul>
 <li>Hasta el 16 de septiembre: Devolución íntegra.</li>
 <li>Del 16/09 al 23/09. Devolución del 75% de lo ingresado</li>
@@ -64,6 +88,7 @@ que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de ot
   <li>Hacer el ingreso correspondiente en la cuenta bancaria que se indicará al completar la ficha. En el ingreso hay que indicar el código de pago apuntado en el paso anterior.</li>
   <li>En pocos días, entrando en la ficha personal aparecerá reflejado que hemos aceptado y comprobado el pago.</li>
   <li>Si se desea pagar por varias personas a la vez, hay que rellenar primero una ficha por cada uno, y en el ingreso indicar todos los códigos de pago. Se admite poner la misma dirección de correo de contacto en todas las fichas, si una persona quiere coordinar lo de todos.</li>
+  <li>Los menores de edad, a partir de 2 años, deben rellenar su propia ficha, y además hay que mencionarlos en la ficha de sus padres si vienen también.</li>
   <li><b>La diferencia entre asistente y participante no tiene cabida en el proceso de inscripción. Es posteriormente, al proponer actividades, donde esta distinción se hace patente</b>.</li>
 </ol>
 <p>MANTÉN INMÓVIL DURANTE 1 SEG. EL CURSOR DEL RATÓN SOBRE LOS RECUADROS DE TEXTO PARA OBTENER MÁS INFORMACIÓN.</p>
@@ -128,9 +153,9 @@ que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de ot
       </p></td>
     </tr>
     </tr><tr>
-      <td><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada.">
+      <td colspan="2"><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada. Los niños de entre 2 y 12 años tienen un descuento en la inscripción, y los menores de 2 años no necesitan inscripción si no requieren cama ni comida.">
         <label for="id_age">Edad: *</label><br/>
-        {{ form.age }}
+        {{ form.age }} Importante para menores o niños de hasta 12 años.
         {% if form.age.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.age.errors|join:", " }}&nbsp;</b>{% endif %}
       </p></td>
     </tr>
