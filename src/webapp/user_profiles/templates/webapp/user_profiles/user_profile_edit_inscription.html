@@ -29,11 +29,25 @@ de asistencia. Si deseas cambiar este dato contacta con la organización.</p>
     {{ form.dinner_menu }}
     {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
-   <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
   <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
     <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
     {{ form.notes_transport }}
     {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Indica qué tipo de habitación prefieres (la doble tiene un incremento de precio).">
+    <label for="id_notes_food">Elige un tipo de alojamiento</label><br/>
+    {{ form.room_choice }}
+    {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Si prefieres compartir habitación con alguien, o cualquier otro comentario al respecto, indicalo aquí.">
+    <label for="id_room_preferences">¿Tienes alguna preferencia sobre con quién compartir habitación?<label><br/>
+    {{ form.room_preferences }}
+    {% if form.room_preferences.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_preferences.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
+    <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label><br/>
+    {{ form.squire }}
+    {% if form.squire.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.squire.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
   <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
     <label for="id_notes_general">¿Algún otro comentario?<label><br/>
@@ -49,11 +63,11 @@ de asistencia. Si deseas cambiar este dato contacta con la organización.</p>
   nada más llegar.</p>
    <table title="Indica cuántas camisetas quieres de esta talla.">
     <tr>
-  <td><label for="id_shirts_S">Camisetas talla S: <label></td>
+      <td><label for="id_shirts_S">Camisetas talla S: <label></td>
       <td>{{ form.shirts_S }}
       {% if form.shirts_S.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_S.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
     </tr>
-<tr>
+    <tr>
       <td><label for="id_shirts_M">Camisetas talla M: <label></td>
       <td>{{ form.shirts_M }}
       {% if form.shirts_M.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_M.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>

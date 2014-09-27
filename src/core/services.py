@@ -42,21 +42,28 @@ def create_new_user(user_data, home_url):
         phone = user_data['phone'],
         city = user_data['city'],
         age = user_data['age'],
-        payment = '',
         notes_food = user_data['notes_food'],
-        notes_transport = user_data['notes_transport'],
-        notes_general = user_data['notes_general'],
         dinner_menu = user_data['dinner_menu'],
+        day_1 = user_data['day_1'],
+        day_2 = user_data['day_2'],
+        day_3 = user_data['day_3'],
+        notes_transport = user_data['notes_transport'],
+        room_choice = user_data['room_choice'],
+        room_preferences = user_data['room_preferences'],
+        children_count = user_data['children_count'],
+        children_names = user_data['children_names'],
+        is_ste_member = user_data['is_ste_member'],
+        want_ste_member = user_data['want_ste_member'],
+        squire = user_data['squire'],
+        notes_general = user_data['notes_general'],
         shirts_S = user_data['shirts_S'],
         shirts_M = user_data['shirts_M'],
         shirts_L = user_data['shirts_L'],
         shirts_XL = user_data['shirts_XL'],
         shirts_XXL = user_data['shirts_XXL'],
-        day_1 = user_data['day_1'],
-        day_2 = user_data['day_2'],
-        day_3 = user_data['day_3'],
         quota = quota,
         payed = 0,
+        payment = '',
     )
 
     if not queue:
@@ -242,9 +249,12 @@ El equipo organizador.
 def change_user_inscription_data(user, new_data, home_url):
     profile = user.profile
     profile.notes_food=new_data['notes_food']
-    profile.notes_transport=new_data['notes_transport']
-    profile.notes_general=new_data['notes_general']
     profile.dinner_menu=new_data['dinner_menu']
+    profile.notes_transport=new_data['notes_transport']
+    profile.room_choice=new_data['room_choice']
+    profile.room_preferences=new_data['room_preferences']
+    profile.squire=new_data['squire']
+    profile.notes_general=new_data['notes_general']
     profile.shirts_S=new_data['shirts_S']
     profile.shirts_M=new_data['shirts_M']
     profile.shirts_L=new_data['shirts_L']

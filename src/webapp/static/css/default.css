@@ -251,6 +251,12 @@ html>body #wrapper {
 
 .boxed-top {
 	background: url(../images/homepage15.png) no-repeat left top;
+        min-height: 25px;
+}
+
+.boxed-content {
+	padding: 10px 20px 5px 16px;
+	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-content {
@@ -258,8 +264,8 @@ html>body #wrapper {
 }
 
 .boxed-bottom {
-	padding: 29px 20px 10px 16px;
 	background: url(../images/homepage17.png) no-repeat left bottom;
+        min-height: 25px;
 }
 
 .boxed h2, .boxed-first h2 {
@@ -269,6 +275,7 @@ html>body #wrapper {
 
 .boxed .more, .boxed-first .more {
 	padding: 0px;
+        margin-bottom: 10px;
 	background: none;
 }
 
@@ -277,6 +284,12 @@ html>body #wrapper {
 
 .boxed-top-first {
 	background: url(../images/homepage15.png) no-repeat left top;
+        min-height: 25px;
+}
+
+.boxed-content-first {
+	padding: 10px 20px 5px 16px;
+	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-content-first {
@@ -284,8 +297,8 @@ background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-bottom-first {
-	padding: 29px 20px 20px 16px;
 	background: url(../images/homepage17.png) no-repeat left bottom;
+        min-height: 25px;
 }
 
 .boxed-second {
@@ -293,6 +306,12 @@ background: url(../images/homepage16.png) repeat-y left top;
 
 .boxed-top-second {
 	background: url(../images/subpage1_05.png) no-repeat left top;
+        min-height: 25px;
+}
+
+.boxed-content-second {
+	padding: 10px 20px 5px 16px;
+	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 
 .boxed-content-second {
@@ -300,8 +319,8 @@ background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-bottom-second {
-	padding: 29px 20px 20px 16px;
 	background: url(../images/subpage1_07.png) no-repeat left bottom;
+        min-height: 25px;
 }
 
 
