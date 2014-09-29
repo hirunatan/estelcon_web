@@ -110,8 +110,8 @@ p, blockquote, ul, ol, dl {
 }
 
 .list2 li a:hover {
-	text-decoration: none;
-	text-transform: uppercase;
+	text-decoration: underline;
+	text-transform: none;
 }
 
 /** LINKS */
@@ -221,7 +221,7 @@ html>body #wrapper {
 #menu {
 	width: 708px;
 	height: 200px;
-	background: url(../images/Menu.png) no-repeat left top;
+	background: url(../images/homepagemenu.png) no-repeat left top;
 }
 
 #menu a {
@@ -237,11 +237,11 @@ html>body #wrapper {
 
 #page {
 	width: 980px;
-	background: url(../images/subpage2_011.png) repeat-y left top;
+	background: url(../images/subpagebg1.png) repeat-y left top;
 }
 
 #page-bg {
-	background: url(../images/subpage2_022.png) repeat-y left top;
+	background: url(../images/subpagebg2.png) repeat-y left top;
 }
 
 /** SIDEBAR > BOXED */
@@ -330,7 +330,7 @@ background: url(../images/homepage16.png) repeat-y left top;
 #footer {
 	width: 980px;
 	height: 80px;
-	background: url(../images/subpage2_033.png) no-repeat left top;
+	background: url(../images/subpagefooter.png) no-repeat left top;
 }
 
 #footer p {
