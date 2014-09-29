@@ -154,6 +154,9 @@ def _calculate_quota(user_data):
     if user_data['age'] <= 12:
         quota = quota * 0.75
 
+    if not user_data['is_ste_member']:
+        quota += 10.0
+
     if user_data['want_ste_member']:
         quota += 2.0
 
