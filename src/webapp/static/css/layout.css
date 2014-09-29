@@ -8,11 +8,11 @@
 
 #logo {
 	float: left;
-	background: url(../images/Logo.png) no-repeat left top;
+	background: url(../images/homepagelogo.png) no-repeat left top;
 }
 
 #logo h1{
-	margin: 150px 0px 0px 0px;
+	margin: 168px 0px 0px 20px;
 	text-indent: 78px;
 	
 }
