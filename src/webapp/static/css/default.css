@@ -88,7 +88,9 @@ p, blockquote, ul, ol, dl {
 }
 
 #sidebar .aactive {
-	/**background: url(../images/homepage11b.jpg) no-repeat left top;*/
+        font-weight: bold;
+        text-transform: uppercase;
+        /**background: url(../images/homepage11b.jpg) no-repeat left top;*/
 }
 
 
@@ -230,7 +232,8 @@ html>body #wrapper {
 }
 
 #menu a:hover {
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
+	text-decoration: underline;
 }
 
 /** PAGE */
