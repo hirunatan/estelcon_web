@@ -317,10 +317,6 @@ background: url(../images/homepage16.png) repeat-y left top;
 	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 
-.boxed-content-second {
-	background: url(../images/subpage1_06.png) repeat-y left top;
-}
-
 .boxed-bottom-second {
 	background: url(../images/subpage1_07.png) no-repeat left bottom;
         min-height: 25px;
