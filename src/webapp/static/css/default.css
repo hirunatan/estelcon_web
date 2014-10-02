@@ -88,7 +88,9 @@ p, blockquote, ul, ol, dl {
 }
 
 #sidebar .aactive {
-	/**background: url(../images/homepage11b.jpg) no-repeat left top;*/
+        font-weight: bold;
+        text-transform: uppercase;
+        /**background: url(../images/homepage11b.jpg) no-repeat left top;*/
 }
 
 
@@ -230,7 +232,8 @@ html>body #wrapper {
 }
 
 #menu a:hover {
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
+	text-decoration: underline;
 }
 
 /** PAGE */
@@ -311,10 +314,6 @@ background: url(../images/homepage16.png) repeat-y left top;
 
 .boxed-content-second {
 	padding: 10px 20px 5px 16px;
-	background: url(../images/subpage1_06.png) repeat-y left top;
-}
-
-.boxed-content-second {
 	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 

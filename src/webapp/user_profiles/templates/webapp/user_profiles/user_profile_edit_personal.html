@@ -4,9 +4,8 @@
 <ul class="list1">
     <li><a href="/merethaderthad_modelo.html">Modelo de Mereth Aderthad</a></li>
     <li><a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a></li>
-<li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
-<li><a href="/merethaderthad_programa">Programa de actividades</a></li>
-
+    <li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
+    <li><a href="/merethaderthad_programa">Programa de actividades</a></li>
     <li><a href="/merethaderthad_inscripcion">Formulario de inscripción</a></li>
     <li class="aactive"><a href="/merethaderthad_ficha">Ficha personal</a></li>
 </ul>
@@ -79,9 +78,9 @@ a entrar a la página.</p>
       </p></td>
     </tr>
     </tr><tr>
-      <td><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada.">
+      <td colspan="2"><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada. Los niños de entre 2 y 12 años tienen un descuento en la inscripción, y los menores de 2 años no necesitan inscripción si no requieren cama ni comida.">
         <label for="id_age">Edad: *</label><br/>
-        {{ form.age }}
+        {{ form.age }} Importante para menores o niños de hasta 12 años.
         {% if form.age.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.age.errors|join:", " }}&nbsp;</b>{% endif %}
       </p></td>
     </tr>

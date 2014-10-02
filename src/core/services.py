@@ -15,13 +15,7 @@ MAX_USERS = 186
 
 def create_new_user(user_data, home_url):
 
-    quota = 0
-    if user_data['day_1']:
-    	quota += 35
-    if user_data['day_2']:
-    	quota += 35
-    if user_data['day_3']:
-    	quota += 70
+    quota = _calculate_quota(user_data)
 
     queue = max(0, UserProfile.objects.count() - MAX_USERS)
 
@@ -69,8 +63,8 @@ def create_new_user(user_data, home_url):
     if not queue:
         profile.payment = \
 u'''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de La Caixa
-2100 1923 91 01 00148021 a nombre de PABLO RUIZ MUZQUIZ, indicando en el ingreso el código %s.
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
+ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
 ''' % (profile.quota, profile.payment_code)
     else:
 	profile.payment = \
@@ -98,8 +92,9 @@ u'''
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
-La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en
-la cuenta de La Caixa 2100 1923 91 01 00148021 a nombre de PABLO RUIZ MUZQUIZ, indicando en el ingreso el código %s.
+La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
+cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
+el código %s.
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
@@ -134,6 +129,46 @@ El equipo organizador.
     )
 
     return (user, queue)
+
+
+def _calculate_quota(user_data):
+    quota = 0.0
+
+    if user_data['room_choice'] == 'triple':
+        quota += 11.2
+        if user_data['day_1']:
+            quota += 39.6
+        if user_data['day_2']:
+            quota += 39.6
+        if user_data['day_3']:
+            quota += 54.6
+
+    if user_data['room_choice'] == 'doble' or user_data['room_choice'] == 'otros':
+        quota += 11.2
+        if user_data['day_1']:
+            quota += 46.6
+        if user_data['day_2']:
+            quota += 46.6
+        if user_data['day_3']:
+            quota += 61.6
+
+    if user_data['age'] <= 12:
+        quota = quota * 0.75
+
+    if not user_data['is_ste_member']:
+        quota += 10.0
+
+    if user_data['want_ste_member']:
+        quota += 2.0
+
+    num_shirts = user_data['shirts_S'] + \
+                 user_data['shirts_M'] + \
+                 user_data['shirts_L'] + \
+                 user_data['shirts_XL'] + \
+                 user_data['shirts_XXL']
+    quota += num_shirts * 10.0
+
+    return round(quota)
 
 
 def retrieve_user(username):
