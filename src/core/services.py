@@ -63,8 +63,8 @@ def create_new_user(user_data, home_url):
     if not queue:
         profile.payment = \
 u'''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de La Caixa
-2100 1923 91 01 00148021 a nombre de PABLO RUIZ MUZQUIZ, indicando en el ingreso el código %s.
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
+ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
 ''' % (profile.quota, profile.payment_code)
     else:
 	profile.payment = \
@@ -92,8 +92,9 @@ u'''
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
-La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en
-la cuenta de La Caixa 2100 1923 91 01 00148021 a nombre de PABLO RUIZ MUZQUIZ, indicando en el ingreso el código %s.
+La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
+cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
+el código %s.
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
