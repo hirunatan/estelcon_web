@@ -87,7 +87,7 @@ Su ficha puede consultarse directamente en %s
     if not queue:
 	message_user = \
 u'''
-¡Gracias por inscribirte en la XIV Mereth Aderthad, %s!.
+¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
@@ -104,7 +104,7 @@ El equipo organizador.
     else:
 	message_user = \
 u'''
-¡Gracias por inscribirte en la XIV Mereth Aderthad, %s!.
+¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
 Sin embargo, lamentamos comunicarte que el número de plazas máximo que teníamos establecido ha sido alcanzado, por
 lo que no podemos garantizar tu asistencia. ¡Lo sentimos muchísimo!
