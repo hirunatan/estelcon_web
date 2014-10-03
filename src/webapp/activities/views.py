@@ -19,8 +19,12 @@ from .forms import (
 class ScheduleView(TemplateView):
     template_name = 'webapp/activities/schedule.html'
 
+
+class ScheduleDevelView(TemplateView):
+    template_name = 'webapp/activities/schedule_devel.html'
+
     def get_context_data(self, **kwargs):
-        context = super(ScheduleView, self).get_context_data(**kwargs)
+        context = super(ScheduleDevelView, self).get_context_data(**kwargs)
         (activ_without_hour, days) = services.get_schedule()
         context['activ_without_hour'] = activ_without_hour
         context['days'] = days

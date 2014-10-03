@@ -258,7 +258,8 @@ html>body #wrapper {
 
 /** SIDEBAR > BOXED */
 
-.boxed {
+.boxed p {
+	text-align: left;
 }
 
 .boxed-top {
@@ -289,7 +290,8 @@ html>body #wrapper {
 	background: none;
 }
 
-.boxed-first {
+.boxed-first p {
+	text-align: left;
 }
 
 .boxed-top-first {
@@ -311,7 +313,8 @@ background: url(../images/homepage16.png) repeat-y left top;
         min-height: 50px;
 }
 
-.boxed-second {
+.boxed-second p {
+	text-align: left;
 }
 
 .boxed-top-second {
