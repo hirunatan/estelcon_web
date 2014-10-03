@@ -1,0 +1,81 @@
+{% extends "webapp/common/base_subsection.html" %}
+
+{% block subsecciones %}
+<ul class="list1">
+    <li><a href="/merethaderthad_modelo.html">Modelo de Mereth Aderthad</a></li>
+    <li><a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a></li>
+    <li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
+    <li class="aactive"><a href="/merethaderthad_programa">Programa de actividades</li>
+    <li><a href="/merethaderthad_inscripcion">Formulario de inscripción</a></li>
+    <li><a href="/merethaderthad_ficha">Ficha personal</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+<h1><span>La Mereth Aderthad</span> Programa de actividades</h1>
+
+{% if activ_without_hour %}
+  <p><b>SIN HORARIO</b></p>
+  {% for activity in activ_without_hour %}
+    {% if not forloop.first %}<br/><br/>{% endif %}
+    {% if activity.has_view_page %}
+      <a href="/merethaderthad_actividad/{{ activity.id }}">{{ activity.title }}</a>
+    {% else %}
+      {{ activity.title }}
+    {% endif %}
+    {% if activity.subtitle %}
+      <br><em>{{ activity.subtitle }}</em>
+    {% endif %}
+    {% if activity.show_owners %}
+      <br>Por: <em>
+      {% for owner in activity.owners.all %}
+        {% if not forloop.first and not forloop.last %}, {% endif %}
+        {% if not forloop.first and forloop.last %} y {% endif %}
+        <b>{{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}</b>
+      {% endfor %}
+      </em>
+    {% endif %}
+  {% endfor %}
+  <p/>
+{% endif %}
+
+{% for day, blocks in days %}
+
+<table class="programtable" border="1" cellpadding="5" width="100%">
+<th colspan="3">{{ day }}</th>
+{% for hour, columns in blocks %}
+      <tr>
+        <td width="6%" valign="top">{{ hour }}</td>
+        {% for rowspan, colspan, activities in columns %}
+          <td width="47%" valign="top" rowspan="{{ rowspan }}" colspan="{{ colspan }}">
+	  {% if not activities %}&nbsp;{% endif %}
+	  {% for activity in activities %}
+	    {% if not forloop.first %}<br/><br/>{% endif %}
+  	    {% if activity.has_view_page %}
+	      <a href="/merethaderthad_actividad/{{ activity.id }}">{{ activity.title }}</a>
+	    {% else %}
+	      {{ activity.title }}
+	    {% endif %}
+	    {% if activity.subtitle %}
+	      <br><em>{{ activity.subtitle }}</em>
+	    {% endif %}
+	    {% if activity.show_owners %}
+	      <br>Por: <em>
+	      {% for owner in activity.owners.all %}
+		{% if not forloop.first and not forloop.last %}, {% endif %}
+		{% if not forloop.first and forloop.last %} y {% endif %}
+		<b>{{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}</b>
+	      {% endfor %}
+	      </em>
+ 	    {% endif %}
+	  {% endfor %}
+ 	  </td>
+        {% endfor %}
+      </tr>
+  {% endfor %}
+</table>
+<p/>
+{% endfor %}
+
+{% endblock %}
