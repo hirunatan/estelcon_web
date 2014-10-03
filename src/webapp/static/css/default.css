@@ -167,6 +167,15 @@ a:hover {
 
 /** MISC */
 
+.english-edition {
+    text-align: right;
+    margin-bottom: 0;
+}
+
+.english-edition img {
+    vertical-align: bottom;
+}
+
 .align-justify { text-align: justify; }
 .align-right { text-align: right; }
 
