@@ -14,23 +14,6 @@
 {% block content %}
 <h1><span>La Mereth Aderthad</span> Formulario de inscripción</h1>
 
-{% comment %}
-<p><b>---El plazo de inscripción a la Mereth ha finalizado, con lo cual ya no se admiten nuevas
-solicitudes. Si deseas comentarnos algo, escribenos a info@estelcon2008.org.</b><p>
-
-<p><b>En el caso (esperemos que no) de que descubras que no puedes venir, puedes escribirnos también a esa
-dirección. En ese caso, es importante que conozcas la política de devoluciones que, salvo excepciones, será:</b>
-<ul>
-<li>Hasta el 16 de septiembre: Devolución íntegra.</li>
-<li>Del 16/09 al 23/09. Devolución del 75% de lo ingresado</li>
-<li>Del 23/09 al 30/09. Devolución del 50% de lo ingresado</li>
-<li>Del 30/09 al 08/10. Devolución del 25% de lo ingresado</li>
-<li>A partir del 09/10 no se devolvería nada.</li>
-<li>Las devoluciones se harán por transferencia a la cuenta que se nos indique, descontando la comisión
-que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de otra entidad).</li>
-</ul>
-{% endcomment %}
-
 <p><em>Muchas gracias por decidirte a asistir a la XIX Mereth Aderthad 2014. Recuerda que las fechas
 son <b>5, 6, 7 y 8 de diciembre de este a&ntilde;o 2014</b>.</em></p>
 <p><b>La política de precios es la siguiente</b>: la inscripción completa incluye alojamiento y
@@ -39,6 +22,7 @@ gastos y actividades, y la cena de gala del domingo. Para los que no puedan ir t
 asistencia parcial será por días completos, incluyendo desde la cena de un día hasta la comida del
 siguiente. Para casos especiales contactad por favor con la organización.
 </p>
+<p>Todos los precios incluyen IVA.</p>
 <p><b>Precios en habitación triple:</b></p>
 <ul>
 <li>Mereth completa: <b>145€</b></li>
@@ -49,6 +33,7 @@ siguiente. Para casos especiales contactad por favor con la organización.
     <li>Desde la cena (de gala) del domingo a la comida del lunes: <b>54,6€</b></li>
     <li>Al total de días que sean, añadir <b>11,2€</b></li>
     </ul>
+</li>
 </ul>
 <p><b>Precios en habitación doble:</b></p>
 <ul>
@@ -60,26 +45,32 @@ siguiente. Para casos especiales contactad por favor con la organización.
     <li>Desde la cena (de gala) del domingo a la comida del lunes: <b>61,6€</b></li>
     <li>Al total de días que sean, añadir <b>11,2€</b></li>
     </ul>
+</li>
 </ul>
 <p><b>Descuentos y condiciones para niños:</b></p>
 <ul>
+<li>Existen habitaciones para familias de más de 3 miembros pero su número es limitado, consultar con las organización (estelcon2014@gmail.com).</li>
 <li>Menores de 18 años deben venir con sus padres o tener autorización.</li>
-<li>Niños entre 2 y 12 años tienen un <b>descuento del 25%</b> respecto de los precios indicados arriba.</li>
+<li>Niños menores de 12 años tienen un <b>descuento del 25%</b> respecto de los precios indicados arriba.</li>
 <li>Niños menores de 2 años no tienen coste y no necesitan inscripción si no requieren cama ni comida (sí que hay que mencionarlos
     en el formulario de inscripción de sus padres).</b>
 </ul>
-<p><b>Es importante también que conozcas la política de devoluciones</b> que, salvo excepciones, será:
+<p><b>Condiciones para no socios:</b></p>
 <ul>
-<li>Hasta el 16 de septiembre: Devolución íntegra.</li>
-<li>Del 16/09 al 23/09. Devolución del 75% de lo ingresado</li>
-<li>Del 23/09 al 30/09. Devolución del 50% de lo ingresado</li>
-<li>Del 30/09 al 08/10. Devolución del 25% de lo ingresado</li>
-<li>A partir del 09/10 no se devolvería nada.</li>
-<li>Las devoluciones se harán por transferencia a la cuenta que se nos indique, descontando la comisión
-que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de otra entidad).</li>
+<li>Los no socios deberán pagar 10 € más en cualquiera de los casos, si bien podrán aprovechar y hacerse socios en la propia EstelCon, descontando esta parte de su cuota.</li>
 </ul>
-<p><b>El plazo de inscripción y pago finaliza el 16 de septiembre.</b></p>
-<p>El proceso de inscripción es el siguiente:</p>
+<p><b>Plazos de inscripción:</b>
+<ul>
+<li>Apertura de inscripciones: principios de octubre.</li>
+<li>Fecha tope de inscripción: <b>4 de noviembre</b>.</li>
+<li>En caso de desistir de la plaza, del precio pagado de la EstelCon, se devolverá:
+    <ul>
+        <li>el 60% a los que comuniquen su baja antes del 12 de noviembre.</li>
+        <li>el 25% a los que comuniquen su baja antes del 1 de diciembre.</li>
+    </ul>
+</li>
+</ul>
+<p><b>El proceso de inscripción es el siguiente:</b></p>
 <ol>
   <li>Comprobar las <a href="/cuestionespracticas_normas.html">normas de la EstelCon</a>.</li>
   <li>Rellenar este formulario. Los campos marcados con un * son obligatorios. Hay que indicar un usuario y contraseña que servirá para acceder después a la ficha personal, apuntarse a las actividades y modificar los datos si se desea.</li>
@@ -107,7 +98,7 @@ que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de ot
         {% if form.email.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.email.errors|join:", " }}&nbsp;</b>{% endif %}
       </p></td>
      </tr><tr>
-      <td><p title="Para evitar errores, sólo se admiten letras y números, sin eñes ni acentos.">
+      <td><p title="Introduce una contraseña de al menos 5 caracteres de largo.">
         <label for="id_password1">Contraseña: *</label><br/>
         {{ form.password1 }}
         {% if form.password1.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.password1.errors|join:", " }}&nbsp;</b>{% endif %}
@@ -269,12 +260,12 @@ que nos cobra La Caixa (0€ si es a otra cuenta de La Caixa, o 3€ si es de ot
     <input type="submit" value="enviar"/>
   </p>
   <p><em>En cumplimiento de la Ley de Protección de Datos, te informamos que los datos aquí introducidos
-  serán incorporados a un fichero automatizado, que obrará en poder del Smial de Hammo y será utilizado
-  exclusivamente para gestionar la asistencia y las actividades de la EstelCon, siendo destruido al
-  finalizar la misma. Puedes ejercer tus derechos de acceso, rectificación, cancelación y oposición en
-  esta misma web, donde puedes consultarlos y modificarlos con los formularios correspondientes, o bien
-  dirigirte a los organizadores de la EstelCon tal como se indica en la sección de contacto de la
-  portada.</em></p>
+  serán incorporados a un fichero automatizado, que obrará en poder de la Sociedad Tolkien Española
+  (nº 112532 en el Registro de Asociaciones del Ministerio del Interior) y será utilizado exclusivamente
+  para gestionar la asistencia y las actividades de la EstelCon, siendo destruido al finalizar la misma.
+  Puedes ejercer tus derechos de acceso, rectificación, cancelación y oposición en esta misma web, donde
+  puedes consultarlos y modificarlos con los formularios correspondientes, o bien dirigirte a los
+  organizadores de la EstelCon tal como se indica en la sección de contacto.</em></p>
 </form>
 
 {% endblock %}
