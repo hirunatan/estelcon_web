@@ -155,10 +155,10 @@ def _calculate_quota(user_data):
     if user_data['age'] <= 12:
         quota = quota * 0.75
 
-    if not user_data['is_ste_member']:
+    if not user_data['is_ste_member'] and user_data['age'] > 12:
         quota += 10.0
 
-    if user_data['want_ste_member']:
+    if user_data['want_ste_member'] and user_data['age'] > 12:
         quota += 2.0
 
     num_shirts = user_data['shirts_S'] + \
