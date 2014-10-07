@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 from datetime import datetime, timedelta
+import locale
 
 from .models import UserProfile, Activity
 
@@ -337,7 +338,7 @@ def get_schedule():
     #  (day2_name, [(block1_hour, [(colspan1, rowspan1, [activ5])])])]
 
     # Set the language for day names
-    #locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
+    locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
 
     # Get the complete list of activities, and split into those with hour and those without
     activities = Activity.objects.all()
@@ -426,7 +427,7 @@ def get_schedule():
 		        break
 		    del blocks[i]
 
-	    days.append((day.strftime('%A %d').decode('iso-8859-15').upper(), blocks))
+            days.append((day.strftime(u'%A %d').decode('utf-8').upper(), blocks))
 	    day = day + timedelta(days=1)
 
     return (activ_without_hour, days)
