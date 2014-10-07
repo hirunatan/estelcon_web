@@ -350,35 +350,6 @@ background: url(../images/homepage16.png) repeat-y left top;
 	color: #e6dad1;
 }
 
-table {
-
-margin-left: 20px;
-margin-right: 20px;
-border: thin solid #190e09;
-caption-side: bottom;
-border-collapse: collapse;
-text-align: left;
-}
-
-td, th {
-border: thin dotted #190e09;
-padding: 5px;
-
-}
-
-th {
-background-color: #190e09;
-}
-caption {
-font-style: italic;
-padding-top: 8px;
-
-}
-
-.cellcolor {
-background-color: #e6dad1;
-}
-
 /** FONTS*/
 
 @font-face {
