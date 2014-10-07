@@ -57,6 +57,7 @@ class ActivityAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'duration', 'max_places', 'has_view_page', 'show_owners', 'requires_inscription')
     list_filter = ('has_view_page', 'show_owners', 'requires_inscription')
     search_fields = ('title', 'subtitle', 'text', 'logistics', 'notes_organization')
+    filter_horizontal = ('owners', 'organizers', 'participants')
 
 admin.site.unregister(auth_models.User)
 admin.site.register(auth_models.User, UserAdmin)
