@@ -135,7 +135,7 @@ El equipo organizador.
 def _calculate_quota(user_data):
     quota = 0.0
 
-    if user_data['room_choice'] == 'triple' or user_data['room_choice'] == 'otros':
+    if user_data['room_choice'].startswith('triple') or user_data['room_choice'] == 'otros':
         quota += 11.2
         if user_data['day_1']:
             quota += 39.6
@@ -144,7 +144,7 @@ def _calculate_quota(user_data):
         if user_data['day_3']:
             quota += 54.6
 
-    if user_data['room_choice'] == 'doble':
+    if user_data['room_choice'].startswith('doble'):
         quota += 11.2
         if user_data['day_1']:
             quota += 46.6

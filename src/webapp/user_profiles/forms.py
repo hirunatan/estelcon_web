@@ -72,7 +72,13 @@ class SignupForm(forms.Form):
     )
     room_choice = forms.ChoiceField(
         required = True,
-        choices=((u'triple', u'Habitación triple'), (u'doble', u'Habitación doble'), (u'otros', u'Otros'))
+        choices=(
+            (u'triple-individual', u'Habitación triple - en cama individual'),
+            (u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
+            (u'doble-individual', u'Habitación doble - en cama individual'),
+            (u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'otros', u'Otros')
+        )
     )
     room_preferences = forms.CharField(
         required = False,

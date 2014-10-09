@@ -22,7 +22,13 @@ class UserProfile(models.Model):
     day_2 = models.BooleanField(u'Asistencia sábado/domingo', default=True)
     day_3 = models.BooleanField(u'Asistencia domingo/lunes+cena', default=True)
     notes_transport = models.TextField(u'Comentarios transporte', blank = True)  # (medio de transporte, hora de llegada...)
-    room_choice = models.CharField(u'Elige un tipo de alojamiento', max_length=50, choices=((u'doble', u'Habitación doble'), (u'triple', u'Habitación triple'), (u'otros', u'Otros')))
+    room_choice = models.CharField(u'Elige un tipo de alojamiento', max_length=50, choices=(
+        (u'triple-individual', u'Habitación triple - en cama individual'),
+        (u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
+        (u'doble-individual', u'Habitación doble - en cama individual'),
+        (u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+        (u'otros', u'Otros'))
+    )
     room_preferences = models.TextField(u'¿Tienes alguna preferencia sobre con quién compartir habitación?', blank = True)
     children_count = models.IntegerField(u'¿Traes niños a tu cargo? Si es así, indica cuántos', default=0)
     children_names = models.TextField(u'Indica sus nombres, uno en cada línea', blank = True)
