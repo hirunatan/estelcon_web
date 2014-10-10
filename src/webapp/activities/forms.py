@@ -26,7 +26,7 @@ class ProposalForm(forms.Form):
         max_length=50, required=True,
     )
     max_places = forms.IntegerField(
-        min_value = 0, required=True,
+        min_value = 0, required=True, initial = 0,
     )
     show_owners = forms.BooleanField(
         initial = False, required = False,
