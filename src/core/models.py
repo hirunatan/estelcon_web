@@ -106,6 +106,7 @@ class Activity(models.Model):
         ordering = ['start', 'end']
 
     def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
         return reverse('activity', kwargs={'activity_id': self.id})
 
     def day_start(self):
