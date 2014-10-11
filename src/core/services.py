@@ -97,6 +97,9 @@ La inscripción queda pendiente de verificación del pago. Debes realizar un ing
 cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
 el código %s.
 
+Dispones de 5 días para la realización del pago que confirmará tu plaza, pasados los cuales la
+inscripción será cancelada si no lo hemos recibido.
+
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
 El equipo organizador.
