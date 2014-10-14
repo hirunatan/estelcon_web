@@ -115,25 +115,25 @@ class Activity(models.Model):
 	else:
 	    #import locale
 	    #locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
-	    return self.start.strftime('%A')
+	    return unicode(self.start.strftime(u'%A'))
 
     def hour_start(self):
         if self.start == None:
-	    return ''
+	    return u''
 	elif self.start.hour == 0 and self.start.minute == 0 and self.start.second == 0 and \
 	     self.end != None and self.end.hour == 0 and self.end.minute == 0 and self.end.second == 0:
-	    return ''
+	    return u''
 	else:
-            return self.start.strftime('%H:%M')
+            return unicode(self.start.strftime(u'%H:%M'))
 
     def hour_end(self):
         if self.end == None:
-	    return ''
+	    return u''
 	elif self.start != None and self.start.hour == 0 and self.start.minute == 0 and self.start.second == 0 and \
 	     self.end.hour == 0 and self.end.minute == 0 and self.end.second == 0:
-	    return ''
+	    return u''
 	else:
-            return self.end.strftime('%H:%M')
+            return unicode(self.end.strftime('%H:%M'))
 
     def __unicode__(self):
         return u'%s %s - %s' % (self.day_start(), self.hour_start(), self.title)
