@@ -414,7 +414,7 @@ def get_schedule():
 		    ncol = ncol + 1
 
 		#if has_data:
-		blocks.append((block.strftime('%H:%M'), columns))
+		blocks.append((block.strftime('%H:%M').decode('utf-8'), columns))
 		block = block + timedelta(minutes=30)
 
 	    # Remove all empty blocks at the beginning and the end of the day

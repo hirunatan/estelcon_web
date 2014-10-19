@@ -113,9 +113,9 @@ class Activity(models.Model):
         if self.start == None:
 	    return u' SIN HORARIO'
 	else:
-	    #import locale
-	    #locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
-	    return unicode(self.start.strftime(u'%A'))
+	    import locale
+	    locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
+	    return self.start.strftime(u'%A').decode('utf-8')
 
     def hour_start(self):
         if self.start == None:
@@ -124,7 +124,7 @@ class Activity(models.Model):
 	     self.end != None and self.end.hour == 0 and self.end.minute == 0 and self.end.second == 0:
 	    return u''
 	else:
-            return unicode(self.start.strftime(u'%H:%M'))
+            return self.start.strftime(u'%H:%M').decode('utf-8')
 
     def hour_end(self):
         if self.end == None:
@@ -133,7 +133,7 @@ class Activity(models.Model):
 	     self.end.hour == 0 and self.end.minute == 0 and self.end.second == 0:
 	    return u''
 	else:
-            return unicode(self.end.strftime('%H:%M'))
+            return self.end.strftime('%H:%M').decode('utf-8')
 
     def __unicode__(self):
         return u'%s %s - %s' % (self.day_start(), self.hour_start(), self.title)
