@@ -4,6 +4,7 @@ from django.core.mail import send_mail, mail_managers
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.db.models import Count
 
 from datetime import datetime, timedelta
 import locale
@@ -657,27 +658,115 @@ El equipo organizador.
 
 def user_listing(listing_id):
     if listing_id == 1:
-        return listing_all_users()
+        return listing_all_users_accommodation()
     elif listing_id == 2:
-        return listing_unpaid_users()
+        return listing_all_users_travel()
     elif listing_id == 3:
-        return listing_paid_users()
+        return listing_non_members()
     elif listing_id == 4:
-        return listing_reserved_shirts()
+        return listing_squires()
     elif listing_id == 5:
+        return listing_children()
+    elif listing_id == 6:
+        return listing_dinner_menus()
+    elif listing_id == 7:
+        return listing_unpaid_users()
+    elif listing_id == 8:
+        return listing_paid_users()
+    elif listing_id == 9:
+        return listing_reserved_shirts()
+    elif listing_id == 10:
         return listing_users_with_shirts()
     else:
         return None
 
 
-def listing_all_users():
-    profiles = UserProfile.objects.all()
+def listing_all_users_accommodation():
+    profiles = UserProfile.objects.order_by('user__first_name', 'user__last_name')
 
-    rows = [(p.user.get_full_name(), p.user.email) for p in profiles]
-    rows.sort(key=lambda p: p[0].lower())
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+        'x' if p.day_1 else '',
+        'x' if p.day_2 else '',
+        'x' if p.day_3 else '',
+        p.room_choice,
+        p.room_preferences,
+        p.notes_food,
+    ) for p in profiles]
 
-    rows = [("Nombre", "Email")] + rows
+    rows = [("Nombre", "Pseudónimo", "Smial", "Viernes", "Sábado", "Domingo", "Habitación", "Dormir", "Comida")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_all_users_travel():
+    profiles = UserProfile.objects.order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+        p.city,
+        p.notes_transport,
+    ) for p in profiles]
+
+    rows = [("Nombre", "Pseudónimo", "Smial", "Procedencia", "Viaje")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_non_members():
+    profiles = UserProfile.objects.filter(is_ste_member = False).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        'x' if p.want_ste_member else '',
+    ) for p in profiles]
+
+    rows = [("Nombre", "Quiere ser socio")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_squires():
+    profiles = UserProfile.objects.filter(squire = True).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+    ) for p in profiles]
+
+    rows = [("Nombre",)] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_children():
+    profiles = UserProfile.objects.filter(age__lt = 15).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+        p.age,
+    ) for p in profiles]
+
+    rows = [("Nombre", "Pseudónimo", "Smial", "Edad")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+
+def listing_dinner_menus():
+    menus = UserProfile.objects.all().values('dinner_menu').annotate(requests=Count('dinner_menu')).order_by()
+
+    rows = [(
+        m['dinner_menu'],
+        m['requests'],
+    ) for m in menus]
+
+    rows = [("Menú", "Peticiones")] + rows
+    block = ""
     return (block, rows)
 
 
