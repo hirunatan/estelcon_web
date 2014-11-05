@@ -55,7 +55,12 @@ class SignupForm(forms.Form):
     )
     dinner_menu = forms.ChoiceField(
         required = True,
-        choices=((u'ternasco',u'Ternasco asado'), (u'merluza',u'Lomo de merluza en salsa verde con hortalizas'), (u'otros',u'Otros'))
+        choices=(
+            (u'ternasco', u'Ternasco asado'),
+            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            (u'otros', u'Otros'),
+            (u'sin_cena', u'No voy a ir a la cena de gala'),
+        )
     )
     day_1 = forms.BooleanField(
         initial = True, required = False,
@@ -77,7 +82,8 @@ class SignupForm(forms.Form):
             (u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
             (u'doble-individual', u'Habitación doble - en cama individual'),
             (u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
-            (u'otros', u'Otros')
+            (u'otros', u'Otros'),
+            (u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
         )
     )
     room_preferences = forms.CharField(
@@ -135,6 +141,7 @@ class SignupForm(forms.Form):
         self._clean_days(cleaned_data)
         self._clean_children(cleaned_data)
         self._clean_ste_member(cleaned_data)
+        self._clean_room_dinner(cleaned_data)
 
         return cleaned_data
 
@@ -182,12 +189,24 @@ class SignupForm(forms.Form):
     def _clean_ste_member(self, cleaned_data):
         is_ste_member = cleaned_data.get('is_ste_member')
         want_ste_member = cleaned_data.get('want_ste_member')
+        room_choice = cleaned_data.get('room_choice')
         if is_ste_member and want_ste_member:
             self._errors['want_ste_member'] = self.error_class([u'No puedes hacerte socio si ya lo eres'])
-            if is_ste_member is not None:
-                del cleaned_data['is_ste_member']
             if want_ste_member is not None:
                 del cleaned_data['want_ste_member']
+        else:
+            if want_ste_member and room_choice == 'sin_alojamiento':
+                self._errors['want_ste_member'] = self.error_class([u'La opción de hacerte socio está disponible sólo para las opciones normales con alojamiento en hotel'])
+                if want_ste_member is not None:
+                    del cleaned_data['want_ste_member']
+
+    def _clean_room_dinner(self, cleaned_data):
+        room_choice = cleaned_data.get('room_choice')
+        dinner_menu = cleaned_data.get('dinner_menu')
+        if dinner_menu == 'sin_cena' and room_choice != 'sin_alojamiento':
+            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
+            if dinner_menu is not None:
+                del cleaned_data['dinner_menu']
 
 
 class LoginForm(forms.Form):
@@ -344,7 +363,12 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     dinner_menu = forms.ChoiceField(
         required = True,
-        choices=((u'ternasco',u'Ternasco asado'), (u'merluza',u'Lomo de merluza en salsa verde con hortalizas'), (u'otros',u'Otros'))
+        choices=(
+            (u'ternasco', u'Ternasco asado'),
+            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            (u'otros', u'Otros'),
+            (u'sin_cena', u'No voy a ir a la cena de gala')
+        )
     )
     notes_transport = forms.CharField(
         required = False,
@@ -352,7 +376,14 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     room_choice = forms.ChoiceField(
         required = True,
-        choices=((u'triple', u'Habitación triple'), (u'doble', u'Habitación doble'), (u'otros', u'Otros'))
+        choices=(
+            (u'triple-individual', u'Habitación triple - en cama individual'),
+            (u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
+            (u'doble-individual', u'Habitación doble - en cama individual'),
+            (u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'otros', u'Otros'),
+            (u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
+        )
     )
     room_preferences = forms.CharField(
         required = False,
@@ -380,4 +411,19 @@ class UserProfileEditInscriptionForm(forms.Form):
     shirts_XXL = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
     )
+
+    def clean(self):
+        cleaned_data = super(UserProfileEditInscriptionForm, self).clean()
+
+        self._clean_room_dinner(cleaned_data)
+
+        return cleaned_data
+
+    def _clean_room_dinner(self, cleaned_data):
+        room_choice = cleaned_data.get('room_choice')
+        dinner_menu = cleaned_data.get('dinner_menu')
+        if dinner_menu == 'sin_cena' and room_choice != 'sin_alojamiento':
+            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
+            if dinner_menu is not None:
+                del cleaned_data['dinner_menu']
 

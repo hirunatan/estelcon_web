@@ -139,32 +139,41 @@ El equipo organizador.
 def _calculate_quota(user_data):
     quota = 0.0
 
-    if user_data['room_choice'].startswith('triple') or user_data['room_choice'] == 'otros':
-        quota += 11.2
-        if user_data['day_1']:
-            quota += 39.6
-        if user_data['day_2']:
-            quota += 39.6
-        if user_data['day_3']:
-            quota += 54.6
+    if user_data['room_choice'] == 'sin_alojamiento':
 
-    if user_data['room_choice'].startswith('doble'):
-        quota += 11.2
-        if user_data['day_1']:
-            quota += 46.6
-        if user_data['day_2']:
-            quota += 46.6
-        if user_data['day_3']:
-            quota += 61.6
+        if user_data['dinner_menu'] == 'sin_cena':
+            quota += 12
+        else:
+            quota += 35
 
-    if user_data['age'] <= 12:
-        quota = quota * 0.75
+    else:
 
-    if not user_data['is_ste_member'] and user_data['age'] > 12:
-        quota += 10.0
+        if user_data['room_choice'].startswith('triple') or user_data['room_choice'] == 'otros':
+            quota += 11.2
+            if user_data['day_1']:
+                quota += 39.6
+            if user_data['day_2']:
+                quota += 39.6
+            if user_data['day_3']:
+                quota += 54.6
 
-    if user_data['want_ste_member'] and user_data['age'] > 12:
-        quota += 2.0
+        if user_data['room_choice'].startswith('doble'):
+            quota += 11.2
+            if user_data['day_1']:
+                quota += 46.6
+            if user_data['day_2']:
+                quota += 46.6
+            if user_data['day_3']:
+                quota += 61.6
+
+        if user_data['age'] <= 12:
+            quota = quota * 0.75
+
+        if not user_data['is_ste_member'] and user_data['age'] > 12:
+            quota += 10.0
+
+        if user_data['want_ste_member'] and user_data['age'] > 12:
+            quota += 2.0
 
     num_shirts = user_data['shirts_S'] + \
                  user_data['shirts_M'] + \
