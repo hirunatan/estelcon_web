@@ -368,7 +368,7 @@ def get_schedule():
 	day = first_day
 	while day <= last_day:
 
-	    first_block = day.replace(hour=8, minute=30)               # from 08:30h
+	    first_block = day.replace(hour=8, minute=00)               # from 08:30h
 	    last_block = first_block + timedelta(hours=20, minutes=30) # until 05:00h next day
 	    rowspans_left = [1, 1, 1]
 
