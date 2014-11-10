@@ -59,7 +59,7 @@ Para casos especiales contactad por favor con la organización.
 </ul>
 <p><b>Opciones sin alojamiento:</b></p>
 <ul>
-<li>Sólo cena de gala (asistencia sólo a la cena de gala, sin pernocta): <b>35€</b></li>
+<li>Sólo cena de gala (para aquellas personas que quieran asistir a las actividades y a la cena de gala, sin incluir ninguna otra comida ni pernocta. Incluye todas las actividades de la EstelCon): <b>36€</b></li>
 <li>Sólo actividades (para aquellas personas que no se queden a ninguna de las comidas ni pernoctas pero quieran asistir a actividades. El pago incluye todas las actividades de la EstelCon, aunque sea en días diferentes): <b>12€</b></li>
 </li>
 </ul>
@@ -159,18 +159,47 @@ Para casos especiales contactad por favor con la organización.
     </tr>
   </table>
   <br/>
-  <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
-    <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
-    {{ form.notes_food }}
-    {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
+  <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
+    <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
+    {{ form.notes_transport }}
+    {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
-  <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
-    <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
-    {{ form.dinner_menu }}
-    {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
+  <p title="Indica qué tipo de habitación prefieres (la doble tiene un incremento de precio). Si eliges una de las opciones sin alojamiento, marca 'no voy a pernoctar en el hotel'.">
+    <label for="id_room_choice">Elige un tipo de alojamiento:</label><br/>
+    {{ form.room_choice }}
+    {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
-  <p>Dinos si asistes a la Estelcon completa, o si no, los días que vas a venir:</p>
-  <table title="Indica los días completos que vas a asistir.">
+  <script type="text/javascript">
+    check_days = function() {
+        var roomChoiceSelect = document.querySelector('#id_room_choice');
+        var day1 = document.querySelector('#id_day_1');
+        var day2 = document.querySelector('#id_day_2');
+        var day3 = document.querySelector('#id_day_3');
+        if (roomChoiceSelect.value === 'sin_alojamiento') {
+            day1.checked = false;
+            day2.checked = false;
+            day3.checked = false;
+        } else {
+            if (day1.checked === false && day2.checked === false && day3.checked === false) {
+                day1.checked = true;
+                day2.checked = true;
+                day3.checked = true;
+            }
+        }
+    }
+
+    // See http://youmightnotneedjquery.com/
+    var roomChoiceSelect = document.querySelector('#id_room_choice');
+    if (roomChoiceSelect.addEventListener) {
+        roomChoiceSelect.addEventListener('change', check_days);
+    } else {
+        roomChoiceSelect.attachEvent('onchange', function() {
+            check_days.call();
+        });
+    }
+  </script>
+  <p>Indica las noches que vas a pasar en el hotel:</p>
+  <table title="Si asistes a la Estelcon completa, marca todo. Si no, dinos qué noches pernoctas en el hotel, incluyendo las comidas como se indica arriba. Si eliges una de las opciones sin alojamiento, no marques nada.">
     <tr>
       <td><label for="id_day_1">Viernes/Sábado<label></td>
       <td>{{ form.day_1 }}
@@ -180,26 +209,26 @@ Para casos especiales contactad por favor con la organización.
       <td>{{ form.day_2 }}
       {% if form.day_2.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_2.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
     </tr><tr>
-      <td><label for="id_day_3">Domingo/Lunes + Cena<label></td>
+      <td><label for="id_day_3">Domingo/Lunes + Cena de gala<label></td>
       <td>{{ form.day_3 }}
       {% if form.day_3.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_3.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
     </tr>
   </table>
   <br/>
-  <p title="Ahora indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
-    <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
-    {{ form.notes_transport }}
-    {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  <p title="Indica qué tipo de habitación prefieres (la doble tiene un incremento de precio).">
-    <label for="id_notes_food">Elige un tipo de alojamiento</label><br/>
-    {{ form.room_choice }}
-    {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
   <p title="Si prefieres compartir habitación con alguien, o cualquier otro comentario al respecto, indicalo aquí.">
     <label for="id_room_preferences">¿Tienes alguna preferencia sobre con quién compartir habitación?<label><br/>
     {{ form.room_preferences }}
     {% if form.room_preferences.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_preferences.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
+    <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
+    {{ form.notes_food }}
+    {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
+    <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
+    {{ form.dinner_menu }}
+    {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
   <p>¿Traes niños a tu cargo?</p>
   <table title="Si traes niños a tu cargo, indica aquí cuántos son y sus nombres. Luego tendrás que rellenar una inscripción por cada uno. Si venis los dos padres, sólo hace falta rellenar esta información una vez.">

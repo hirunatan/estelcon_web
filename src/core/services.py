@@ -144,7 +144,7 @@ def _calculate_quota(user_data):
         if user_data['dinner_menu'] == 'sin_cena':
             quota += 12
         else:
-            quota += 35
+            quota += 36
 
     else:
 

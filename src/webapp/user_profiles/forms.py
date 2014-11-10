@@ -158,11 +158,20 @@ class SignupForm(forms.Form):
                     del cleaned_data['password2']
 
     def _clean_days(self, cleaned_data):
+        room_choice = cleaned_data.get('room_choice')
         day_1 = cleaned_data.get('day_1')
         day_2 = cleaned_data.get('day_2')
         day_3 = cleaned_data.get('day_3')
-        if not day_1 and not day_2 and not day_3:
-            err = self.error_class([u'Debes indicar al menos uno de estos.'])
+
+        err = None
+        if room_choice == 'sin_alojamiento':
+            if day_1 or day_2 or day_3:
+                err = self.error_class([u'Si no vas a pernoctar no puedes seleccionar ninguna noche.'])
+        else:
+            if not day_1 and not day_2 and not day_3:
+                err = self.error_class([u'Debes indicar al menos uno de estos.'])
+
+        if err:
             self._errors['day_1'] = err
             self._errors['day_2'] = err
             self._errors['day_3'] = err
