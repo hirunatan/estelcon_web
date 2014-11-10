@@ -18,7 +18,7 @@ class UserAdmin(auth_admin.UserAdmin):
     list_display = ('username', 'email', 'get_full_name', 'is_staff', 'get_payment_code', 'get_is_under_age', 'get_quota', 'get_payed', 'get_payment')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'profile__dinner_menu', 'profile__room_choice')
     select_related = ('profile',)
-    search_fields = ('username', 'email', 'first_name', 'last_name', 'alias', 'smial', 'payment')
+    search_fields = ('username', 'email', 'first_name', 'last_name', 'profile__alias', 'profile__smial', 'profile__payment')
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
