@@ -686,6 +686,8 @@ def user_listing(listing_id):
         return listing_reserved_shirts()
     elif listing_id == 10:
         return listing_users_with_shirts()
+    elif listing_id == 11:
+        return listing_everything()
     else:
         return None
 
@@ -843,4 +845,48 @@ def listing_users_with_shirts():
 
     rows = [("Talla", "Nombre", "Cantidad")] + rows
     return (None, rows)
+
+
+def listing_everything():
+    profiles = UserProfile.objects.order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.user.email,
+        'x' if p.user.is_staff else '',
+        p.alias,
+        p.smial,
+        p.phone,
+        p.city,
+        p.age,
+        p.dinner_menu,
+        p.notes_food,
+        'x' if p.day_1 else '',
+        'x' if p.day_2 else '',
+        'x' if p.day_3 else '',
+        p.notes_transport,
+        p.room_choice,
+        p.room_preferences,
+        p.children_count,
+        p.children_names,
+        'x' if p.is_ste_member else '',
+        'x' if p.want_ste_member else '',
+        p.squire,
+        p.notes_general,
+        p.shirts_S,
+        p.shirts_M,
+        p.shirts_L,
+        p.shirts_XL,
+        p.shirts_XXL,
+        p.quota,
+        p.payed,
+        p.payment,
+    ) for p in profiles]
+
+    rows = [(u"Nombre", u"Email", u"Staff", u"Pseudónimo", u"Smial", u"Teléfono", u"Población", u"Edad", u"Menú",
+             u"Comida", u"Viernes", u"Sábado", u"Domingo", u"Transporte", u"Habitación", u"Dormir", u"Nº hijos",
+             u"Hijos", u"Es socio", u"Quiere ser", u"Escudero", u"Notas", u"S", u"M", u"L", u"XL", u"XXL",
+             u"Cuota", u"Pagado", u"Estado de pago")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
 
