@@ -878,6 +878,7 @@ def listing_everything():
         p.shirts_L,
         p.shirts_XL,
         p.shirts_XXL,
+        p.payment_code,
         p.quota,
         p.payed,
         p.payment,
@@ -886,7 +887,7 @@ def listing_everything():
     rows = [(u"Nombre", u"Email", u"Staff", u"Pseudónimo", u"Smial", u"Teléfono", u"Población", u"Edad", u"Menú",
              u"Comida", u"Viernes", u"Sábado", u"Domingo", u"Transporte", u"Habitación", u"Dormir", u"Nº hijos",
              u"Hijos", u"Es socio", u"Quiere ser", u"Escudero", u"Notas", u"S", u"M", u"L", u"XL", u"XXL",
-             u"Cuota", u"Pagado", u"Estado de pago")] + rows
+             u"Código", u"Cuota", u"Pagado", u"Estado de pago")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
 
