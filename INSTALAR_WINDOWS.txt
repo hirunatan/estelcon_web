@@ -6,22 +6,26 @@ INSTALAR EN WINDOWS
 
   http://sourceforge.net/projects/winpython/files/WinPython_2.7/2.7.9.5/WinPython-32bit-2.7.9.5.exe/download
 
-  Se puede instalar en cualquier carpeta, se recomienda C:\WinPython-32bit-2.7.9.5. Si no, habrá que editar
-  más adelante los archivos .bat y cambiar la ruta en PYTHON_DIR.
+  Se puede instalar en cualquier carpeta, se recomienda C:\WinPython-32bit-2.7.9.5.
 
-* Descargar la aplicación Estelcon web y descomprimirla en algún sitio:
+* Descargar la aplicación Estelcon web y extraer el contenido del zip en algún sitio.
 
   https://github.com/hirunatan/estelcon_web/zipball/master
 
-* Entrar en la carpeta descomprimida y ejecutar
+  Se recomienda extraer el contenido a C:\hirunatan-estelcon_web-26c8768 (el número del final puede variar).
 
+* Entrar en la carpeta donde se instaló WinPython y ejecutar "WinPython Command Prompt".
+
+* En la consola que aparece, escribir los siguientes comandos:
+
+  cd c:\hirunatan-estelcon_web-26c8768\hirunatan-estelcon_web-26c8768
   install_windows.bat
 
 
 USAR LA APLICACIÓN
 ==================
 
-* Ejectar
+* En la misma consola de antes, escribir:
 
   runserver.bat
 
@@ -32,4 +36,6 @@ USAR LA APLICACIÓN
 * Para ver el panel de administración, entrar en
 
   http://localhost:8000/admin/
+
+* Inicialmente hay un usuario admin con contraseña admin.
 
