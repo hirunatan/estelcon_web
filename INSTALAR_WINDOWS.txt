@@ -4,15 +4,18 @@ INSTALAR EN WINDOWS
 
 * Descargar e instalar el entorno Python:
 
-http://downloads.activestate.com/ActivePython/releases/2.7.8.10/ActivePython-2.7.8.10-win64-x64.msi
+  http://sourceforge.net/projects/winpython/files/WinPython_2.7/2.7.9.5/WinPython-32bit-2.7.9.5.exe/download
 
-* Descargar la aplicación y descomprimir en algún sitio:
+  Se puede instalar en cualquier carpeta, se recomienda C:\WinPython-32bit-2.7.9.5. Si no, habrá que editar
+  más adelante los archivos .bat y cambiar la ruta en PYTHON_DIR.
 
-https://github.com/hirunatan/estelcon_web/zipball/master
+* Descargar la aplicación Estelcon web y descomprimirla en algún sitio:
+
+  https://github.com/hirunatan/estelcon_web/zipball/master
 
 * Entrar en la carpeta descomprimida y ejecutar
 
-install_windows.bat
+  install_windows.bat
 
 
 USAR LA APLICACIÓN
@@ -20,13 +23,13 @@ USAR LA APLICACIÓN
 
 * Ejectar
 
-runserver.bat
+  runserver.bat
 
 * Abrir un navegador y entrar en
 
-http://localhost:8000/
+  http://localhost:8000/
 
 * Para ver el panel de administración, entrar en
 
-http://localhost:8000/admin/
+  http://localhost:8000/admin/
 
