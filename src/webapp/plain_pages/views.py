@@ -10,3 +10,12 @@ def statichtml(request, html_id='index'):
     except TemplateDoesNotExist:
         raise Http404('No se encuentra el documento %s' % html_id)
 
+def statictxt(request, txt_id):
+    try:
+        return render_to_response(
+            'webapp/plain_pages/' + txt_id + '.txt',
+            content_type='text/plain'
+        )
+    except TemplateDoesNotExist:
+        raise Http404('No se encuentra el documento %s' % txt_id)
+
