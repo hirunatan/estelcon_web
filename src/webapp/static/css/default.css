@@ -7,7 +7,7 @@ html, body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #190e09 url(../images/Background2.png) repeat left top;
+	background: #190e09 url(../images/Background2.jpg) repeat left top;
 }
 
 /** FORMS */
@@ -127,7 +127,7 @@ a:hover {
 }
 
 .more {
-	margin: 10px 0px 20px 0px;
+	margin: 20px 0px 20px 0px;
 	padding: 0px 0px 0px 68px;
 	background: url(../images/homepage09.gif) no-repeat left center;
 	text-transform: uppercase;
@@ -232,7 +232,7 @@ html>body #wrapper {
 #menu {
 	width: 708px;
 	height: 200px;
-	background: url(../images/homepagemenu.png) no-repeat left top;
+	background: url(../images/nuevo-banner-menu-PROVISIONAL.gif) no-repeat left top;
 }
 
 #menu a {
@@ -249,11 +249,11 @@ html>body #wrapper {
 
 #page {
 	width: 980px;
-	background: url(../images/subpagebg1.png) repeat-y left top;
+	/*background: url(../images/subpagebg1.png) repeat-y left top;*/
 }
 
 #page-bg {
-	background: url(../images/subpagebg2.png) repeat-y left top;
+	background: url(../images/nuevo-fondo-ppal.gif) repeat-y left top;
 }
 
 /** SIDEBAR > BOXED */
@@ -338,8 +338,8 @@ background: url(../images/homepage16.png) repeat-y left top;
 
 #footer {
 	width: 980px;
-	height: 80px;
-	background: url(../images/subpagefooter.png) no-repeat left top;
+	height:200px;
+	background: url(../images/nuevo-footer.gif) no-repeat left top;
 }
 
 #footer p {
