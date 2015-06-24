@@ -4,7 +4,7 @@ from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from .views import (
-    SignupView, LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
+    PreSignupView, SignupView, LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
     UserProfileView, UserProfileEditPersonalView, UserProfileEditInscriptionView,
     UserListingsIndexView, UserListingView
 )
@@ -13,7 +13,7 @@ def user_is_staff(user):
     return user.is_staff
 
 urlpatterns = patterns('',
-    url(r'^merethaderthad_inscripcion/$', SignupView.as_view(),
+    url(r'^merethaderthad_inscripcion/$', PreSignupView.as_view(),
         name='login'),
     url(r'^merethaderthad_entrada/$', LoginView.as_view(),
         name='login'),
