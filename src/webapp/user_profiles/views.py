@@ -12,9 +12,25 @@ from django.http import HttpResponseNotFound, HttpResponseForbidden
 from core import services
 
 from .forms import (
-    SignupForm, LoginForm, ForgotPasswordForm, ChangePasswordForm,
+    PreSignupForm, SignupForm, LoginForm, ForgotPasswordForm, ChangePasswordForm,
     UserProfileEditPersonalForm, UserProfileEditInscriptionForm
 )
+
+
+class PreSignupView(FormView):
+    template_name = 'webapp/user_profiles/pre_signup.html'
+    form_class = PreSignupForm
+
+    def form_valid(self, form):
+        services.pre_register_user(
+            user_data = form.cleaned_data,
+            home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
+        )
+        return super(PreSignupView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.info(self.request, u'Se ha enviado tu preinscripción a los organizadores, en breve se pondrán en contacto contigo.')
+        return '/index.html'
 
 
 class SignupView(FormView):
