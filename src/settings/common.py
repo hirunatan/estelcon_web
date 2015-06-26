@@ -104,3 +104,5 @@ LOGIN_URL = 'login'
 
 PRE_SIGNUP_FORM = False
 
+SCHEDULE_HIDDEN = False
+

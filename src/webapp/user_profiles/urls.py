@@ -14,6 +14,7 @@ def user_is_staff(user):
     return user.is_staff
 
 if settings.PRE_SIGNUP_FORM:
+    # Option initial (pre signup form only send mail to admins, does not create real users)
     urlpatterns = patterns('',
         url(r'^merethaderthad_inscripcion/$', PreSignupView.as_view(),
             name='signup')
