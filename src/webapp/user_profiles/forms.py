@@ -12,6 +12,46 @@ user_validator = validators.RegexValidator(
 )
 
 
+class PreSignupForm(forms.Form):
+    first_name = forms.CharField(
+        max_length=100, required=True,
+    )
+    last_name = forms.CharField(
+        max_length=100, required=True,
+    )
+    alias = forms.CharField(
+        max_length=100, required=False,
+    )
+    smial = forms.CharField(
+        max_length=100, required=False,
+    )
+    email = forms.EmailField(
+        required=True,
+    )
+    phone = forms.CharField(
+        max_length=100, required=True,
+    )
+    city = forms.CharField(
+        max_length=100, required=False,
+    )
+    age = forms.IntegerField(
+        min_value = 1, max_value = 100, required=False,
+    )
+    day_1 = forms.BooleanField(
+        initial = True, required = False,
+    )
+    day_2 = forms.BooleanField(
+        initial = True, required = False,
+    )
+    day_3 = forms.BooleanField(
+        initial = True, required = False,
+    )
+    notes = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
+    )
+
+
 class SignupForm(forms.Form):
     username = forms.CharField(
         max_length=30, required=True,

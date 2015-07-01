@@ -2,10 +2,9 @@
 
 from django.conf.urls import patterns, url
 
-from .views import statichtml, statictxt
+from .views import statichtml
 
 urlpatterns = patterns('',
     url(r'^(?P<html_id>.*).html$', statichtml),
-    url(r'^(?P<txt_id>.*).txt$', statictxt),
     url(r'^$', statichtml),
 )

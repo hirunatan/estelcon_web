@@ -15,6 +15,38 @@ MAX_USERS = 186
 
 #TODO: usar templates para los textos de los correos
 
+def pre_register_user(user_data, home_url):
+
+    mail_managers(
+        subject = u'[Estelcon Admin] Nueva preinscripción en la Estelcon: %s %s' % (
+            user_data['first_name'], user_data['last_name']
+        ),
+        message =
+u'''
+Se ha preinscrito un nuevo usuario con nombre %s %s.
+
+ - Alias: %s
+ - Smial: %s
+ - Email: %s
+ - Teléfono: %s
+ - Población: %s
+ - Edad: %s
+ - Viernes / sábado: %s
+ - Sábado / domingo: %s
+ - Domingo / lunes + cena de gala: %s
+
+Notas:
+%s
+'''
+% (user_data['first_name'], user_data['last_name'], user_data['alias'], user_data['smial'],
+   user_data['email'], user_data['phone'], user_data['city'], user_data['age'],
+   u'Sí' if user_data['day_1'] else u'No',
+   u'Sí' if user_data['day_2'] else u'No',
+   u'Sí' if user_data['day_3'] else u'No',
+   user_data['notes']),
+    )
+
+
 def create_new_user(user_data, home_url):
 
     quota = _calculate_quota(user_data)

@@ -100,3 +100,9 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = 'login'
 
+# Application specific
+
+PRE_SIGNUP_FORM = False
+
+SCHEDULE_HIDDEN = False
+
