@@ -2,6 +2,7 @@
 
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.conf import settings
 
 from .views import (
     PreSignupView, SignupView, LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
@@ -12,9 +13,19 @@ from .views import (
 def user_is_staff(user):
     return user.is_staff
 
-urlpatterns = patterns('',
-    url(r'^merethaderthad_inscripcion/$', PreSignupView.as_view(),
-        name='login'),
+if settings.PRE_SIGNUP_FORM:
+    # Option initial (pre signup form only send mail to admins, does not create real users)
+    urlpatterns = patterns('',
+        url(r'^merethaderthad_inscripcion/$', PreSignupView.as_view(),
+            name='signup')
+    )
+else:
+    urlpatterns = patterns('',
+        url(r'^merethaderthad_inscripcion/$', SignupView.as_view(),
+            name='signup')
+    )
+
+urlpatterns += patterns('',
     url(r'^merethaderthad_entrada/$', LoginView.as_view(),
         name='login'),
     url(r'^merethaderthad_salida/$', LogoutView.as_view(),
