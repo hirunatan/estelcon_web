@@ -133,13 +133,13 @@ contactad por favor con la organización.</p>
         {% if form.phone.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.phone.errors|join:", " }}&nbsp;</b>{% endif %}
       </p></td>
       <td><p title="Introduce la población donde resides habitualmente.">
-        <label for="id_city">Población:</label><br/>
+        <label for="id_city">Población: *</label><br/>
         {{ form.city }}
         {% if form.city.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.city.errors|join:", " }}&nbsp;</b>{% endif %}
       </p></td>
     </tr>
     </tr><tr>
-      <td colspan="2"><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada. Los niños de entre 2 y 12 años tienen un descuento en la inscripción, y los menores de 2 años no necesitan inscripción si no requieren cama ni comida.">
+      <td colspan="2"><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada. Los niños de entre 3 y 12 años tienen un descuento en la inscripción, y los menores de 3 años no necesitan inscripción si no requieren cama ni comida.">
         <label for="id_age">Edad: *</label><br/>
         {{ form.age }} Importante para menores o niños de hasta 12 años.
         {% if form.age.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.age.errors|join:", " }}&nbsp;</b>{% endif %}
@@ -152,11 +152,12 @@ contactad por favor con la organización.</p>
     {{ form.notes_transport }}
     {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
-  <p title="Indica qué tipo de habitación prefieres (la doble tiene un incremento de precio). Si eliges una de las opciones sin alojamiento, marca 'no voy a pernoctar en el hotel'.">
+  <p title="Indica qué días te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
     <label for="id_room_choice">Elige un tipo de alojamiento:</label><br/>
     {{ form.room_choice }}
     {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% comment %}
   <script type="text/javascript">
     check_days = function() {
         var roomChoiceSelect = document.querySelector('#id_room_choice');
@@ -186,6 +187,8 @@ contactad por favor con la organización.</p>
         });
     }
   </script>
+  {% endcomment %}
+  {% comment %}
   <p>Indica las noches que vas a pasar en el hotel:</p>
   <table title="Si asistes a la Estelcon completa, marca todo. Si no, dinos qué noches pernoctas en el hotel, incluyendo las comidas como se indica arriba. Si eliges una de las opciones sin alojamiento, no marques nada.">
     <tr>
@@ -203,6 +206,7 @@ contactad por favor con la organización.</p>
     </tr>
   </table>
   <br/>
+  {% endcomment %}
   <p title="Si prefieres compartir habitación con alguien, o cualquier otro comentario al respecto, indicalo aquí.">
     <label for="id_room_preferences">¿Tienes alguna preferencia sobre con quién compartir habitación?<label><br/>
     {{ form.room_preferences }}
@@ -213,13 +217,15 @@ contactad por favor con la organización.</p>
     {{ form.notes_food }}
     {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% comment %}
   <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
     <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
     {{ form.dinner_menu }}
     {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% endcomment %}
   <p>¿Traes niños a tu cargo?</p>
-  <table title="Si traes niños a tu cargo, indica aquí cuántos son y sus nombres. Luego tendrás que rellenar una inscripción por cada uno. Si venis los dos padres, sólo hace falta rellenar esta información una vez.">
+  <table title="Si traes niños a tu cargo, indica aquí cuántos son y sus nombres. Luego tendrás que rellenar una inscripción por cada uno (si tienen 3 años o más). Si venis los dos padres, sólo hace falta rellenar esta información una vez.">
       <tr>
           <td><label for="id_children_count">Nº de niños</label></td>
           <td>{{ form.children_count }}
@@ -236,11 +242,13 @@ contactad por favor con la organización.</p>
     {{ form.is_ste_member }}
     {% if form.is_ste_member.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.is_ste_member.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% comment %}
   <p title="Como oferta de Estelcon, añadiendo 2€ a la inscripción te puedes convertir en socio/a de la STE, de cuota reducida (recibirías la revista por correo electrónico en lugar de en papel).">
     <label for="id_want_ste_member">En caso de que no, ¿quieres asociarte por 2€ más?</label><br/>
     {{ form.want_ste_member }}
     {% if form.want_ste_member.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.want_ste_member.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% endcomment %}
   <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
     <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label><br/>
     {{ form.squire }}
@@ -251,6 +259,7 @@ contactad por favor con la organización.</p>
     {{ form.notes_general }}
     {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% comment %}
   <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
   optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
   Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de
@@ -281,6 +290,7 @@ contactad por favor con la organización.</p>
     </tr>
   </table>
   <br/>
+  {% endcomment %}
   <p>
     <input type="submit" value="enviar"/>
   </p>

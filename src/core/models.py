@@ -17,12 +17,13 @@ class UserProfile(models.Model):
     city = models.CharField(u'Población', max_length=100)
     age = models.IntegerField(u'Edad')
     notes_food = models.TextField(u'Comentarios comida', blank = True)  # (vegetariano, celiaco...)
-    dinner_menu = models.CharField(u'Menú de la cena de gala', max_length=50,
+    dinner_menu = models.CharField(u'Menú de la cena de gala', max_length=50, blank = True,
         choices=(
-            (u'ternasco', u'Ternasco asado'),
-            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
-            (u'otros', u'Otros'),
-            (u'sin_cena', u'No voy a ir a la cena de gala'),
+            (u'', u''),
+            #(u'ternasco', u'Ternasco asado'),
+            #(u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            #(u'otros', u'Otros'),
+            #(u'sin_cena', u'No voy a ir a la cena de gala'),
         )
     )
     day_1 = models.BooleanField(u'Asistencia viernes/sábado', default=True)
@@ -31,12 +32,14 @@ class UserProfile(models.Model):
     notes_transport = models.TextField(u'Comentarios transporte', blank = True)  # (medio de transporte, hora de llegada...)
     room_choice = models.CharField(u'Elige un tipo de alojamiento', max_length=50,
         choices=(
-            (u'triple-individual', u'Habitación triple - en cama individual'),
-            (u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
-            (u'doble-individual', u'Habitación doble - en cama individual'),
-            (u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
-            (u'otros', u'Otros'),
-            (u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
+            (u'inscripcion-completa', u'Inscripción completa'),
+            (u'fin-de-semana', u'Fin de semana y cena de gala'),
+            #(u'triple-individual', u'Habitación triple - en cama individual'),
+            #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
+            #(u'doble-individual', u'Habitación doble - en cama individual'),
+            #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'otros', u'Otros (contactar con la organización)'),
+            #(u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
         )
     )
     room_preferences = models.TextField(u'¿Tienes alguna preferencia sobre con quién compartir habitación?', blank = True)

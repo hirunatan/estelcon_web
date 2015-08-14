@@ -32,7 +32,7 @@ class PreSignupForm(forms.Form):
         max_length=100, required=True,
     )
     city = forms.CharField(
-        max_length=100, required=False,
+        max_length=100, required=True,
     )
     age = forms.IntegerField(
         min_value = 1, max_value = 100, required=False,
@@ -84,7 +84,7 @@ class SignupForm(forms.Form):
         max_length=100, required=True,
     )
     city = forms.CharField(
-        max_length=100, required=False,
+        max_length=100, required=True,
     )
     age = forms.IntegerField(
         min_value = 1, max_value = 100, required=True,
@@ -94,12 +94,13 @@ class SignupForm(forms.Form):
         widget = forms.Textarea,
     )
     dinner_menu = forms.ChoiceField(
-        required = True,
+        required = False,
         choices=(
-            (u'ternasco', u'Ternasco asado'),
-            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
-            (u'otros', u'Otros'),
-            (u'sin_cena', u'No voy a ir a la cena de gala'),
+            (u'', u''),
+            #(u'ternasco', u'Ternasco asado'),
+            #(u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            #(u'otros', u'Otros'),
+            #(u'sin_cena', u'No voy a ir a la cena de gala'),
         )
     )
     day_1 = forms.BooleanField(
@@ -118,12 +119,14 @@ class SignupForm(forms.Form):
     room_choice = forms.ChoiceField(
         required = True,
         choices=(
-            (u'triple-individual', u'Habitación triple - en cama individual'),
-            (u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
-            (u'doble-individual', u'Habitación doble - en cama individual'),
-            (u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'inscripcion-completa', u'Inscripción completa'),
+            (u'fin-de-semana', u'Fin de semana y cena de gala'),
+            #(u'triple-individual', u'Habitación triple - en cama individual'),
+            #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
+            #(u'doble-individual', u'Habitación doble - en cama individual'),
+            #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
             (u'otros', u'Otros'),
-            (u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
+            #(u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
         )
     )
     room_preferences = forms.CharField(
@@ -151,19 +154,19 @@ class SignupForm(forms.Form):
         widget = forms.Textarea,
     )
     shirts_S = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_M = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_L = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_XL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_XXL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
 
     def clean_username(self):
@@ -174,6 +177,14 @@ class SignupForm(forms.Form):
             )
         return username
 
+    def clean_age(self):
+        age = self.cleaned_data['age']
+        if age < 3:
+            raise validators.ValidationError(
+                u'Niños menores de 3 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
+            )
+        return age
+
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
 
@@ -182,6 +193,7 @@ class SignupForm(forms.Form):
         self._clean_children(cleaned_data)
         self._clean_ste_member(cleaned_data)
         self._clean_room_dinner(cleaned_data)
+        self._clean_shirts(cleaned_data)
 
         return cleaned_data
 
@@ -199,28 +211,41 @@ class SignupForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        day_1 = cleaned_data.get('day_1')
-        day_2 = cleaned_data.get('day_2')
-        day_3 = cleaned_data.get('day_3')
-
-        err = None
-        if room_choice == 'sin_alojamiento':
-            if day_1 or day_2 or day_3:
-                err = self.error_class([u'Si no vas a pernoctar no puedes seleccionar ninguna noche.'])
+        if room_choice == u'inscripcion-completa':
+            cleaned_data['day_1'] = True
+            cleaned_data['day_2'] = True
+            cleaned_data['day_3'] = True
+        elif room_choice == u'fin-de-semana':
+            cleaned_data['day_1'] = False
+            cleaned_data['day_2'] = True
+            cleaned_data['day_3'] = True
         else:
-            if not day_1 and not day_2 and not day_3:
-                err = self.error_class([u'Debes indicar al menos uno de estos.'])
+            cleaned_data['day_1'] = False
+            cleaned_data['day_2'] = False
+            cleaned_data['day_3'] = False
 
-        if err:
-            self._errors['day_1'] = err
-            self._errors['day_2'] = err
-            self._errors['day_3'] = err
-            if day_1 is not None:
-                del cleaned_data['day_1']
-            if day_2 is not None:
-                del cleaned_data['day_2']
-            if day_3 is not None:
-                del cleaned_data['day_3']
+        #day_1 = cleaned_data.get('day_1')
+        #day_2 = cleaned_data.get('day_2')
+        #day_3 = cleaned_data.get('day_3')
+
+        #err = None
+        #if room_choice == 'sin_alojamiento':
+        #    if day_1 or day_2 or day_3:
+        #        err = self.error_class([u'Si no vas a pernoctar no puedes seleccionar ninguna noche.'])
+        #else:
+        #    if not day_1 and not day_2 and not day_3:
+        #        err = self.error_class([u'Debes indicar al menos uno de estos.'])
+
+        #if err:
+        #    self._errors['day_1'] = err
+        #    self._errors['day_2'] = err
+        #    self._errors['day_3'] = err
+        #    if day_1 is not None:
+        #        del cleaned_data['day_1']
+        #    if day_2 is not None:
+        #        del cleaned_data['day_2']
+        #    if day_3 is not None:
+        #        del cleaned_data['day_3']
 
     def _clean_children(self, cleaned_data):
         children_count = cleaned_data.get('children_count')
@@ -256,6 +281,13 @@ class SignupForm(forms.Form):
             self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
+
+    def _clean_shirts(self, cleaned_data):
+        cleaned_data['shirts_S'] = 0
+        cleaned_data['shirts_M'] = 0
+        cleaned_data['shirts_L'] = 0
+        cleaned_data['shirts_XL'] = 0
+        cleaned_data['shirts_XXL'] = 0
 
 
 class LoginForm(forms.Form):
@@ -375,7 +407,7 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
         max_length=100, required=True,
     )
     city = forms.CharField(
-        max_length=100, required=False,
+        max_length=100, required=True,
     )
     age = forms.IntegerField(
         min_value = 1, max_value = 100, required=True,
@@ -411,12 +443,13 @@ class UserProfileEditInscriptionForm(forms.Form):
         widget = forms.Textarea,
     )
     dinner_menu = forms.ChoiceField(
-        required = True,
+        required = False,
         choices=(
-            (u'ternasco', u'Ternasco asado'),
-            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
-            (u'otros', u'Otros'),
-            (u'sin_cena', u'No voy a ir a la cena de gala')
+            (u'', u''),
+            #(u'ternasco', u'Ternasco asado'),
+            #(u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            #(u'otros', u'Otros'),
+            #(u'sin_cena', u'No voy a ir a la cena de gala')
         )
     )
     notes_transport = forms.CharField(
@@ -426,12 +459,14 @@ class UserProfileEditInscriptionForm(forms.Form):
     room_choice = forms.ChoiceField(
         required = True,
         choices=(
-            (u'triple-individual', u'Habitación triple - en cama individual'),
-            (u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
-            (u'doble-individual', u'Habitación doble - en cama individual'),
-            (u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'inscripcion-completa', u'Inscripción completa'),
+            (u'fin-de-semana', u'Fin de semana y cena de gala'),
+            #(u'triple-individual', u'Habitación triple - en cama individual'),
+            #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
+            #(u'doble-individual', u'Habitación doble - en cama individual'),
+            #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
             (u'otros', u'Otros'),
-            (u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
+            #(u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
         )
     )
     room_preferences = forms.CharField(
@@ -446,25 +481,34 @@ class UserProfileEditInscriptionForm(forms.Form):
         widget = forms.Textarea,
     )
     shirts_S = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_M = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_L = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_XL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
     shirts_XXL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=False,
     )
+
+    def clean_age(self):
+        age = self.cleaned_data['age']
+        if age < 3:
+            raise validators.ValidationError(
+                u'Niños menores de 3 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
+            )
+        return age
 
     def clean(self):
         cleaned_data = super(UserProfileEditInscriptionForm, self).clean()
 
         self._clean_room_dinner(cleaned_data)
+        self._clean_shirts(cleaned_data)
 
         return cleaned_data
 
@@ -475,4 +519,11 @@ class UserProfileEditInscriptionForm(forms.Form):
             self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
+
+    def _clean_shirts(self, cleaned_data):
+        cleaned_data['shirts_S'] = 0
+        cleaned_data['shirts_M'] = 0
+        cleaned_data['shirts_L'] = 0
+        cleaned_data['shirts_XL'] = 0
+        cleaned_data['shirts_XXL'] = 0
 

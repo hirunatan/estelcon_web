@@ -95,11 +95,17 @@ def create_new_user(user_data, home_url):
     )
 
     if not queue:
-        profile.payment = \
+        if quota > 0:
+            profile.payment = \
 u'''
 Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
 ''' % (profile.quota, profile.payment_code)
+        else:
+            profile.payment = \
+u'''
+Ponte en contacto con la organización para que te indiquemos el importe a pagar y la forma de pago.
+'''
     else:
 	profile.payment = \
 u'''
@@ -119,7 +125,8 @@ Su ficha puede consultarse directamente en %s
     )
 
     if not queue:
-	message_user = \
+        if profile.quota > 0:
+            message_user = \
 u'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
@@ -138,6 +145,23 @@ Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 El equipo organizador.
 %s
 ''' % (user.first_name, profile.quota, profile.payment_code, home_url)
+        else:
+            message_user = \
+u'''
+¡Gracias por inscribirte en la Mereth Aderthad, %s!.
+
+Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
+cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
+
+La inscripción queda pendiente de pago, pero tu opción de inscripción requiere que contactes
+con la organización para que te indiquemos el importe a abonar y la forma de pago.
+
+Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
+
+El equipo organizador.
+%s
+''' % (user.first_name, home_url)
+
     else:
 	message_user = \
 u'''
@@ -171,48 +195,56 @@ El equipo organizador.
 def _calculate_quota(user_data):
     quota = 0.0
 
-    if user_data['room_choice'] == 'sin_alojamiento':
-
-        if user_data['dinner_menu'] == 'sin_cena':
-            quota += 12
-        else:
-            quota += 36
-
+    if user_data['age'] <= 12:
+        quota = 80
     else:
+        if user_data['room_choice'] == 'inscripcion-completa':
+            quota = 160
+        elif user_data['room_choice'] == 'fin-de-semana':
+            quota = 110
 
-        if user_data['room_choice'].startswith('triple') or user_data['room_choice'] == 'otros':
-            quota += 11.2
-            if user_data['day_1']:
-                quota += 39.6
-            if user_data['day_2']:
-                quota += 39.6
-            if user_data['day_3']:
-                quota += 54.6
+    #if user_data['room_choice'] == 'sin_alojamiento':
 
-        if user_data['room_choice'].startswith('doble'):
-            quota += 11.2
-            if user_data['day_1']:
-                quota += 46.6
-            if user_data['day_2']:
-                quota += 46.6
-            if user_data['day_3']:
-                quota += 61.6
+    #    if user_data['dinner_menu'] == 'sin_cena':
+    #        quota += 12
+    #    else:
+    #        quota += 36
 
-        if user_data['age'] <= 12:
-            quota = quota * 0.75
+    #else:
 
-        if not user_data['is_ste_member'] and user_data['age'] > 12:
-            quota += 10.0
+    #    if user_data['room_choice'].startswith('triple') or user_data['room_choice'] == 'otros':
+    #        quota += 11.2
+    #        if user_data['day_1']:
+    #            quota += 39.6
+    #        if user_data['day_2']:
+    #            quota += 39.6
+    #        if user_data['day_3']:
+    #            quota += 54.6
 
-        if user_data['want_ste_member'] and user_data['age'] > 12:
-            quota += 2.0
+    #    if user_data['room_choice'].startswith('doble'):
+    #        quota += 11.2
+    #        if user_data['day_1']:
+    #            quota += 46.6
+    #        if user_data['day_2']:
+    #            quota += 46.6
+    #        if user_data['day_3']:
+    #            quota += 61.6
 
-    num_shirts = user_data['shirts_S'] + \
-                 user_data['shirts_M'] + \
-                 user_data['shirts_L'] + \
-                 user_data['shirts_XL'] + \
-                 user_data['shirts_XXL']
-    quota += num_shirts * 10.0
+    #    if user_data['age'] <= 12:
+    #        quota = quota * 0.75
+
+    #    if not user_data['is_ste_member'] and user_data['age'] > 12:
+    #        quota += 10.0
+
+    #    if user_data['want_ste_member'] and user_data['age'] > 12:
+    #        quota += 2.0
+
+    #num_shirts = user_data['shirts_S'] + \
+    #             user_data['shirts_M'] + \
+    #             user_data['shirts_L'] + \
+    #             user_data['shirts_XL'] + \
+    #             user_data['shirts_XXL']
+    #quota += num_shirts * 10.0
 
     return round(quota)
 
