@@ -16,8 +16,8 @@
 <p>Aquí puedes modificar cualquier parte de tu información de inscripción, excepto los días
 de asistencia. Si deseas cambiar este dato contacta con la organización.</p>
 <p><strong>Atención</strong>: si modificas algún dato que influya en el precio de la inscripción
-(como el tipo de alojamiento o las camisetas), te agradeceremos que contactes con la organización
-para ver cómo podemos compensar la diferencia.</p>
+(como el tipo de alojamiento), te agradeceremos que contactes con la organización para ver cómo
+podemos compensar la diferencia.</p>
 
 <form method="post" action=".">
   {% csrf_token %}
@@ -26,11 +26,13 @@ para ver cómo podemos compensar la diferencia.</p>
     {{ form.notes_food }}
     {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% comment %}
   <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
     <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
     {{ form.dinner_menu }}
     {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  {% endcomment %}
   <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
     <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
     {{ form.notes_transport }}
@@ -57,6 +59,7 @@ para ver cómo podemos compensar la diferencia.</p>
     {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
 
+  {% comment %}
   <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
   optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
   Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de
@@ -88,6 +91,7 @@ para ver cómo podemos compensar la diferencia.</p>
     </tr>
   </table>
   <br/>
+  {% endcomment %}
   <p>
     <input type="submit" value="enviar"/>
   </p>

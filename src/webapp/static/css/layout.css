@@ -8,20 +8,19 @@
 
 #logo {
 	float: left;
-	background: url(../images/nuevo-logo.gif) no-repeat left top;
+	background: url(../images/header_logo.png) no-repeat left top;
 }
 
 #logo h1{
 	margin: 168px 0px 0px 20px;
 	text-indent: 78px;
-	
+
 }
 
 #logo h1 a{
 	margin: 150px 0px 0px 0px;
 	text-indent: 78px;
 text-decoration: none;
-	
 }
 
 
@@ -57,13 +56,13 @@ text-decoration: none;
 	display: block;
 	float: left;
 	height: 20px;
-	padding: 4px 4px 0px 50px;
+	padding: 4px 4px 0px 25px;
 	background: transparent no-repeat left center;
 }
 
 #menu .first a {
 	background: none;
-	padding: 4px 4px 0px 15px;
+	padding: 4px 4px 0px 35px;
 }
 
 /** PAGE */
@@ -76,8 +75,8 @@ text-decoration: none;
 
 #content {
 	float: right;
-	width: 602px;
-	padding: 15px 87px 20px 0px;
+	width: 620px;
+	padding: 15px 30px 20px 0px;
 }
 
 /** ONE COLUMN WIDE */
@@ -110,8 +109,8 @@ text-decoration: none;
 
 #sidebar {
 	float: left;
-	width: 230px;
-	padding: 0px 0px 0px 49px;
+	width: 300px;
+	padding: 0px 15px 0px 15px;
 }
 
 /** FOOTER */
@@ -167,4 +166,4 @@ caption {
 		-o-transform : scale(2); /* Opera */
 		-ms-transform : scale(2); /* IE9 */
 	}
-	
+

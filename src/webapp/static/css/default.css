@@ -7,7 +7,7 @@ html, body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #190e09 url(../images/Background2.jpg) repeat left top;
+	background: #190e09 url(../images/tileBG.png) repeat left top;
 }
 
 /** FORMS */
@@ -77,7 +77,7 @@ p, blockquote, ul, ol, dl {
 
 .list1 li {
 	display: block;
-	font-size: 10px;
+	font-size: 12px;
 	height: 17px;
 	margin-bottom: 3px;
 	padding: 3px 0px 0px 10px;
@@ -86,7 +86,7 @@ p, blockquote, ul, ol, dl {
 
 .list1 li a {
 	text-decoration: none;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 .list1 li a:hover {
@@ -222,24 +222,28 @@ html>body #wrapper {
 #header {
 	width: 980px;
 	height: 200px;
+	-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 }
 
 /** LOGO */
 
 #logo {
-	width: 272px;
+	width: 325px;
 	height: 200px;
 }
 
 #logo h1, #logo p {
+	display: none;
 }
 
 /** MENU */
 
 #menu {
-	width: 708px;
+	width: 655px;
 	height: 200px;
-	background: url(../images/nuevo-banner-menu.gif) no-repeat left top;
+	background: url(../images/header_menu.png) no-repeat left top;
 }
 
 #menu a {
@@ -260,30 +264,38 @@ html>body #wrapper {
 }
 
 #page-bg {
-	background: url(../images/nuevo-fondo-ppal.gif) repeat-y left top;
+	background: url(../images/bg_content.png) repeat left top;
+	-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 }
 
 /** SIDEBAR > BOXED */
+
+.boxed{
+	margin:20px 0;
+}
 
 .boxed p {
 	text-align: left;
 }
 
 .boxed-top {
-	background: url(../images/homepage15.png) no-repeat left top;
-        min-height: 50px;
-	
+	background: url(../images/bg_sidebar_top.png) no-repeat center top;
+    min-height: 25px;
+
 }
 
 .boxed-content {
-	padding: 10px 20px 5px 16px;
-	background: url(../images/homepage16.png) repeat-y left top;
+	padding: 10px 40px 0 40px;
+	background: url(../images/bg_sidebar_center.png) repeat-y center top;
+	height: 100%;
 }
 
 
 .boxed-bottom {
-	background: url(../images/homepage17.png) no-repeat left bottom;
-        min-height: 50px;
+	background: url(../images/bg_sidebar_bottom.png) no-repeat center bottom;
+        min-height: 25px;
 }
 
 .boxed h2, .boxed-first h2 {
@@ -302,22 +314,19 @@ html>body #wrapper {
 }
 
 .boxed-top-first {
-	background: url(../images/homepage15.png) no-repeat left top;
-        min-height: 50px;
+	background: url(../images/bg_sidebar_top.png) no-repeat center top;
+    min-height: 25px;
 }
 
 .boxed-content-first {
-	padding: 10px 20px 5px 16px;
-	background: url(../images/homepage16.png) repeat-y left top;
-}
-
-.boxed-content-first {
-background: url(../images/homepage16.png) repeat-y left top;
+	padding: 10px 40px 0 40px;
+	background: url(../images/bg_sidebar_center.png) repeat-y center top;
+	height: 100%;
 }
 
 .boxed-bottom-first {
-	background: url(../images/homepage17.png) no-repeat left bottom;
-        min-height: 50px;
+	background: url(../images/bg_sidebar_bottom.png) no-repeat center bottom;
+    min-height: 25px;
 }
 
 .boxed-second p {
@@ -325,18 +334,19 @@ background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-top-second {
-	background: url(../images/subpage1_05.png) no-repeat left top;
-        min-height: 45px;
+	background: url(../images/bg_sidebar_top.png) no-repeat center top;
+    min-height: 25px;
 }
 
 .boxed-content-second {
-	padding: 10px 20px 5px 16px;
-	background: url(../images/subpage1_06.png) repeat-y left top;
+	padding: 10px 40px 0 40px;
+	background: url(../images/bg_sidebar_center.png) repeat-y center top;
+	height: 100%;
 }
 
 .boxed-bottom-second {
-	background: url(../images/subpage1_07.png) no-repeat left bottom;
-        min-height: 45px;
+	background: url(../images/bg_sidebar_bottom.png) no-repeat center bottom;
+    min-height: 25px;
 }
 
 
@@ -346,7 +356,6 @@ background: url(../images/homepage16.png) repeat-y left top;
 #footer {
 	width: 980px;
 	height:200px;
-	background: url(../images/nuevo-footer.gif) no-repeat left top;
 }
 
 #footer p {
