@@ -141,7 +141,7 @@ cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas 
 
 El siguiente paso sería realizar el pago, pero los pagos no están habilitados todavía, estamos
 terminando de cerrar las condiciones. En breve te enviaremos más instrucciones, recuerda tu
-importe de %s€ y tu código de inscripción %s.</p>
+importe de %s€ y tu código de inscripción %s.
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
