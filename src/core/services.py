@@ -98,9 +98,15 @@ def create_new_user(user_data, home_url):
         if quota > 0:
             profile.payment = \
 u'''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
-ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
+Pendiente de pago. Los pagos no están habilitados todavía, estamos terminando de cerrar las
+condiciones. Recuerda tu importe de %d€ y tu código de inscripción %s, en breve te
+enviaremos más instrucciones.
 ''' % (profile.quota, profile.payment_code)
+#            profile.payment = \
+#u'''
+#Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
+#ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
+#''' % (profile.quota, profile.payment_code)
         else:
             profile.payment = \
 u'''
@@ -133,18 +139,34 @@ u'''
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
-La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
-el código %s.
-
-Dispones de 5 días para la realización del pago que confirmará tu plaza, pasados los cuales la
-inscripción será cancelada si no lo hemos recibido.
+El siguiente paso sería realizar el pago, pero los pagos no están habilitados todavía, estamos
+terminando de cerrar las condiciones. En breve te enviaremos más instrucciones, recuerda tu
+importe de %s€ y tu código de inscripción %s.</p>
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
 El equipo organizador.
 %s
 ''' % (user.first_name, profile.quota, profile.payment_code, home_url)
+#            message_user = \
+#u'''
+#¡Gracias por inscribirte en la Mereth Aderthad, %s!.
+#
+#Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
+#cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
+#
+#La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
+#cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
+#el código %s.
+#
+#Dispones de 5 días para la realización del pago que confirmará tu plaza, pasados los cuales la
+#inscripción será cancelada si no lo hemos recibido.
+#
+#Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
+#
+#El equipo organizador.
+#%s
+#''' % (user.first_name, profile.quota, profile.payment_code, home_url)
         else:
             message_user = \
 u'''
