@@ -868,7 +868,7 @@ def listing_dinner_menus():
 
 
 def listing_unpaid_users():
-    profiles = UserProfile.objects.filter(payment__contains=u'Pendiente de verificación del pago')
+    profiles = UserProfile.objects.filter(payment__contains=u'Pendiente de pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
@@ -879,7 +879,7 @@ def listing_unpaid_users():
 
 
 def listing_paid_users():
-    profiles = UserProfile.objects.exclude(payment__contains=u'Pendiente de verificación del pago')
+    profiles = UserProfile.objects.exclude(payment__contains=u'Pendiente de pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
