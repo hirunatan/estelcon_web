@@ -125,8 +125,8 @@ class SignupForm(forms.Form):
             #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
             #(u'doble-individual', u'Habitación doble - en cama individual'),
             #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'sin-alojamiento', u'No voy a pernoctar en el hotel'),
             (u'otros', u'Otros'),
-            #(u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
         )
     )
     room_preferences = forms.CharField(
@@ -229,7 +229,7 @@ class SignupForm(forms.Form):
         #day_3 = cleaned_data.get('day_3')
 
         #err = None
-        #if room_choice == 'sin_alojamiento':
+        #if room_choice == 'sin-alojamiento':
         #    if day_1 or day_2 or day_3:
         #        err = self.error_class([u'Si no vas a pernoctar no puedes seleccionar ninguna noche.'])
         #else:
@@ -269,7 +269,7 @@ class SignupForm(forms.Form):
             if want_ste_member is not None:
                 del cleaned_data['want_ste_member']
         else:
-            if want_ste_member and room_choice == 'sin_alojamiento':
+            if want_ste_member and room_choice == 'sin-alojamiento':
                 self._errors['want_ste_member'] = self.error_class([u'La opción de hacerte socio está disponible sólo para las opciones normales con alojamiento en hotel'])
                 if want_ste_member is not None:
                     del cleaned_data['want_ste_member']
@@ -277,7 +277,7 @@ class SignupForm(forms.Form):
     def _clean_room_dinner(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
         dinner_menu = cleaned_data.get('dinner_menu')
-        if dinner_menu == 'sin_cena' and room_choice != 'sin_alojamiento':
+        if dinner_menu == 'sin_cena' and room_choice != 'sin-alojamiento':
             self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
@@ -465,8 +465,8 @@ class UserProfileEditInscriptionForm(forms.Form):
             #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
             #(u'doble-individual', u'Habitación doble - en cama individual'),
             #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'sin-alojamiento', u'No voy a pernoctar en el hotel'),
             (u'otros', u'Otros'),
-            #(u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
         )
     )
     room_preferences = forms.CharField(
@@ -515,7 +515,7 @@ class UserProfileEditInscriptionForm(forms.Form):
     def _clean_room_dinner(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
         dinner_menu = cleaned_data.get('dinner_menu')
-        if dinner_menu == 'sin_cena' and room_choice != 'sin_alojamiento':
+        if dinner_menu == 'sin_cena' and room_choice != 'sin-alojamiento':
             self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']

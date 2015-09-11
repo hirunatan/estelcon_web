@@ -227,14 +227,19 @@ def _calculate_quota(user_data):
     quota = 0.0
 
     if user_data['age'] <= 12:
-        quota = 80
+        if user_data['room_choice'] == 'sin-alojamiento':
+            quota = 40
+        else:
+            quota = 80
     else:
         if user_data['room_choice'] == 'inscripcion-completa':
             quota = 160
         elif user_data['room_choice'] == 'fin-de-semana':
             quota = 110
+        elif user_data['room_choice'] == 'sin-alojamiento':
+            quota = 40
 
-    #if user_data['room_choice'] == 'sin_alojamiento':
+    #if user_data['room_choice'] == 'sin-alojamiento':
 
     #    if user_data['dinner_menu'] == 'sin_cena':
     #        quota += 12
