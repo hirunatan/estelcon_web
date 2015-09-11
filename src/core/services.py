@@ -96,17 +96,23 @@ def create_new_user(user_data, home_url):
 
     if not queue:
         if quota > 0:
-            profile.payment = \
-u'''
-Pendiente de pago. Los pagos no están habilitados todavía, estamos terminando de cerrar las
-condiciones. Recuerda tu importe de %d€ y tu código de inscripción %s, en breve te
-enviaremos más instrucciones.
-''' % (profile.quota, profile.payment_code)
 #            profile.payment = \
 #u'''
-#Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
-#ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
+#Pendiente de pago. Los pagos no están habilitados todavía, estamos terminando de cerrar las
+#condiciones. Recuerda tu importe de %d€ y tu código de inscripción %s, en breve te
+#enviaremos más instrucciones.
 #''' % (profile.quota, profile.payment_code)
+            profile.payment = \
+u'''
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caixabank
+ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el ingreso el código %s.
+
+Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+anterioridad a esa fecha, tu plaza quedará anulada.
+
+Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
+tu nombre completo, dirección postal, DNI y el mismo código %s.
+''' % (profile.quota, profile.payment_code, profile.payment_code)
         else:
             profile.payment = \
 u'''
@@ -132,22 +138,6 @@ Su ficha puede consultarse directamente en %s
 
     if not queue:
         if profile.quota > 0:
-            message_user = \
-u'''
-¡Gracias por inscribirte en la Mereth Aderthad, %s!.
-
-Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
-cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
-
-El siguiente paso sería realizar el pago, pero los pagos no están habilitados todavía, estamos
-terminando de cerrar las condiciones. En breve te enviaremos más instrucciones, recuerda tu
-importe de %s€ y tu código de inscripción %s.
-
-Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
-
-El equipo organizador.
-%s
-''' % (user.first_name, profile.quota, profile.payment_code, home_url)
 #            message_user = \
 #u'''
 #¡Gracias por inscribirte en la Mereth Aderthad, %s!.
@@ -155,18 +145,37 @@ El equipo organizador.
 #Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 #cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 #
-#La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-#cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
-#el código %s.
-#
-#Dispones de 5 días para la realización del pago que confirmará tu plaza, pasados los cuales la
-#inscripción será cancelada si no lo hemos recibido.
+#El siguiente paso sería realizar el pago, pero los pagos no están habilitados todavía, estamos
+#terminando de cerrar las condiciones. En breve te enviaremos más instrucciones, recuerda tu
+#importe de %s€ y tu código de inscripción %s.
 #
 #Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 #
 #El equipo organizador.
 #%s
 #''' % (user.first_name, profile.quota, profile.payment_code, home_url)
+            message_user = \
+u'''
+¡Gracias por inscribirte en la Mereth Aderthad, %s!.
+
+Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
+cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
+
+La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
+cuenta de Caixabank ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el
+ingreso el código %s.
+
+Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+anterioridad a esa fecha, tu plaza quedará anulada.
+
+Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
+tu nombre completo, dirección postal, DNI y el mismo código %s.
+
+Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
+
+El equipo organizador.
+%s
+''' % (user.first_name, profile.quota, profile.payment_code, profile.payment_code, home_url)
         else:
             message_user = \
 u'''
@@ -868,7 +877,7 @@ def listing_dinner_menus():
 
 
 def listing_unpaid_users():
-    profiles = UserProfile.objects.filter(payment__contains=u'Pendiente de pago')
+    profiles = UserProfile.objects.filter(payment__contains=u'Pendiente de verificación del pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
@@ -879,7 +888,7 @@ def listing_unpaid_users():
 
 
 def listing_paid_users():
-    profiles = UserProfile.objects.exclude(payment__contains=u'Pendiente de pago')
+    profiles = UserProfile.objects.exclude(payment__contains=u'Pendiente de verificación del pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
