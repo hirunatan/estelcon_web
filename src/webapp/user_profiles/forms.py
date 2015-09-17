@@ -193,7 +193,6 @@ class SignupForm(forms.Form):
         self._clean_children(cleaned_data)
         self._clean_ste_member(cleaned_data)
         self._clean_room_dinner(cleaned_data)
-        self._clean_shirts(cleaned_data)
 
         return cleaned_data
 
@@ -281,13 +280,6 @@ class SignupForm(forms.Form):
             self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
-
-    def _clean_shirts(self, cleaned_data):
-        cleaned_data['shirts_S'] = 0
-        cleaned_data['shirts_M'] = 0
-        cleaned_data['shirts_L'] = 0
-        cleaned_data['shirts_XL'] = 0
-        cleaned_data['shirts_XXL'] = 0
 
 
 class LoginForm(forms.Form):
@@ -508,7 +500,6 @@ class UserProfileEditInscriptionForm(forms.Form):
         cleaned_data = super(UserProfileEditInscriptionForm, self).clean()
 
         self._clean_room_dinner(cleaned_data)
-        self._clean_shirts(cleaned_data)
 
         return cleaned_data
 
@@ -519,11 +510,4 @@ class UserProfileEditInscriptionForm(forms.Form):
             self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
-
-    def _clean_shirts(self, cleaned_data):
-        cleaned_data['shirts_S'] = 0
-        cleaned_data['shirts_M'] = 0
-        cleaned_data['shirts_L'] = 0
-        cleaned_data['shirts_XL'] = 0
-        cleaned_data['shirts_XXL'] = 0
 
