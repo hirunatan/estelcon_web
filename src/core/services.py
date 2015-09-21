@@ -275,12 +275,12 @@ def _calculate_quota(user_data):
     #    if user_data['want_ste_member'] and user_data['age'] > 12:
     #        quota += 2.0
 
-    num_shirts = user_data['shirts_S'] + \
-                 user_data['shirts_M'] + \
-                 user_data['shirts_L'] + \
-                 user_data['shirts_XL'] + \
-                 user_data['shirts_XXL']
-    quota += num_shirts * 10.0
+    #num_shirts = user_data['shirts_S'] + \
+    #             user_data['shirts_M'] + \
+    #             user_data['shirts_L'] + \
+    #             user_data['shirts_XL'] + \
+    #             user_data['shirts_XXL']
+    #quota += num_shirts * 10.0
 
     return round(quota)
 
