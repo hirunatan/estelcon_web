@@ -154,19 +154,19 @@ class SignupForm(forms.Form):
         widget = forms.Textarea,
     )
     shirts_S = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_M = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_L = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_XL = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_XXL = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
 
     def clean_username(self):
@@ -473,19 +473,19 @@ class UserProfileEditInscriptionForm(forms.Form):
         widget = forms.Textarea,
     )
     shirts_S = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_M = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_L = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_XL = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
     shirts_XXL = forms.IntegerField(
-        min_value = 0, initial = 0, required=False,
+        min_value = 0, initial = 0, required=True,
     )
 
     def clean_age(self):

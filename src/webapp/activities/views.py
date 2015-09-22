@@ -69,14 +69,15 @@ class ActivitySubscribeView(FormView):
     def get_context_data(self, **kwargs):
         context = super(ActivitySubscribeView, self).get_context_data(**kwargs)
 
+        context['activity'] = self.activity
         if self.activity \
                 and self.activity.requires_inscription \
                 and not self.user_status['is_owner'] \
                 and not self.user_status['is_organizer'] \
                 and not self.user_status['is_participant']:
-            context['activity'] = self.activity
+            context['can_subscribe'] = True
         else:
-            context['activity'] = None
+            context['can_subscribe'] = False
 
         return context
 
