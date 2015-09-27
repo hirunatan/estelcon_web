@@ -11,7 +11,7 @@ import locale
 
 from .models import UserProfile, Activity
 
-MAX_USERS = 186
+MAX_USERS = 105
 
 #TODO: usar templates para los textos de los correos
 
@@ -51,7 +51,10 @@ def create_new_user(user_data, home_url):
 
     quota = _calculate_quota(user_data)
 
-    queue = max(0, UserProfile.objects.count() - MAX_USERS)
+    if user_data['room_choice'] in ["inscripcion-completa", "fin-de-semana"]:
+        queue = max(0, UserProfile.objects.filter(room_choice__in=["inscripcion-completa", "fin-de-semana"]).count() - MAX_USERS)
+    else:
+        queue = 0
 
     user = User.objects.create_user(username=user_data['username'],
                                     email=user_data['email'],
@@ -198,8 +201,8 @@ El equipo organizador.
 u'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
-Sin embargo, lamentamos comunicarte que el número de plazas máximo que teníamos establecido ha sido alcanzado, por
-lo que no podemos garantizar tu asistencia. ¡Lo sentimos muchísimo!
+Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos en el hotel ha sido alcanzado, por
+lo que no podemos garantizar tu alojamiento. ¡Lo sentimos muchísimo!
 
 Pero de todas formas, te ponemos en cola de espera por si aparece un hueco vacante y podemos dar paso a tu inscripción.
 Tu posición en la cola es la %d. Hemos registrado tus datos y se ha creado un usuario con el que puedes acceder a la
