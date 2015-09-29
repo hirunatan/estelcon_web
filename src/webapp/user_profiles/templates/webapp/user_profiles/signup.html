@@ -40,15 +40,15 @@ contactad por favor con la organización.</p>
     <li>Los menores de 18 años deben venir con sus padres o tener autorización.</li>
 </ul>
 
-<p><b>Opciones sin alojamiento:</b></p>
+<p><b>Opción sin alojamiento: 40€</b></p>
 <ul>
-    <li>Existirá la posibilidad de asistir a la EstelCon sin alojarse en el hotel. Aún estamos estudiando las
-        condiciones, así que por ahora no está disponible esta opción.</li>
+    <li>Existirá la posibilidad de asistir a la EstelCon y la cena de gala sin alojarse en el hotel. esta
+        opción incluye todas las actividades pero no las comidas, excepto la cena de gala.</li>
 </ul>
 {% comment %}
 <p><b>Condiciones para no socios:</b></p>
 <ul>
-    <li>Los no socios deberán pagar 10 € más en cualquiera de los casos excepto en las opciones sin alojamiento, si bien podrán aprovechar y hacerse socios en la propia EstelCon, descontando esta parte de su cuota.</li>
+    <li>Los no socios deberán pagar 10 € más en cualquiera de los casos excepto en la opción sin alojamiento, si bien podrán aprovechar y hacerse socios en la propia EstelCon, descontando esta parte de su cuota.</li>
 </ul>
 {% endcomment %}
 
@@ -164,7 +164,7 @@ contactad por favor con la organización.</p>
         var day1 = document.querySelector('#id_day_1');
         var day2 = document.querySelector('#id_day_2');
         var day3 = document.querySelector('#id_day_3');
-        if (roomChoiceSelect.value === 'sin_alojamiento') {
+        if (roomChoiceSelect.value === 'sin-alojamiento') {
             day1.checked = false;
             day2.checked = false;
             day3.checked = false;
@@ -190,7 +190,7 @@ contactad por favor con la organización.</p>
   {% endcomment %}
   {% comment %}
   <p>Indica las noches que vas a pasar en el hotel:</p>
-  <table title="Si asistes a la Estelcon completa, marca todo. Si no, dinos qué noches pernoctas en el hotel, incluyendo las comidas como se indica arriba. Si eliges una de las opciones sin alojamiento, no marques nada.">
+  <table title="Si asistes a la Estelcon completa, marca todo. Si no, dinos qué noches pernoctas en el hotel, incluyendo las comidas como se indica arriba. Si eliges la opción sin alojamiento, no marques nada.">
     <tr>
       <td><label for="id_day_1">Viernes/Sábado<label></td>
       <td>{{ form.day_1 }}
@@ -259,6 +259,15 @@ contactad por favor con la organización.</p>
     {{ form.notes_general }}
     {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
+  <p>Queremos dar la oportunidad de lucir la <a href="/static/images/camiseta.jpg" target="_blank">camiseta de la Estelcon</a> en el
+  castillo de Santa Bárbara. Para ello deberéis reservarla indicando la talla y número de unidades en el formulario
+  siguiente. Los que la reservéis y paguéis hasta el 1 de octubre se os entregara en el pack de bienvenida al llegar al
+  Castillo. Si la reserva se hace a posteriori, no dará tiempo de tenerla lista para la Estelcon y os la haremos llegar
+  a vuestra casa, en ese caso habrá que sumar al precio 2€ más en concepto de gastos de envío (se podrán consultar otros
+  tipos de envios).</p>
+  <p>El precio de la camiseta será de <b>6€</b> (precio de coste). Como el pago de la Estelcon va directamente a
+  las cuentas de Esatur, hay que hacer un pago separado para la camiseta. Después de reservar se os mandará un mail con
+  la información para el pago.</p>
   {% comment %}
   <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
   optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
@@ -266,6 +275,7 @@ contactad por favor con la organización.</p>
   una, simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
   <p>Las camisetas costarán 10€ y se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis
   nada más llegar.</p>
+  {% endcomment %}
   <table title="Indica cuántas camisetas quieres de esta talla.">
     <tr>
       <td><label for="id_shirts_S">Camisetas talla S: <label></td>
@@ -290,7 +300,6 @@ contactad por favor con la organización.</p>
     </tr>
   </table>
   <br/>
-  {% endcomment %}
   <p>
     <input type="submit" value="enviar"/>
   </p>

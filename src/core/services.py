@@ -11,7 +11,7 @@ import locale
 
 from .models import UserProfile, Activity
 
-MAX_USERS = 186
+MAX_USERS = 105
 
 #TODO: usar templates para los textos de los correos
 
@@ -51,7 +51,10 @@ def create_new_user(user_data, home_url):
 
     quota = _calculate_quota(user_data)
 
-    queue = max(0, UserProfile.objects.count() - MAX_USERS)
+    if user_data['room_choice'] in ["inscripcion-completa", "fin-de-semana"]:
+        queue = max(0, UserProfile.objects.filter(room_choice__in=["inscripcion-completa", "fin-de-semana"]).count() - MAX_USERS)
+    else:
+        queue = 0
 
     user = User.objects.create_user(username=user_data['username'],
                                     email=user_data['email'],
@@ -96,17 +99,23 @@ def create_new_user(user_data, home_url):
 
     if not queue:
         if quota > 0:
-            profile.payment = \
-u'''
-Pendiente de pago. Los pagos no están habilitados todavía, estamos terminando de cerrar las
-condiciones. Recuerda tu importe de %d€ y tu código de inscripción %s, en breve te
-enviaremos más instrucciones.
-''' % (profile.quota, profile.payment_code)
 #            profile.payment = \
 #u'''
-#Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
-#ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
+#Pendiente de pago. Los pagos no están habilitados todavía, estamos terminando de cerrar las
+#condiciones. Recuerda tu importe de %d€ y tu código de inscripción %s, en breve te
+#enviaremos más instrucciones.
 #''' % (profile.quota, profile.payment_code)
+            profile.payment = \
+u'''
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caixabank
+ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el ingreso el código %s.
+
+Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+anterioridad a esa fecha, tu plaza quedará anulada.
+
+Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
+tu nombre completo, dirección postal, DNI y el mismo código %s.
+''' % (profile.quota, profile.payment_code, profile.payment_code)
         else:
             profile.payment = \
 u'''
@@ -132,22 +141,6 @@ Su ficha puede consultarse directamente en %s
 
     if not queue:
         if profile.quota > 0:
-            message_user = \
-u'''
-¡Gracias por inscribirte en la Mereth Aderthad, %s!.
-
-Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
-cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
-
-El siguiente paso sería realizar el pago, pero los pagos no están habilitados todavía, estamos
-terminando de cerrar las condiciones. En breve te enviaremos más instrucciones, recuerda tu
-importe de %s€ y tu código de inscripción %s.
-
-Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
-
-El equipo organizador.
-%s
-''' % (user.first_name, profile.quota, profile.payment_code, home_url)
 #            message_user = \
 #u'''
 #¡Gracias por inscribirte en la Mereth Aderthad, %s!.
@@ -155,18 +148,37 @@ El equipo organizador.
 #Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 #cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 #
-#La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-#cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
-#el código %s.
-#
-#Dispones de 5 días para la realización del pago que confirmará tu plaza, pasados los cuales la
-#inscripción será cancelada si no lo hemos recibido.
+#El siguiente paso sería realizar el pago, pero los pagos no están habilitados todavía, estamos
+#terminando de cerrar las condiciones. En breve te enviaremos más instrucciones, recuerda tu
+#importe de %s€ y tu código de inscripción %s.
 #
 #Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 #
 #El equipo organizador.
 #%s
 #''' % (user.first_name, profile.quota, profile.payment_code, home_url)
+            message_user = \
+u'''
+¡Gracias por inscribirte en la Mereth Aderthad, %s!.
+
+Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
+cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
+
+La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
+cuenta de Caixabank ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el
+ingreso el código %s.
+
+Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+anterioridad a esa fecha, tu plaza quedará anulada.
+
+Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
+tu nombre completo, dirección postal, DNI y el mismo código %s.
+
+Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
+
+El equipo organizador.
+%s
+''' % (user.first_name, profile.quota, profile.payment_code, profile.payment_code, home_url)
         else:
             message_user = \
 u'''
@@ -189,8 +201,8 @@ El equipo organizador.
 u'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
-Sin embargo, lamentamos comunicarte que el número de plazas máximo que teníamos establecido ha sido alcanzado, por
-lo que no podemos garantizar tu asistencia. ¡Lo sentimos muchísimo!
+Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos en el hotel ha sido alcanzado, por
+lo que no podemos garantizar tu alojamiento. ¡Lo sentimos muchísimo!
 
 Pero de todas formas, te ponemos en cola de espera por si aparece un hueco vacante y podemos dar paso a tu inscripción.
 Tu posición en la cola es la %d. Hemos registrado tus datos y se ha creado un usuario con el que puedes acceder a la
@@ -218,14 +230,19 @@ def _calculate_quota(user_data):
     quota = 0.0
 
     if user_data['age'] <= 12:
-        quota = 80
+        if user_data['room_choice'] == 'sin-alojamiento':
+            quota = 40
+        else:
+            quota = 80
     else:
         if user_data['room_choice'] == 'inscripcion-completa':
             quota = 160
         elif user_data['room_choice'] == 'fin-de-semana':
             quota = 110
+        elif user_data['room_choice'] == 'sin-alojamiento':
+            quota = 40
 
-    #if user_data['room_choice'] == 'sin_alojamiento':
+    #if user_data['room_choice'] == 'sin-alojamiento':
 
     #    if user_data['dinner_menu'] == 'sin_cena':
     #        quota += 12
