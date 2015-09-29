@@ -25,17 +25,19 @@
   {% if not queue %}
 
   <p>¡Bienvenido/a a la Mereth Aderthad!</p>
-  {% comment %}
   <p>Tu inscripción ha sido procesada, el siguiente paso es realizar el pago.
-  Debes realizar el ingreso de {{ quota }}€ en la cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA,
-  indicando en las observaciones el código {{ payment_code }}.</p>
-  <p>Dispones de 5 días para la realización del pago que confirmará tu plaza, pasados los cuales la inscripción será cancelada
-  si no lo hemos recibido.</p>
+  Debes realizar un ingreso de {{ quota }}€ en la cuenta de Caixabank ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L.,
+  indicando en el ingreso el código {{ payment_code }}.</p>
+  <p>Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con anterioridad a esa fecha, tu
+  plaza quedará anulada.</p>
   <p>Cuando hayamos verificado el pago, lo reflejaremos así en tu ficha.</p>
-  {% endcomment %}
-  <p>Tu inscripción ha sido procesada. El siguiente paso sería realizar el pago, pero los pagos no están habilitados
+  <p>Si necesitas factura de este pago, puedes un email a administracion@esatur.com indicando tu nombre completo,
+  dirección postal, DNI y el mismo código {{ payment_code }}.</p>
+  {% comment %}
+  <!--<p>Tu inscripción ha sido procesada. El siguiente paso sería realizar el pago, pero los pagos no están habilitados
   todavía, estamos terminando de cerrar las condiciones. En breve te enviaremos más instrucciones, recuerda tu importe
-  de <strong>{{ quota }}€</strong> y tu código de inscripción <strong>{{ payment_code }}</strong>.</p>
+  de <strong>{{ quota }}€</strong> y tu código de inscripción <strong>{{ payment_code }}</strong>.</p>-->
+  {% endcomment %}
 
   <p>Ahora puedes entrar en la página con el usuario y contraseña que acabas de
   indicar, para consultar tu ficha y apuntarte a las diferentes actividades.</p>

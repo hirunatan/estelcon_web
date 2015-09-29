@@ -90,7 +90,6 @@
   <p><b>¿Algún otro comentario?</b>:<br/>
   {{ profile.notes_general|linebreaksbr }}<p>
 {% endif %}
-{% comment %}
 <p>
   <b>Reserva de camisetas</b><br/>
   {% if not profile.shirts_S and not profile.shirts_M and not profile.shirts_L and not profile.shirts_XL and not profile.shirts_XXL %}
@@ -103,7 +102,6 @@
     {% if profile.shirts_XL %}<br> * {{ profile.shirts_XL }} de talla XL.{% endif %}
     {% if profile.shirts_XXL %}<br> * {{ profile.shirts_XXL }} de talla XXL.{% endif %}
   {% endif %}
-{% endcomment %}
 </p>
 
 {% if owned_by or organized_by or participant_in %}
@@ -154,6 +152,8 @@
 ¡No te limites a mirar! ¿Te apetece unirte a los organizadores de esta fiesta? Asegúrate de leer
 la sección <a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a>, y luego haznos una
 <a href="/merethaderthad_propuesta">propuesta de actividad</a>.</p>
+{% comment %}
 <p>También puedes usar este formulario para informarnos de artículos para su venta en la Esteltienda.</p>
+{% endcomment %}
 
 {% endblock %}

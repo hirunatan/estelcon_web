@@ -38,8 +38,8 @@ class UserProfile(models.Model):
             #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
             #(u'doble-individual', u'Habitación doble - en cama individual'),
             #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
+            (u'sin-alojamiento', u'No voy a pernoctar en el hotel'),
             (u'otros', u'Otros (contactar con la organización)'),
-            #(u'sin_alojamiento', u'No voy a pernoctar en el hotel'),
         )
     )
     room_preferences = models.TextField(u'¿Tienes alguna preferencia sobre con quién compartir habitación?', blank = True)
