@@ -37,6 +37,18 @@ class SignupView(FormView):
     template_name = 'webapp/user_profiles/signup.html'
     form_class = SignupForm
 
+    def get_context_data(self, **kwargs):
+        context = super(SignupView, self).get_context_data(**kwargs)
+        context['signup_closed'] = settings.SIGNUP_CLOSED
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if not settings.SIGNUP_CLOSED:
+            return super(SignupView, self).post(request, *args, **kwargs)
+        else:
+            # If signup form disabled, don't process anything and return the same page
+            return super(SignupView, self).get(request, *args, **kwargs)
+
     def form_valid(self, form):
         (user, queue) = services.create_new_user(
             user_data = form.cleaned_data,

@@ -46,6 +46,7 @@
                     <p>Este año, además, se ha pensado especialmente en los visitantes de la ciudad y la exposición, para quienes se están preparando actividades que les permitan disfrutar y conocer mejor la obra de J.R.R. Tolkien.</p>
                     <p>Esta web es el medio que utilizamos para presentar los aspectos generales y el progreso del proyecto de EstelCon, así como para formalizar las inscripciones para asistir al evento.</p>
                     {#<p><b>Si ya te inscribiste</b>, puedes ir directamente a <a href="{% url 'user-profile' %}">tu ficha personal</a> y actualizar tus preferencias o apuntarte a actividades.</p>#}
+                    <p style="color:red; width: 250px; margin-left: auto; margin-right: auto;">*** INSCRIPCIÓN CERRADA ***</p>
                     <p class="english-edition"><a href="english.html"><img src="/static/images/eng.jpg" alt="" width="40" height="21"></a> <a href="english.html">English edition</a></p>
                 </div>
                 <div class="hr1"></div>
@@ -56,7 +57,9 @@
                         <ul>
                             <li><a href="/merethaderthad_programa">El programa de actividades</a></li>
                             <br>
-                            <li><a href="/merethaderthad_inscripcion">El formulario de inscripción</a></li>
+                            <li><a href="{% url 'user-profile' %}">Tu ficha personal</a></li>
+                            {#<br>#}
+                            {#<li><a href="/merethaderthad_inscripcion">El formulario de inscripción</a></li>#}
                             {#<br>#}
                             {#<li><a href="/merethaderthad_propuesta">Proponer una actividad</a><p>(requiere inscripción)</li>#}
                         </ul>
@@ -73,8 +76,16 @@
 
                         <img src="/static/images/espada-pequena.gif" alt="" width="60" height="24" class="left" /><h2 style="color: red">¡COMPLETO!</h2>
 
-                        <p><span style="color: red">¡Acabamos de poner el cartel de COMPLETO!</span>. Pero no desesperes, si aún deseas acudir a nuestra convención anual, quizá puedas hacerlo, rellenando el <a href="/merethaderthad_inscripcion">formulario de inscripción</a>. Aunque a priori entrarás a formar parte de la lista de espera, la organización está negociando duramente para aumentar un poco el número de habitaciones disponibles en el hotel. Informaremos puntualmente a todos aquellos apuntados en lista de espera acerca de si finalmente somos capaces de alojarlos en el Hotel Maya.</p>
+                        <p><span style="color: red">¡Acabamos de poner el cartel de COMPLETO!</span> A punto de comenzar el evento, tenemos ya la lista definitiva de asistentes y ya no se admiten nuevas inscripciones. ¡Venga, que ya no queda nada! Nos vemos muy pronto...</p>
                         <br>
+
+                        {% comment %}
+                        <img src="/static/images/espada-pequena.gif" alt="" width="60" height="24" class="left" /><h2 style="color: red">¡COMPLETO!</h2>
+
+                        <p><span style="color: red">¡Acabamos de poner el cartel de COMPLETO!</span> Pero no desesperes, si aún deseas acudir a nuestra convención anual, quizá puedas hacerlo, rellenando el <a href="/merethaderthad_inscripcion">formulario de inscripción</a>. Aunque a priori entrarás a formar parte de la lista de espera, la organización está negociando duramente para aumentar un poco el número de habitaciones disponibles en el hotel. Informaremos puntualmente a todos aquellos apuntados en lista de espera acerca de si finalmente somos capaces de alojarlos en el Hotel Maya.</p>
+                        <br>
+                        {% endcomment %}
+
                         <img src="/static/images/espada-pequena.gif" alt="" width="60" height="24" class="left" /><h2>Ya hay camisetas</h2>
 
                         <p>Ya puedes reservar las <a href="/static/images/camiseta.jpg" target="_blank">camisetas</a> de la Estelcon, en el
