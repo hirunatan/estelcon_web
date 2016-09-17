@@ -13,12 +13,12 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 ADMINS = (
-    ('Estelcon', 'info@estelcon2014.org'),
+    ('Estelcon', 'info@estelcon2016.org'),
 )
 
 MANAGERS = ADMINS
 
-MAIL_FROM = 'Estelcon <info@estelcon2014.org>'
+MAIL_FROM = 'Estelcon <info@estelcon2016.org>'
 
 
 # Quick-start development settings - unsuitable for production
