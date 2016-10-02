@@ -15,7 +15,7 @@
 <h1><span>La Mereth Aderthad</span> Formulario de inscripción</h1>
 
 <p><em>Muchas gracias por decidirte a asistir a la XXI Mereth Aderthad 2016. Recuerda que las fechas
-son <b>5, 6, 7 y 8 de diciembre de este a&ntilde;o 2016</b>.</em></p>
+son <b>8, 9, 10 y 11 de diciembre de este a&ntilde;o 2016</b>.</em></p>
 <p><b>La política de precios es la siguiente</b>: la inscripción completa incluye alojamiento y
 pensión completa desde la cena del viernes hasta la comida del lunes inclusive, más todos los
 gastos y actividades, y la cena de gala del domingo. Para los que no puedan ir todos los días,
@@ -27,25 +27,25 @@ Para casos especiales contactad por favor con la organización.
 <p>Todos los precios incluyen IVA.</p>
 <p><b>Precios en habitación triple:</b></p>
 <ul>
-<li>Mereth completa: <b>145€</b></li>
+<li>Mereth completa: <b>156€</b></li>
 <li>Precios desglosados:
     <ul>
-    <li>Desde la cena del viernes a la comida del sábado: <b>39,6€</b></li>
-    <li>Desde la cena del sábado a la comida del domingo: <b>39,6€</b></li>
-    <li>Desde la cena (de gala) del domingo a la comida del lunes: <b>54,6€</b></li>
-    <li>Al total de días que sean, añadir <b>11,2€</b></li>
+    <li>Desde la cena del jueves a la comida del viernes: <b>42€</b></li>
+    <li>Desde la cena del viernes a la comida del sábado: <b>42€</b></li>
+    <li>Desde la cena (de gala) del sábado a la comida del domingo: <b>57€</b></li>
+    <li>Al total de días que sean, añadir <b>15€</b></li>
     </ul>
 </li>
 </ul>
 <p><b>Precios en habitación doble:</b></p>
 <ul>
-<li>Mereth completa: <b>166€</b></li>
+<li>Mereth completa: <b>177€</b></li>
 <li>Precios desglosados:
-    <ul>
-    <li>Desde la cena del viernes a la comida del sábado: <b>46,6€</b></li>
-    <li>Desde la cena del sábado a la comida del domingo: <b>46,6€</b></li>
-    <li>Desde la cena (de gala) del domingo a la comida del lunes: <b>61,6€</b></li>
-    <li>Al total de días que sean, añadir <b>11,2€</b></li>
+   <ul>
+    <li>Desde la cena del jueves a la comida del viernes: <b>49€</b></li>
+    <li>Desde la cena del viernes a la comida del sábado: <b>49€</b></li>
+    <li>Desde la cena (de gala) del sábado a la comida del domingo: <b>64€</b></li>
+    <li>Al total de días que sean, añadir <b>15€</b></li>
     </ul>
 </li>
 </ul>
@@ -59,8 +59,8 @@ Para casos especiales contactad por favor con la organización.
 </ul>
 <p><b>Opciones sin alojamiento:</b></p>
 <ul>
-<li>Sólo cena de gala (para aquellas personas que quieran asistir a las actividades y a la cena de gala, sin incluir ninguna otra comida ni pernocta. Incluye todas las actividades de la EstelCon): <b>36€</b></li>
-<li>Sólo actividades (para aquellas personas que no se queden a ninguna de las comidas ni pernoctas pero quieran asistir a actividades. El pago incluye todas las actividades de la EstelCon, aunque sea en días diferentes): <b>12€</b></li>
+<li>Sólo cena de gala (para aquellas personas que quieran asistir a las actividades y a la cena de gala, sin incluir ninguna otra comida ni pernocta. Incluye todas las actividades de la EstelCon): <b>43€</b></li>
+<li>Sólo actividades (para aquellas personas que no se queden a ninguna de las comidas ni pernoctas pero quieran asistir a actividades. El pago incluye todas las actividades de la EstelCon, aunque sea en días diferentes): <b>15€</b></li>
 </li>
 </ul>
 <p><b>Condiciones para no socios:</b></p>
@@ -70,7 +70,7 @@ Para casos especiales contactad por favor con la organización.
 <p><b>Plazos de inscripción:</b>
 <ul>
 <li>Apertura de inscripciones: principios de octubre.</li>
-<li>Fecha tope de inscripción: <b>12 de noviembre</b>.</li>
+<li>Fecha tope de inscripción: <b>4 de noviembre</b>.</li>
 <li>En caso de desistir de la plaza, del precio pagado de la EstelCon, se devolverá:
     <ul>
         <li>el 60% a los que comuniquen su baja antes del 12 de noviembre.</li>
@@ -201,15 +201,15 @@ Para casos especiales contactad por favor con la organización.
   <p>Indica las noches que vas a pasar en el hotel:</p>
   <table title="Si asistes a la Estelcon completa, marca todo. Si no, dinos qué noches pernoctas en el hotel, incluyendo las comidas como se indica arriba. Si eliges una de las opciones sin alojamiento, no marques nada.">
     <tr>
-      <td><label for="id_day_1">Viernes/Sábado<label></td>
+      <td><label for="id_day_1">Jueves/Viernes<label></td>
       <td>{{ form.day_1 }}
       {% if form.day_1.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_1.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
     </tr><tr>
-      <td><label for="id_day_2">Sábado/Domingo<label></td>
+      <td><label for="id_day_2">Viernes/Sábado<label></td>
       <td>{{ form.day_2 }}
       {% if form.day_2.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_2.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
     </tr><tr>
-      <td><label for="id_day_3">Domingo/Lunes + Cena de gala<label></td>
+      <td><label for="id_day_3">Sábado/Domingo + Cena de gala<label></td>
       <td>{{ form.day_3 }}
       {% if form.day_3.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_3.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
     </tr>

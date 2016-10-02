@@ -7,7 +7,7 @@ html, body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #190e09 url(../images/Background.png) repeat left top;
+	background: #190e09 url(../images/Zgz/1/2/3/moria.png) repeat left top;
 }
 
 /** FORMS */
@@ -29,7 +29,7 @@ h1, h2 {
 
 h1 span, h2 span {
 	padding: 0px 40px 0px 0px;
-	background: url(../images/Homepage03.png) no-repeat right center;
+	background: url(../images/Zgz/1/2/3/Homepage03.png) no-repeat right center;
 }
 
 h1 {
@@ -74,7 +74,7 @@ p, blockquote, ul, ol, dl {
 	height: 17px;
 	margin-bottom: 3px;
 	padding: 3px 0px 0px 10px;
-	/**background: url(../images/homepage11.jpg) no-repeat left top;*/
+	/**background: url(../images/Zgz/1/2/3/homepage11.jpg) no-repeat left top;*/
 }
 
 .list1 li a {
@@ -90,7 +90,7 @@ p, blockquote, ul, ol, dl {
 #sidebar .aactive {
         font-weight: bold;
         text-transform: uppercase;
-        /**background: url(../images/homepage11b.jpg) no-repeat left top;*/
+        /**background: url(../images/Zgz/1/2/3/homepage11b.jpg) no-repeat left top;*/
 }
 
 
@@ -129,7 +129,7 @@ a:hover {
 .more {
 	margin: 10px 0px 20px 0px;
 	padding: 0px 0px 0px 68px;
-	background: url(../images/homepage09.gif) no-repeat left center;
+	background: url(../images/Zgz/1/2/3/homepage09.gif) no-repeat left center;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 9px;
@@ -137,7 +137,7 @@ a:hover {
 
 .more a {
 	padding-right: 15px;
-	background: url(../images/homepage10.gif) no-repeat right center;
+	background: url(../images/Zgz/1/2/3/homepage10.gif) no-repeat right center;
 	text-decoration: none;
 }
 
@@ -152,7 +152,7 @@ a:hover {
 
 .style1 li {
 
-/**background: url(../images/homepage11b.jpg) no-repeat left top;*/
+/**background: url(../images/Zgz/1/2/3/homepage11b.jpg) no-repeat left top;*/
 }
 .style1 a {
 }
@@ -195,7 +195,7 @@ hr { display: none; }
 
 .hr1 {
 	height: 31px;
-	background: url(../images/homepage04.png) repeat-x left center;
+	background: url(../images/Zgz/1/2/3/homepage04.png) repeat-x left center;
 }
 
 /** WRAPPER */
@@ -203,7 +203,7 @@ hr { display: none; }
 #wrapper {
 	height: 100%;
 	min-height: 100%;
-	background: url(../images/Background.png) fixed;
+	background: url(../images/Zgz/1/2/3/Moria.png) fixed;
 }
 
 html>body #wrapper {
@@ -213,14 +213,14 @@ html>body #wrapper {
 /** HEADER */
 
 #header {
-	width: 980px;
+	width: 990px;
 	height: 200px;
 }
 
 /** LOGO */
 
 #logo {
-	width: 272px;
+	width: 270px;
 	height: 200px;
 }
 
@@ -230,9 +230,10 @@ html>body #wrapper {
 /** MENU */
 
 #menu {
-	width: 708px;
+	width: 720px;
 	height: 200px;
-	background: url(../images/homepagemenu.png) no-repeat left top;
+	background: url(../images/Zgz/1/2/3/menupuente.png) no-repeat left top;
+    color: #FFFFFF;
 }
 
 #menu a {
@@ -249,11 +250,11 @@ html>body #wrapper {
 
 #page {
 	width: 980px;
-	background: url(../images/subpagebg1.png) repeat-y left top;
+	background: url(../images/Zgz/1/2/3/subpagebg1.png) repeat-y left top;
 }
 
 #page-bg {
-	background: url(../images/subpagebg2.png) repeat-y left top;
+	background: url(../images/Zgz/1/2/3/subpagebg2.png) repeat-y left top;
 }
 
 /** SIDEBAR > BOXED */
@@ -263,19 +264,19 @@ html>body #wrapper {
 }
 
 .boxed-top {
-	background: url(../images/homepage15.png) no-repeat left top;
+	background: url(../images/Zgz/1/2/3/homepage15.png) no-repeat left top;
         min-height: 50px;
 	
 }
 
 .boxed-content {
 	padding: 10px 20px 5px 16px;
-	background: url(../images/homepage16.png) repeat-y left top;
+	background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
 }
 
 
 .boxed-bottom {
-	background: url(../images/homepage17.png) no-repeat left bottom;
+	background: url(../images/Zgz/1/2/3/homepage17.png) no-repeat left bottom;
         min-height: 50px;
 }
 
@@ -295,21 +296,21 @@ html>body #wrapper {
 }
 
 .boxed-top-first {
-	background: url(../images/homepage15.png) no-repeat left top;
+	background: url(../images/Zgz/1/2/3/homepage15.png) no-repeat left top;
         min-height: 50px;
 }
 
 .boxed-content-first {
 	padding: 10px 20px 5px 16px;
-	background: url(../images/homepage16.png) repeat-y left top;
+	background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
 }
 
 .boxed-content-first {
-background: url(../images/homepage16.png) repeat-y left top;
+background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
 }
 
 .boxed-bottom-first {
-	background: url(../images/homepage17.png) no-repeat left bottom;
+	background: url(../images/Zgz/1/2/3/homepage17.png) no-repeat left bottom;
         min-height: 50px;
 }
 
@@ -318,17 +319,17 @@ background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-top-second {
-	background: url(../images/subpage1_05.png) no-repeat left top;
+	background: url(../images/Zgz/1/2/3/subpage1_05.png) no-repeat left top;
         min-height: 45px;
 }
 
 .boxed-content-second {
 	padding: 10px 20px 5px 16px;
-	background: url(../images/subpage1_06.png) repeat-y left top;
+	background: url(../images/Zgz/1/2/3/subpage1_06.png) repeat-y left top;
 }
 
 .boxed-bottom-second {
-	background: url(../images/subpage1_07.png) no-repeat left bottom;
+	background: url(../images/Zgz/1/2/3/subpage1_07.png) no-repeat left bottom;
         min-height: 45px;
 }
 
@@ -339,7 +340,7 @@ background: url(../images/homepage16.png) repeat-y left top;
 #footer {
 	width: 980px;
 	height: 80px;
-	background: url(../images/subpagefooter.png) no-repeat left top;
+	background: url(../images/Zgz/1/2/3/subpagefooter.png) no-repeat left top;
 }
 
 #footer p {
@@ -355,7 +356,7 @@ background: url(../images/homepage16.png) repeat-y left top;
 @font-face {
 font-family: 'DejaVu Serif';
 src: url('/fonts/DejaVuSerif-Bold-webfont.eot');
-src: local('☺'), url('/fonts/DejaVuSerif-Bold-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-Bold-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DejaVuSerif-Bold-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-Bold-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: normal;
 }
@@ -364,7 +365,7 @@ font-style: normal;
 @font-face {
 font-family: 'DejaVu Serif';
 src: url('/fonts/DejaVuSerif-BoldItalic-webfont.eot');
-src: local('☺'), url('/fonts/DejaVuSerif-BoldItalic-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-BoldItalic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-BoldItalic-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DejaVuSerif-BoldItalic-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-BoldItalic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-BoldItalic-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: italic;
 }
@@ -373,7 +374,7 @@ font-style: italic;
 @font-face {
 font-family: 'DejaVu Serif';
 src: url('/fonts/DejaVuSerif-webfont.eot');
-src: local('☺'), url('/fonts/DejaVuSerif-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DejaVuSerif-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: normal;
 }
@@ -382,7 +383,7 @@ font-style: normal;
 @font-face {
 font-family: 'DejaVu Serif';
 src: url('/fonts/DejaVuSerifCondensed-Italic-webfont.eot');
-src: local('☺'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-Italic-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: italic;
 }
@@ -391,7 +392,7 @@ font-style: italic;
 @font-face {
 font-family: 'DejaVu Serif';
 src: url('/fonts/DejaVuSerifCondensed-Bold-webfont.eot');
-src: local('☺'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: normal;
 }
@@ -400,7 +401,7 @@ font-style: normal;
 @font-face {
 font-family: 'DejaVu Serif';
 src: url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.eot');
-src: local('☺'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.woff') format('woff'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerifCondensed-BoldItalic-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: italic;
 }
@@ -409,7 +410,7 @@ font-style: italic;
 @font-face {
 font-family: 'DejaVu Serif';
 src: url('/fonts/DejaVuSerif-Italic-webfont.eot');
-src: local('☺'), url('/fonts/DejaVuSerif-Italic-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-Italic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-Italic-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DejaVuSerif-Italic-webfont.woff') format('woff'), url('/fonts/DejaVuSerif-Italic-webfont.ttf') format('truetype'), url('/fonts/DejaVuSerif-Italic-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: italic;
 }
@@ -419,7 +420,7 @@ font-style: italic;
 @font-face {
 font-family: 'Gentium Basic';
 src: url('/fonts/GenBasB-webfont.eot');
-src: local('☺'), url('/fonts/GenBasB-webfont.woff') format('woff'), url('/fonts/GenBasB-webfont.ttf') format('truetype'), url('/fonts/GenBasB-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/GenBasB-webfont.woff') format('woff'), url('/fonts/GenBasB-webfont.ttf') format('truetype'), url('/fonts/GenBasB-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: normal;
 }
@@ -428,7 +429,7 @@ font-style: normal;
 @font-face {
 font-family: 'Gentium Basic';
 src: url('/fonts/GenBasBI-webfont.eot');
-src: local('☺'), url('/fonts/GenBasBI-webfont.woff') format('woff'), url('/fonts/GenBasBI-webfont.ttf') format('truetype'), url('/fonts/GenBasBI-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/GenBasBI-webfont.woff') format('woff'), url('/fonts/GenBasBI-webfont.ttf') format('truetype'), url('/fonts/GenBasBI-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: italic;
 }
@@ -437,7 +438,7 @@ font-style: italic;
 @font-face {
 font-family: 'Gentium Basic';
 src: url('/fonts/GenBasI-webfont.eot');
-src: local('☺'), url('/fonts/GenBasI-webfont.woff') format('woff'), url('/fonts/GenBasI-webfont.ttf') format('truetype'), url('/fonts/GenBasI-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/GenBasI-webfont.woff') format('woff'), url('/fonts/GenBasI-webfont.ttf') format('truetype'), url('/fonts/GenBasI-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: italic;
 }
@@ -446,7 +447,7 @@ font-style: italic;
 @font-face {
 font-family: 'Gentium Basic';
 src: url('/fonts/GenBasR-webfont.eot');
-src: local('☺'), url('/fonts/GenBasR-webfont.woff') format('woff'), url('/fonts/GenBasR-webfont.ttf') format('truetype'), url('/fonts/GenBasR-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/GenBasR-webfont.woff') format('woff'), url('/fonts/GenBasR-webfont.ttf') format('truetype'), url('/fonts/GenBasR-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: normal;
 }
@@ -456,7 +457,7 @@ font-style: normal;
 @font-face {
 font-family: 'Droid Sans';
 src: url('/fonts/DroidSans-Bold-webfont.eot');
-src: local('☺'), url('/fonts/DroidSans-Bold-webfont.woff') format('woff'), url('/fonts/DroidSans-Bold-webfont.ttf') format('truetype'), url('/fonts/DroidSans-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DroidSans-Bold-webfont.woff') format('woff'), url('/fonts/DroidSans-Bold-webfont.ttf') format('truetype'), url('/fonts/DroidSans-Bold-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: normal;
 }
@@ -465,7 +466,7 @@ font-style: normal;
 @font-face {
 font-family: 'Droid Sans';
 src: url('/fonts/DroidSans-webfont.eot');
-src: local('☺'), url('/fonts/DroidSans-webfont.woff') format('woff'), url('/fonts/DroidSans-webfont.ttf') format('truetype'), url('/fonts/DroidSans-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/DroidSans-webfont.woff') format('woff'), url('/fonts/DroidSans-webfont.ttf') format('truetype'), url('/fonts/DroidSans-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: normal;
 }
@@ -475,7 +476,7 @@ font-style: normal;
 @font-face {
 font-family: 'TeX Gyre Cursor';
 src: url('/fonts/texgyrecursor-bold-webfont.eot');
-src: local('☺'), url('/fonts/texgyrecursor-bold-webfont.woff') format('woff'), url('/fonts/texgyrecursor-bold-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-bold-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/texgyrecursor-bold-webfont.woff') format('woff'), url('/fonts/texgyrecursor-bold-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-bold-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: normal;
 }
@@ -484,7 +485,7 @@ font-style: normal;
 @font-face {
 font-family: 'TeX Gyre Cursor';
 src: url('/fonts/texgyrecursor-bolditalic-webfont.eot');
-src: local('☺'), url('/fonts/texgyrecursor-bolditalic-webfont.woff') format('woff'), url('/fonts/texgyrecursor-bolditalic-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-bolditalic-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/texgyrecursor-bolditalic-webfont.woff') format('woff'), url('/fonts/texgyrecursor-bolditalic-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-bolditalic-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 700;
 font-style: italic;
 }
@@ -493,7 +494,7 @@ font-style: italic;
 @font-face {
 font-family: 'TeX Gyre Cursor';
 src: url('/fonts/texgyrecursor-italic-webfont.eot');
-src: local('☺'), url('/fonts/texgyrecursor-italic-webfont.woff') format('woff'), url('/fonts/texgyrecursor-italic-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-italic-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/texgyrecursor-italic-webfont.woff') format('woff'), url('/fonts/texgyrecursor-italic-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-italic-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: italic;
 }
@@ -502,7 +503,7 @@ font-style: italic;
 @font-face {
 font-family: 'TeX Gyre Cursor';
 src: url('/fonts/texgyrecursor-regular-webfont.eot');
-src: local('☺'), url('/fonts/texgyrecursor-regular-webfont.woff') format('woff'), url('/fonts/texgyrecursor-regular-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-regular-webfont.svg#webfontX4pGz9fc') format('svg');
+src: local('?'), url('/fonts/texgyrecursor-regular-webfont.woff') format('woff'), url('/fonts/texgyrecursor-regular-webfont.ttf') format('truetype'), url('/fonts/texgyrecursor-regular-webfont.svg#webfontX4pGz9fc') format('svg');
 font-weight: 400;
 font-style: normal;
 }
