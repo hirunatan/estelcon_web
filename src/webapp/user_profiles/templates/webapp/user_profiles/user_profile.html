@@ -45,9 +45,9 @@
 
 <p>Aquí están los datos de tu inscripción (<a href="/merethaderthad_ficha_editar_inscr">modificar</a>):</p>
 <p><b>Días de asistencia</b><br/>
- - Viernes/Sábado: {% if profile.day_1 %} sí {% else %} no {% endif %}<br/>
- - Sábado/Domingo: {% if profile.day_2 %} sí {% else %} no {% endif %}<br/>
- - Domingo/Lunes + Cena: {% if profile.day_3 %} sí {% else %} no {% endif %}<br/>
+ - Jueves/Viernes: {% if profile.day_1 %} sí {% else %} no {% endif %}<br/>
+ - Viernes/Sábado: {% if profile.day_2 %} sí {% else %} no {% endif %}<br/>
+ - Sábado/Domingo + Cena: {% if profile.day_3 %} sí {% else %} no {% endif %}<br/>
 </p>
 <p><b>Estado de la inscripción</b><br/>
 {{ profile.payment }}<p>

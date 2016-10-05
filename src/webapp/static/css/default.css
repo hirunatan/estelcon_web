@@ -7,7 +7,7 @@ html, body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #190e09 url(../images/Zgz/1/2/3/moria.png) repeat left top;
+	background: #190e09 url(../images/moria.png) no-repeat center; 
 }
 
 /** FORMS */
@@ -28,8 +28,8 @@ h1, h2 {
 }
 
 h1 span, h2 span {
-	padding: 0px 40px 0px 0px;
-	background: url(../images/Zgz/1/2/3/Homepage03.png) no-repeat right center;
+	padding: 10px 40px 0px 0px;
+	background: url(../images/Homepage03.png) no-repeat right center;
 }
 
 h1 {
@@ -74,7 +74,7 @@ p, blockquote, ul, ol, dl {
 	height: 17px;
 	margin-bottom: 3px;
 	padding: 3px 0px 0px 10px;
-	/**background: url(../images/Zgz/1/2/3/homepage11.jpg) no-repeat left top;*/
+	/**background: url(../images/homepage11.jpg) no-repeat left top;*/
 }
 
 .list1 li a {
@@ -90,7 +90,7 @@ p, blockquote, ul, ol, dl {
 #sidebar .aactive {
         font-weight: bold;
         text-transform: uppercase;
-        /**background: url(../images/Zgz/1/2/3/homepage11b.jpg) no-repeat left top;*/
+        /**background: url(../images/homepage11b.jpg) no-repeat left top;*/
 }
 
 
@@ -129,7 +129,7 @@ a:hover {
 .more {
 	margin: 10px 0px 20px 0px;
 	padding: 0px 0px 0px 68px;
-	background: url(../images/Zgz/1/2/3/homepage09.gif) no-repeat left center;
+	background: url(../images/homepage09.gif) no-repeat left center;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 9px;
@@ -137,7 +137,7 @@ a:hover {
 
 .more a {
 	padding-right: 15px;
-	background: url(../images/Zgz/1/2/3/homepage10.gif) no-repeat right center;
+	background: url(../images/homepage10.gif) no-repeat right center;
 	text-decoration: none;
 }
 
@@ -152,7 +152,7 @@ a:hover {
 
 .style1 li {
 
-/**background: url(../images/Zgz/1/2/3/homepage11b.jpg) no-repeat left top;*/
+/**background: url(../images/homepage11b.jpg) no-repeat left top;*/
 }
 .style1 a {
 }
@@ -195,7 +195,7 @@ hr { display: none; }
 
 .hr1 {
 	height: 31px;
-	background: url(../images/Zgz/1/2/3/homepage04.png) repeat-x left center;
+	background: url(../images/homepage04.png) repeat-x left center;
 }
 
 /** WRAPPER */
@@ -203,7 +203,7 @@ hr { display: none; }
 #wrapper {
 	height: 100%;
 	min-height: 100%;
-	background: url(../images/Zgz/1/2/3/Moria.png) fixed;
+	background: url(../images/Moria.png)no-repeat center;  
 }
 
 html>body #wrapper {
@@ -232,7 +232,7 @@ html>body #wrapper {
 #menu {
 	width: 720px;
 	height: 200px;
-	background: url(../images/Zgz/1/2/3/menupuente.png) no-repeat left top;
+	background: url(../images/menupuente.png) no-repeat left top;
     color: #FFFFFF;
 }
 
@@ -250,11 +250,11 @@ html>body #wrapper {
 
 #page {
 	width: 980px;
-	background: url(../images/Zgz/1/2/3/subpagebg1.png) repeat-y left top;
+	background: url(../images/subpagebg1.png) repeat-y left top;
 }
 
 #page-bg {
-	background: url(../images/Zgz/1/2/3/subpagebg2.png) repeat-y left top;
+	background: url(../images/subpagebg2.png) repeat-y left top;
 }
 
 /** SIDEBAR > BOXED */
@@ -264,19 +264,19 @@ html>body #wrapper {
 }
 
 .boxed-top {
-	background: url(../images/Zgz/1/2/3/homepage15.png) no-repeat left top;
+	background: url(../images/homepage15.png) no-repeat left top;
         min-height: 50px;
 	
 }
 
 .boxed-content {
 	padding: 10px 20px 5px 16px;
-	background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
+	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 
 .boxed-bottom {
-	background: url(../images/Zgz/1/2/3/homepage17.png) no-repeat left bottom;
+	background: url(../images/homepage17.png) no-repeat left bottom;
         min-height: 50px;
 }
 
@@ -296,21 +296,21 @@ html>body #wrapper {
 }
 
 .boxed-top-first {
-	background: url(../images/Zgz/1/2/3/homepage15.png) no-repeat left top;
+	background: url(../images/homepage15.png) no-repeat left top;
         min-height: 50px;
 }
 
 .boxed-content-first {
 	padding: 10px 20px 5px 16px;
-	background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
+	background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-content-first {
-background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
+background: url(../images/homepage16.png) repeat-y left top;
 }
 
 .boxed-bottom-first {
-	background: url(../images/Zgz/1/2/3/homepage17.png) no-repeat left bottom;
+	background: url(../images/homepage17.png) no-repeat left bottom;
         min-height: 50px;
 }
 
@@ -319,17 +319,17 @@ background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
 }
 
 .boxed-top-second {
-	background: url(../images/Zgz/1/2/3/subpage1_05.png) no-repeat left top;
+	background: url(../images/subpage1_05.png) no-repeat left top;
         min-height: 45px;
 }
 
 .boxed-content-second {
 	padding: 10px 20px 5px 16px;
-	background: url(../images/Zgz/1/2/3/subpage1_06.png) repeat-y left top;
+	background: url(../images/subpage1_06.png) repeat-y left top;
 }
 
 .boxed-bottom-second {
-	background: url(../images/Zgz/1/2/3/subpage1_07.png) no-repeat left bottom;
+	background: url(../images/subpage1_07.png) no-repeat left bottom;
         min-height: 45px;
 }
 
@@ -340,7 +340,7 @@ background: url(../images/Zgz/1/2/3/homepage16.png) repeat-y left top;
 #footer {
 	width: 980px;
 	height: 80px;
-	background: url(../images/Zgz/1/2/3/subpagefooter.png) no-repeat left top;
+	background: url(../images/subpagefooter.png) no-repeat left top;
 }
 
 #footer p {
