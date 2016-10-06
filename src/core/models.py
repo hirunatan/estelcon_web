@@ -19,8 +19,8 @@ class UserProfile(models.Model):
     notes_food = models.TextField(u'Comentarios comida', blank = True)  # (vegetariano, celiaco...)
     dinner_menu = models.CharField(u'Menú de la cena de gala', max_length=50,
         choices=(
-            (u'ternasco', u'Ternasco asado'),
-            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            (u'carne', u'Solomillo de ibérico, setas a la crema y salsa de oporto'),
+            (u'pescado', u'Merluza rellena de txangurro en salsa verde de espárragos y langostinos'),
             (u'otros', u'Otros'),
             (u'sin_cena', u'No voy a ir a la cena de gala'),
         )

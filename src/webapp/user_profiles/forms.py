@@ -56,8 +56,8 @@ class SignupForm(forms.Form):
     dinner_menu = forms.ChoiceField(
         required = True,
         choices=(
-            (u'ternasco', u'Ternasco asado'),
-            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            (u'carne', u'Solomillo de ibérico, setas a la crema y salsa de oporto'),
+            (u'pescado', u'Merluza rellena de txangurro en salsa verde de espárragos y langostinos'),
             (u'otros', u'Otros'),
             (u'sin_cena', u'No voy a ir a la cena de gala'),
         )
@@ -373,8 +373,8 @@ class UserProfileEditInscriptionForm(forms.Form):
     dinner_menu = forms.ChoiceField(
         required = True,
         choices=(
-            (u'ternasco', u'Ternasco asado'),
-            (u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
+            (u'carne', u'Solomillo de ibérico, setas a la crema y salsa de oporto'),
+            (u'pescado', u'Merluza rellena de txangurro en salsa verde de espárragos y langostinos'),
             (u'otros', u'Otros'),
             (u'sin_cena', u'No voy a ir a la cena de gala')
         )
