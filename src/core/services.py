@@ -142,29 +142,29 @@ def _calculate_quota(user_data):
     if user_data['room_choice'] == 'sin_alojamiento':
 
         if user_data['dinner_menu'] == 'sin_cena':
-            quota += 12
+            quota += 15
         else:
-            quota += 36
+            quota += 43
 
     else:
 
         if user_data['room_choice'].startswith('triple') or user_data['room_choice'] == 'otros':
-            quota += 11.2
+            quota += 15
             if user_data['day_1']:
-                quota += 39.6
+                quota += 42
             if user_data['day_2']:
-                quota += 39.6
+                quota += 42
             if user_data['day_3']:
-                quota += 54.6
+                quota += 57
 
         if user_data['room_choice'].startswith('doble'):
-            quota += 11.2
+            quota += 15
             if user_data['day_1']:
-                quota += 46.6
+                quota += 49
             if user_data['day_2']:
-                quota += 46.6
+                quota += 49
             if user_data['day_3']:
-                quota += 61.6
+                quota += 64
 
         if user_data['age'] <= 12:
             quota = quota * 0.75
@@ -180,7 +180,7 @@ def _calculate_quota(user_data):
                  user_data['shirts_L'] + \
                  user_data['shirts_XL'] + \
                  user_data['shirts_XXL']
-    quota += num_shirts * 10.0
+    quota += num_shirts * 0
 
     return round(quota)
 
