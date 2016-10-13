@@ -180,7 +180,7 @@ def _calculate_quota(user_data):
                  user_data['shirts_L'] + \
                  user_data['shirts_XL'] + \
                  user_data['shirts_XXL']
-    quota += num_shirts * 0
+    quota += num_shirts * 15
 
     return round(quota)
 
