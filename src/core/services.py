@@ -65,8 +65,8 @@ def create_new_user(user_data, home_url):
     if not queue:
         profile.payment = \
 u'''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caja3
-ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de ING Direct
+ES45 1465 0230 48 2042041252 a nombre de IRENE BERBERANA, indicando en el ingreso el código %s.
 ''' % (profile.quota, profile.payment_code)
     else:
 	profile.payment = \
@@ -95,8 +95,8 @@ Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
 La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-cuenta de Caja3 ES79 2086 0002 11 3300558438 a nombre de IRENE BERBERANA, indicando en el ingreso
-el código %s.
+cuenta de ING Direct ES45 1465 0230 48 2042041252 a nombre de IRENE BERBERANA, indicando en el
+ingreso el código %s.
 
 Dispones de 5 días para la realización del pago que confirmará tu plaza, pasados los cuales la
 inscripción será cancelada si no lo hemos recibido.
