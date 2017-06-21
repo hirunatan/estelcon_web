@@ -1,37 +1,37 @@
 /** HEADER */
 
 #header {
-	margin: 0px auto;
+    margin: 0px auto;
 }
 
 /** LOGO */
 
 #logo {
-	float: left;
-	background: url(../images/header_logo.png) no-repeat left top;
+    float: left;
+    background: url(../images/header_logo.png) no-repeat left top;
 }
 
 #logo h1{
-	margin: 168px 0px 0px 20px;
-	text-indent: 78px;
+    margin: 168px 0px 0px 20px;
+    text-indent: 78px;
 
 }
 
 #logo h1 a{
-	margin: 150px 0px 0px 0px;
-	text-indent: 78px;
+    margin: 150px 0px 0px 0px;
+    text-indent: 78px;
 text-decoration: none;
 }
 
 
 #logo p {
-	text-indent: 88px;
+    text-indent: 88px;
 
 }
 
 #logo p a{
-	text-indent: 88px;
-	text-decoration: none;
+    text-indent: 88px;
+    text-decoration: none;
 
 }
 
@@ -39,44 +39,45 @@ text-decoration: none;
 /** MENU */
 
 #menu {
-	float: right;
+    float: right;
 }
 
 #menu ul {
-	margin: 0px;
-	padding: 158px 0px 0px 0px;
-	list-style: none;
+    margin: 0px;
+    padding: 158px 0px 0px 0px;
+    list-style: none;
 }
 
 #menu li {
-	display: inline;
+    display: inline;
 }
 
 #menu a {
-	display: block;
-	float: left;
-	height: 20px;
-	padding: 4px 4px 0px 25px;
-	background: transparent no-repeat left center;
+    color: white;
+    display: block;
+    float: left;
+    height: 20px;
+    padding: 15px 4px 0px 25px;
+    background: transparent no-repeat left center;
 }
 
 #menu .first a {
-	background: none;
-	padding: 4px 4px 0px 35px;
+    background: none;
+    padding: 15px 4px 0px 35px;
 }
 
 /** PAGE */
 
 #page {
-	margin: 0px auto;
+    margin: 0px auto;
 }
 
 /** CONTENT */
 
 #content {
-	float: right;
-	width: 620px;
-	padding: 15px 30px 20px 0px;
+    float: right;
+    width: 620px;
+    padding: 15px 30px 20px 0px;
 }
 
 /** ONE COLUMN WIDE */
@@ -85,7 +86,7 @@ text-decoration: none;
 }
 
 .one-column-wide {
-	padding: 20px 90px;
+    padding: 20px 90px;
 }
 
 /** 2-COLUMNS */
@@ -94,29 +95,29 @@ text-decoration: none;
 }
 
 .two-columns .column1 {
-	float: left;
-	width: 360px;
+    float: left;
+    width: 360px;
 }
 
 .two-columns .column2 {
-	float: right;
-	width: 207px;
-	padding: 0px 0px 0px 18px;
-	background: url(../images/homepage05.png) repeat-y left top;
+    float: right;
+    width: 207px;
+    padding: 0px 0px 0px 18px;
+    background: url(../images/homepage05.png) repeat-y left top;
 }
 
 /** SIDEBAR */
 
 #sidebar {
-	float: left;
-	width: 300px;
-	padding: 0px 15px 0px 15px;
+    float: left;
+    width: 300px;
+    padding: 0px 15px 0px 15px;
 }
 
 /** FOOTER */
 
 #footer {
-	margin: 0px auto;
+    margin: 0px auto;
 }
 
 
@@ -152,18 +153,18 @@ caption {
 /** IMAGES */
 
 .zoom{
-		border: 2px solid #190e09;
-		transition: 1.5s ease;
- 		-moz-transition: 1.5s ease; /* Firefox */
- 		-webkit-transition: 1.5s ease; /* Chrome - Safari */
- 		-o-transition: 1.5s ease; /* Opera */
-	}
-	.zoom:hover{
-		border: none;
-		transform : scale(2);
-		-moz-transform : scale(2); /* Firefox */
-		-webkit-transform : scale(2); /* Chrome - Safari */
-		-o-transform : scale(2); /* Opera */
-		-ms-transform : scale(2); /* IE9 */
-	}
+        border: 2px solid #190e09;
+        transition: 1.5s ease;
+        -moz-transition: 1.5s ease; /* Firefox */
+        -webkit-transition: 1.5s ease; /* Chrome - Safari */
+        -o-transition: 1.5s ease; /* Opera */
+    }
+    .zoom:hover{
+        border: none;
+        transform : scale(2);
+        -moz-transform : scale(2); /* Firefox */
+        -webkit-transform : scale(2); /* Chrome - Safari */
+        -o-transform : scale(2); /* Opera */
+        -ms-transform : scale(2); /* IE9 */
+    }
 
