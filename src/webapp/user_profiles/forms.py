@@ -89,19 +89,18 @@ class SignupForm(forms.Form):
     age = forms.IntegerField(
         min_value = 1, max_value = 100, required=True,
     )
-    notes_food = forms.CharField(
-        required = False,
-        widget = forms.Textarea,
-    )
     dinner_menu = forms.ChoiceField(
         required = False,
         choices=(
-            (u'', u''),
-            #(u'ternasco', u'Ternasco asado'),
-            #(u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
-            #(u'otros', u'Otros'),
-            #(u'sin_cena', u'No voy a ir a la cena de gala'),
+            (u'carne', u'Carne'),
+            (u'pescado', u'Pescado'),
+            (u'otros', u'Otros'),
+            (u'sin-cena', u'No voy a ir a la cena de gala'),
         )
+    )
+    notes_food = forms.CharField(
+        required = False,
+        widget = forms.Textarea,
     )
     day_1 = forms.BooleanField(
         initial = True, required = False,
@@ -119,13 +118,20 @@ class SignupForm(forms.Form):
     room_choice = forms.ChoiceField(
         required = True,
         choices=(
-            (u'inscripcion-completa', u'Inscripción completa'),
-            (u'fin-de-semana', u'Fin de semana y cena de gala'),
-            #(u'triple-individual', u'Habitación triple - en cama individual'),
-            #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
-            #(u'doble-individual', u'Habitación doble - en cama individual'),
-            #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
-            (u'sin-alojamiento', u'No voy a pernoctar en el hotel'),
+            (
+                u'Albergue (litera y baño comunitario)', (
+                    (u'albergue-completa', u'(litera) completa'),
+                    (u'albergue-v-a-d', u'(litera) viernes a domingo'),
+                    (u'albergue-s-y-d', u'(litera) sábado y domingo'),
+                )
+            ),(
+                u'Habitación doble con baño propio', (
+                    (u'hotel-completa', u'(doble) completa'),
+                    (u'hotel-v-a-d', u'(doble) viernes a domingo'),
+                    (u'hotel-s-y-d', u'(doble) sábado y domingo'),
+                )
+            ),
+            (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
             (u'otros', u'Otros'),
         )
     )
@@ -148,6 +154,12 @@ class SignupForm(forms.Form):
     )
     squire = forms.BooleanField(
         initial = False, required = False,
+    )
+    first_estelcon = forms.BooleanField(
+        initial = False, required = False
+    )
+    want_boat = forms.BooleanField(
+        initial = False, required = False
     )
     notes_general = forms.CharField(
         required = False,
@@ -179,9 +191,9 @@ class SignupForm(forms.Form):
 
     def clean_age(self):
         age = self.cleaned_data['age']
-        if age < 3:
+        if age < 2:
             raise validators.ValidationError(
-                u'Niños menores de 3 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
+                u'Niños menores de 2 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
             )
         return age
 
@@ -210,13 +222,17 @@ class SignupForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == u'inscripcion-completa':
+        if room_choice == u'albergue-completa' or room_choice == u'hotel-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'fin-de-semana':
+        elif room_choice == u'albergue-v-a-d' or room_choice == u'hotel-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
+            cleaned_data['day_3'] = True
+        elif room_choice == u'albergue-s-y-d' or room_choice == u'hotel-s-y-d':
+            cleaned_data['day_1'] = False
+            cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True
         else:
             cleaned_data['day_1'] = False
@@ -276,8 +292,8 @@ class SignupForm(forms.Form):
     def _clean_room_dinner(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
         dinner_menu = cleaned_data.get('dinner_menu')
-        if dinner_menu == 'sin_cena' and room_choice != 'sin-alojamiento':
-            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
+        if dinner_menu == 'sin-cena' and room_choice != 'sin-alojamiento':
+            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el seminario'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
 
@@ -437,11 +453,10 @@ class UserProfileEditInscriptionForm(forms.Form):
     dinner_menu = forms.ChoiceField(
         required = False,
         choices=(
-            (u'', u''),
-            #(u'ternasco', u'Ternasco asado'),
-            #(u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
-            #(u'otros', u'Otros'),
-            #(u'sin_cena', u'No voy a ir a la cena de gala')
+            (u'carne', u'Carne'),
+            (u'pescado', u'Pescado'),
+            (u'otros', u'Otros'),
+            (u'sin-cena', u'No voy a ir a la cena de gala'),
         )
     )
     notes_transport = forms.CharField(
@@ -451,13 +466,20 @@ class UserProfileEditInscriptionForm(forms.Form):
     room_choice = forms.ChoiceField(
         required = True,
         choices=(
-            (u'inscripcion-completa', u'Inscripción completa'),
-            (u'fin-de-semana', u'Fin de semana y cena de gala'),
-            #(u'triple-individual', u'Habitación triple - en cama individual'),
-            #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
-            #(u'doble-individual', u'Habitación doble - en cama individual'),
-            #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
-            (u'sin-alojamiento', u'No voy a pernoctar en el hotel'),
+            (
+                u'Albergue (litera y baño comunitario)', (
+                    (u'albergue-completa', u'(litera) completa'),
+                    (u'albergue-v-a-d', u'(litera) viernes a domingo'),
+                    (u'albergue-s-y-d', u'(litera) sábado y domingo'),
+                )
+            ),(
+                u'Habitación doble con baño propio', (
+                    (u'hotel-completa', u'(doble) completa'),
+                    (u'hotel-v-a-d', u'(doble) viernes a domingo'),
+                    (u'hotel-s-y-d', u'(doble) sábado y domingo'),
+                )
+            ),
+            (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
             (u'otros', u'Otros'),
         )
     )
@@ -467,6 +489,12 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     squire = forms.BooleanField(
         initial = False, required = False,
+    )
+    first_estelcon = forms.BooleanField(
+        initial = False, required = False
+    )
+    want_boat = forms.BooleanField(
+        initial = False, required = False
     )
     notes_general = forms.CharField(
         required = False,
@@ -490,24 +518,44 @@ class UserProfileEditInscriptionForm(forms.Form):
 
     def clean_age(self):
         age = self.cleaned_data['age']
-        if age < 3:
+        if age < 2:
             raise validators.ValidationError(
-                u'Niños menores de 3 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
+                u'Niños menores de 2 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
             )
         return age
 
     def clean(self):
         cleaned_data = super(UserProfileEditInscriptionForm, self).clean()
 
+        self._clean_days(cleaned_data)
         self._clean_room_dinner(cleaned_data)
 
         return cleaned_data
 
+    def _clean_days(self, cleaned_data):
+        room_choice = cleaned_data.get('room_choice')
+        if room_choice == u'albergue-completa' or room_choice == u'hotel-completa':
+            cleaned_data['day_1'] = True
+            cleaned_data['day_2'] = True
+            cleaned_data['day_3'] = True
+        elif room_choice == u'albergue-v-a-d' or room_choice == u'hotel-v-a-d':
+            cleaned_data['day_1'] = False
+            cleaned_data['day_2'] = True
+            cleaned_data['day_3'] = True
+        elif room_choice == u'albergue-s-y-d' or room_choice == u'hotel-s-y-d':
+            cleaned_data['day_1'] = False
+            cleaned_data['day_2'] = False
+            cleaned_data['day_3'] = True
+        else:
+            cleaned_data['day_1'] = False
+            cleaned_data['day_2'] = False
+            cleaned_data['day_3'] = False
+
     def _clean_room_dinner(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
         dinner_menu = cleaned_data.get('dinner_menu')
-        if dinner_menu == 'sin_cena' and room_choice != 'sin-alojamiento':
-            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el hotel'])
+        if dinner_menu == 'sin-cena' and room_choice != 'sin-alojamiento':
+            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el seminario'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
 

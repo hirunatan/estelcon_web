@@ -11,7 +11,7 @@ import locale
 
 from .models import UserProfile, Activity
 
-MAX_USERS = 105
+MAX_USERS = 150
 
 #TODO: usar templates para los textos de los correos
 
@@ -51,8 +51,8 @@ def create_new_user(user_data, home_url):
 
     quota = _calculate_quota(user_data)
 
-    if user_data['room_choice'] in ["inscripcion-completa", "fin-de-semana"]:
-        queue = max(0, UserProfile.objects.filter(room_choice__in=["inscripcion-completa", "fin-de-semana"]).count() - MAX_USERS)
+    if user_data['room_choice'] not in ["sin-alojamiento", "otros"]:
+        queue = max(0, UserProfile.objects.filter(room_choice__in=["sin-alojamiento", "otros"]).count() - MAX_USERS)
     else:
         queue = 0
 
@@ -86,6 +86,8 @@ def create_new_user(user_data, home_url):
         is_ste_member = user_data['is_ste_member'],
         want_ste_member = user_data['want_ste_member'],
         squire = user_data['squire'],
+        first_estelcon = user_data['first_estelcon'],
+        want_boat = user_data['want_boat'],
         notes_general = user_data['notes_general'],
         shirts_S = user_data['shirts_S'],
         shirts_M = user_data['shirts_M'],
@@ -108,14 +110,11 @@ def create_new_user(user_data, home_url):
             profile.payment = \
 u'''
 Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caixabank
-ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el ingreso el código %s.
+ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el ingreso el código %s.
 
-Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
-
-Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
-tu nombre completo, dirección postal, DNI y el mismo código %s.
-''' % (profile.quota, profile.payment_code, profile.payment_code)
+''' % (profile.quota, profile.payment_code)
         else:
             profile.payment = \
 u'''
@@ -165,20 +164,17 @@ Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
 La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-cuenta de Caixabank ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el
+cuenta de Caixabank ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el
 ingreso el código %s.
 
-Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
-
-Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
-tu nombre completo, dirección postal, DNI y el mismo código %s.
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
 El equipo organizador.
 %s
-''' % (user.first_name, profile.quota, profile.payment_code, profile.payment_code, home_url)
+''' % (user.first_name, profile.quota, profile.payment_code, home_url)
         else:
             message_user = \
 u'''
@@ -227,24 +223,48 @@ El equipo organizador.
 
 
 def _calculate_quota(user_data):
-    quota = 0.0
+    if user_data['room_choice'] == 'albergue-completa':
+        quota = 175.0
+    elif user_data['room_choice'] == 'albergue-v-a-d':
+        quota = 150.0
+    elif user_data['room_choice'] == 'albergue-s-y-d':
+        quota = 125.0
+    elif user_data['room_choice'] == 'hotel-completa':
+        quota = 195.0
+    elif user_data['room_choice'] == 'hotel-v-a-d':
+        quota = 175.0
+    elif user_data['room_choice'] == 'hotel-s-y-d':
+        quota = 140.0
+    elif user_data['room_choice'] == 'sin-alojamiento':
+        quota = 120.0
+    else:
+        return 0.0
 
     if user_data['age'] <= 12:
-        if user_data['room_choice'] == 'sin-alojamiento':
-            quota = 40
+        quota = quota * 0.75
+
+    if not user_data['is_ste_member'] and user_data['room_choice'] != 'sin-alojamiento':
+        quota += 10.0
+
+    if user_data['want_ste_member']:
+        if user_data['room_choice'] != 'sin-alojamiento':
+            quota += 2.0
         else:
-            quota = 80
-    else:
-        if user_data['room_choice'] == 'inscripcion-completa':
-            quota = 160
-        elif user_data['room_choice'] == 'fin-de-semana':
-            quota = 110
-        elif user_data['room_choice'] == 'sin-alojamiento':
-            quota = 40
+            quota += 12.0
+
+    if user_data['want_boat']:
+        quota += 15.0
+
+    num_shirts = user_data['shirts_S'] + \
+                 user_data['shirts_M'] + \
+                 user_data['shirts_L'] + \
+                 user_data['shirts_XL'] + \
+                 user_data['shirts_XXL']
+    quota += num_shirts * 12.0
 
     #if user_data['room_choice'] == 'sin-alojamiento':
 
-    #    if user_data['dinner_menu'] == 'sin_cena':
+    #    if user_data['dinner_menu'] == 'sin-cena':
     #        quota += 12
     #    else:
     #        quota += 36
@@ -974,7 +994,9 @@ def listing_everything():
         p.children_names,
         'x' if p.is_ste_member else '',
         'x' if p.want_ste_member else '',
-        p.squire,
+        'x' if p.squire else '',
+        'x' if p.first_estelcon else '',
+        'x' if p.want_boat else '',
         p.notes_general,
         p.shirts_S,
         p.shirts_M,
@@ -989,8 +1011,8 @@ def listing_everything():
 
     rows = [(u"Nombre", u"Email", u"Staff", u"Pseudónimo", u"Smial", u"Teléfono", u"Población", u"Edad", u"Menú",
              u"Comida", u"Viernes", u"Sábado", u"Domingo", u"Transporte", u"Habitación", u"Dormir", u"Nº hijos",
-             u"Hijos", u"Es socio", u"Quiere ser", u"Escudero", u"Notas", u"S", u"M", u"L", u"XL", u"XXL",
-             u"Código", u"Cuota", u"Pagado", u"Estado de pago")] + rows
+             u"Hijos", u"Es socio", u"Quiere ser", u"Escudero", u"Primera vez", u"Barco", u"Notas", u"S", u"M",
+             u"L", u"XL", u"XXL", u"Código", u"Cuota", u"Pagado", u"Estado de pago")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
 

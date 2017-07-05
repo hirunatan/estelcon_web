@@ -16,38 +16,46 @@ class UserProfile(models.Model):
     phone = models.CharField(u'Teléfono', max_length=100)
     city = models.CharField(u'Población', max_length=100)
     age = models.IntegerField(u'Edad')
-    notes_food = models.TextField(u'Comentarios comida', blank = True)  # (vegetariano, celiaco...)
     dinner_menu = models.CharField(u'Menú de la cena de gala', max_length=50, blank = True,
         choices=(
-            (u'', u''),
-            #(u'ternasco', u'Ternasco asado'),
-            #(u'merluza', u'Lomo de merluza en salsa verde con hortalizas'),
-            #(u'otros', u'Otros'),
-            #(u'sin_cena', u'No voy a ir a la cena de gala'),
+            (u'carne', u'Carne'),
+            (u'pescado', u'Pescado'),
+            (u'otros', u'Otros'),
+            (u'sin-cena', u'No voy a ir a la cena de gala'),
         )
     )
+    notes_food = models.TextField(u'Comentarios comida', blank = True)  # (vegetariano, celiaco...)
     day_1 = models.BooleanField(u'Asistencia viernes/sábado', default=True)
     day_2 = models.BooleanField(u'Asistencia sábado/domingo', default=True)
     day_3 = models.BooleanField(u'Asistencia domingo/lunes+cena', default=True)
     notes_transport = models.TextField(u'Comentarios transporte', blank = True)  # (medio de transporte, hora de llegada...)
     room_choice = models.CharField(u'Elige un tipo de alojamiento', max_length=50,
         choices=(
-            (u'inscripcion-completa', u'Inscripción completa'),
-            (u'fin-de-semana', u'Fin de semana y cena de gala'),
-            #(u'triple-individual', u'Habitación triple - en cama individual'),
-            #(u'triple-matrimonio', u'Habitación triple - en cama de matrimonio'),
-            #(u'doble-individual', u'Habitación doble - en cama individual'),
-            #(u'doble-matrimonio', u'Habitación doble - en cama de matrimonio'),
-            (u'sin-alojamiento', u'No voy a pernoctar en el hotel'),
-            (u'otros', u'Otros (contactar con la organización)'),
+            (
+                u'Albergue (litera y baño comunitario)', (
+                    (u'albergue-completa', u'(litera) completa'),
+                    (u'albergue-v-a-d', u'(litera) viernes a domingo'),
+                    (u'albergue-s-y-d', u'(litera) sábado y domingo'),
+                )
+            ),(
+                u'Habitación doble con baño propio', (
+                    (u'hotel-completa', u'(doble) completa'),
+                    (u'hotel-v-a-d', u'(doble) viernes a domingo'),
+                    (u'hotel-s-y-d', u'(doble) sábado y domingo'),
+                )
+            ),
+            (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
+            (u'otros', u'Otros'),
         )
     )
     room_preferences = models.TextField(u'¿Tienes alguna preferencia sobre con quién compartir habitación?', blank = True)
     children_count = models.IntegerField(u'¿Traes niños a tu cargo? Si es así, indica cuántos', default=0)
     children_names = models.TextField(u'Indica sus nombres, uno en cada línea', blank = True)
     is_ste_member = models.BooleanField(u'¿Eres socio/a de la STE?', default=True)
-    want_ste_member = models.BooleanField(u'En caso de que no, ¿quieres serlo por 2€ más?', default=False)
+    want_ste_member = models.BooleanField(u'En caso de que no, ¿quieres asociarte por 2€ más?', default=False)
     squire = models.BooleanField(u'¿Quieres ser escudero?', default=False)
+    first_estelcon = models.BooleanField(u'¿Es tu primera Estelcon?', default=False)
+    want_boat = models.BooleanField(u'¿Quieres remontar en barco por el río?', default=False)
     notes_general = models.TextField(u'Comentarios general', blank = True)
     shirts_S = models.IntegerField(u'Camisetas talla S', default=0)
     shirts_M = models.IntegerField(u'Camisetas talla M', default=0)

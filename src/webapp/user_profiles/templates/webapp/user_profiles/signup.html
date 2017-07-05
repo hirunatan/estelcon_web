@@ -15,68 +15,102 @@
 <h1><span>La Mereth Aderthad</span> Formulario de inscripción</h1>
 
 {% if not signup_closed %}
-    <p><em>Muchas gracias por decidirte a asistir a la XX Mereth Aderthad 2017. Recuerda que las fechas
-    son <b>9, 10, 11 y 12 de octubre de este a&ntilde;o 2017</b>.</em></p>
 
-    <p>La política de precios es la siguiente. Todos los precios incluyen IVA. Para casos especiales
+    {% if form.errors %}
+    <p><b style="color:white;background-color:red">Ha habido algún problema, consulta los mensajes de error más abajo.</b></p>
+    {% endif %}
+
+    <p><em>¡Nos alegra que te hayas decidido a asistir a la XXII Mereth Aderthad 2017! Recuerda que
+    las fechas son <b>12, 13, 14 y 15 de octubre de este año 2017</b>.</em></p>
+
+    <p><b>La política de precios es la siguiente</b>: la inscripción completa incluye alojamiento y
+    pensión completa desde la cena del jueves hasta la comida del domingo inclusive, más todos los
+    gastos y actividades, y por supuesto la cena de gala del sábado. Para los que no puedan ir
+    todos los días hemos habilitado también opciones de asistencia parcial. Toda asistencia parcial
+    será por días completos, incluyendo desde la cena de un día hasta la comida del
+    siguiente. Finalmente, existe la opción de excluir el alojamiento del precio, y su reserva corra
+    por cuenta del asistente (y por tanto fuera del Seminario). En ese caso aconsejamos el Hotel
+    Berenguer IV que está a unos escasos 5 min a pie del Seminario. Para casos especiales
     contactad por favor con la organización.</p>
 
-    <p><b>Inscripción completa: 160€</b></p>
+    <p>Todos los precios incluyen IVA.</p>
+
+    <p><b>Precios base en albergue del Seminario (incluye sábanas y toalla)</b>:</p>
     <ul>
-        <li>Incluye alojamiento y pensión completa desde la cena del viernes hasta la comida del lunes
-            inclusive, más todos los gastos y actividades, y la cena de gala del domingo.</li>
+      <li>Mereth Aderthad completa: <b>175€</b></li>
+      <li>Opciones parciales:
+        <ul>
+          <li>Estelcon de viernes a domingo: <b>150€</b></li>
+          <li>Estelcon de sábado a domingo: <b>125€</b></li>
+        </ul>
+      </li>
     </ul>
 
-    <p><b>Fin de semana y cena de gala: 110€</b></p>
+    <p><b>Precios “upgrade” en habitación doble con baño (según disponibilidad hasta agotarse)</b>:</p>
     <ul>
-        <li>Incluye noche de sábado y domingo y desayunos de domingo y lunes, más todos los gastos y
-            actividades, y la cena de gala del domingo. No incluye comidas.</li>
+      <li>Mereth Aderthad completa: <b>195€</b></li>
+      <li>Para esta modalidad de habitación se dará preferencia a los que asistan a toda la
+          convención, por lo que se confirmará disponibilidad (o no) de las mismas con asistencia
+          parcial un mes y medio antes (sobre el primero de septiembre).
+        <ul>
+          <li>Estelcon de viernes a domingo: <b>175€</b></li>
+          <li>Estelcon de sábado a domingo: <b>140€</b></li>
+        </ul>
+      </li>
     </ul>
 
-    <p><b>Infantil (de 3 a 12 años): 80€</b></p>
+    <p><b>Descuentos y condiciones para niños y menores</b>:</p>
     <ul>
-        <li>Incluye lo mismo que la inscripción completa.</li>
-        <li>Los niños menores de 3 años no tienen coste si los padres se encargan de su alimentación, y no hay
-            que rellenar ficha de inscripción para ellos, aunque sí mencionarlos en la ficha de los padres.</li>
-        <li>Los menores de 18 años deben venir con sus padres o tener autorización.</li>
+      <li>Existen habitaciones para familias de más de 3 miembros pero su número es limitado,
+          consultar con la organización (<a href="mailto:estelconlorien@gmail.com">estelconlorien@gmail.com</a>).</li>
+      <li>Menores de 18 años deben venir con sus padres o tener autorización.</li>
+      <li>Niños menores de 12 años tienen un <b>descuento del 25%</b> respecto de los precios
+          indicados arriba.</li>
+      <li>Niños menores de 2 años no tienen coste y no necesitan inscripción si no requieren
+          cama propia ni comida (sí que hay que mencionarlos en el formulario de inscripción
+          de sus padres).</li>
     </ul>
 
-    <p><b>Opción sin alojamiento: 40€</b></p>
+    <p><b>Opciones sin alojamiento</b>:</p>
     <ul>
-        <li>Existirá la posibilidad de asistir a la EstelCon y la cena de gala sin alojarse en el hotel. esta
-            opción incluye todas las actividades pero no las comidas, excepto la cena de gala.</li>
+      <li>Estelcon completa excluyendo alojamiento. (Incluye todas las comidas y actividades de la
+        EstelCon): <b>120€</b></li>
+      <li>Existen otras fórmulas parciales sin pernocta, por ejemplo sólo sábado con cena de gala y
+        sin pernocta costaría 75€. Otras fórmulas, exponer la problemática a la Organización.</li>
     </ul>
-    {% comment %}
+
     <p><b>Condiciones para no socios:</b></p>
     <ul>
-        <li>Los no socios deberán pagar 10 € más en cualquiera de los casos excepto en la opción sin alojamiento, si bien podrán aprovechar y hacerse socios en la propia EstelCon, descontando esta parte de su cuota.</li>
+      <li>Los no socios deberán pagar <b>10€</b> adicionales en cualquiera de los casos excepto en las
+          opciones sin alojamiento, si bien podrán aprovechar y hacerse socios en la propia EstelCon,
+          descontando esta parte de su cuota.</li>
     </ul>
-    {% endcomment %}
 
-    {% comment %}
     <p><b>Plazos de inscripción:</b>
     <ul>
-    <li>Apertura de inscripciones: principios de octubre.</li>
-    <li>Fecha tope de inscripción: <b>12 de noviembre</b>.</li>
+    <li>Apertura de inscripciones: 1 de julio.</li>
+    <li>Fecha tope de inscripción: <b>domingo 17 de septiembre</b>.</li>
     <li>En caso de desistir de la plaza, del precio pagado de la EstelCon, se devolverá:
         <ul>
-            <li>el 60% a los que comuniquen su baja antes del 12 de noviembre.</li>
-            <li>el 25% a los que comuniquen su baja antes del 1 de diciembre.</li>
+            <li>el 100% a los que comuniquen su baja antes del 17 de septiembre.</li>
+            <li>el 75% a los que comuniquen su baja antes del 24 de septiembre.</li>
+            <li>el 50% a los que comuniquen su baja antes del 1 de octubre.</li>
+            <li>En casos de fuerza mayor que impidan la asistencia por favor contactar con la organización</li>
         </ul>
     </li>
     </ul>
-    {% endcomment %}
 
     <p><b>El proceso de inscripción es el siguiente:</b></p>
     <ol>
       <li>Comprobar las <a href="/cuestionespracticas_normas.html">normas de la EstelCon</a>.</li>
       <li>Rellenar este formulario. Los campos marcados con un * son obligatorios. Hay que indicar un usuario y contraseña que servirá para acceder después a la ficha personal, apuntarse a las actividades y modificar los datos si se desea.</li>
-      <li>Se mostrará un código de pago que hay que apuntar. Por ejemplo, EC245.</li>
-      <li>Hacer el ingreso correspondiente en la cuenta bancaria que se indicará al completar la ficha. En el ingreso hay que indicar el código de pago apuntado en el paso anterior.</li>
+      <li>Se mostrará un código que hay que apuntar en el documento de pago. Por ejemplo, EC245.</li>
+      <li>Recuerda que tienes 5 días desde la inscripción para realizar el ingreso y así asegurar tu plaza. Pasado ese tiempo, si no se ha producido el ingreso, deberás inscribirte de nuevo.</li>
+      <li>Haced el ingreso correspondiente en la cuenta bancaria que se indicará al completar la ficha. En el ingreso hay que indicar el código de pago apuntado en el paso anterior.</li>
       <li>En pocos días, entrando en la ficha personal aparecerá reflejado que hemos aceptado y comprobado el pago.</li>
-      <li>Si se desea pagar por varias personas a la vez, hay que rellenar primero una ficha por cada uno, y en el ingreso indicar todos los códigos de pago. Se admite poner la misma dirección de correo de contacto en todas las fichas, si una persona quiere coordinar lo de todos.</li>
-      <li>Los menores de edad, a partir de 3 años, deben rellenar su propia ficha, y además hay que mencionarlos en la ficha de sus padres si vienen también.</li>
-      <li><b>No hay diferencia entre asistente y colaborador en el proceso de inscripción. Es posteriormente, al proponer actividades, donde esta distinción se hace patente</b>.</li>
+      <li>Si se desea pagar por varias personas a la vez, hay que rellenar primero una ficha para cada uno, y en el ingreso indicar todos los códigos de pago. Se admite poner la misma dirección de correo de contacto en todas las fichas, si una persona quiere coordinar lo de todos.</li>
+      <li>Los menores de edad, a partir de 2 años, deben rellenar su propia ficha, y además hay que mencionarlos en la ficha de sus padres si vienen también.</li>
+      <li><b>No hay diferencia entre asistente y colaborador en el proceso de inscripción. Es posteriormente, al proponer actividades, donde esta distinción se hace patente.</b></li>
     </ol>
     <p>MANTÉN INMÓVIL DURANTE 1 SEG. EL CURSOR DEL RATÓN SOBRE LOS RECUADROS DE TEXTO PARA OBTENER MÁS INFORMACIÓN.</p>
 
@@ -154,7 +188,7 @@
         {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
       <p title="Indica qué días te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
-        <label for="id_room_choice">Elige un tipo de alojamiento:</label><br/>
+        <label for="id_room_choice">Elige un tipo de alojamiento.</label><br/>
         {{ form.room_choice }}
         {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
@@ -218,13 +252,11 @@
         {{ form.notes_food }}
         {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
-      {% comment %}
-      <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
-        <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
+      <p title="Si tienes algúna condición especial (alérgico, vegetariano... elige otros)">
+        <label for="id_dinner_menu">El plato principal de la cena de gala es un surtido de carnes, pero alternativamente hay un plato de pescado (dorada o similar a la brasa con guarnición). Si lo prefieres por favor indícanoslo aquí:</label><br/>
         {{ form.dinner_menu }}
         {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
-      {% endcomment %}
       <p>¿Traes niños a tu cargo?</p>
       <table title="Si traes niños a tu cargo, indica aquí cuántos son y sus nombres. Luego tendrás que rellenar una inscripción por cada uno (si tienen 3 años o más). Si venis los dos padres, sólo hace falta rellenar esta información una vez.">
           <tr>
@@ -243,41 +275,43 @@
         {{ form.is_ste_member }}
         {% if form.is_ste_member.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.is_ste_member.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
-      {% comment %}
       <p title="Como oferta de Estelcon, añadiendo 2€ a la inscripción te puedes convertir en socio/a de la STE, de cuota reducida (recibirías la revista por correo electrónico en lugar de en papel).">
         <label for="id_want_ste_member">En caso de que no, ¿quieres asociarte por 2€ más?</label><br/>
         {{ form.want_ste_member }}
         {% if form.want_ste_member.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.want_ste_member.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
-      {% endcomment %}
       <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
         <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label><br/>
         {{ form.squire }}
         {% if form.squire.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.squire.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
+      <p title="Indícanos si es tu primera Estelcon, tanto si llevas mucho o poco tiempo en la STE.">
+        <label for="id_first_estelcon">¿Es tu primera vez asistiendo a una Estelcon?</label><br/>
+        {{ form.first_estelcon }}
+        {% if form.first_estelcon.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.first_estelcon.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+      <p title="">
+        <label for="id_want_boat">¿Quieres ser “Umbariano” en esta Estelcon?<br />Eso hará que la llegada al Castillo de Miravet
+          el sábado por la tarde la hagas por vía fluvial remontando el Anduin (Ebro), con un coste de 15€:</label><br/>
+        {{ form.want_boat }}
+        {% if form.want_boat.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.want_boat.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
       <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
-        <label for="id_notes_general">¿Algún otro comentario?<label><br/>
+        <label for="id_notes_general">¿Alguna otra necesidad que quieras compartir, o comentario?<label><br/>
         {{ form.notes_general }}
         {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
       </p>
-      <p>Queremos dar la oportunidad de lucir la <a href="/static/images/camiseta.jpg" target="_blank">camiseta de la Estelcon</a> en el
-      castillo de Santa Bárbara. Para ello deberéis reservarla indicando la talla y número de unidades en el formulario
-      siguiente. Los que la reservéis y paguéis hasta el 1 de octubre se os entregara en el pack de bienvenida al llegar al
-      Castillo. Si la reserva se hace a posteriori, no dará tiempo de tenerla lista para la Estelcon y os la haremos llegar
-      a vuestra casa, en ese caso habrá que sumar al precio 2€ más en concepto de gastos de envío (se podrán consultar otros
-      tipos de envios).</p>
-      <p>El precio de la camiseta será de <b>6€</b> (precio de coste). Como el pago de la Estelcon va directamente a
-      las cuentas de Esatur, hay que hacer un pago separado para la camiseta. Después de reservar se os mandará un mail con
-      la información para el pago.</p>
-      {% comment %}
       <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
       optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
-      Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de
-      una, simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
-      <p>Las camisetas costarán 10€ y se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis
-      nada más llegar.</p>
-      {% endcomment %}
-      <table title="Indica cuántas camisetas quieres de esta talla.">
+      Hay dos tipos de camisetas, unisex y de mujer (para camisetas de niñ@s por favor consultad a la organización). Para ver
+      cómo son y las distintas tallas, pulsa en el enlace que se muestra un poco más abajo junto al precio de la misma. Si
+      vas a querer alguna camiseta, indícanos aquí la talla. Recuerda que debes indicar si quieres el modelo Mujer en el
+      apartado &quot;¿Alguna otra necesidad(...)?&quot; al hacer tu inscripción. Si no por defecto se facilitará el modelo Unisex.
+      También puedes, si lo deseas, reservar más de una, simplemente indicando la cantidad que quieres en la casilla o casillas
+      correspondientes.</p>
+      <p>El precio de <a href="/merethaderthad_camiseta.html">las camisetas</a> es de 12€, se entregarán junto con el Maratulmë
+      de la EstelCon, cuando os registréis nada más llegar.</p>
+      <table title="Indica cuántas camisetas quieres de cada talla.">
         <tr>
           <td><label for="id_shirts_S">Camisetas talla S: <label></td>
           <td>{{ form.shirts_S }}

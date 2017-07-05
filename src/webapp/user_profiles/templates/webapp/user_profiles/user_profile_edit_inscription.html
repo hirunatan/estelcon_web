@@ -13,33 +13,23 @@
 
 {% block content %}
 <h1><span>La Mereth Aderthad</span> <span>Ficha personal</span> Modificar</h1>
+{% comment %}
 <p>Aquí puedes modificar cualquier parte de tu información de inscripción, excepto los días
 de asistencia. Si deseas cambiar este dato contacta con la organización.</p>
+{% endcomment %}
 <p><strong>Atención</strong>: si modificas algún dato que influya en el precio de la inscripción
 (como el tipo de alojamiento), te agradeceremos que contactes con la organización para ver cómo
 podemos compensar la diferencia.</p>
 
 <form method="post" action=".">
   {% csrf_token %}
-  <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
-    <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
-    {{ form.notes_food }}
-    {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  {% comment %}
-  <p title="Si has indicado algúna condición especial (alérgico, vegetariano... elige otros)">
-    <label for="id_dinner_menu">Tienes que decirnos también qué plato principal querrás en la cena de gala, para reservarlo en el restaurante:</label><br/>
-    {{ form.dinner_menu }}
-    {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  {% endcomment %}
-  <p title="Indica si en transporte privado o público, y en este caso, lugar y horario de llegada.">
+  <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
     <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
     {{ form.notes_transport }}
     {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
-  <p title="Indica qué tipo de habitación prefieres (la doble tiene un incremento de precio).">
-    <label for="id_notes_food">Elige un tipo de alojamiento</label><br/>
+  <p title="Indica qué días te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
+    <label for="id_room_choice">Elige un tipo de alojamiento.</label><br/>
     {{ form.room_choice }}
     {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
@@ -47,6 +37,16 @@ podemos compensar la diferencia.</p>
     <label for="id_room_preferences">¿Tienes alguna preferencia sobre con quién compartir habitación?<label><br/>
     {{ form.room_preferences }}
     {% if form.room_preferences.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_preferences.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
+    <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
+    {{ form.notes_food }}
+    {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
+  </p>
+  <p title="Si tienes algúna condición especial (alérgico, vegetariano... elige otros)">
+    <label for="id_dinner_menu">El plato principal de la cena de gala es un surtido de carnes, pero alternativamente hay un plato de pescado (dorada o similar a la brasa con guarnición). Si lo prefieres por favor indícanoslo aquí:</label><br/>
+    {{ form.dinner_menu }}
+    {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
   <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
     <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label><br/>
@@ -59,24 +59,17 @@ podemos compensar la diferencia.</p>
     {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
   </p>
 
-  <p>Queremos dar la oportunidad de lucir la <a href="/static/images/camiseta.jpg" target="_blank">camiseta de la Estelcon</a> en el
-  castillo de Santa Bárbara. Para ello deberéis reservarla indicando la talla y número de unidades en el formulario
-  siguiente. Los que la reservéis y paguéis hasta el 1 de octubre se os entregara en el pack de bienvenida al llegar al
-  Castillo. Si la reserva se hace a posteriori, no dará tiempo de tenerla lista para la Estelcon y os la haremos llegar
-  a vuestra casa, en ese caso habrá que sumar al precio 2€ más en concepto de gastos de envío (se podrán consultar otros
-  tipos de envios).</p>
-  <p>El precio de la camiseta será de <b>6€</b> (precio de coste). Como el pago de la Estelcon va directamente a
-  las cuentas de Esatur, hay que hacer un pago separado para la camiseta. Después de reservar se os mandará un mail con
-  la información para el pago.</p>
-  {% comment %}
   <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
   optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
-  Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de
-  una, simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
-  <p>Las camisetas costarán 10€ y se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis
-  nada más llegar.</p>
-  {% endcomment %}
-   <table title="Indica cuántas camisetas quieres de esta talla.">
+  Hay dos tipos de camisetas, unisex y de mujer (para camisetas de niñ@s por favor consultad a la organización). Para ver
+  cómo son y las distintas tallas, pulsa en el enlace que se muestra un poco más abajo junto al precio de la misma. Si
+  vas a querer alguna camiseta, indícanos aquí la talla. Recuerda que debes indicar si quieres el modelo Mujer en el
+  apartado &quot;¿Alguna otra necesidad(...)?&quot; al hacer tu inscripción. Si no por defecto se facilitará el modelo Unisex.
+  También puedes, si lo deseas, reservar más de una, simplemente indicando la cantidad que quieres en la casilla o casillas
+  correspondientes.</p>
+  <p>El precio de <a href="/merethaderthad_camiseta.html">las camisetas</a> es de 12€, se entregarán junto con el Maratulmë
+  de la EstelCon, cuando os registréis nada más llegar.</p>
+  <table title="Indica cuántas camisetas quieres de esta talla.">
     <tr>
       <td><label for="id_shirts_S">Camisetas talla S: <label></td>
       <td>{{ form.shirts_S }}
