@@ -285,7 +285,7 @@ class SignupForm(forms.Form):
                 del cleaned_data['want_ste_member']
         else:
             if want_ste_member and room_choice == 'sin-alojamiento':
-                self._errors['want_ste_member'] = self.error_class([u'La opción de hacerte socio está disponible sólo para las opciones normales con alojamiento en hotel'])
+                self._errors['want_ste_member'] = self.error_class([u'Si quieres hacerte socio pero no te vas a alojar en el seminario, consulta con la organización'])
                 if want_ste_member is not None:
                     del cleaned_data['want_ste_member']
 
