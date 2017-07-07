@@ -197,7 +197,7 @@ El equipo organizador.
 u'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
-Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos en el hotel ha sido alcanzado, por
+Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos ha sido alcanzado, por
 lo que no podemos garantizar tu alojamiento. ¡Lo sentimos muchísimo!
 
 Pero de todas formas, te ponemos en cola de espera por si aparece un hueco vacante y podemos dar paso a tu inscripción.
@@ -229,11 +229,11 @@ def _calculate_quota(user_data):
         quota = 150.0
     elif user_data['room_choice'] == 'albergue-s-y-d':
         quota = 125.0
-    elif user_data['room_choice'] == 'hotel-completa':
+    elif user_data['room_choice'] == 'doble-completa':
         quota = 195.0
-    elif user_data['room_choice'] == 'hotel-v-a-d':
+    elif user_data['room_choice'] == 'doble-v-a-d':
         quota = 175.0
-    elif user_data['room_choice'] == 'hotel-s-y-d':
+    elif user_data['room_choice'] == 'doble-s-y-d':
         quota = 140.0
     elif user_data['room_choice'] == 'sin-alojamiento':
         quota = 120.0

@@ -126,9 +126,9 @@ class SignupForm(forms.Form):
                 )
             ),(
                 u'Habitación doble con baño propio', (
-                    (u'hotel-completa', u'(doble) completa'),
-                    (u'hotel-v-a-d', u'(doble) viernes a domingo'),
-                    (u'hotel-s-y-d', u'(doble) sábado y domingo'),
+                    (u'doble-completa', u'(doble) completa'),
+                    (u'doble-v-a-d', u'(doble) viernes a domingo'),
+                    (u'doble-s-y-d', u'(doble) sábado y domingo'),
                 )
             ),
             (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
@@ -222,15 +222,15 @@ class SignupForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == u'albergue-completa' or room_choice == u'hotel-completa':
+        if room_choice == u'albergue-completa' or room_choice == u'doble-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-v-a-d' or room_choice == u'hotel-v-a-d':
+        elif room_choice == u'albergue-v-a-d' or room_choice == u'doble-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-s-y-d' or room_choice == u'hotel-s-y-d':
+        elif room_choice == u'albergue-s-y-d' or room_choice == u'doble-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True
@@ -474,9 +474,9 @@ class UserProfileEditInscriptionForm(forms.Form):
                 )
             ),(
                 u'Habitación doble con baño propio', (
-                    (u'hotel-completa', u'(doble) completa'),
-                    (u'hotel-v-a-d', u'(doble) viernes a domingo'),
-                    (u'hotel-s-y-d', u'(doble) sábado y domingo'),
+                    (u'doble-completa', u'(doble) completa'),
+                    (u'doble-v-a-d', u'(doble) viernes a domingo'),
+                    (u'doble-s-y-d', u'(doble) sábado y domingo'),
                 )
             ),
             (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
@@ -534,15 +534,15 @@ class UserProfileEditInscriptionForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == u'albergue-completa' or room_choice == u'hotel-completa':
+        if room_choice == u'albergue-completa' or room_choice == u'doble-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-v-a-d' or room_choice == u'hotel-v-a-d':
+        elif room_choice == u'albergue-v-a-d' or room_choice == u'doble-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-s-y-d' or room_choice == u'hotel-s-y-d':
+        elif room_choice == u'albergue-s-y-d' or room_choice == u'doble-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True

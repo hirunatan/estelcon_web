@@ -39,9 +39,9 @@ class UserProfile(models.Model):
                 )
             ),(
                 u'Habitación doble con baño propio', (
-                    (u'hotel-completa', u'(doble) completa'),
-                    (u'hotel-v-a-d', u'(doble) viernes a domingo'),
-                    (u'hotel-s-y-d', u'(doble) sábado y domingo'),
+                    (u'doble-completa', u'(doble) completa'),
+                    (u'doble-v-a-d', u'(doble) viernes a domingo'),
+                    (u'doble-s-y-d', u'(doble) sábado y domingo'),
                 )
             ),
             (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
