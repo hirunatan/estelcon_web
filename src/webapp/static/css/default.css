@@ -188,6 +188,11 @@ a:hover {
 
 img { border: none; }
 
+img.fleft {
+    float: left;
+    margin: 0px 10px 5px 0px;
+}
+
 img.left {
     float: left;
     margin: -5px 5px 0px -5px;
