@@ -373,30 +373,36 @@ def get_activities_to_participate_by(user):
 
 
 def change_user_personal_data(user, new_data, home_url):
-    user.username = new_data['username'];
-    user.email = new_data['email'];
+    changed_fields = []
+
     if new_data['password1']:
         user.set_password(new_data['password1']);
-    user.first_name=new_data['first_name']
-    user.last_name=new_data['last_name']
+
+    for field_name in ['username', 'email', 'first_name', 'last_name']:
+        if getattr(user, field_name) != new_data[field_name]:
+            changed_fields.append(unicode(user._meta.get_field_by_name(field_name)[0].verbose_name))
+            setattr(user, field_name, new_data[field_name])
     user.save()
 
     profile = user.profile
-    profile.alias=new_data['alias']
-    profile.smial=new_data['smial']
-    profile.phone=new_data['phone']
-    profile.city=new_data['city']
-    profile.age=new_data['age']
+    for field_name in ['alias', 'smial', 'phone', 'city', 'age']:
+        if getattr(profile, field_name) != new_data[field_name]:
+            changed_fields.append(unicode(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            setattr(profile, field_name, new_data[field_name])
     profile.save()
 
+    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
     mail_managers(
         subject = u'[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
         message =
 u'''
-%s, con usuario %s y email %s, ha modificado sus datos personales en la web.
+%s, con usuario %s y email %s, ha modificado sus datos personales en la web:
+
+%s
+
 Su ficha puede consultarse directamente en %s
 '''
-% (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
+% (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
     )
 
     send_mail(
@@ -419,29 +425,30 @@ El equipo organizador.
 
 
 def change_user_inscription_data(user, new_data, home_url):
+    changed_fields = []
+
     profile = user.profile
-    profile.notes_food=new_data['notes_food']
-    profile.dinner_menu=new_data['dinner_menu']
-    profile.notes_transport=new_data['notes_transport']
-    profile.room_choice=new_data['room_choice']
-    profile.room_preferences=new_data['room_preferences']
-    profile.squire=new_data['squire']
-    profile.notes_general=new_data['notes_general']
-    profile.shirts_S=new_data['shirts_S']
-    profile.shirts_M=new_data['shirts_M']
-    profile.shirts_L=new_data['shirts_L']
-    profile.shirts_XL=new_data['shirts_XL']
-    profile.shirts_XXL=new_data['shirts_XXL']
+    for field_name in ['notes_food', 'dinner_menu', 'notes_transport', 'room_choice',
+                'room_preferences', 'squire', 'notes_general', 'shirts_S', 'shirts_M',
+                'shirts_L', 'shirts_XL', 'shirts_XXL',
+            ]:
+        if getattr(profile, field_name) != new_data[field_name]:
+            changed_fields.append(unicode(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            setattr(profile, field_name, new_data[field_name])
     profile.save()
 
+    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
     mail_managers(
         subject = u'[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
         message =
 u'''
-%s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web.
+%s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web:
+
+%s
+
 Su ficha puede consultarse directamente en %s
 '''
-% (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
+% (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
     )
 
     send_mail(

@@ -11,11 +11,11 @@ class UserProfile(models.Model):
     # Link with the Django user
     user = models.OneToOneField(User, related_name='profile')
     # Additional info
-    alias = models.CharField(u'Pseudónimo', max_length=100, blank = True)
-    smial = models.CharField(u'Smial', max_length=100, blank = True)
-    phone = models.CharField(u'Teléfono', max_length=100)
-    city = models.CharField(u'Población', max_length=100)
-    age = models.IntegerField(u'Edad')
+    alias = models.CharField(u'pseudónimo', max_length=100, blank = True)
+    smial = models.CharField(u'smial', max_length=100, blank = True)
+    phone = models.CharField(u'teléfono', max_length=100)
+    city = models.CharField(u'población', max_length=100)
+    age = models.IntegerField(u'edad')
     dinner_menu = models.CharField(u'Menú de la cena de gala', max_length=50, blank = True,
         choices=(
             (u'carne', u'Carne'),
