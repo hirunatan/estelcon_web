@@ -121,7 +121,7 @@ u'''
 Ponte en contacto con la organización para que te indiquemos el importe a pagar y la forma de pago.
 '''
     else:
-	profile.payment = \
+        profile.payment = \
 u'''
 En cola de espera con posición %d. La cuota es de %d€ y el código %s, pero no debes hacer
 ningún ingreso hasta que se pueda confirmar tu asistencia.
@@ -193,7 +193,7 @@ El equipo organizador.
 ''' % (user.first_name, home_url)
 
     else:
-	message_user = \
+        message_user = \
 u'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
@@ -491,87 +491,87 @@ def get_schedule():
     days = []
     if len(activ_with_hour) > 0:
 
-	first_day = activ_with_hour[0].start.replace(hour=0, minute=0, second=0, microsecond=0)
-	last_day = activ_with_hour[-1].start.replace(hour=0, minute=0, second=0, microsecond=0)
+        first_day = activ_with_hour[0].start.replace(hour=0, minute=0, second=0, microsecond=0)
+        last_day = activ_with_hour[-1].start.replace(hour=0, minute=0, second=0, microsecond=0)
 
-	# Create the list of days
-	day = first_day
-	while day <= last_day:
+        # Create the list of days
+        day = first_day
+        while day <= last_day:
 
-	    first_block = day.replace(hour=8, minute=00)               # from 08:30h
-	    last_block = first_block + timedelta(hours=20, minutes=30) # until 05:00h next day
-	    rowspans_left = [1, 1, 1]
+            first_block = day.replace(hour=8, minute=00)               # from 08:30h
+            last_block = first_block + timedelta(hours=20, minutes=30) # until 05:00h next day
+            rowspans_left = [1, 1, 1]
 
-	    # Create the list of half hour blocks
-	    blocks = []
-	    block = first_block
-	    while block <= last_block:
+            # Create the list of half hour blocks
+            blocks = []
+            block = first_block
+            while block <= last_block:
 
-	        has_data = False
+                has_data = False
 
-	        # Create the list of columns
-		columns = []
-		ncol = 0
-		while ncol <= 2:
+                # Create the list of columns
+                columns = []
+                ncol = 0
+                while ncol <= 2:
 
-		    if rowspans_left[ncol] > 1:
-		        rowspans_left[ncol] = rowspans_left[ncol] - 1
-			has_data = True
-		    else:
-			# Create the list of activities
-			activities_column = []
-			rowspan = 1
-			for activity in activ_with_hour:
-			    if (activity.start >= block) and \
-			       (activity.start < (block + timedelta(minutes=30))) and \
-			       activity.start.second == ncol:
+                    if rowspans_left[ncol] > 1:
+                        rowspans_left[ncol] = rowspans_left[ncol] - 1
+                        has_data = True
+                    else:
+                        # Create the list of activities
+                        activities_column = []
+                        rowspan = 1
+                        for activity in activ_with_hour:
+                            if (activity.start >= block) and \
+                               (activity.start < (block + timedelta(minutes=30))) and \
+                               activity.start.second == ncol:
 
-			       has_data = True
+                               has_data = True
 
-			       # Calculate the block span of the activity
-			       if activity.end is None:
-				   duration = 0
-			       else:
-				   duration = int((activity.end - activity.start).seconds / 60)
-			       activ_span = (duration - 1) / 30 + 1
-			       if activ_span > rowspan:
-				   rowspan = activ_span
+                               # Calculate the block span of the activity
+                               if activity.end is None:
+                                   duration = 0
+                               else:
+                                   duration = int((activity.end - activity.start).seconds / 60)
+                               activ_span = (duration - 1) / 30 + 1
+                               if activ_span > rowspan:
+                                   rowspan = activ_span
 
-			       activities_column.append(activity)
+                               activities_column.append(activity)
 
                         rowspans_left[ncol] = rowspan
-			if ncol == 0:
-			    colspan = 2
-			    if has_data:
-			        columns.append((rowspan, colspan, activities_column))
-				break
-			else:
-			    colspan = 1
-			    columns.append((rowspan, colspan, activities_column))
+                        if ncol == 0:
+                            colspan = 2
+                            if has_data:
+                                columns.append((rowspan, colspan, activities_column))
+                                break
+                        else:
+                            colspan = 1
+                            columns.append((rowspan, colspan, activities_column))
 
-		    if ncol == 0 and has_data:
-		    	break
-		    ncol = ncol + 1
+                    if ncol == 0 and has_data:
+                        break
+                    ncol = ncol + 1
 
-		#if has_data:
-		blocks.append((block.strftime('%H:%M').decode('utf-8'), columns))
-		block = block + timedelta(minutes=30)
+                #if has_data:
+                blocks.append((block.strftime('%H:%M').decode('utf-8'), columns))
+                block = block + timedelta(minutes=30)
 
-	    # Remove all empty blocks at the beginning and the end of the day
-	    for i in [0, -1]:
-	        while len(blocks) > 0:
-	            block = blocks[i]
-		    has_data = False
-		    for col in blocks[i][1]:
-		        if len(col[2]) > 0:
-			    has_data = True
-			    break
-		    if has_data:
-		        break
-		    del blocks[i]
+            # Remove all empty blocks at the beginning and the end of the day
+            for i in [0, -1]:
+                while len(blocks) > 0:
+                    block = blocks[i]
+                    has_data = False
+                    for col in blocks[i][1]:
+                        if len(col[2]) > 0:
+                            has_data = True
+                            break
+                    if has_data:
+                        break
+                    del blocks[i]
 
             days.append((day.strftime(u'%A %d').decode('utf-8').upper(), blocks))
-	    day = day + timedelta(days=1)
+            day = day + timedelta(days=1)
 
     return (activ_without_hour, days)
 
@@ -580,7 +580,7 @@ def get_activity_and_status(activity_id, user):
     try:
         activity = Activity.objects.get(pk = activity_id)
     except Activity.DoesNotExist:
-	return (None, {})
+        return (None, {})
 
     is_owner = False
     is_organizer = False
@@ -589,13 +589,13 @@ def get_activity_and_status(activity_id, user):
 
     if user.is_authenticated():
         if user in activity.owners.all():
-	    is_owner = True
+            is_owner = True
         if user in activity.organizers.all():
-	    is_organizer = True
+            is_organizer = True
         if user in activity.participants.all():
-	    is_participant = True
+            is_participant = True
         if user.is_staff:
-	    is_admin = True
+            is_admin = True
 
     user_status =  {
         'is_owner': is_owner,
@@ -612,7 +612,7 @@ def subscribe_to_activity(user, activity_id):
     try:
         activity = Activity.objects.get(pk = activity_id)
     except Activity.DoesNotExist:
-	return
+        return
 
     # User is always added, even if the limit is reached
     activity.participants.add(user)
@@ -633,7 +633,7 @@ El usuario %s (%s) se ha inscrito en la actividad %s.
     )
 
     for owner in activity.owners.all():
-	send_mail(
+        send_mail(
             subject = u'[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
             message =
 u'''
@@ -645,7 +645,7 @@ El usuario %s (%s) se ha inscrito en la actividad %s.
             fail_silently = False
         )
         if maxplacesreached:
-	    send_mail(
+            send_mail(
                 subject = u'[Estelcon] ATENCION: Tu actividad ha superado el máximo de plazas.',
                 message =
 u'''
@@ -938,11 +938,11 @@ def listing_reserved_shirts():
 
     sums = reduce(lambda sums, row: (sums[0]+row.shirts_S,
                                      sums[1]+row.shirts_M,
-				     sums[2]+row.shirts_L,
-				     sums[3]+row.shirts_XL,
-				     sums[4]+row.shirts_XXL),
-		  profiles,
-		  (0, 0, 0, 0, 0))
+                                     sums[2]+row.shirts_L,
+                                     sums[3]+row.shirts_XL,
+                                     sums[4]+row.shirts_XXL),
+                  profiles,
+                  (0, 0, 0, 0, 0))
 
     rows = [("TallaS", "TallaM", "TallaL", "TallaXL", "TallaXXL"), sums]
     return (None, rows)
