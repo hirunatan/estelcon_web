@@ -817,6 +817,8 @@ def user_listing(listing_id):
     elif listing_id == 10:
         return listing_users_with_shirts()
     elif listing_id == 11:
+        return listing_umbarians()
+    elif listing_id == 12:
         return listing_everything()
     else:
         return None
@@ -975,6 +977,19 @@ def listing_users_with_shirts():
 
     rows = [("Talla", "Nombre", "Cantidad")] + rows
     return (None, rows)
+
+def listing_umbarians():
+    profiles = UserProfile.objects.filter(want_boat=True).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+    ) for p in profiles]
+
+    rows = [("Nombre", "Pseudónimo", "Smial")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
 
 
 def listing_everything():
