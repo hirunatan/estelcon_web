@@ -1,2 +1,1 @@
-Django==1.9.13
-django-extensions==1.5.5
+Django==1.10.8

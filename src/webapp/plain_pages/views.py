@@ -9,7 +9,7 @@ def statichtml(request, html_id='index'):
     # try:
         return render_to_response(
             'webapp/plain_pages/' + html_id + '.html',
-            context_instance = RequestContext(request),
+            context = RequestContext(request),
         )
     # except TemplateDoesNotExist:
     #     raise Http404('No se encuentra el documento %s' % html_id)
