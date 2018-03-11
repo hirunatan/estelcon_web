@@ -8,7 +8,7 @@ from core import services
 
 user_validator = validators.RegexValidator(
     regex = r'^[a-zA-Z0-9_]{3,15}$',
-    message = u'Debe ser una palabra de 3 a 15 letras o números, o guión bajo "_"',
+    message = 'Debe ser una palabra de 3 a 15 letras o números, o guión bajo "_"',
 )
 
 
@@ -92,10 +92,10 @@ class SignupForm(forms.Form):
     dinner_menu = forms.ChoiceField(
         required = False,
         choices=(
-            (u'carne', u'Carne'),
-            (u'pescado', u'Pescado'),
-            (u'otros', u'Otros'),
-            (u'sin-cena', u'No voy a ir a la cena de gala'),
+            ('carne', 'Carne'),
+            ('pescado', 'Pescado'),
+            ('otros', 'Otros'),
+            ('sin-cena', 'No voy a ir a la cena de gala'),
         )
     )
     notes_food = forms.CharField(
@@ -119,20 +119,20 @@ class SignupForm(forms.Form):
         required = True,
         choices=(
             (
-                u'Albergue (litera y baño comunitario)', (
-                    (u'albergue-completa', u'(litera) completa'),
-                    (u'albergue-v-a-d', u'(litera) viernes a domingo'),
-                    (u'albergue-s-y-d', u'(litera) sábado y domingo'),
+                'Albergue (litera y baño comunitario)', (
+                    ('albergue-completa', '(litera) completa'),
+                    ('albergue-v-a-d', '(litera) viernes a domingo'),
+                    ('albergue-s-y-d', '(litera) sábado y domingo'),
                 )
             ),(
-                u'Habitación doble con baño propio', (
-                    (u'doble-completa', u'(doble) completa'),
-                    (u'doble-v-a-d', u'(doble) viernes a domingo'),
-                    (u'doble-s-y-d', u'(doble) sábado y domingo'),
+                'Habitación doble con baño propio', (
+                    ('doble-completa', '(doble) completa'),
+                    ('doble-v-a-d', '(doble) viernes a domingo'),
+                    ('doble-s-y-d', '(doble) sábado y domingo'),
                 )
             ),
-            (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
-            (u'otros', u'Otros'),
+            ('sin-alojamiento', 'No voy a pernoctar en el seminario'),
+            ('otros', 'Otros'),
         )
     )
     room_preferences = forms.CharField(
@@ -185,7 +185,7 @@ class SignupForm(forms.Form):
         username = self.cleaned_data['username']
         if services.retrieve_user(username):
             raise validators.ValidationError(
-                u'Ese usuario ya existe, por favor introduce otro nombre.',
+                'Ese usuario ya existe, por favor introduce otro nombre.',
             )
         return username
 
@@ -193,7 +193,7 @@ class SignupForm(forms.Form):
         age = self.cleaned_data['age']
         if age < 2:
             raise validators.ValidationError(
-                u'Niños menores de 2 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
+                'Niños menores de 2 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
             )
         return age
 
@@ -214,7 +214,7 @@ class SignupForm(forms.Form):
         if password1 or password2:
             if password1 != password2:
                 # See https://docs.djangoproject.com/en/1.6/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
-                self._errors['password1'] = self.error_class([u'Las dos contraseñas no coinciden.'])
+                self._errors['password1'] = self.error_class(['Las dos contraseñas no coinciden.'])
                 if password1:
                     del cleaned_data['password1']
                 if password2:
@@ -222,15 +222,15 @@ class SignupForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == u'albergue-completa' or room_choice == u'doble-completa':
+        if room_choice == 'albergue-completa' or room_choice == 'doble-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-v-a-d' or room_choice == u'doble-v-a-d':
+        elif room_choice == 'albergue-v-a-d' or room_choice == 'doble-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-s-y-d' or room_choice == u'doble-s-y-d':
+        elif room_choice == 'albergue-s-y-d' or room_choice == 'doble-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True
@@ -268,8 +268,8 @@ class SignupForm(forms.Form):
         if children_count is not None and children_names is not None:
             children_list = [name.strip() for name in children_names.split('\n') if name.strip()]
             if children_count != len(children_list):
-                self._errors['children_count'] = self.error_class([u'El número no coincide'])
-                self._errors['children_names'] = self.error_class([u'Tienes que un nombre en cada fila'])
+                self._errors['children_count'] = self.error_class(['El número no coincide'])
+                self._errors['children_names'] = self.error_class(['Tienes que un nombre en cada fila'])
                 if children_count is not None:
                     del cleaned_data['children_count']
                 if children_names is not None:
@@ -280,12 +280,12 @@ class SignupForm(forms.Form):
         want_ste_member = cleaned_data.get('want_ste_member')
         room_choice = cleaned_data.get('room_choice')
         if is_ste_member and want_ste_member:
-            self._errors['want_ste_member'] = self.error_class([u'No puedes hacerte socio si ya lo eres'])
+            self._errors['want_ste_member'] = self.error_class(['No puedes hacerte socio si ya lo eres'])
             if want_ste_member is not None:
                 del cleaned_data['want_ste_member']
         else:
             if want_ste_member and room_choice == 'sin-alojamiento':
-                self._errors['want_ste_member'] = self.error_class([u'Si quieres hacerte socio pero no te vas a alojar en el seminario, consulta con la organización'])
+                self._errors['want_ste_member'] = self.error_class(['Si quieres hacerte socio pero no te vas a alojar en el seminario, consulta con la organización'])
                 if want_ste_member is not None:
                     del cleaned_data['want_ste_member']
 
@@ -293,7 +293,7 @@ class SignupForm(forms.Form):
         room_choice = cleaned_data.get('room_choice')
         dinner_menu = cleaned_data.get('dinner_menu')
         if dinner_menu == 'sin-cena' and room_choice != 'sin-alojamiento':
-            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el seminario'])
+            self._errors['dinner_menu'] = self.error_class(['La opción sin cena está disponible sólo si no vas a pernoctar en el seminario'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
 
@@ -315,9 +315,9 @@ class LoginForm(forms.Form):
         user = services.authenticate_user(username, password)
 
         if user is None:
-            raise validators.ValidationError(u'Este usuario no existe o la contraseña es incorrecta.')
+            raise validators.ValidationError('Este usuario no existe o la contraseña es incorrecta.')
         if not user.is_active:
-            raise validators.ValidationError(u'Este usuario está desactivado.')
+            raise validators.ValidationError('Este usuario está desactivado.')
 
         cleaned_data['user'] = user
 
@@ -336,7 +336,7 @@ class ForgotPasswordForm(forms.Form):
 
         user = services.retrieve_user(username)
         if not user:
-            self._errors['username'] = self.error_class([u'Ese nombre de usuario no existe.'])
+            self._errors['username'] = self.error_class(['Ese nombre de usuario no existe.'])
             del cleaned_data['username']
         else:
             cleaned_data['user'] = user
@@ -366,7 +366,7 @@ class ChangePasswordForm(forms.Form):
         if password1 or password2:
             if password1 != password2:
                 # See https://docs.djangoproject.com/en/1.6/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
-                self._errors['password1'] = self.error_class([u'Las dos contraseñas no coinciden.'])
+                self._errors['password1'] = self.error_class(['Las dos contraseñas no coinciden.'])
                 if password1:
                     del cleaned_data['password1']
                 if password2:
@@ -375,7 +375,7 @@ class ChangePasswordForm(forms.Form):
         reminder_code = self.cleaned_data['reminder_code']
         user = services.validate_reminder_code(reminder_code)
         if not user:
-            self._errors['reminder_code'] = self.error_class([u'El código de recuperación de contraseña no es válido o está caducado. Por favor, vuelve a la página de entrada y empieza de nuevo.'])
+            self._errors['reminder_code'] = self.error_class(['El código de recuperación de contraseña no es válido o está caducado. Por favor, vuelve a la página de entrada y empieza de nuevo.'])
             del cleaned_data['reminder_code']
         else:
             cleaned_data['user'] = user
@@ -426,7 +426,7 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
         if username != self.initial['username']:
             if services.retrieve_user(username):
                 raise validators.ValidationError(
-                    u'Ese usuario ya existe, por favor introduce otro nombre.',
+                    'Ese usuario ya existe, por favor introduce otro nombre.',
                 )
         return username
 
@@ -437,7 +437,7 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
         if password1 or password2:
             if password1 != password2:
                 # See https://docs.djangoproject.com/en/1.6/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
-                self._errors['password1'] = self.error_class([u'Las dos contraseñas no coinciden.'])
+                self._errors['password1'] = self.error_class(['Las dos contraseñas no coinciden.'])
                 if password1:
                     del cleaned_data['password1']
                 if password2:
@@ -453,10 +453,10 @@ class UserProfileEditInscriptionForm(forms.Form):
     dinner_menu = forms.ChoiceField(
         required = False,
         choices=(
-            (u'carne', u'Carne'),
-            (u'pescado', u'Pescado'),
-            (u'otros', u'Otros'),
-            (u'sin-cena', u'No voy a ir a la cena de gala'),
+            ('carne', 'Carne'),
+            ('pescado', 'Pescado'),
+            ('otros', 'Otros'),
+            ('sin-cena', 'No voy a ir a la cena de gala'),
         )
     )
     notes_transport = forms.CharField(
@@ -467,20 +467,20 @@ class UserProfileEditInscriptionForm(forms.Form):
         required = True,
         choices=(
             (
-                u'Albergue (litera y baño comunitario)', (
-                    (u'albergue-completa', u'(litera) completa'),
-                    (u'albergue-v-a-d', u'(litera) viernes a domingo'),
-                    (u'albergue-s-y-d', u'(litera) sábado y domingo'),
+                'Albergue (litera y baño comunitario)', (
+                    ('albergue-completa', '(litera) completa'),
+                    ('albergue-v-a-d', '(litera) viernes a domingo'),
+                    ('albergue-s-y-d', '(litera) sábado y domingo'),
                 )
             ),(
-                u'Habitación doble con baño propio', (
-                    (u'doble-completa', u'(doble) completa'),
-                    (u'doble-v-a-d', u'(doble) viernes a domingo'),
-                    (u'doble-s-y-d', u'(doble) sábado y domingo'),
+                'Habitación doble con baño propio', (
+                    ('doble-completa', '(doble) completa'),
+                    ('doble-v-a-d', '(doble) viernes a domingo'),
+                    ('doble-s-y-d', '(doble) sábado y domingo'),
                 )
             ),
-            (u'sin-alojamiento', u'No voy a pernoctar en el seminario'),
-            (u'otros', u'Otros'),
+            ('sin-alojamiento', 'No voy a pernoctar en el seminario'),
+            ('otros', 'Otros'),
         )
     )
     room_preferences = forms.CharField(
@@ -520,7 +520,7 @@ class UserProfileEditInscriptionForm(forms.Form):
         age = self.cleaned_data['age']
         if age < 2:
             raise validators.ValidationError(
-                u'Niños menores de 2 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
+                'Niños menores de 2 años no necesitan rellenar ficha, sólo indicarlo en la de sus padres.',
             )
         return age
 
@@ -534,15 +534,15 @@ class UserProfileEditInscriptionForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == u'albergue-completa' or room_choice == u'doble-completa':
+        if room_choice == 'albergue-completa' or room_choice == 'doble-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-v-a-d' or room_choice == u'doble-v-a-d':
+        elif room_choice == 'albergue-v-a-d' or room_choice == 'doble-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == u'albergue-s-y-d' or room_choice == u'doble-s-y-d':
+        elif room_choice == 'albergue-s-y-d' or room_choice == 'doble-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True
@@ -555,7 +555,7 @@ class UserProfileEditInscriptionForm(forms.Form):
         room_choice = cleaned_data.get('room_choice')
         dinner_menu = cleaned_data.get('dinner_menu')
         if dinner_menu == 'sin-cena' and room_choice != 'sin-alojamiento':
-            self._errors['dinner_menu'] = self.error_class([u'La opción sin cena está disponible sólo si no vas a pernoctar en el seminario'])
+            self._errors['dinner_menu'] = self.error_class(['La opción sin cena está disponible sólo si no vas a pernoctar en el seminario'])
             if dinner_menu is not None:
                 del cleaned_data['dinner_menu']
 

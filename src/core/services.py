@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import locale
 
 from .models import UserProfile, Activity
+from functools import reduce
 
 MAX_USERS = 150
 
@@ -18,11 +19,11 @@ MAX_USERS = 150
 def pre_register_user(user_data, home_url):
 
     mail_managers(
-        subject = u'[Estelcon Admin] Nueva preinscripción en la Estelcon: %s %s' % (
+        subject = '[Estelcon Admin] Nueva preinscripción en la Estelcon: %s %s' % (
             user_data['first_name'], user_data['last_name']
         ),
         message =
-u'''
+'''
 Se ha preinscrito un nuevo usuario con nombre %s %s.
 
  - Alias: %s
@@ -40,9 +41,9 @@ Notas:
 '''
 % (user_data['first_name'], user_data['last_name'], user_data['alias'], user_data['smial'],
    user_data['email'], user_data['phone'], user_data['city'], user_data['age'],
-   u'Sí' if user_data['day_1'] else u'No',
-   u'Sí' if user_data['day_2'] else u'No',
-   u'Sí' if user_data['day_3'] else u'No',
+   'Sí' if user_data['day_1'] else 'No',
+   'Sí' if user_data['day_2'] else 'No',
+   'Sí' if user_data['day_3'] else 'No',
    user_data['notes']),
     )
 
@@ -108,7 +109,7 @@ def create_new_user(user_data, home_url):
 #enviaremos más instrucciones.
 #''' % (profile.quota, profile.payment_code)
             profile.payment = \
-u'''
+'''
 Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caixabank
 ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el ingreso el código %s.
 
@@ -117,21 +118,21 @@ anterioridad a esa fecha, tu plaza quedará anulada.
 ''' % (profile.quota, profile.payment_code)
         else:
             profile.payment = \
-u'''
+'''
 Ponte en contacto con la organización para que te indiquemos el importe a pagar y la forma de pago.
 '''
     else:
         profile.payment = \
-u'''
+'''
 En cola de espera con posición %d. La cuota es de %d€ y el código %s, pero no debes hacer
 ningún ingreso hasta que se pueda confirmar tu asistencia.
 ''' % (queue, profile.quota, profile.payment_code)
     profile.save()
 
     mail_managers(
-        subject = u'[Estelcon Admin] Nueva inscripción en la Estelcon: %s (%s)' % (user.username, user.get_full_name()),
+        subject = '[Estelcon Admin] Nueva inscripción en la Estelcon: %s (%s)' % (user.username, user.get_full_name()),
         message =
-u'''
+'''
 Se ha creado una nueva ficha para %s, con usuario %s y email %s.
 Su ficha puede consultarse directamente en %s
 '''
@@ -157,7 +158,7 @@ Su ficha puede consultarse directamente en %s
 #%s
 #''' % (user.first_name, profile.quota, profile.payment_code, home_url)
             message_user = \
-u'''
+'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
@@ -177,7 +178,7 @@ El equipo organizador.
 ''' % (user.first_name, profile.quota, profile.payment_code, home_url)
         else:
             message_user = \
-u'''
+'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
@@ -194,7 +195,7 @@ El equipo organizador.
 
     else:
         message_user = \
-u'''
+'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
 Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos ha sido alcanzado, por
@@ -212,7 +213,7 @@ El equipo organizador.
 ''' % (user.first_name, queue, profile.quota, profile.payment_code, home_url)
 
     send_mail(
-        subject = u'[Estelcon] Notificación de inscripción en la Estelcon',
+        subject = '[Estelcon] Notificación de inscripción en la Estelcon',
         message = message_user,
         from_email = settings.MAIL_FROM,
         recipient_list = [user.email],
@@ -325,9 +326,9 @@ def send_password_reminder(user, change_password_url_pattern):
     profile.save()
 
     send_mail(
-        subject = u'[Estelcon] Olvido de contraseña',
+        subject = '[Estelcon] Olvido de contraseña',
         message =
-u'''
+'''
 Para cambiar tu contraseña visita el siguiente enlace:
 
 %s
@@ -380,22 +381,22 @@ def change_user_personal_data(user, new_data, home_url):
 
     for field_name in ['username', 'email', 'first_name', 'last_name']:
         if getattr(user, field_name) != new_data[field_name]:
-            changed_fields.append(unicode(user._meta.get_field_by_name(field_name)[0].verbose_name))
+            changed_fields.append(str(user._meta.get_field_by_name(field_name)[0].verbose_name))
             setattr(user, field_name, new_data[field_name])
     user.save()
 
     profile = user.profile
     for field_name in ['alias', 'smial', 'phone', 'city', 'age']:
         if getattr(profile, field_name) != new_data[field_name]:
-            changed_fields.append(unicode(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            changed_fields.append(str(profile._meta.get_field_by_name(field_name)[0].verbose_name))
             setattr(profile, field_name, new_data[field_name])
     profile.save()
 
     changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
     mail_managers(
-        subject = u'[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
+        subject = '[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
         message =
-u'''
+'''
 %s, con usuario %s y email %s, ha modificado sus datos personales en la web:
 
 %s
@@ -406,9 +407,9 @@ Su ficha puede consultarse directamente en %s
     )
 
     send_mail(
-        subject = u'[Estelcon] Notificación de modificación de ficha personal',
+        subject = '[Estelcon] Notificación de modificación de ficha personal',
         message =
-u'''
+'''
 Datos modificados.
 
 Se ha registrado correctamente el cambio de tus datos personales. Puedes consultarlos entrando en
@@ -433,15 +434,15 @@ def change_user_inscription_data(user, new_data, home_url):
                 'shirts_L', 'shirts_XL', 'shirts_XXL',
             ]:
         if getattr(profile, field_name) != new_data[field_name]:
-            changed_fields.append(unicode(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            changed_fields.append(str(profile._meta.get_field_by_name(field_name)[0].verbose_name))
             setattr(profile, field_name, new_data[field_name])
     profile.save()
 
     changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
     mail_managers(
-        subject = u'[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
+        subject = '[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
         message =
-u'''
+'''
 %s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web:
 
 %s
@@ -452,9 +453,9 @@ Su ficha puede consultarse directamente en %s
     )
 
     send_mail(
-        subject = u'[Estelcon] Notificación de modificación de ficha personal',
+        subject = '[Estelcon] Notificación de modificación de ficha personal',
         message =
-u'''
+'''
 Datos modificados.
 
 Se ha registrado correctamente el cambio de tus datos de inscripción. Puedes consultarlos entrando en
@@ -554,7 +555,7 @@ def get_schedule():
                     ncol = ncol + 1
 
                 #if has_data:
-                blocks.append((block.strftime('%H:%M').decode('utf-8'), columns))
+                blocks.append((block.strftime('%H:%M'), columns))
                 block = block + timedelta(minutes=30)
 
             # Remove all empty blocks at the beginning and the end of the day
@@ -570,7 +571,7 @@ def get_schedule():
                         break
                     del blocks[i]
 
-            days.append((day.strftime(u'%A %d').decode('utf-8').upper(), blocks))
+            days.append((day.strftime('%A %d').upper(), blocks))
             day = day + timedelta(days=1)
 
     return (activ_without_hour, days)
@@ -624,9 +625,9 @@ def subscribe_to_activity(user, activity_id):
         maxplacesreached = True
 
     mail_managers(
-        subject = u'[Estelcon Admin] Inscripción en actividad %s' % (activity.title),
+        subject = '[Estelcon Admin] Inscripción en actividad %s' % (activity.title),
         message =
-u'''
+'''
 El usuario %s (%s) se ha inscrito en la actividad %s.
 '''
 % (user.username, user.get_full_name(), activity.title),
@@ -634,9 +635,9 @@ El usuario %s (%s) se ha inscrito en la actividad %s.
 
     for owner in activity.owners.all():
         send_mail(
-            subject = u'[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
+            subject = '[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
             message =
-u'''
+'''
 El usuario %s (%s) se ha inscrito en la actividad %s.
 '''
 % (user.username, user.get_full_name(), activity.title),
@@ -646,9 +647,9 @@ El usuario %s (%s) se ha inscrito en la actividad %s.
         )
         if maxplacesreached:
             send_mail(
-                subject = u'[Estelcon] ATENCION: Tu actividad ha superado el máximo de plazas.',
+                subject = '[Estelcon] ATENCION: Tu actividad ha superado el máximo de plazas.',
                 message =
-u'''
+'''
 Ponte en contacto con la organización, por favor, ya que tu actividad '%s' ya ha sobrepasado el máximo de plazas.
 Actualmente tienes %d inscritos en una actividad con un máximo establecido por ti de %d.
 '''
@@ -660,18 +661,18 @@ Actualmente tienes %d inscritos en una actividad con un máximo establecido por 
 
     if maxplacesreached:
         message_participants_maxplaces = \
-u'''
+'''
 ATENCION, tu inscripción ha superado el número máximo de plazas disponibles. Los responsables
 ya han sido notificados de este hecho y tomarán una decisión en breve. Si no recibes
 contestación en pocos días no dudes en escribir directamente a la organización.
 '''
     else:
-        message_participants_maxplaces = u'Te encuentras dentro del número máximo de plazas.'
+        message_participants_maxplaces = 'Te encuentras dentro del número máximo de plazas.'
 
     send_mail(
-        subject = u'[Estelcon] Inscripción en actividad de la Estelcon',
+        subject = '[Estelcon] Inscripción en actividad de la Estelcon',
         message =
-u'''
+'''
 Se ha registrado tu inscripción en la actividad con título '%s'.
 
 Si en el futuro deseas cancelarla, escribe a la organización.
@@ -688,9 +689,9 @@ Si en el futuro deseas cancelarla, escribe a la organización.
 def change_activity(user, activity, home_url):
 
     mail_managers(
-        subject = u'[Estelcon Admin] Modificación de actividad "%s"' % (activity.title),
+        subject = '[Estelcon Admin] Modificación de actividad "%s"' % (activity.title),
         message =
-u'''
+'''
 El usuario %s (%s) ha modificado una actividad
 
 Título: %s
@@ -714,9 +715,9 @@ Notas para la organización:
 )
 
     send_mail(
-        subject = u'[Estelcon] Se ha modificado la actividad "%s"' % (activity.title),
+        subject = '[Estelcon] Se ha modificado la actividad "%s"' % (activity.title),
         message =
-u'''
+'''
 Se ha modificado correctamente la actividad con título '%s'.
 
 ¡Muchas gracias por participar! Entre todos haremos una gran Mereth Aderthad.
@@ -734,9 +735,9 @@ El equipo organizador.
 def send_proposal(user, data, home_url):
 
     mail_managers(
-        subject = u'[Estelcon Admin] Actividad propuesta: %s' % (data['title']),
+        subject = '[Estelcon Admin] Actividad propuesta: %s' % (data['title']),
         message =
-u'''
+'''
 El usuario %s (%s) ha propuesto una actividad.
 
 Título: %s
@@ -768,9 +769,9 @@ Notas para la organización:
 )
 
     send_mail(
-        subject = u'[Estelcon] Actividad propuesta para la Estelcon',
+        subject = '[Estelcon] Actividad propuesta para la Estelcon',
         message =
-u'''
+'''
 Se ha enviado a los organizadores tu propuesta de actividad con título
 '%s'.
 
@@ -914,7 +915,7 @@ def listing_dinner_menus():
 
 
 def listing_unpaid_users():
-    profiles = UserProfile.objects.filter(payment__contains=u'Pendiente de verificación del pago')
+    profiles = UserProfile.objects.filter(payment__contains='Pendiente de verificación del pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
@@ -925,7 +926,7 @@ def listing_unpaid_users():
 
 
 def listing_paid_users():
-    profiles = UserProfile.objects.exclude(payment__contains=u'Pendiente de verificación del pago')
+    profiles = UserProfile.objects.exclude(payment__contains='Pendiente de verificación del pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
@@ -1031,10 +1032,10 @@ def listing_everything():
         p.payment,
     ) for p in profiles]
 
-    rows = [(u"Nombre", u"Email", u"Staff", u"Pseudónimo", u"Smial", u"Teléfono", u"Población", u"Edad", u"Menú",
-             u"Comida", u"Viernes", u"Sábado", u"Domingo", u"Transporte", u"Habitación", u"Dormir", u"Nº hijos",
-             u"Hijos", u"Es socio", u"Quiere ser", u"Escudero", u"Primera vez", u"Barco", u"Notas", u"S", u"M",
-             u"L", u"XL", u"XXL", u"Código", u"Cuota", u"Pagado", u"Estado de pago")] + rows
+    rows = [("Nombre", "Email", "Staff", "Pseudónimo", "Smial", "Teléfono", "Población", "Edad", "Menú",
+             "Comida", "Viernes", "Sábado", "Domingo", "Transporte", "Habitación", "Dormir", "Nº hijos",
+             "Hijos", "Es socio", "Quiere ser", "Escudero", "Primera vez", "Barco", "Notas", "S", "M",
+             "L", "XL", "XXL", "Código", "Cuota", "Pagado", "Estado de pago")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
 

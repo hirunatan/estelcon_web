@@ -29,7 +29,7 @@ class PreSignupView(FormView):
         return super(PreSignupView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.info(self.request, u'Se ha enviado tu preinscripción a los organizadores, en breve se pondrán en contacto contigo.')
+        messages.info(self.request, 'Se ha enviado tu preinscripción a los organizadores, en breve se pondrán en contacto contigo.')
         return '/index.html'
 
 
@@ -108,7 +108,7 @@ class ForgotPasswordView(FormView):
             change_password_url_pattern = settings.PROTOCOL + '://' + settings.SITE_URL +
                 reverse('change-password') + '?reminder_code=%s',
         )
-        messages.info(self.request, u'Se ha enviado a tu dirección de correo un mensaje con instrucciones para crear una nueva contraseña.')
+        messages.info(self.request, 'Se ha enviado a tu dirección de correo un mensaje con instrucciones para crear una nueva contraseña.')
         return super(ForgotPasswordView, self).form_valid(form)
 
 
@@ -127,7 +127,7 @@ class ChangePasswordView(FormView):
             user = form.cleaned_data['user'],
             password = form.cleaned_data['password1']
         )
-        messages.info(self.request, u'Tu contraseña ha sido cambiada. Ya puedes entrar con ella.')
+        messages.info(self.request, 'Tu contraseña ha sido cambiada. Ya puedes entrar con ella.')
         return super(ChangePasswordView, self).form_valid(form)
 
 
@@ -173,7 +173,7 @@ class UserProfileEditPersonalView(FormView):
             new_data = form.cleaned_data,
             home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
         )
-        messages.info(self.request, u'Datos modificados correctamente')
+        messages.info(self.request, 'Datos modificados correctamente')
         return super(UserProfileEditPersonalView, self).form_valid(form)
 
 
@@ -206,7 +206,7 @@ class UserProfileEditInscriptionView(FormView):
             new_data = form.cleaned_data,
             home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
         )
-        messages.info(self.request, u'Datos modificados correctamente')
+        messages.info(self.request, 'Datos modificados correctamente')
         return super(UserProfileEditInscriptionView, self).form_valid(form)
 
 
@@ -227,7 +227,7 @@ class UserListingView(TemplateView):
             self.listing_data = services.user_listing(listing_id)
 
         if not listing_id or self.listing_data is None:
-            return HttpResponseNotFound(u'Número de listado incorrecto: %d' % listing_id)
+            return HttpResponseNotFound('Número de listado incorrecto: %d' % listing_id)
 
         return super(UserListingView, self).get(*args, **kwargs)
 
