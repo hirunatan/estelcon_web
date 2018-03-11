@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from .views import statichtml
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^(?P<html_id>.*).html$', statichtml),
     url(r'^$', statichtml),
-)
+]

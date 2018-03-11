@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 
@@ -15,17 +15,17 @@ def user_is_staff(user):
 
 if settings.PRE_SIGNUP_FORM:
     # Option initial (pre signup form only send mail to admins, does not create real users)
-    urlpatterns = patterns('',
+    urlpatterns = [
         url(r'^merethaderthad_inscripcion/$', PreSignupView.as_view(),
             name='signup')
-    )
+    ]
 else:
-    urlpatterns = patterns('',
+    urlpatterns = [
         url(r'^merethaderthad_inscripcion/$', SignupView.as_view(),
             name='signup')
-    )
+    ]
 
-urlpatterns += patterns('',
+urlpatterns += [
     url(r'^merethaderthad_entrada/$', LoginView.as_view(),
         name='login'),
     url(r'^merethaderthad_salida/$', LogoutView.as_view(),
@@ -44,5 +44,5 @@ urlpatterns += patterns('',
         name='user-listings-index'),
     url(r'^listados/(?P<listing_id>\d+)/$', user_passes_test(user_is_staff)(UserListingView.as_view()),
         name='user-listing'),
-)
+]
 
