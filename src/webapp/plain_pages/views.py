@@ -8,8 +8,7 @@ from django.http import Http404
 def statichtml(request, html_id='index'):
     # try:
         return render_to_response(
-            'webapp/plain_pages/' + html_id + '.html',
-            context = RequestContext(request),
+            'webapp/plain_pages/' + html_id + '.html'
         )
     # except TemplateDoesNotExist:
     #     raise Http404('No se encuentra el documento %s' % html_id)
