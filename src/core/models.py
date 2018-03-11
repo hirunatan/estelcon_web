@@ -107,9 +107,9 @@ class Activity(models.Model):
     max_places = models.IntegerField(u'Nº máximo de plazas', default = 0)
     logistics = models.TextField(u'Necesidades logísticas', blank = True)
     notes_organization = models.TextField(u'Comentarios', blank = True)
-    has_view_page = models.BooleanField(u'Tiene página propia')
-    show_owners = models.BooleanField(u'Mostrar responsables')
-    requires_inscription = models.BooleanField(u'Requiere inscripción')
+    has_view_page = models.BooleanField(u'Tiene página propia', default = False)
+    show_owners = models.BooleanField(u'Mostrar responsables', default = False)
+    requires_inscription = models.BooleanField(u'Requiere inscripción', default = False)
 
     owners = models.ManyToManyField(User, verbose_name = u'Responsables', related_name = 'owner_of')
     organizers = models.ManyToManyField(User,
