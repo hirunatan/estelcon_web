@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.auth import login, logout
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponseNotFound, HttpResponseForbidden

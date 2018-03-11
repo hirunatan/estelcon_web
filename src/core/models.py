@@ -9,7 +9,7 @@ import string
 
 class UserProfile(models.Model):
     # Link with the Django user
-    user = models.OneToOneField(User, related_name='profile')
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     # Additional info
     alias = models.CharField('pseudónimo', max_length=100, blank = True)
     smial = models.CharField('smial', max_length=100, blank = True)
