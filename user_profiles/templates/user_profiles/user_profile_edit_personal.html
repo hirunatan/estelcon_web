@@ -1,0 +1,82 @@
+{% extends "dynamic_page.html" %}
+
+{% block content %}
+<h1><span>La Mereth Aderthad</span> <span>Ficha personal</span> Modificar</h1>
+<p>Aquí puedes modificar cualquiera de tus datos personales.</p>
+<p>Puedes cambiar tu contraseña introduciendo un nuevo valor en las dos casillas.</p>
+<p>Si modificas tu nombre de usuario o contraseña, tendrás que usarlos para volver
+a entrar a la página.</p>
+
+<form method="post" action=".">
+  {% csrf_token %}
+  <table style="vertical-align:top">
+    <tr>
+      <td><p title="Introduce un nombre corto y sin espacios. Será sensible a las mayúsculas y minúsculas.">
+        <label for="id_username">Nombre de usuario: *</label><br/>
+        {{ form.username }}
+        {% if form.username.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.username.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Introduce tu dirección de correo electrónico.">
+        <label for="id_email">Correo electrónico: *</label><br/>
+        {{ form.email }}
+        {% if form.email.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.email.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+     </tr><tr>
+      <td><p title="Introduce una contraseña de al menos 5 caracteres de largo.">
+        <label for="id_password1">Contraseña: *</label><br/>
+        {{ form.password1 }}
+        {% if form.password1.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.password1.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Repite la contraseña para confirmar que está bien escrita.">
+        <label for="id_password2">Confirmar contraseña: *</label><br/>
+        {{ form.password2 }}
+        {% if form.password2.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.password2.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr><tr>
+      <td><p title="Introduce tu nombre.">
+        <label for="id_first_name">Nombre: *</label><br/>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.first_name.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Introduce tus apellidos.">
+        <label for="id_last_name">Apellidos: *</label><br/>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.last_name.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr><tr>
+      <td><p title="Introduce tu pseudónimo en la STE, si lo tienes. Si no, puedes dejarlo en blanco.">
+        <label for="id_alias">Pseudónimo:</label><br/>
+        {{ form.alias }}
+        {% if form.alias.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.alias.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Nombre del smial al que perteneces, o en blanco si no eres de la STE.">
+        <label for="id_smial">Smial:</label><br/>
+        {{ form.smial }}
+        {% if form.smial.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.smial.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr><tr>
+      <td><p title="Introduce un teléfono de contacto.">
+        <label for="id_phone">Teléfono: *</label><br/>
+        {{ form.phone }}
+        {% if form.phone.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.phone.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+      <td><p title="Introduce la población donde resides habitualmente.">
+        <label for="id_city">Población: *</label><br/>
+        {{ form.city }}
+        {% if form.city.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.city.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr>
+    </tr><tr>
+      <td colspan="2"><p title="Recuerda que los menores necesitan venir con sus padres o una autorización firmada. Los niños de entre 2 y 12 años tienen un descuento en la inscripción, y los menores de 2 años no necesitan inscripción si no requieren cama ni comida.">
+        <label for="id_age">Edad: *</label><br/>
+        {{ form.age }} Importante para menores o niños de hasta 12 años.
+        {% if form.age.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.age.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p></td>
+    </tr>
+  </table>
+  <p>
+    <input type="submit" value="enviar"/>
+  </p>
+  <div align="right"><a href="{% url 'user-profile' %}">Cancelar</a></div>
+</form>
+{% endblock %}

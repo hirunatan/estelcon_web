@@ -1,0 +1,22 @@
+<html>
+<body>
+  {% if rows %}
+    <table>
+    {% for row in rows %}
+      <tr>
+      {% for cell in row %}
+        <td>{{ cell }}</td>
+      {% endfor %}
+    {% endfor %}
+    </table>
+  {% endif %}
+
+  {% if block and rows %}
+    <hr>
+  {% endif %}
+
+  {% if block %}
+    <p>{{ block }}</p>
+  {% endif %}
+</body>
+

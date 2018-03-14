@@ -1,0 +1,10 @@
+{% extends "dynamic_page.html" %}
+
+{% block dynamic_content %}
+<h1><span>La Mereth Aderthad</span> Ficha personal</h1>
+<p>Te has desconectado con éxito.</p>
+
+<p>Ahora puedes seguir navegando por la web, o si quieres, volverte a registrar con tu usuario
+y contraseña entrando en la <a href="{% url 'user-profile' %}">Ficha personal</a>.</p>
+
+{% endblock %}

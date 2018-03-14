@@ -1,0 +1,23 @@
+{% extends "dynamic_page.html" %}
+
+{% block dynamic_content %}
+<h1><span>La Mereth Aderthad</span> <span>Ficha personal</span> Propuesta de actividad</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        <h3 class="message">{{ message }}</h3>
+    {% endfor %}
+{% endif %}
+
+<p>Estudiaremos la actividad que propones y le buscaremos un hueco en la Estelcon. En cuanto
+lo hagamos, podrás ver cómo aparece en el Programa de actividades,
+incluyendo una ficha rellena con los datos que nos has enviado (al menos con la parte pública).
+Y si tú o cualquiera de las personas designadas como responsables accedéis a la web con vuestro
+usuario y contraseña, podréis consultar y modificar todos los datos.</p>
+
+<p>Si tenemos alguna duda o consulta que hacerte, contactaremos contigo a través del correo
+electrónico o el teléfono que indicaste al registrarte.</p>
+
+<p>¡Muchas gracias por participar! Entre todos haremos una gran Mereth Aderthad.</p>
+
+{% endblock %}
