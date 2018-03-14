@@ -10,19 +10,20 @@ from datetime import datetime, timedelta
 import locale
 
 from .models import UserProfile, Activity
+from functools import reduce
 
-MAX_USERS = 105
+MAX_USERS = 150
 
 #TODO: usar templates para los textos de los correos
 
 def pre_register_user(user_data, home_url):
 
     mail_managers(
-        subject = u'[Estelcon Admin] Nueva preinscripción en la Estelcon: %s %s' % (
+        subject = '[Estelcon Admin] Nueva preinscripción en la Estelcon: %s %s' % (
             user_data['first_name'], user_data['last_name']
         ),
         message =
-u'''
+'''
 Se ha preinscrito un nuevo usuario con nombre %s %s.
 
  - Alias: %s
@@ -40,9 +41,9 @@ Notas:
 '''
 % (user_data['first_name'], user_data['last_name'], user_data['alias'], user_data['smial'],
    user_data['email'], user_data['phone'], user_data['city'], user_data['age'],
-   u'Sí' if user_data['day_1'] else u'No',
-   u'Sí' if user_data['day_2'] else u'No',
-   u'Sí' if user_data['day_3'] else u'No',
+   'Sí' if user_data['day_1'] else 'No',
+   'Sí' if user_data['day_2'] else 'No',
+   'Sí' if user_data['day_3'] else 'No',
    user_data['notes']),
     )
 
@@ -51,8 +52,8 @@ def create_new_user(user_data, home_url):
 
     quota = _calculate_quota(user_data)
 
-    if user_data['room_choice'] in ["inscripcion-completa", "fin-de-semana"]:
-        queue = max(0, UserProfile.objects.filter(room_choice__in=["inscripcion-completa", "fin-de-semana"]).count() - MAX_USERS)
+    if user_data['room_choice'] not in ["sin-alojamiento", "otros"]:
+        queue = max(0, UserProfile.objects.filter(room_choice__in=["sin-alojamiento", "otros"]).count() - MAX_USERS)
     else:
         queue = 0
 
@@ -86,6 +87,8 @@ def create_new_user(user_data, home_url):
         is_ste_member = user_data['is_ste_member'],
         want_ste_member = user_data['want_ste_member'],
         squire = user_data['squire'],
+        first_estelcon = user_data['first_estelcon'],
+        want_boat = user_data['want_boat'],
         notes_general = user_data['notes_general'],
         shirts_S = user_data['shirts_S'],
         shirts_M = user_data['shirts_M'],
@@ -106,33 +109,30 @@ def create_new_user(user_data, home_url):
 #enviaremos más instrucciones.
 #''' % (profile.quota, profile.payment_code)
             profile.payment = \
-u'''
+'''
 Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caixabank
-ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el ingreso el código %s.
+ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el ingreso el código %s.
 
-Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
-
-Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
-tu nombre completo, dirección postal, DNI y el mismo código %s.
-''' % (profile.quota, profile.payment_code, profile.payment_code)
+''' % (profile.quota, profile.payment_code)
         else:
             profile.payment = \
-u'''
+'''
 Ponte en contacto con la organización para que te indiquemos el importe a pagar y la forma de pago.
 '''
     else:
-	profile.payment = \
-u'''
+        profile.payment = \
+'''
 En cola de espera con posición %d. La cuota es de %d€ y el código %s, pero no debes hacer
 ningún ingreso hasta que se pueda confirmar tu asistencia.
 ''' % (queue, profile.quota, profile.payment_code)
     profile.save()
 
     mail_managers(
-        subject = u'[Estelcon Admin] Nueva inscripción en la Estelcon: %s (%s)' % (user.username, user.get_full_name()),
+        subject = '[Estelcon Admin] Nueva inscripción en la Estelcon: %s (%s)' % (user.username, user.get_full_name()),
         message =
-u'''
+'''
 Se ha creado una nueva ficha para %s, con usuario %s y email %s.
 Su ficha puede consultarse directamente en %s
 '''
@@ -158,30 +158,27 @@ Su ficha puede consultarse directamente en %s
 #%s
 #''' % (user.first_name, profile.quota, profile.payment_code, home_url)
             message_user = \
-u'''
+'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
 La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-cuenta de Caixabank ES70 2100 1533 1102 0034 8087 a nombre de ESATUR XXI, S.L., indicando en el
+cuenta de Caixabank ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el
 ingreso el código %s.
 
-Por favor recuerda hacer el ingreso antes del 30 de septiembre. Si no se recibe el pago con
+Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
-
-Si necesitas factura de este pago, escribe un email a administracion@esatur.com indicando
-tu nombre completo, dirección postal, DNI y el mismo código %s.
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
 El equipo organizador.
 %s
-''' % (user.first_name, profile.quota, profile.payment_code, profile.payment_code, home_url)
+''' % (user.first_name, profile.quota, profile.payment_code, home_url)
         else:
             message_user = \
-u'''
+'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
@@ -197,11 +194,11 @@ El equipo organizador.
 ''' % (user.first_name, home_url)
 
     else:
-	message_user = \
-u'''
+        message_user = \
+'''
 ¡Gracias por inscribirte en la Mereth Aderthad, %s!.
 
-Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos en el hotel ha sido alcanzado, por
+Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos ha sido alcanzado, por
 lo que no podemos garantizar tu alojamiento. ¡Lo sentimos muchísimo!
 
 Pero de todas formas, te ponemos en cola de espera por si aparece un hueco vacante y podemos dar paso a tu inscripción.
@@ -216,7 +213,7 @@ El equipo organizador.
 ''' % (user.first_name, queue, profile.quota, profile.payment_code, home_url)
 
     send_mail(
-        subject = u'[Estelcon] Notificación de inscripción en la Estelcon',
+        subject = '[Estelcon] Notificación de inscripción en la Estelcon',
         message = message_user,
         from_email = settings.MAIL_FROM,
         recipient_list = [user.email],
@@ -227,24 +224,48 @@ El equipo organizador.
 
 
 def _calculate_quota(user_data):
-    quota = 0.0
+    if user_data['room_choice'] == 'albergue-completa':
+        quota = 175.0
+    elif user_data['room_choice'] == 'albergue-v-a-d':
+        quota = 150.0
+    elif user_data['room_choice'] == 'albergue-s-y-d':
+        quota = 125.0
+    elif user_data['room_choice'] == 'doble-completa':
+        quota = 195.0
+    elif user_data['room_choice'] == 'doble-v-a-d':
+        quota = 175.0
+    elif user_data['room_choice'] == 'doble-s-y-d':
+        quota = 140.0
+    elif user_data['room_choice'] == 'sin-alojamiento':
+        quota = 120.0
+    else:
+        return 0.0
 
     if user_data['age'] <= 12:
-        if user_data['room_choice'] == 'sin-alojamiento':
-            quota = 40
+        quota = quota * 0.75
+
+    if not user_data['is_ste_member'] and user_data['room_choice'] != 'sin-alojamiento':
+        quota += 10.0
+
+    if user_data['want_ste_member']:
+        if user_data['room_choice'] != 'sin-alojamiento':
+            quota += 2.0
         else:
-            quota = 80
-    else:
-        if user_data['room_choice'] == 'inscripcion-completa':
-            quota = 160
-        elif user_data['room_choice'] == 'fin-de-semana':
-            quota = 110
-        elif user_data['room_choice'] == 'sin-alojamiento':
-            quota = 40
+            quota += 12.0
+
+    if user_data['want_boat']:
+        quota += 15.0
+
+    num_shirts = user_data['shirts_S'] + \
+                 user_data['shirts_M'] + \
+                 user_data['shirts_L'] + \
+                 user_data['shirts_XL'] + \
+                 user_data['shirts_XXL']
+    quota += num_shirts * 12.0
 
     #if user_data['room_choice'] == 'sin-alojamiento':
 
-    #    if user_data['dinner_menu'] == 'sin_cena':
+    #    if user_data['dinner_menu'] == 'sin-cena':
     #        quota += 12
     #    else:
     #        quota += 36
@@ -305,9 +326,9 @@ def send_password_reminder(user, change_password_url_pattern):
     profile.save()
 
     send_mail(
-        subject = u'[Estelcon] Olvido de contraseña',
+        subject = '[Estelcon] Olvido de contraseña',
         message =
-u'''
+'''
 Para cambiar tu contraseña visita el siguiente enlace:
 
 %s
@@ -353,36 +374,42 @@ def get_activities_to_participate_by(user):
 
 
 def change_user_personal_data(user, new_data, home_url):
-    user.username = new_data['username'];
-    user.email = new_data['email'];
+    changed_fields = []
+
     if new_data['password1']:
         user.set_password(new_data['password1']);
-    user.first_name=new_data['first_name']
-    user.last_name=new_data['last_name']
+
+    for field_name in ['username', 'email', 'first_name', 'last_name']:
+        if getattr(user, field_name) != new_data[field_name]:
+            changed_fields.append(str(user._meta.get_field_by_name(field_name)[0].verbose_name))
+            setattr(user, field_name, new_data[field_name])
     user.save()
 
     profile = user.profile
-    profile.alias=new_data['alias']
-    profile.smial=new_data['smial']
-    profile.phone=new_data['phone']
-    profile.city=new_data['city']
-    profile.age=new_data['age']
+    for field_name in ['alias', 'smial', 'phone', 'city', 'age']:
+        if getattr(profile, field_name) != new_data[field_name]:
+            changed_fields.append(str(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            setattr(profile, field_name, new_data[field_name])
     profile.save()
 
+    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
     mail_managers(
-        subject = u'[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
+        subject = '[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
         message =
-u'''
-%s, con usuario %s y email %s, ha modificado sus datos personales en la web.
+'''
+%s, con usuario %s y email %s, ha modificado sus datos personales en la web:
+
+%s
+
 Su ficha puede consultarse directamente en %s
 '''
-% (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
+% (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
     )
 
     send_mail(
-        subject = u'[Estelcon] Notificación de modificación de ficha personal',
+        subject = '[Estelcon] Notificación de modificación de ficha personal',
         message =
-u'''
+'''
 Datos modificados.
 
 Se ha registrado correctamente el cambio de tus datos personales. Puedes consultarlos entrando en
@@ -399,35 +426,36 @@ El equipo organizador.
 
 
 def change_user_inscription_data(user, new_data, home_url):
+    changed_fields = []
+
     profile = user.profile
-    profile.notes_food=new_data['notes_food']
-    profile.dinner_menu=new_data['dinner_menu']
-    profile.notes_transport=new_data['notes_transport']
-    profile.room_choice=new_data['room_choice']
-    profile.room_preferences=new_data['room_preferences']
-    profile.squire=new_data['squire']
-    profile.notes_general=new_data['notes_general']
-    profile.shirts_S=new_data['shirts_S']
-    profile.shirts_M=new_data['shirts_M']
-    profile.shirts_L=new_data['shirts_L']
-    profile.shirts_XL=new_data['shirts_XL']
-    profile.shirts_XXL=new_data['shirts_XXL']
+    for field_name in ['notes_food', 'dinner_menu', 'notes_transport', 'room_choice',
+                'room_preferences', 'squire', 'notes_general', 'shirts_S', 'shirts_M',
+                'shirts_L', 'shirts_XL', 'shirts_XXL',
+            ]:
+        if getattr(profile, field_name) != new_data[field_name]:
+            changed_fields.append(str(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            setattr(profile, field_name, new_data[field_name])
     profile.save()
 
+    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
     mail_managers(
-        subject = u'[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
+        subject = '[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
         message =
-u'''
-%s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web.
+'''
+%s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web:
+
+%s
+
 Su ficha puede consultarse directamente en %s
 '''
-% (user.get_full_name(), user.username, user.email, profile.get_admin_url()),
+% (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
     )
 
     send_mail(
-        subject = u'[Estelcon] Notificación de modificación de ficha personal',
+        subject = '[Estelcon] Notificación de modificación de ficha personal',
         message =
-u'''
+'''
 Datos modificados.
 
 Se ha registrado correctamente el cambio de tus datos de inscripción. Puedes consultarlos entrando en
@@ -464,87 +492,87 @@ def get_schedule():
     days = []
     if len(activ_with_hour) > 0:
 
-	first_day = activ_with_hour[0].start.replace(hour=0, minute=0, second=0, microsecond=0)
-	last_day = activ_with_hour[-1].start.replace(hour=0, minute=0, second=0, microsecond=0)
+        first_day = activ_with_hour[0].start.replace(hour=0, minute=0, second=0, microsecond=0)
+        last_day = activ_with_hour[-1].start.replace(hour=0, minute=0, second=0, microsecond=0)
 
-	# Create the list of days
-	day = first_day
-	while day <= last_day:
+        # Create the list of days
+        day = first_day
+        while day <= last_day:
 
-	    first_block = day.replace(hour=8, minute=00)               # from 08:30h
-	    last_block = first_block + timedelta(hours=20, minutes=30) # until 05:00h next day
-	    rowspans_left = [1, 1, 1]
+            first_block = day.replace(hour=8, minute=00)               # from 08:30h
+            last_block = first_block + timedelta(hours=20, minutes=30) # until 05:00h next day
+            rowspans_left = [1, 1, 1]
 
-	    # Create the list of half hour blocks
-	    blocks = []
-	    block = first_block
-	    while block <= last_block:
+            # Create the list of half hour blocks
+            blocks = []
+            block = first_block
+            while block <= last_block:
 
-	        has_data = False
+                has_data = False
 
-	        # Create the list of columns
-		columns = []
-		ncol = 0
-		while ncol <= 2:
+                # Create the list of columns
+                columns = []
+                ncol = 0
+                while ncol <= 2:
 
-		    if rowspans_left[ncol] > 1:
-		        rowspans_left[ncol] = rowspans_left[ncol] - 1
-			has_data = True
-		    else:
-			# Create the list of activities
-			activities_column = []
-			rowspan = 1
-			for activity in activ_with_hour:
-			    if (activity.start >= block) and \
-			       (activity.start < (block + timedelta(minutes=30))) and \
-			       activity.start.second == ncol:
+                    if rowspans_left[ncol] > 1:
+                        rowspans_left[ncol] = rowspans_left[ncol] - 1
+                        has_data = True
+                    else:
+                        # Create the list of activities
+                        activities_column = []
+                        rowspan = 1
+                        for activity in activ_with_hour:
+                            if (activity.start >= block) and \
+                               (activity.start < (block + timedelta(minutes=30))) and \
+                               activity.start.second == ncol:
 
-			       has_data = True
+                               has_data = True
 
-			       # Calculate the block span of the activity
-			       if activity.end is None:
-				   duration = 0
-			       else:
-				   duration = int((activity.end - activity.start).seconds / 60)
-			       activ_span = (duration - 1) / 30 + 1
-			       if activ_span > rowspan:
-				   rowspan = activ_span
+                               # Calculate the block span of the activity
+                               if activity.end is None:
+                                   duration = 0
+                               else:
+                                   duration = int((activity.end - activity.start).seconds / 60)
+                               activ_span = (duration - 1) / 30 + 1
+                               if activ_span > rowspan:
+                                   rowspan = activ_span
 
-			       activities_column.append(activity)
+                               activities_column.append(activity)
 
                         rowspans_left[ncol] = rowspan
-			if ncol == 0:
-			    colspan = 2
-			    if has_data:
-			        columns.append((rowspan, colspan, activities_column))
-				break
-			else:
-			    colspan = 1
-			    columns.append((rowspan, colspan, activities_column))
+                        if ncol == 0:
+                            colspan = 2
+                            if has_data:
+                                columns.append((rowspan, colspan, activities_column))
+                                break
+                        else:
+                            colspan = 1
+                            columns.append((rowspan, colspan, activities_column))
 
-		    if ncol == 0 and has_data:
-		    	break
-		    ncol = ncol + 1
+                    if ncol == 0 and has_data:
+                        break
+                    ncol = ncol + 1
 
-		#if has_data:
-		blocks.append((block.strftime('%H:%M').decode('utf-8'), columns))
-		block = block + timedelta(minutes=30)
+                #if has_data:
+                blocks.append((block.strftime('%H:%M'), columns))
+                block = block + timedelta(minutes=30)
 
-	    # Remove all empty blocks at the beginning and the end of the day
-	    for i in [0, -1]:
-	        while len(blocks) > 0:
-	            block = blocks[i]
-		    has_data = False
-		    for col in blocks[i][1]:
-		        if len(col[2]) > 0:
-			    has_data = True
-			    break
-		    if has_data:
-		        break
-		    del blocks[i]
+            # Remove all empty blocks at the beginning and the end of the day
+            for i in [0, -1]:
+                while len(blocks) > 0:
+                    block = blocks[i]
+                    has_data = False
+                    for col in blocks[i][1]:
+                        if len(col[2]) > 0:
+                            has_data = True
+                            break
+                    if has_data:
+                        break
+                    del blocks[i]
 
-            days.append((day.strftime(u'%A %d').decode('utf-8').upper(), blocks))
-	    day = day + timedelta(days=1)
+            days.append((day.strftime('%A %d').upper(), blocks))
+            day = day + timedelta(days=1)
 
     return (activ_without_hour, days)
 
@@ -553,7 +581,7 @@ def get_activity_and_status(activity_id, user):
     try:
         activity = Activity.objects.get(pk = activity_id)
     except Activity.DoesNotExist:
-	return (None, {})
+        return (None, {})
 
     is_owner = False
     is_organizer = False
@@ -562,13 +590,13 @@ def get_activity_and_status(activity_id, user):
 
     if user.is_authenticated():
         if user in activity.owners.all():
-	    is_owner = True
+            is_owner = True
         if user in activity.organizers.all():
-	    is_organizer = True
+            is_organizer = True
         if user in activity.participants.all():
-	    is_participant = True
+            is_participant = True
         if user.is_staff:
-	    is_admin = True
+            is_admin = True
 
     user_status =  {
         'is_owner': is_owner,
@@ -585,7 +613,7 @@ def subscribe_to_activity(user, activity_id):
     try:
         activity = Activity.objects.get(pk = activity_id)
     except Activity.DoesNotExist:
-	return
+        return
 
     # User is always added, even if the limit is reached
     activity.participants.add(user)
@@ -597,19 +625,19 @@ def subscribe_to_activity(user, activity_id):
         maxplacesreached = True
 
     mail_managers(
-        subject = u'[Estelcon Admin] Inscripción en actividad %s' % (activity.title),
+        subject = '[Estelcon Admin] Inscripción en actividad %s' % (activity.title),
         message =
-u'''
+'''
 El usuario %s (%s) se ha inscrito en la actividad %s.
 '''
 % (user.username, user.get_full_name(), activity.title),
     )
 
     for owner in activity.owners.all():
-	send_mail(
-            subject = u'[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
+        send_mail(
+            subject = '[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
             message =
-u'''
+'''
 El usuario %s (%s) se ha inscrito en la actividad %s.
 '''
 % (user.username, user.get_full_name(), activity.title),
@@ -618,10 +646,10 @@ El usuario %s (%s) se ha inscrito en la actividad %s.
             fail_silently = False
         )
         if maxplacesreached:
-	    send_mail(
-                subject = u'[Estelcon] ATENCION: Tu actividad ha superado el máximo de plazas.',
+            send_mail(
+                subject = '[Estelcon] ATENCION: Tu actividad ha superado el máximo de plazas.',
                 message =
-u'''
+'''
 Ponte en contacto con la organización, por favor, ya que tu actividad '%s' ya ha sobrepasado el máximo de plazas.
 Actualmente tienes %d inscritos en una actividad con un máximo establecido por ti de %d.
 '''
@@ -633,18 +661,18 @@ Actualmente tienes %d inscritos en una actividad con un máximo establecido por 
 
     if maxplacesreached:
         message_participants_maxplaces = \
-u'''
+'''
 ATENCION, tu inscripción ha superado el número máximo de plazas disponibles. Los responsables
 ya han sido notificados de este hecho y tomarán una decisión en breve. Si no recibes
 contestación en pocos días no dudes en escribir directamente a la organización.
 '''
     else:
-        message_participants_maxplaces = u'Te encuentras dentro del número máximo de plazas.'
+        message_participants_maxplaces = 'Te encuentras dentro del número máximo de plazas.'
 
     send_mail(
-        subject = u'[Estelcon] Inscripción en actividad de la Estelcon',
+        subject = '[Estelcon] Inscripción en actividad de la Estelcon',
         message =
-u'''
+'''
 Se ha registrado tu inscripción en la actividad con título '%s'.
 
 Si en el futuro deseas cancelarla, escribe a la organización.
@@ -661,9 +689,9 @@ Si en el futuro deseas cancelarla, escribe a la organización.
 def change_activity(user, activity, home_url):
 
     mail_managers(
-        subject = u'[Estelcon Admin] Modificación de actividad "%s"' % (activity.title),
+        subject = '[Estelcon Admin] Modificación de actividad "%s"' % (activity.title),
         message =
-u'''
+'''
 El usuario %s (%s) ha modificado una actividad
 
 Título: %s
@@ -687,9 +715,9 @@ Notas para la organización:
 )
 
     send_mail(
-        subject = u'[Estelcon] Se ha modificado la actividad "%s"' % (activity.title),
+        subject = '[Estelcon] Se ha modificado la actividad "%s"' % (activity.title),
         message =
-u'''
+'''
 Se ha modificado correctamente la actividad con título '%s'.
 
 ¡Muchas gracias por participar! Entre todos haremos una gran Mereth Aderthad.
@@ -707,9 +735,9 @@ El equipo organizador.
 def send_proposal(user, data, home_url):
 
     mail_managers(
-        subject = u'[Estelcon Admin] Actividad propuesta: %s' % (data['title']),
+        subject = '[Estelcon Admin] Actividad propuesta: %s' % (data['title']),
         message =
-u'''
+'''
 El usuario %s (%s) ha propuesto una actividad.
 
 Título: %s
@@ -741,9 +769,9 @@ Notas para la organización:
 )
 
     send_mail(
-        subject = u'[Estelcon] Actividad propuesta para la Estelcon',
+        subject = '[Estelcon] Actividad propuesta para la Estelcon',
         message =
-u'''
+'''
 Se ha enviado a los organizadores tu propuesta de actividad con título
 '%s'.
 
@@ -790,6 +818,8 @@ def user_listing(listing_id):
     elif listing_id == 10:
         return listing_users_with_shirts()
     elif listing_id == 11:
+        return listing_umbarians()
+    elif listing_id == 12:
         return listing_everything()
     else:
         return None
@@ -885,7 +915,7 @@ def listing_dinner_menus():
 
 
 def listing_unpaid_users():
-    profiles = UserProfile.objects.filter(payment__contains=u'Pendiente de verificación del pago')
+    profiles = UserProfile.objects.filter(payment__contains='Pendiente de verificación del pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
@@ -896,7 +926,7 @@ def listing_unpaid_users():
 
 
 def listing_paid_users():
-    profiles = UserProfile.objects.exclude(payment__contains=u'Pendiente de verificación del pago')
+    profiles = UserProfile.objects.exclude(payment__contains='Pendiente de verificación del pago')
 
     rows = [(p.user.get_full_name(), p.user.email, p.quota, p.payed) for p in profiles]
     rows.sort(key=lambda p: p[0].lower())
@@ -911,11 +941,11 @@ def listing_reserved_shirts():
 
     sums = reduce(lambda sums, row: (sums[0]+row.shirts_S,
                                      sums[1]+row.shirts_M,
-				     sums[2]+row.shirts_L,
-				     sums[3]+row.shirts_XL,
-				     sums[4]+row.shirts_XXL),
-		  profiles,
-		  (0, 0, 0, 0, 0))
+                                     sums[2]+row.shirts_L,
+                                     sums[3]+row.shirts_XL,
+                                     sums[4]+row.shirts_XXL),
+                  profiles,
+                  (0, 0, 0, 0, 0))
 
     rows = [("TallaS", "TallaM", "TallaL", "TallaXL", "TallaXXL"), sums]
     return (None, rows)
@@ -949,6 +979,19 @@ def listing_users_with_shirts():
     rows = [("Talla", "Nombre", "Cantidad")] + rows
     return (None, rows)
 
+def listing_umbarians():
+    profiles = UserProfile.objects.filter(want_boat=True).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+    ) for p in profiles]
+
+    rows = [("Nombre", "Pseudónimo", "Smial")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
 
 def listing_everything():
     profiles = UserProfile.objects.order_by('user__first_name', 'user__last_name')
@@ -974,7 +1017,9 @@ def listing_everything():
         p.children_names,
         'x' if p.is_ste_member else '',
         'x' if p.want_ste_member else '',
-        p.squire,
+        'x' if p.squire else '',
+        'x' if p.first_estelcon else '',
+        'x' if p.want_boat else '',
         p.notes_general,
         p.shirts_S,
         p.shirts_M,
@@ -987,10 +1032,10 @@ def listing_everything():
         p.payment,
     ) for p in profiles]
 
-    rows = [(u"Nombre", u"Email", u"Staff", u"Pseudónimo", u"Smial", u"Teléfono", u"Población", u"Edad", u"Menú",
-             u"Comida", u"Viernes", u"Sábado", u"Domingo", u"Transporte", u"Habitación", u"Dormir", u"Nº hijos",
-             u"Hijos", u"Es socio", u"Quiere ser", u"Escudero", u"Notas", u"S", u"M", u"L", u"XL", u"XXL",
-             u"Código", u"Cuota", u"Pagado", u"Estado de pago")] + rows
+    rows = [("Nombre", "Email", "Staff", "Pseudónimo", "Smial", "Teléfono", "Población", "Edad", "Menú",
+             "Comida", "Viernes", "Sábado", "Domingo", "Transporte", "Habitación", "Dormir", "Nº hijos",
+             "Hijos", "Es socio", "Quiere ser", "Escudero", "Primera vez", "Barco", "Notas", "S", "M",
+             "L", "XL", "XXL", "Código", "Cuota", "Pagado", "Estado de pago")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
 

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, UpdateView
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.conf import settings
 
@@ -86,7 +86,7 @@ class ActivitySubscribeView(FormView):
             user = self.request.user,
             activity_id = form.cleaned_data['id'],
         )
-        messages.info(self.request, u'Te has inscrito en la actividad.')
+        messages.info(self.request, 'Te has inscrito en la actividad.')
         return super(ActivitySubscribeView, self).form_valid(form)
 
 
@@ -103,7 +103,7 @@ class ActivityEditView(UpdateView):
             activity = self.object,
             home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
         )
-        messages.info(self.request, u'Datos modificados correctamente')
+        messages.info(self.request, 'Datos modificados correctamente')
         return result
 
     def get_success_url(self):
@@ -125,7 +125,7 @@ class ProposalView(FormView):
             data = form.cleaned_data,
             home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
         )
-        messages.info(self.request, u'Se ha enviado la propuesta a los organizadores.')
+        messages.info(self.request, 'Se ha enviado la propuesta a los organizadores.')
         return super(ProposalView, self).form_valid(form)
 
 

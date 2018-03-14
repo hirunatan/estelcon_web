@@ -6,6 +6,7 @@
     <li><a href="/merethaderthad_comoparticipar.html">¿Cómo participar?</a></li>
     <li><a href="/merethaderthad_premios.html">Concursos y Premios</a></li>
     <li><a href="/merethaderthad_programa">Programa de actividades</a></li>
+    <li><a href="/merethaderthad_invitados.html">Nuestros invitados</a></li>
     <li><a href="/merethaderthad_inscripcion">Formulario de inscripción</a></li>
     <li class="aactive"><a href="/merethaderthad_ficha">Ficha personal</a></li>
 </ul>
@@ -80,12 +81,12 @@
   {{ profile.children_names|linebreaksbr }}<p>
 {% endif %}
 <p><b>¿Eres socio/a de la STE?</b>: {% if profile.is_ste_member %}sí{% else %}no{% endif %}</p>
-{% comment %}
 {% if not profile.is_ste_member %}
     <p><b>¿Te quieres hacer en esta Estelcon?</b>: {% if profile.want_ste_member %}sí{% else %}no{% endif %}</p>
 {% endif %}
-{% endcomment %}
 <p><b>¿Quieres ser escudero?</b>: {% if profile.squire %}sí{% else %}no{% endif %}</p>
+<p><b>¿Es tu primera Estelcon?</b>: {% if profile.first_estelcon %}sí{% else %}no{% endif %}</p>
+<p><b>¿Vas a llegar al castillo en barco?</b>: {% if profile.want_boat %}sí{% else %}no{% endif %}</p>
 {% if profile.notes_general %}
   <p><b>¿Algún otro comentario?</b>:<br/>
   {{ profile.notes_general|linebreaksbr }}<p>

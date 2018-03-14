@@ -13,12 +13,12 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 ADMINS = (
-    ('Estelcon', 'info@estelcon2015.org'),
+    ('Estelcon', 'info@estelcon2017.org'),
 )
 
 MANAGERS = ADMINS
 
-MAIL_FROM = 'Estelcon <info@estelcon2015.org>'
+MAIL_FROM = 'Estelcon <info@estelcon2017.org>'
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,8 +29,6 @@ SECRET_KEY = '+^8d-@f1fd^f$l4&_s%bo+39iinkdljv$ju6*6(8_xu0)op@*q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -52,7 +50,7 @@ INSTALLED_APPS = (
     'webapp.plain_pages',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,6 +74,23 @@ DATABASES = {
     }
 }
 
+
+# Template loaders
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+            ]
+        },
+    },
+]
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -95,6 +110,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
 
 # Authentication
 
