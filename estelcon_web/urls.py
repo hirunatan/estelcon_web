@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
 from cms.sitemaps import CMSSitemap
@@ -13,6 +12,7 @@ from django.views.static import serve
 admin.autodiscover()
 
 from user_profiles import urls as user_profiles_urls
+from activities import urls as activities_urls
 
 urlpatterns = [
     url(r'^sitemap\.xml$', sitemap,
@@ -21,7 +21,8 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^admin/', include(admin.site.urls)),  # NOQA
-    url(r'', include(user_profiles_urls)),
+    url(r'^', include(user_profiles_urls)),
+    url(r'^', include(activities_urls)),
     url(r'^', include('cms.urls')),
 )
 

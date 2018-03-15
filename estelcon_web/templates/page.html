@@ -5,13 +5,13 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-3">
+        <div id="sidebar" class="col-sm-3">
             <p>Subsecciones:</p>
             <ul class="nav nav-pills nav-stacked">
                 {% show_menu 1 1 0 100 "menu.html" %}
             </ul>
         </div>
-        <div class="col-sm-9">
+        <div id="main-column" class="col-sm-9">
             <ol class="breadcrumb">
                 {% show_breadcrumb %}
             </ol>

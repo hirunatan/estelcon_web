@@ -7,7 +7,7 @@ from django.db.models import Count
 from datetime import datetime, timedelta
 import locale
 
-from .models import UserProfile, Activity
+from .models import Activity
 from functools import reduce
 
 
