@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Application specific
-project.db
+db.sqlite3
 **/settings/local.py
 media/*
 static/*

@@ -1,0 +1,52 @@
+﻿INSTALAR EN WINDOWS
+===================
+
+* Descargar e instalar el entorno Python:
+
+  https://www.python.org/ftp/python/3.6.5/python-3.6.5-amd64-webinstall.exe
+
+  IMPORTANTE: Marcar las opciones "Install launcher for all users" y "Add Python 3.7 to PATH".
+  Luego darle a "Install now". Finalmente "Close".
+
+
+* Descargar e instalar el cliente de GitHub:
+
+  https://desktop.github.com/
+
+
+* Crear una cuenta en github.com, si no la tenías ya (Create your free account)
+  y entrar en ella desde el cliente (Sign into GitHub.com). Resto de pantallas de
+  configuración sin cambios.
+
+
+* Descargarse el código de la aplicación de la Web Estelcon:
+
+  - Clone a repository
+  - hirunatan/estelcon_web
+  - Clone
+
+  Al terminar, tendremos la aplicación en Documentos / GitHub / estelcon_web
+
+
+* Entrar en esa carpeta y hacer doble click sobre "install_windows.bat". Cuando diga
+  "Presione una tecla para continuar...", pulsar una tecla y cerrar.
+
+
+USAR LA APLICACIÓN
+==================
+
+* En la misma consola de antes, escribir:
+
+  runserver.bat
+
+* Abrir un navegador y entrar en
+
+  http://localhost:8000/
+
+* Para ver el panel de administración, entrar en
+
+  http://localhost:8000/admin/
+
+* Inicialmente hay un usuario admin con contraseña admin.
+
+
