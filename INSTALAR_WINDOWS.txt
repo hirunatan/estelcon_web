@@ -19,13 +19,14 @@
   configuración sin cambios.
 
 
-* Descargarse el código de la aplicación de la Web Estelcon:
+* Desde el cliente de GitHub, descargarse el código de la aplicación de la Web Estelcon:
 
   - Clone a repository
   - hirunatan/estelcon_web
   - Clone
+  - En el menú, "Current branch", elegir "estelcon_2018"
 
-  Al terminar, tendremos la aplicación en Documentos / GitHub / estelcon_web
+  Al terminar, tendremos la aplicación en Documentos \ GitHub \ estelcon_web
 
 
 * Entrar en esa carpeta y hacer doble click sobre "install_windows.bat". Cuando diga
@@ -35,18 +36,64 @@
 USAR LA APLICACIÓN
 ==================
 
-* En la misma consola de antes, escribir:
+* En la misma carpeta de antes, hacer doble click sobre:
 
   runserver.bat
+
 
 * Abrir un navegador y entrar en
 
   http://localhost:8000/
 
-* Para ver el panel de administración, entrar en
 
-  http://localhost:8000/admin/
+* Para editar las páginas, entrar en
 
-* Inicialmente hay un usuario admin con contraseña admin.
+  http://localhost:8000/es/?edit
+
+  (hay un usuario admin contraseña admin)
 
 
+MODIFICAR DISEÑO VISUAL
+=======================
+
+* Se puede cambiar prácticamente todo el diseño tocando en tres sitios:
+
+  (html base de la web)
+  estelcon_web \ templates \ base.html
+
+  (estilos css generales)
+  estelcon_web \ static \ styles \ custom.css
+
+  (imágenes fijas)
+  estelcon_web \ static \ img \ *
+
+
+* Al tocar el HTML hay que seguir unas normas:
+
+  - No tocar nada de las tags con la forma {% ... %} ni de lo que hay dentro.
+
+  - Para poner el URL de cualquier cosa que esté dentro de estelcon_web \ static, hay
+    que usar un tag como éste:
+
+     {% static 'img/header_logo.png' %}
+
+  - Si es desde un archivo css, hay que poner
+
+     "/static/img/header_logo.png"
+
+  - Se pueden crear más carpetas y archivos dentro de static, y se pueden referenciar
+    desde el html o el css como se pone arriba.
+
+
+* Al tener un conjunto de cambios que funcione, para enviarlo hay que usar el cliente
+  de GitHub:
+
+  - Al abrir el cliente, en la pestaña "Changes" se deberían ver todos los archivos que
+    se han modificado o creado nuevos. Asegurarse de que todos están marcados.
+
+  - Escribir una línea en "Summary" (abajo a la izquierda) con un resumen de qué has
+    cambiado (ejemplo "Actualizado el diseño de la barra de menú").
+
+  - Pulsar el botón "Commit to estelcon_2018".
+
+  - IMPORTANTE: Arriba a la derecha pulsar "Push origin".
