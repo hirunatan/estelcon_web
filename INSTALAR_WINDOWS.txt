@@ -1,41 +1,99 @@
-
-INSTALAR EN WINDOWS
+﻿INSTALAR EN WINDOWS
 ===================
 
 * Descargar e instalar el entorno Python:
 
-  http://sourceforge.net/projects/winpython/files/WinPython_2.7/2.7.9.5/WinPython-32bit-2.7.9.5.exe/download
+  https://www.python.org/ftp/python/3.6.5/python-3.6.5-amd64-webinstall.exe
 
-  Se puede instalar en cualquier carpeta, se recomienda C:\WinPython-32bit-2.7.9.5.
+  IMPORTANTE: Marcar las opciones "Install launcher for all users" y "Add Python 3.7 to PATH".
+  Luego darle a "Install now". Finalmente "Close".
 
-* Descargar la aplicación Estelcon web y extraer el contenido del zip en algún sitio.
 
-  https://github.com/hirunatan/estelcon_web/zipball/master
+* Descargar e instalar el cliente de GitHub:
 
-  Se recomienda extraer el contenido a C:\hirunatan-estelcon_web-26c8768 (el número del final puede variar).
+  https://desktop.github.com/
 
-* Entrar en la carpeta donde se instaló WinPython y ejecutar "WinPython Command Prompt".
 
-* En la consola que aparece, escribir los siguientes comandos:
+* Crear una cuenta en github.com, si no la tenías ya (Create your free account)
+  y entrar en ella desde el cliente (Sign into GitHub.com). Resto de pantallas de
+  configuración sin cambios.
 
-  cd c:\hirunatan-estelcon_web-26c8768\hirunatan-estelcon_web-26c8768
-  install_windows.bat
+
+* Desde el cliente de GitHub, descargarse el código de la aplicación de la Web Estelcon:
+
+  - Clone a repository
+  - hirunatan/estelcon_web
+  - Clone
+  - En el menú, "Current branch", elegir "estelcon_2018"
+
+  Al terminar, tendremos la aplicación en Documentos \ GitHub \ estelcon_web
+
+
+* Entrar en esa carpeta y hacer doble click sobre "install_windows.bat". Cuando diga
+  "Presione una tecla para continuar...", pulsar una tecla y cerrar.
 
 
 USAR LA APLICACIÓN
 ==================
 
-* En la misma consola de antes, escribir:
+* En la misma carpeta de antes, hacer doble click sobre:
 
   runserver.bat
+
 
 * Abrir un navegador y entrar en
 
   http://localhost:8000/
 
-* Para ver el panel de administración, entrar en
 
-  http://localhost:8000/admin/
+* Para editar las páginas, entrar en
 
-* Inicialmente hay un usuario admin con contraseña admin.
+  http://localhost:8000/es/?edit
 
+  (hay un usuario admin contraseña admin)
+
+
+MODIFICAR DISEÑO VISUAL
+=======================
+
+* Se puede cambiar prácticamente todo el diseño tocando en tres sitios:
+
+  (html base de la web)
+  estelcon_web \ templates \ base.html
+
+  (estilos css generales)
+  estelcon_web \ static \ styles \ custom.css
+
+  (imágenes fijas)
+  estelcon_web \ static \ img \ *
+
+
+* Al tocar el HTML hay que seguir unas normas:
+
+  - No tocar nada de las tags con la forma {% ... %} ni de lo que hay dentro.
+
+  - Para poner el URL de cualquier cosa que esté dentro de estelcon_web \ static, hay
+    que usar un tag como éste:
+
+     {% static 'img/header_logo.png' %}
+
+  - Si es desde un archivo css, hay que poner
+
+     "/static/img/header_logo.png"
+
+  - Se pueden crear más carpetas y archivos dentro de static, y se pueden referenciar
+    desde el html o el css como se pone arriba.
+
+
+* Al tener un conjunto de cambios que funcione, para enviarlo hay que usar el cliente
+  de GitHub:
+
+  - Al abrir el cliente, en la pestaña "Changes" se deberían ver todos los archivos que
+    se han modificado o creado nuevos. Asegurarse de que todos están marcados.
+
+  - Escribir una línea en "Summary" (abajo a la izquierda) con un resumen de qué has
+    cambiado (ejemplo "Actualizado el diseño de la barra de menú").
+
+  - Pulsar el botón "Commit to estelcon_2018".
+
+  - IMPORTANTE: Arriba a la derecha pulsar "Push origin".

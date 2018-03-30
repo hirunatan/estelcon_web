@@ -4,7 +4,7 @@ __pycache__/
 
 # Application specific
 db.sqlite3
-**/*/settings/local.py
+**/settings/local.py
 media/*
 static/*
 

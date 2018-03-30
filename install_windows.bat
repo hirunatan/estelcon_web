@@ -1,6 +1,12 @@
-@echo off
 pip install -r requirements.txt
-copy src\settings\local.py.example src\settings\local.py
+
+copy settings\local.py.example settings\local.py
+
+mkdir media
+
+xcopy media.example media /s
+
 copy db.sqlite3.example db.sqlite3
+
 pause
 
