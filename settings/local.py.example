@@ -1,2 +1,8 @@
 from .development import *
 
+PRE_SIGNUP_FORM = False
+
+SCHEDULE_HIDDEN = False
+
+SIGNUP_CLOSED = False
+

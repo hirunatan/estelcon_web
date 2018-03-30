@@ -71,7 +71,7 @@ class UserProfile(models.Model):
         verbose_name_plural = 'Fichas de usuario'
         ordering = ('id',)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username + ' - ' + self.user.email + ' - ' + self.user.get_full_name() + ' - ' + self.payment[:40] + '...'
 
     @property

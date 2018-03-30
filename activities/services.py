@@ -5,21 +5,24 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 
 from datetime import datetime, timedelta
+from collections import namedtuple
 import locale
+import math
 
 from .models import Activity
 from functools import reduce
 
+
+Day = namedtuple('Day', ['name', 'blocks'])
+Block = namedtuple('Block', ['hour', 'columns'])
+Column = namedtuple('Column', ['rowspan', 'colspan', 'activities'])
+PendingColumn = namedtuple('PendingColumn', ['current_row', 'column'])
 
 def get_schedule():
     # Obtain the list of all activities (they are already ordered by start date) and put them in
     # a table divided in days, and then in blocks of half hour, from 8:30h to 05:00h next day.
     # Each block contains columns, and in each column fit one or more activities. Columns
     # may also span more than one block.
-    # The result is a list structure like this:
-    # [(day1_name, [(block1_hour, [(colspan1, rowspan1, [activ1]), (colspan2, rowspan2 [activ2, activ3])]),
-    #               (block2_hour, [(colspan1, rowspan1, [activ4])])],
-    #  (day2_name, [(block1_hour, [(colspan1, rowspan1, [activ5])])])]
 
     # Set the language for day names
     locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
@@ -29,92 +32,117 @@ def get_schedule():
     activ_without_hour = [a for a in activities if a.start is None]
     activ_with_hour = [a for a in activities if a.start is not None]
 
+    # Create the list of days
     days = []
     if len(activ_with_hour) > 0:
 
         first_day = activ_with_hour[0].start.replace(hour=0, minute=0, second=0, microsecond=0)
         last_day = activ_with_hour[-1].start.replace(hour=0, minute=0, second=0, microsecond=0)
 
-        # Create the list of days
         day = first_day
         while day <= last_day:
-
-            first_block = day.replace(hour=8, minute=00)               # from 08:30h
-            last_block = first_block + timedelta(hours=20, minutes=30) # until 05:00h next day
-            rowspans_left = [1, 1, 1]
-
-            # Create the list of half hour blocks
-            blocks = []
-            block = first_block
-            while block <= last_block:
-
-                has_data = False
-
-                # Create the list of columns
-                columns = []
-                ncol = 0
-                while ncol <= 2:
-
-                    if rowspans_left[ncol] > 1:
-                        rowspans_left[ncol] = rowspans_left[ncol] - 1
-                        has_data = True
-                    else:
-                        # Create the list of activities
-                        activities_column = []
-                        rowspan = 1
-                        for activity in activ_with_hour:
-                            if (activity.start >= block) and \
-                               (activity.start < (block + timedelta(minutes=30))) and \
-                               activity.start.second == ncol:
-
-                               has_data = True
-
-                               # Calculate the block span of the activity
-                               if activity.end is None:
-                                   duration = 0
-                               else:
-                                   duration = int((activity.end - activity.start).seconds / 60)
-                               activ_span = (duration - 1) / 30 + 1
-                               if activ_span > rowspan:
-                                   rowspan = activ_span
-
-                               activities_column.append(activity)
-
-                        rowspans_left[ncol] = rowspan
-                        if ncol == 0:
-                            colspan = 2
-                            if has_data:
-                                columns.append((rowspan, colspan, activities_column))
-                                break
-                        else:
-                            colspan = 1
-                            columns.append((rowspan, colspan, activities_column))
-
-                    if ncol == 0 and has_data:
-                        break
-                    ncol = ncol + 1
-
-                #if has_data:
-                blocks.append((block.strftime('%H:%M'), columns))
-                block = block + timedelta(minutes=30)
-
-            # Remove all empty blocks at the beginning and the end of the day
-            for i in [0, -1]:
-                while len(blocks) > 0:
-                    block = blocks[i]
-                    has_data = False
-                    for col in blocks[i][1]:
-                        if len(col[2]) > 0:
-                            has_data = True
-                            break
-                    if has_data:
-                        break
-                    del blocks[i]
-
-            days.append((day.strftime('%A %d').upper(), blocks))
+            day_blocks = _build_day_blocks(activ_with_hour, day)
+            days.append(day_blocks)
             day = day + timedelta(days=1)
 
     return (activ_without_hour, days)
+
+
+def _build_day_blocks(activ_with_hour, day):
+    first_block_hour = day.replace(hour=8, minute=00)                     # from 08:30h
+    last_block_hour = first_block_hour + timedelta(hours=20, minutes=30)  # until 05:00h next day
+
+    pending_cols = [
+        PendingColumn(0, Column(1, 2, [])),
+        PendingColumn(0, Column(1, 1, [])),
+        PendingColumn(0, Column(1, 1, []))
+    ]
+
+    # Create a list of 30min blocks
+    blocks = []
+    block_hour = first_block_hour
+    while block_hour <= last_block_hour:
+
+        block = _build_block(activ_with_hour, block_hour, pending_cols)
+        if block:
+            blocks.append(block)
+
+        block_hour = block_hour + timedelta(minutes=30)
+
+    # Remove all empty blocks at the beginning and the end of the day
+    for i in [0, -1]:
+        while len(blocks) > 0:
+            block = blocks[i]
+            if not block.columns:
+                del blocks[i]
+            else:
+                break
+
+    return Day(day.strftime('%A %d').upper(), blocks)
+
+
+def _build_block(activ_with_hour, block_hour, pending_cols):
+
+    for ncol in range(3):
+        rowspan, activities = _get_block_activities(activ_with_hour, block_hour, ncol)
+
+        current_row, column = pending_cols[ncol]
+
+        column.activities.extend(activities)
+        if rowspan > column.rowspan - current_row:
+            column = Column(rowspan + current_row, column.colspan, column.activities)
+
+        pending_cols[ncol] = PendingColumn(current_row, column)
+
+    if pending_cols[0].column.activities:
+        if pending_cols[0].current_row == 0:
+            columns = [pending_cols[0].column]
+        else:
+            columns = []
+        if pending_cols[1].column.activities:
+            columns[0].activities.extend(pending_cols[1].column.activities)
+        if pending_cols[2].column.activities:
+            columns[0].activities.extend(pending_cols[2].column.activities)
+    else:
+        columns = []
+        if pending_cols[1].current_row == 0 and pending_cols[1].column.activities:
+            columns.append(pending_cols[1].column)
+        if pending_cols[2].current_row == 0 and pending_cols[2].column.activities:
+            columns.append(pending_cols[2].column)
+
+    for ncol in range(3):
+        current_row, column = pending_cols[ncol]
+
+        current_row += 1
+        if current_row >= column.rowspan:
+            current_row = 0
+            column = Column(1, column.colspan, [])
+
+        pending_cols[ncol] = PendingColumn(current_row, column)
+
+    return Block(block_hour.strftime('%H:%M'), columns)
+
+
+def _get_block_activities(activ_with_hour, block_hour, ncol):
+    activities = []
+    rowspan = 1
+    for activity in activ_with_hour:
+        if (activity.start >= block_hour) and \
+           (activity.start < (block_hour + timedelta(minutes=30))) and \
+           (activity.start.second == ncol):
+
+            activities.append(activity)
+
+            if activity.end is None:
+                duration = 0
+            else:
+                duration = math.ceil((activity.end - activity.start).seconds / 60)
+ 
+            activ_span = math.ceil(duration / 30)
+            if activ_span > rowspan:
+                rowspan = activ_span
+
+    return (rowspan, activities)
 
 
 def get_activity_and_status(activity_id, user):
