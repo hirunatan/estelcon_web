@@ -67,3 +67,6 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Pipenv
+Pipfile
+Pipfile.lock

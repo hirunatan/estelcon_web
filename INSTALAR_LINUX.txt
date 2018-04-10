@@ -1,0 +1,104 @@
+﻿INSTALAR EN LINUX
+=================
+
+* Asegurarse de que tenemos instalado python3, pip y git. En un sistema Ubuntu o similar,
+  abrir un terminal y escribir:
+
+    sudo apt update
+    sudo apt install python3 python3-pip git
+
+  (también se puede instalar la aplicación Synaptic y usarla para instalar esos tres
+   paquetes).
+
+
+* Descargarse el código de la aplicación de la web Estelcon. En un terminal escribir:
+
+    git clone http://github.com/hirunatan/estelcon_web
+    cd estelcon_web
+    git checkout estelcon_2018
+
+  Esto creará una carpeta "estelcon_web" dentro de tu carpeta personal, con todos los
+  ficheros de la aplicación.
+
+
+* Entrar en esa carpeta y hacer doble click sobre "install_linux.sh". Cuando diga
+  "Presione una tecla para continuar...", pulsar una tecla y cerrar.
+
+
+USAR LA APLICACIÓN
+==================
+
+* En la misma carpeta de antes, hacer doble click sobre:
+
+  runserver.sh
+
+
+* Abrir un navegador y entrar en
+
+  http://localhost:8000/
+
+
+* Para editar las páginas, entrar en
+
+  http://localhost:8000/es/?edit
+
+  (hay un usuario admin contraseña admin)
+
+
+MODIFICAR DISEÑO VISUAL
+=======================
+
+* Se puede cambiar prácticamente todo el diseño tocando en tres sitios:
+
+  (html base de la web)
+  estelcon_web \ templates \ base.html
+
+  (estilos css generales)
+  estelcon_web \ static \ styles \ custom.css
+
+  (imágenes fijas)
+  estelcon_web \ static \ img \ *
+
+
+* Al tocar el HTML hay que seguir unas normas:
+
+  - No tocar nada de las tags con la forma {% ... %} ni de lo que hay dentro.
+
+  - Para poner el URL de cualquier cosa que esté dentro de estelcon_web \ static, hay
+    que usar un tag como éste:
+
+     {% static 'img/header_logo.png' %}
+
+  - Si es desde un archivo css, hay que poner
+
+     "/static/img/header_logo.png"
+
+  - Se pueden crear más carpetas y archivos dentro de static, y se pueden referenciar
+    desde el html o el css como se pone arriba.
+
+
+* Descargarse el cliente de Git:
+
+  https://bitbucket.org/demian85/git-watcher/downloads/gitw-linux-x64-v0.6.0.tar.gz
+
+  Descomprimirlo en tu carpeta personal, tras lo cual verás una nueva carpeta
+  gitw-linux-64, con un programa gitw que es el que tienes que abrir. Una vez dentro,
+  darle a "Open Repository" y seleccionar la carpeta estelcon_web del paso anterior.
+
+
+* Al tener un conjunto de cambios que funcione, para enviarlo hay que usar el cliente
+  de GitHub:
+
+  - Al abrir el cliente, en el recuadro "Unstaged Changes" se deberían ver todos los
+    archivos que se han modificado o creado nuevos. A la derecha se ven todos los
+    cambios.
+
+  - Pulsar el botón verde para pasar todos los archivos a "Staged Changes".
+
+  - Escribir una línea en "Commit message..." (abajo a la izquierda) con un resumen
+    de qué has cambiado (ejemplo "Actualizado el diseño de la barra de menú").
+
+  - Pulsar el botón "Commit" y luego "Push".
+
+  - Ver que en el recuadro inferior aparece una línea nueva con el mensaje introducido.
+
