@@ -14,6 +14,3 @@ cp -R media.example/* media
 
 cp db.sqlite3.example db.sqlite3
 
-echo Pulsar intro...
-read
-

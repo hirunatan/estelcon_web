@@ -18,19 +18,19 @@
     git checkout estelcon_2018
 
   Esto creará una carpeta "estelcon_web" dentro de tu carpeta personal, con todos los
-  ficheros de la aplicación.
+  ficheros de la aplicación. Luego hay que escribir un comando más:
 
-
-* Entrar en esa carpeta y hacer doble click sobre "install_linux.sh". Cuando diga
-  "Presione una tecla para continuar...", pulsar una tecla y cerrar.
+    ./install_linux.sh
 
 
 USAR LA APLICACIÓN
 ==================
 
-* En la misma carpeta de antes, hacer doble click sobre:
+* Abrir un terminal y escribir:
 
-  runserver.sh
+  cd estelcon_web
+  pipenv shell
+  ./runserver.sh
 
 
 * Abrir un navegador y entrar en
