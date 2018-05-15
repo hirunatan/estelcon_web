@@ -193,7 +193,9 @@ CMS_LANGUAGES = {
 CMS_TEMPLATES = (
     ## Customize this
     ('page.html', 'Page'),
-    ('home_page.html', 'Home Page')
+    ('home_page.html', 'Home Page'),
+    ('page_full.html', 'Full width page')
+    
 )
 
 CMS_PERMISSION = True

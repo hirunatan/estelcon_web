@@ -1,9 +1,9 @@
 {% extends "dynamic_page.html" %}
 
 {% block dynamic_content %}
-<h1><span>La Mereth Aderthad</span> Ficha personal</h1>
+<h1>Ficha personal</h1>
 
-<div align="right"><a href="/mereth-aderthad/salida">Desconectar</a></div>
+<div align="right"><a href="/salida">Desconectar</a></div>
 
 {% if messages %}
     {% for message in messages %}
@@ -32,7 +32,7 @@
 
 <div align="center">-----------------------------------------------------------------------------------------------------------------------------</div><br/>
 
-<p>Aquí están los datos de tu inscripción (<a href="/mereth-aderthad/ficha-editar-inscripcion">modificar</a>):</p>
+<p>Aquí están los datos de tu inscripción (<a href="/ficha-editar-inscripcion">modificar</a>):</p>
 {% comment %}
 <p><b>Días de asistencia</b><br/>
  - Viernes/Sábado: {% if profile.day_1 %} sí {% else %} no {% endif %}<br/>

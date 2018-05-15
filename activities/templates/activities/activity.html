@@ -2,7 +2,7 @@
 
 {% block dynamic_content %}
 
-<h1><span>La Mereth Aderthad</span> <span>Programa de actividades</span> Actividad</h1>
+<h1><span>Programa de actividades</span> Actividad</h1>
 
 {% if messages %}
     {% for message in messages %}
@@ -27,7 +27,7 @@
   {% endif %}
 
   {% if is_owner %}
-    <div align="right"><a href="/mereth-aderthad/actividad-editar/{{ activity.id }}">Modificar datos de esta actividad</a></div>
+    <div align="right"><a href="/actividad-editar/{{ activity.id }}">Modificar datos de esta actividad</a></div>
   {% endif %}
 
   <h2>{{ activity.title }}</h2>
@@ -112,6 +112,6 @@
 
 {% endif %}
 
-<div align="right"><a href="/mereth-aderthad/programa">Volver atrás</a></div>
+<div align="right"><a href="programa">Volver atrás</a></div>
 
 {% endblock %}
