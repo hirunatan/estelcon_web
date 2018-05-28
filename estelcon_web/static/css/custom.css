@@ -1,18 +1,88 @@
 /* your styles go here */
+body {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+  }
+.bg:before, .bg:after{
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+.bg:before{
+    left: 0;
+    background: url(../img/back_arbol_l.png)no-repeat left top;
+    background-size: 40%;
+    z-index: 1;
+}
+.bg:after{
+    background: url(../img/back_arbol_r.png)no-repeat right top;
+    right: 0;
+    background-size: 40%;
+}
+header.bg:before,header.bg:after{
+    position: absolute;
+}
 .navbar-brand{
-    width: 250px;
+    width: 260px;
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+    padding-left: 1rem;
 }
 header #navbar{
-    background-color: #519461;
-    background-image: url("../img/grid.png");
+    background-color: #005c9d;
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 header #navigation{
     font-family: 'Uncial Antiqua', sans-serif;
 }
+.posBack{
+    z-index: 1001;
+}
+#navbar .navbar-nav > li > a{
+    color: #fff;
+    padding: 1.3rem 1rem 1.3rem;
+    font-size: 0.8rem;
+    letter-spacing: 0rem;
+}
+ /* Banner */
+.owl-carousel .owl-stage-outer {
+    background:rgba(158, 183, 200, 0.9);
+}
+.home-carousel .container-fluid{
+    padding: 0;
+}
+.owl-carousel .owl-item {
+    padding: 40px 20px 0;
+}
+.home-carousel h1{
+    font-size: 2.4rem;
+  }
+.home-carousel li, .home-carousel p {
+text-transform: uppercase;
+letter-spacing: 0.1em;
+font-weight: 700;
+font-size: 1.3rem;
+margin-bottom: 10px;
+}
+/* Contenedor principal general */
+.main-content{
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 20px;
+    padding-top:20px;
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    position: relative;
+}
 h1{
     font-family: 'Uncial Antiqua', sans-serif;
-    color: #519461;
+    color: #005c9d;
     font-size: 2rem;
 }
 .programtable th{
@@ -29,24 +99,9 @@ h1{
     margin: 0.5rem 0;
     
 }
-.form-group input, .form-group select, .form-group textarea{
-    display: block;
-    width: 100%;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-.form-group select:not([size]):not([multiple]) {
-    height: calc(2.25rem + 2px);
-}
-.form-check input{
-    position: absolute;
-    margin-top: .3rem;
-    margin-left: -1.25rem;
+
+/* Footer */
+footer{
+    position: relative;
+    z-index: 5;
 }

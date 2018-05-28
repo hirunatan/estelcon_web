@@ -21,17 +21,35 @@
     contactad por favor con la organización.</p>
 
     <p>Todos los precios incluyen IVA.</p>
-
-    <p><b>Precios base en albergue del Seminario (incluye sábanas y toalla)</b>:</p>
-    <ul>
-      <li>Mereth Aderthad completa: <b>175€</b></li>
-      <li>Opciones parciales:
-        <ul>
-          <li>Estelcon de viernes a domingo: <b>150€</b></li>
-          <li>Estelcon de sábado a domingo: <b>125€</b></li>
-        </ul>
-      </li>
-    </ul>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table">
+          <tr>
+            <th>
+              Precios base
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <ul>
+                <li>Mereth Aderthad completa: <b>175€</b></li>
+                <li>Opciones parciales:
+                  <ul>
+                    <li>Estelcon de viernes a domingo: <b>150€</b></li>
+                    <li>Estelcon de sábado a domingo: <b>125€</b></li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+    
+    
 
     <p><b>Precios “upgrade” en habitación doble con baño (según disponibilidad hasta agotarse)</b>:</p>
     <ul>
@@ -193,6 +211,7 @@
           </p>
         </div>
       </div>
+      <hr>
       <div class="row">
         <div class="form-group col-md-6">
           <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
@@ -280,7 +299,7 @@
         <div class="form-group col-md-6">
           <p title="Si tienes algúna condición especial (alérgico, vegetariano... elige otros)">
             <label for="id_dinner_menu">El plato principal de la cena de gala es un surtido de carnes, pero alternativamente hay un plato de pescado (dorada o similar a la brasa con guarnición). Si lo prefieres por favor indícanoslo aquí:</label>
-            <div class="w-50"> {{form.dinner_menu }}</div>
+            {{form.dinner_menu }}
             {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
           </p>
         </div>
@@ -290,13 +309,12 @@
           <p title="Si traes niños a tu cargo, indica aquí cuántos son y sus nombres. Luego tendrás que rellenar una inscripción por cada uno (si tienen 3 años o más). Si venis los dos padres, sólo hace falta rellenar esta información una vez.">
             <span>¿Traes niños a tu cargo?</span><br>
             <label for="id_children_count">Nº de niños</label>
-            <div class="w-25">{{ form.children_count }}</div>
+            {{ form.children_count }}
             {% if form.children_count.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_count.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
-        
-            <label for="id_children_names">Nombres (uno por fila)</label>
-            {{ form.children_names }}
-            {% if form.children_names.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_names.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
           </p>
+          <label for="id_children_names">Nombres (uno por fila)</label>
+          {{ form.children_names }}
+          {% if form.children_names.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_names.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
         </div>
       </div>  
       <div class="form-check">
@@ -309,21 +327,21 @@
       <div class="form-check">
         <p title="Como oferta de Estelcon, añadiendo 2€ a la inscripción te puedes convertir en socio/a de la STE, de cuota reducida (recibirías la revista por correo electrónico en lugar de en papel).">
           {{ form.want_ste_member }}
-          <label for="id_want_ste_member">En caso de que no, ¿quieres asociarte por 2€ más?</label>
+          <label for="id_want_ste_member" class="form-check-label">En caso de que no, ¿quieres asociarte por 2€ más?</label>
           {% if form.want_ste_member.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.want_ste_member.errors|join:", " }}&nbsp;</b>{% endif %}
         </p>
       </div>
       <div class="form-check">
         <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
           {{ form.squire }}
-          <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label>
+          <label for="id_squire" class="form-check-label">¿Quieres ser escudero en esta Estelcon?</label>
           {% if form.squire.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.squire.errors|join:", " }}&nbsp;</b>{% endif %}
         </p>
       </div>
       <div class="form-check">
         <p title="Indícanos si es tu primera Estelcon, tanto si llevas mucho o poco tiempo en la STE.">
           {{ form.first_estelcon }}
-          <label for="id_first_estelcon">¿Es tu primera vez asistiendo a una Estelcon?</label>
+          <label for="id_first_estelcon" class="form-check-label">¿Es tu primera vez asistiendo a una Estelcon?</label>
           {% if form.first_estelcon.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.first_estelcon.errors|join:", " }}&nbsp;</b>{% endif %}
         </p>
       </div>
