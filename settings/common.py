@@ -194,7 +194,8 @@ CMS_TEMPLATES = (
     ## Customize this
     ('page.html', 'Page'),
     ('home_page.html', 'Home Page'),
-    ('page_full.html', 'Full width page')
+    ('page_full.html', 'Full width page'),
+    ('page_map.html', 'Map page')
     
 )
 

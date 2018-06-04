@@ -40,7 +40,7 @@
   {% cms_toolbar %}
   <div id="all">
     <!-- Login Modal-->
-    <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+    <!-- <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
       <div role="document" class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -70,11 +70,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Login modal end-->
     <!-- Navbar Start-->
     <header class="nav-holder make-sticky sticky bg">
-      <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
+      <div id="navbar" role="navigation" class="navbar navbar-expand-lg"> 
         <div class="container-fluid posBack">
           <a href="/" class="navbar-brand home">
             <img src="{% static 'img/logo.png' %}" alt="Universal logo" class="d-none d-md-inline-block">
@@ -85,12 +85,13 @@
             <span class="sr-only">Toggle navigation</span>
             <i class="fa fa-align-justify"></i>
           </button>
-          <div id="navigation" class="navbar-collapse collapse">
+          <div id="navigation" class="navbar-collapse collapse flex-column">
+            <a href="{% url 'login' %}" class="btnlogin nav-link ml-auto"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a>
             <ul class="nav navbar-nav ml-auto">
               {% show_menu 0 100 0 100 "menu.html" %}
             </ul>
           </div>
-          <div id="search" class="collapse clearfix">
+          <!-- <div id="search" class="collapse clearfix">
             <form role="search" class="navbar-form">
               <div class="input-group">
                 <input type="text" placeholder="Search" class="form-control">
@@ -101,7 +102,7 @@
                 </span>
               </div>
             </form>
-          </div>
+          </div> -->
         </div>
       </div>
     </header>
@@ -123,7 +124,7 @@
           <div class="col-lg-3">
             <h4 class="h6">Contacto</h4>
             <p class="text-uppercase"></p>
-            <a href="contact.html" class="btn btn-template-main">Go to contact page</a>
+            <a href="contact.html" class="btn btn-template-main">escríbenos aquí</a>
             <hr class="d-block d-lg-none">
           </div>
           <div class="col-lg-3">

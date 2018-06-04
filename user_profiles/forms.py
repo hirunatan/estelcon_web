@@ -298,11 +298,11 @@ class SignupForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        max_length=30, required=True,
+        max_length=30, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     password = forms.CharField(
         max_length=30, required=True,
-        widget = forms.PasswordInput,
+        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
     )
 
     def clean(self):
@@ -324,7 +324,7 @@ class LoginForm(forms.Form):
 
 class ForgotPasswordForm(forms.Form):
     username = forms.CharField(
-        max_length=30, required=True,
+        max_length=30, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
 
     def clean(self):
@@ -345,15 +345,15 @@ class ForgotPasswordForm(forms.Form):
 class ChangePasswordForm(forms.Form):
     password1 = forms.CharField(
         min_length = 5, max_length=30, required=True,
-        widget = forms.PasswordInput,
+        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
     )
     password2 = forms.CharField(
         min_length = 5, max_length=30, required=True,
-        widget = forms.PasswordInput,
+        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
     )
     reminder_code = forms.CharField(
         required=True,
-        widget = forms.HiddenInput,
+        widget = forms.HiddenInput(attrs={ 'class': 'form-control'}),
     )
 
     def clean(self):
@@ -383,40 +383,41 @@ class ChangePasswordForm(forms.Form):
 
 class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because edits data of two models at the same time
     username = forms.CharField(
-        max_length=30, required=True,
+        max_length=30, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
         validators=[user_validator,]
     )
     email = forms.EmailField( # Note that it is allowed to have several users with same email. This is useful, for example,
-        required=True,        # for the case in that a single person manages the inscription of several friends.
+        required=True, 
+        widget=forms.TextInput(attrs={ 'class': 'form-control'}),       # for the case in that a single person manages the inscription of several friends.
     )
     password1 = forms.CharField(
         min_length = 5, max_length=30, required=False,
-        widget = forms.PasswordInput,
+        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
     )
     password2 = forms.CharField(
         min_length = 5, max_length=30, required=False,
-        widget = forms.PasswordInput,
+        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
     )
     first_name = forms.CharField(
-        max_length=100, required=True,
+        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     last_name = forms.CharField(
-        max_length=100, required=True,
+        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     alias = forms.CharField(
-        max_length=100, required=False,
+        max_length=100, required=False,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     smial = forms.CharField(
-        max_length=100, required=False,
+        max_length=100, required=False,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     phone = forms.CharField(
-        max_length=100, required=True,
+        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     city = forms.CharField(
-        max_length=100, required=True,
+        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     age = forms.IntegerField(
-        min_value = 1, max_value = 100, required=True,
+        min_value = 1, max_value = 100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
 
     def clean_username(self):
@@ -446,23 +447,24 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
 class UserProfileEditInscriptionForm(forms.Form):
     notes_food = forms.CharField(
         required = False,
-        widget = forms.Textarea,
+        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
     )
     dinner_menu = forms.ChoiceField(
-        required = False,
+        required = False,widget=forms.Select(attrs={ 'class': 'form-control'}),
         choices=(
             ('carne', 'Carne'),
             ('pescado', 'Pescado'),
             ('otros', 'Otros'),
             ('sin-cena', 'No voy a ir a la cena de gala'),
         )
+        
     )
     notes_transport = forms.CharField(
         required = False,
-        widget = forms.Textarea,
+        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
     )
     room_choice = forms.ChoiceField(
-        required = True,
+        required = True,widget=forms.Select(attrs={ 'class': 'form-control'}),
         choices=(
             (
                 'Albergue (litera y baño comunitario)', (
