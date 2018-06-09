@@ -1,8 +1,9 @@
 {% extends "dynamic_page.html" %}
 
 {% block dynamic_content %}
-<h1><span>Programa de actividades</span> Modificar actividad</h1>
-
+<div class="heading">
+<h1>Modificar actividad</h1>
+</div>
 {% if message %}
 
 <p class="message">{{ message }}</p>
@@ -19,63 +20,71 @@ recuadro de comentarios para la organización de la EC.</p>
 <form method="post" action=".">
   {% csrf_token %}
   {{ form.id }}
-  <table style="vertical-align:top">
-    <tr>
-      <td><p title="Descripción breve en una línea, tal como aparecerá en el Programa.">
-        <label for="id_title">Título de la actividad: *</label><br/>
-        {{ form.title }}
-        {% if form.title.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.title.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-     </tr><tr>
-      <td><p title="Un comentario breve, en una o dos líneas, que aparecerá debajo del título.">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="form-group">
+        <p title="Descripción breve en una línea, tal como aparecerá en el Programa.">
+          <label for="id_title">Título de la actividad: *</label><br/>
+          {{ form.title }}
+          {% if form.title.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.title.errors|join:", " }}&nbsp;</b>{% endif %}
+        </p>
+      </div>
+      <div class="form-group">
+      <p title="Un comentario breve, en una o dos líneas, que aparecerá debajo del título.">
         <label for="id_subtitle">Entradilla:</label><br/>
         {{ form.subtitle }}
         {% if form.subtitle.errors %}<br/><b style="color:white;background-color=red">&nbsp;{{ form.subtitle.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-    </tr><tr>
-      </tr><tr>
-      <td><p title="La duración prevista para la actividad, o 0 si es indefinida.">
+      </p>
+    </div>
+    <div class="form-group">
+      <p title="La duración prevista para la actividad, o 0 si es indefinida.">
         <label for="id_duration">Duración aproximada: *</label><br/>
         {{ form.duration }}
         {% if form.duration.errors %}<br/><b style="color:white;background-color=red">&nbsp;{{ form.duration.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-    </tr><tr>
-     </tr><tr>
-      </tr><tr>
-      <td><p title="Indica cuántas personas podrán apuntarse como máximo, o 0 si no hay límite.">
+      </p>
+    </div>
+     
+    <div class="form-group">
+      <p title="Indica cuántas personas podrán apuntarse como máximo, o 0 si no hay límite.">
         <label for="id_max_places">Nº máximo de plazas (si lo hay): *</label><br/>
         {{ form.max_places }}
         {% if form.max_places.errors %}<br/><b style="color:white;background-color=red">&nbsp;{{ form.max_places.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-    </tr><tr>
-      <td><p title="Indica si se mostrará en el Programa el nombre de los responsables.">
-        <label for="id_show_owners">Mostrar responsables: </label>
+      </p>
+    </div>
+    <div class="form-check">
+      <p title="Indica si se mostrará en el Programa el nombre de los responsables.">
         {{ form.show_owners }}
+        <label for="id_show_owners" class="form-check-label">Mostrar responsables: </label>
         {% if form.show_owners.errors %}<br/><b style="color:white;background-color=red">&nbsp;{{ form.show_owners.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-    </tr><tr>
-      <td><p title="Describe la actividad con el detalle que quieras. Se mostrará en el Programa detallado.">
+      </p>
+    </div>
+    <div class="form-group">
+      <p title="Describe la actividad con el detalle que quieras. Se mostrará en el Programa detallado.">
         <label for="id_text">Descripción: *</label><br/>
         {{ form.text }}
         {% if form.text.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.text.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-    </tr><tr>
-      <td><p title="Dinos qué necesidades tienes. Esto sólo lo verá la organización de la EC.">
+      </p>
+    </div>
+    <div class="form-group">
+      <p title="Dinos qué necesidades tienes. Esto sólo lo verá la organización de la EC.">
         <label for="id_logistics">Necesidades logísticas (materiales, espacio y cualquier otro recurso necesario):</label><br/>
         {{ form.logistics }}
         {% if form.logistics.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.logistics.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-    </tr><tr>
-      <td><p title="Coméntanos cualquier otra cosa que se te ocurra, sólo para verlo nosotros.">
+      </p>
+    </div>
+    <div class="form-group">
+      <p title="Coméntanos cualquier otra cosa que se te ocurra, sólo para verlo nosotros.">
         <label for="id_notes_organization">Comentarios para la organización de la EC:</label><br/>
         {{ form.notes_organization }}
         {% if form.notes_organization.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_organization.errors|join:", " }}&nbsp;</b>{% endif %}
-      </p></td>
-    </tr>
-   </table>
-  <p>
-    <input type="submit" value="enviar"/>
-  </p>
+      </p>
+    </div>
+  
+
+    <input type="submit" value="enviar" class="btn btn-primary btn-lg"/>
+  </div>
+</div>
+
 </form>
 
 {% endif %}

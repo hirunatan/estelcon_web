@@ -1,7 +1,9 @@
 {% extends "dynamic_page.html" %}
 
 {% block dynamic_content %}
-<h1><span>Ficha personal</span> Modificar</h1>
+<div class="heading">
+<h1>Modificar</h1>
+</div>
 {% comment %}
 <p>Aquí puedes modificar cualquier parte de tu información de inscripción, excepto los días
 de asistencia. Si deseas cambiar este dato contacta con la organización.</p>
@@ -12,80 +14,89 @@ podemos compensar la diferencia.</p>
 
 <form method="post" action=".">
   {% csrf_token %}
-  <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
-    <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
-    {{ form.notes_transport }}
-    {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  <p title="Indica qué días te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
-    <label for="id_room_choice">Elige un tipo de alojamiento.</label><br/>
-    {{ form.room_choice }}
-    {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  <p title="Si prefieres compartir habitación con alguien, o cualquier otro comentario al respecto, indicalo aquí.">
-    <label for="id_room_preferences">¿Tienes alguna preferencia sobre con quién compartir habitación?<label><br/>
-    {{ form.room_preferences }}
-    {% if form.room_preferences.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_preferences.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
-    <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
-    {{ form.notes_food }}
-    {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  <p title="Si tienes algúna condición especial (alérgico, vegetariano... elige otros)">
-    <label for="id_dinner_menu">El plato principal de la cena de gala es un surtido de carnes, pero alternativamente hay un plato de pescado (dorada o similar a la brasa con guarnición). Si lo prefieres por favor indícanoslo aquí:</label><br/>
-    {{ form.dinner_menu }}
-    {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
-    <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label><br/>
-    {{ form.squire }}
-    {% if form.squire.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.squire.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-  <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
-    <label for="id_notes_general">¿Algún otro comentario?<label><br/>
-    {{ form.notes_general }}
-    {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
-  </p>
-
-  <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
-  optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
-  Hay dos tipos de camisetas, unisex y de mujer (para camisetas de niñ@s por favor consultad a la organización). Para ver
-  cómo son y las distintas tallas, pulsa en el enlace que se muestra un poco más abajo junto al precio de la misma. Si
-  vas a querer alguna camiseta, indícanos aquí la talla. Recuerda que debes indicar si quieres el modelo Mujer en el
-  apartado &quot;¿Alguna otra necesidad(...)?&quot; al hacer tu inscripción. Si no por defecto se facilitará el modelo Unisex.
-  También puedes, si lo deseas, reservar más de una, simplemente indicando la cantidad que quieres en la casilla o casillas
-  correspondientes.</p>
-  <p>El precio de <a href="/mereth-aderthad/camiseta">las camisetas</a> es de 12€, se entregarán junto con el Maratulmë
-  de la EstelCon, cuando os registréis nada más llegar.</p>
-  <table title="Indica cuántas camisetas quieres de esta talla.">
-    <tr>
-      <td><label for="id_shirts_S">Camisetas talla S: <label></td>
-      <td>{{ form.shirts_S }}
-      {% if form.shirts_S.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_S.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr>
-    <tr>
-      <td><label for="id_shirts_M">Camisetas talla M: <label></td>
-      <td>{{ form.shirts_M }}
-      {% if form.shirts_M.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_M.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr><tr>
-      <td><label for="id_shirts_L">Camisetas talla L: <label></td>
-      <td>{{ form.shirts_L }}
-      {% if form.shirts_L.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_L.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr><tr>
-      <td><label for="id_shirts_XL">Camisetas talla XL: <label></td>
-      <td>{{ form.shirts_XL }}
-      {% if form.shirts_XL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr><tr>
-      <td><label for="id_shirts_XXL">Camisetas talla XXL: <label></td>
-      <td>{{ form.shirts_XXL }}
-      {% if form.shirts_XXL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XXL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
-    </tr>
-  </table>
-  <br/>
-  <p>
-    <input type="submit" value="enviar"/>
-  </p>
-  <div align="right"><a href="{% url 'user-profile' %}">Cancelar</a></div>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
+        <label for="id_notes_transport">¿Cómo vas a venir?</label><br/>
+        {{ form.notes_transport }}
+        {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+      <p title="Indica qué días te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
+        <label for="id_room_choice">Elige un tipo de alojamiento.</label><br/>
+        {{ form.room_choice }}
+        {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+      <p title="Si prefieres compartir habitación con alguien, o cualquier otro comentario al respecto, indicalo aquí.">
+        <label for="id_room_preferences">¿Tienes alguna preferencia sobre con quién compartir habitación?<label><br/>
+        {{ form.room_preferences }}
+        {% if form.room_preferences.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_preferences.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+    </div>
+    <div class="col-4">
+      <p title="Indica si eres alérgico a algún alimento, vegetariano o cualquier otra condición especial.">
+        <label for="id_notes_food">¿Tienes necesidades especiales respecto de las comidas?</label><br/>
+        {{ form.notes_food }}
+        {% if form.notes_food.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_food.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+      <p title="Si tienes algúna condición especial (alérgico, vegetariano... elige otros)">
+        <label for="id_dinner_menu">El plato principal de la cena de gala es un surtido de carnes, pero alternativamente hay un plato de pescado (dorada o similar a la brasa con guarnición). Si lo prefieres por favor indícanoslo aquí:</label><br/>
+        {{ form.dinner_menu }}
+        {% if form.dinner_menu.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.dinner_menu.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+      <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
+        <label for="id_squire">¿Quieres ser escudero en esta Estelcon?</label><br/>
+        {{ form.squire }}
+        {% if form.squire.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.squire.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+      <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
+        <label for="id_notes_general">¿Algún otro comentario?<label><br/>
+        {{ form.notes_general }}
+        {% if form.notes_general.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_general.errors|join:", " }}&nbsp;</b>{% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
+      optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
+      Hay dos tipos de camisetas, unisex y de mujer (para camisetas de niñ@s por favor consultad a la organización). Para ver
+      cómo son y las distintas tallas, pulsa en el enlace que se muestra un poco más abajo junto al precio de la misma. Si
+      vas a querer alguna camiseta, indícanos aquí la talla. Recuerda que debes indicar si quieres el modelo Mujer en el
+      apartado &quot;¿Alguna otra necesidad(...)?&quot; al hacer tu inscripción. Si no por defecto se facilitará el modelo Unisex.
+      También puedes, si lo deseas, reservar más de una, simplemente indicando la cantidad que quieres en la casilla o casillas
+      correspondientes.</p>
+      <p>El precio de <a href="/mereth-aderthad/camiseta">las camisetas</a> es de 12€, se entregarán junto con el Maratulmë
+      de la EstelCon, cuando os registréis nada más llegar.</p>
+      <table title="Indica cuántas camisetas quieres de esta talla.">
+        <tr>
+          <td><label for="id_shirts_S">Camisetas talla S: <label></td>
+          <td>{{ form.shirts_S }}
+          {% if form.shirts_S.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_S.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+        </tr>
+        <tr>
+          <td><label for="id_shirts_M">Camisetas talla M: <label></td>
+          <td>{{ form.shirts_M }}
+          {% if form.shirts_M.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_M.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+        </tr><tr>
+          <td><label for="id_shirts_L">Camisetas talla L: <label></td>
+          <td>{{ form.shirts_L }}
+          {% if form.shirts_L.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_L.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+        </tr><tr>
+          <td><label for="id_shirts_XL">Camisetas talla XL: <label></td>
+          <td>{{ form.shirts_XL }}
+          {% if form.shirts_XL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+        </tr><tr>
+          <td><label for="id_shirts_XXL">Camisetas talla XXL: <label></td>
+          <td>{{ form.shirts_XXL }}
+          {% if form.shirts_XXL.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.shirts_XXL.errors|join:", " }}&nbsp;</b>{% endif %}<br/></td>
+        </tr>
+      </table>
+      <br/>
+      <p>
+        <input type="submit" value="enviar" class="btn btn-template-outlined"/>
+        <a href="{% url 'user-profile' %}" class="btn btn-template-outlined">Cancelar</a>
+      </p>  
+    </div>
+  </div>
 </form>
 {% endblock %}

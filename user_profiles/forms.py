@@ -485,35 +485,35 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     room_preferences = forms.CharField(
         required = False,
-        widget = forms.Textarea,
+        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
     )
     squire = forms.BooleanField(
-        initial = False, required = False,
+        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
     )
     first_estelcon = forms.BooleanField(
-        initial = False, required = False
+        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
     )
     want_boat = forms.BooleanField(
-        initial = False, required = False
+        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
     )
     notes_general = forms.CharField(
         required = False,
-        widget = forms.Textarea,
+        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
     )
     shirts_S = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     shirts_M = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     shirts_L = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     shirts_XL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
     shirts_XXL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,
+        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
     )
 
     def clean_age(self):

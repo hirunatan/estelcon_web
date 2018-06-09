@@ -56,6 +56,20 @@ header #navbar{
 header #navigation{
     font-family: 'Uncial Antiqua', sans-serif;
 }
+header #navigation .nav{
+    flex-wrap: nowrap;
+}
+@media (max-width: 1220px) {
+
+    header #navigation .navbar-nav > .nav-item {
+        max-width: 150px;
+        text-align: center;
+    }
+    header #navigation .navbar-nav > li > a{
+        padding: 1.3rem 1rem 1.3rem;
+        height: 100%;
+    }
+}
 .posBack{
     z-index: 1001;
 }
@@ -97,6 +111,7 @@ margin-bottom: 10px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     z-index: 5;
     position: relative;
+    min-height: 64vh;
 }
 h1{
     font-family: 'Uncial Antiqua', sans-serif;
@@ -107,6 +122,7 @@ h1{
     font-family: 'Uncial Antiqua', sans-serif;
     font-size: 20px;
     border-width: 0 0 3px 0;
+    color:rgb(0, 92, 157,0.7);
 }
 .breadcrumb{
     background-color: transparent;
@@ -134,4 +150,49 @@ h1{
 footer{
     position: relative;
     z-index: 5;
+}
+.blockquote {
+    padding: 2rem 3rem;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    position: relative;
+    display: inline-block;
+    font-family: 'Uncial Antiqua', sans-serif;
+    text-align: left;
+    color: rgb(70, 127, 191, 0.5);
+}
+.blockquote:before, .blockquote:after{
+    font-family: Georgia, serif;
+    position: absolute;
+    font-weight: normal;
+    color: rgb(70, 127, 191, 0.8);
+    line-height: 20px;
+    top: 50px;
+}
+.blockquote:before {
+    content: "“";
+    left: 10px;
+    font-size: 5rem;   
+}
+.blockquote:after {
+    content: "”";
+    right: 0;
+    font-size: 5rem;
+}
+.container_premios img{
+    width: 100%;
+    padding: 25px;
+}
+.btn_salir{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: 10px 20px;
+    border: 1px solid rgb(70, 127, 191, 0.8);
+}
+.btn_salir:before{
+    font-family: 'FontAwesome';
+    content: '\f011';
+    padding-right: 5px;
+    color: rgb(70, 127, 191, 0.8);
 }
