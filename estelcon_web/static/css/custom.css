@@ -151,6 +151,9 @@ footer{
     position: relative;
     z-index: 5;
 }
+footer.main-footer{
+    padding:20px 0;
+}
 .blockquote {
     padding: 2rem 3rem;
     margin-bottom: 0;
