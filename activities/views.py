@@ -11,7 +11,7 @@ from . import services
 from .models import Activity
 
 from .forms import (
-    ActivitySubscribeForm, ProposalForm
+    ActivitySubscribeForm, ProposalForm, ActivityForm
 )
 
 
@@ -92,8 +92,8 @@ class ActivitySubscribeView(FormView):
 class ActivityEditView(UpdateView):
     template_name = 'activities/activity_edit.html'
     model = Activity
+    form_class = ActivityForm
     pk_url_kwarg = 'activity_id'
-    fields = ['id', 'title', 'subtitle', 'duration', 'max_places', 'show_owners', 'text', 'logistics', 'notes_organization']
 
     def form_valid(self, form):
         result = super(ActivityEditView, self).form_valid(form)

@@ -29,7 +29,16 @@
 </div>
 {% endblock content %}
 {% block js %}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvQq8q6kAxXOa_190k5q4c5-SycxFzSk"></script>
+<script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvQq8q6kAxXOa_190k5q4c5-SycxFzSk&callback=initMap"></script>
 <script src="js/gmaps.js"></script>
 <script src="js/gmaps.init.js"></script>
 {% endblock js %}

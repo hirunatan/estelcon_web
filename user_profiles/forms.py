@@ -12,10 +12,12 @@ user_validator = validators.RegexValidator(
 
 class PreSignupForm(forms.Form):
     first_name = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     last_name = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     alias = forms.CharField(
         max_length=100, required=False,
@@ -52,43 +54,52 @@ class PreSignupForm(forms.Form):
 
 class SignupForm(forms.Form):
     username = forms.CharField(
-        max_length=30, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=30, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
         validators=[user_validator,]
     )
     email = forms.EmailField( # Note that it is allowed to have several users with same email. This is useful, for example,
-        required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),       # for the case in that a single person manages the inscription of several friends.
+        required=True,        # for the case in that a single person manages the inscription of several friends.
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     password1 = forms.CharField(
         min_length = 5, max_length=30, required=True,
-        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
+        widget = forms.PasswordInput(attrs={'class': 'form-control'}),
     )
     password2 = forms.CharField(
         min_length = 5, max_length=30, required=True,
-        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
+        widget = forms.PasswordInput(attrs={'class': 'form-control'}),
     )
     first_name = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     last_name = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     alias = forms.CharField(
-        max_length=100, required=False,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     smial = forms.CharField(
-        max_length=100, required=False,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     phone = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     city = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     age = forms.IntegerField(
-        min_value = 1, max_value = 100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 1, max_value = 100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     dinner_menu = forms.ChoiceField(
-        required = False, widget=forms.Select(attrs={ 'class': 'form-control'}),
+        required = False, widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             ('carne', 'Carne'),
             ('pescado', 'Pescado'),
@@ -98,7 +109,7 @@ class SignupForm(forms.Form):
     )
     notes_food = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control', 'rows':5}),
+        widget = forms.Textarea(attrs={'class': 'form-control', 'rows':5}),
     )
     day_1 = forms.BooleanField(
         initial = True, required = False,
@@ -111,10 +122,10 @@ class SignupForm(forms.Form):
     )
     notes_transport = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control', 'rows':5}),
+        widget = forms.Textarea(attrs={'class': 'form-control', 'rows':5}),
     )
     room_choice = forms.ChoiceField(
-        required = True, widget=forms.Select(attrs={ 'class': 'form-control'}),
+        required = True, widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             (
                 'Albergue (litera y baño comunitario)', (
@@ -135,48 +146,58 @@ class SignupForm(forms.Form):
     )
     room_preferences = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control', 'rows':5}),
+        widget = forms.Textarea(attrs={'class': 'form-control', 'rows':5}),
     )
     children_count = forms.IntegerField(
-        min_value = 0, initial = 0, required=True, widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     children_names = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
     is_ste_member = forms.BooleanField(
-        initial = True, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = True, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     want_ste_member = forms.BooleanField(
-        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     squire = forms.BooleanField(
-        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     first_estelcon = forms.BooleanField(
-        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     want_boat = forms.BooleanField(
-        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     notes_general = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
     shirts_S = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_M = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_L = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_XL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_XXL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
 
     def clean_username(self):
@@ -298,11 +319,12 @@ class SignupForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        max_length=30, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=30, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     password = forms.CharField(
         max_length=30, required=True,
-        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
+        widget = forms.PasswordInput(attrs={'class': 'form-control'}),
     )
 
     def clean(self):
@@ -324,7 +346,8 @@ class LoginForm(forms.Form):
 
 class ForgotPasswordForm(forms.Form):
     username = forms.CharField(
-        max_length=30, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=30, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
 
     def clean(self):
@@ -345,15 +368,15 @@ class ForgotPasswordForm(forms.Form):
 class ChangePasswordForm(forms.Form):
     password1 = forms.CharField(
         min_length = 5, max_length=30, required=True,
-        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
+        widget = forms.PasswordInput(attrs={'class': 'form-control'}),
     )
     password2 = forms.CharField(
         min_length = 5, max_length=30, required=True,
-        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
+        widget = forms.PasswordInput(attrs={'class': 'form-control'}),
     )
     reminder_code = forms.CharField(
         required=True,
-        widget = forms.HiddenInput(attrs={ 'class': 'form-control'}),
+        widget = forms.HiddenInput(attrs={'class': 'form-control'}),
     )
 
     def clean(self):
@@ -383,41 +406,49 @@ class ChangePasswordForm(forms.Form):
 
 class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because edits data of two models at the same time
     username = forms.CharField(
-        max_length=30, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=30, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
         validators=[user_validator,]
     )
     email = forms.EmailField( # Note that it is allowed to have several users with same email. This is useful, for example,
         required=True, 
-        widget=forms.TextInput(attrs={ 'class': 'form-control'}),       # for the case in that a single person manages the inscription of several friends.
+        widget=forms.TextInput(attrs={'class': 'form-control'}),       # for the case in that a single person manages the inscription of several friends.
     )
     password1 = forms.CharField(
         min_length = 5, max_length=30, required=False,
-        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
+        widget = forms.PasswordInput(attrs={'class': 'form-control'}),
     )
     password2 = forms.CharField(
         min_length = 5, max_length=30, required=False,
-        widget = forms.PasswordInput(attrs={ 'class': 'form-control'}),
+        widget = forms.PasswordInput(attrs={'class': 'form-control'}),
     )
     first_name = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     last_name = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     alias = forms.CharField(
-        max_length=100, required=False,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     smial = forms.CharField(
-        max_length=100, required=False,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     phone = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     city = forms.CharField(
-        max_length=100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        max_length=100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     age = forms.IntegerField(
-        min_value = 1, max_value = 100, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 1, max_value = 100, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
 
     def clean_username(self):
@@ -447,10 +478,11 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
 class UserProfileEditInscriptionForm(forms.Form):
     notes_food = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
     dinner_menu = forms.ChoiceField(
-        required = False,widget=forms.Select(attrs={ 'class': 'form-control'}),
+        required = False,
+        widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             ('carne', 'Carne'),
             ('pescado', 'Pescado'),
@@ -461,10 +493,11 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     notes_transport = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
     room_choice = forms.ChoiceField(
-        required = True,widget=forms.Select(attrs={ 'class': 'form-control'}),
+        required = True,
+        widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             (
                 'Albergue (litera y baño comunitario)', (
@@ -485,35 +518,43 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     room_preferences = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
     squire = forms.BooleanField(
-        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     first_estelcon = forms.BooleanField(
-        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     want_boat = forms.BooleanField(
-        initial = False, required = False,widget=forms.CheckboxInput(attrs={ 'class': 'form-check-input'}),
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
     notes_general = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={ 'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
     shirts_S = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_M = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_L = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_XL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     shirts_XXL = forms.IntegerField(
-        min_value = 0, initial = 0, required=True,widget=forms.TextInput(attrs={ 'class': 'form-control'}),
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
 
     def clean_age(self):

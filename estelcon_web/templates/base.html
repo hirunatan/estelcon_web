@@ -86,7 +86,7 @@
             <i class="fa fa-align-justify"></i>
           </button>
           <div id="navigation" class="navbar-collapse collapse flex-column">
-            <a href="{% url 'login' %}" class="btnlogin nav-link ml-auto"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a>
+            <a href="{% url 'user-profile' %}" class="btnlogin nav-link ml-auto"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a>
             <ul class="nav navbar-nav ml-auto">
               {% show_menu 0 100 0 100 "menu.html" %}
             </ul>
@@ -147,7 +147,7 @@
   <script src="{% static 'vendor/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
   <script src="{% static 'vendor/jquery.scrollto/jquery.scrollTo.min.js' %}"></script>
   <script src="{% static 'js/front.js' %}"></script> 
-  {% render_block "js" %}
+  {% block js %}{% endblock js %}
 </body>
 
 </html>

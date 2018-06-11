@@ -196,7 +196,6 @@ CMS_TEMPLATES = (
     ('home_page.html', 'Home Page'),
     ('page_full.html', 'Full width page'),
     ('page_map.html', 'Map page')
-    
 )
 
 CMS_PERMISSION = True
@@ -216,7 +215,6 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {
-    
 }
 
 THUMBNAIL_PROCESSORS = (
@@ -236,3 +234,4 @@ SIGNUP_CLOSED = False
 
 MAIL_FROM = 'Estelcon <estelcon@sociedadtolkien.org>'
 
+LOGIN_URL = '/entrada'
