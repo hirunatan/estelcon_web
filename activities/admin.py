@@ -7,7 +7,7 @@ from . import models
 
 
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'duration', 'max_places', 'has_view_page', 'show_owners', 'requires_inscription')
+    list_display = ('__str__', 'duration', 'column', 'has_view_page', 'show_owners', 'requires_inscription')
     list_filter = ('has_view_page', 'show_owners', 'requires_inscription')
     search_fields = ('title', 'subtitle', 'text', 'logistics', 'notes_organization')
     filter_horizontal = ('owners', 'organizers', 'participants')

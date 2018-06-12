@@ -129,7 +129,7 @@ def _get_block_activities(activ_with_hour, block_hour, ncol):
     for activity in activ_with_hour:
         if (activity.start >= block_hour) and \
            (activity.start < (block_hour + timedelta(minutes=30))) and \
-           (activity.start.second == ncol):
+           (activity.column == ncol):
 
             activities.append(activity)
 
