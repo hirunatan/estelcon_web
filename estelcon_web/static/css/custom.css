@@ -35,6 +35,9 @@ header.bg:before,header.bg:after{
     padding-bottom: 1.1rem;
     padding-left: 1rem;
 }
+.box_ficha{
+    text-align: center;
+}
 .btnlogin{
     text-transform: uppercase;
     margin-top: 10px;
@@ -44,6 +47,7 @@ header.bg:before,header.bg:after{
     padding: 6px 12px;
     border:1px solid rgba(158, 183, 200, 0.9);
     color:rgba(255, 255, 255, 0.6);
+    display: inline-block;
 }
 .btnlogin:hover{
     border:1px solid rgba(158, 183, 200, 1);
@@ -53,6 +57,19 @@ header #navbar{
     background-color: #005c9d;
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
+.btn-toggle-main {
+    background: rgb(70, 127, 191, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    border-radius: 0;
+    text-decoration: none;
+  }
+  
+  .btn-toggle-main:hover, .btn-toggle-main:focus {
+    background: #3d72af;
+    color: #fff ;
+    border-color: #3d72af;
+  }
 header #navigation{
     font-family: 'Uncial Antiqua', sans-serif;
 }
@@ -61,15 +78,32 @@ header #navigation .nav{
 }
 @media (max-width: 1220px) {
 
-    header #navigation .navbar-nav > .nav-item {
+    #navbar .navbar-nav > li {
         max-width: 150px;
         text-align: center;
     }
-    header #navigation .navbar-nav > li > a{
+    #navbar .navbar-nav > li > a{
         padding: 1.3rem 1rem 1.3rem;
         height: 100%;
     }
 }
+@media (max-width: 991px) {
+    #navbar {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    #navbar .navbar-nav > li {
+      max-width: 100%;
+    }
+    #navbar .navbar-nav > li > a{
+        padding: 0 !important;
+      }
+    #navbar .dropdown-menu {
+      border: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
 .posBack{
     z-index: 1001;
 }
@@ -136,6 +170,7 @@ h1{
 #main-column{
     padding-bottom: 60px;   
     position: relative;
+    border-left:1px dashed #dddddd;
 }
 #main-column:after{
     content: url(../img/detalle1.png);
@@ -153,6 +188,13 @@ footer{
 }
 footer.main-footer{
     padding:20px 0;
+}
+footer.main-footer h4{
+    color: #8cafd8;
+}
+footer.main-footer hr{
+    border-color: #8cafd8;
+    margin-top: 0;
 }
 .blockquote {
     padding: 2rem 3rem;

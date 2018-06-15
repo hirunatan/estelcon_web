@@ -61,7 +61,7 @@ inscripción</a>.</p>
 <div class="row">
     <div class="col-md-6 offset-md-3">
         {% if form.errors %}
-        <p><b>El usuario o contraseña son incorrectos. Por favor intentalo de nuevo.</b></p>
+        <div class="alert alert-danger" role="alert">El usuario o contraseña son incorrectos. Por favor intentalo de nuevo.</div>
         {% endif %}
 
         <form method="post" action=".">

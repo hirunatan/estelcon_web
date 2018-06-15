@@ -16,7 +16,7 @@ from .forms import (
 
 
 class PreSignupView(FormView):
-    template_name = 'user_profiles/pre_signup.html'
+    template_name = 'user_profiles/signup_off.html'
     form_class = PreSignupForm
 
     def form_valid(self, form):

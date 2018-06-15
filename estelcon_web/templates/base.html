@@ -81,12 +81,12 @@
             <img src="{% static 'img/logo-small.png' %}" alt="Universal logo" class="d-inline-block d-md-none">
             <span class="sr-only">Inicio</span>
           </a>
-          <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined">
+          <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-toggle-main">
             <span class="sr-only">Toggle navigation</span>
             <i class="fa fa-align-justify"></i>
           </button>
           <div id="navigation" class="navbar-collapse collapse flex-column">
-            <a href="{% url 'user-profile' %}" class="btnlogin nav-link ml-auto"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a>
+            <div class="box_ficha ml-auto"><a href="{% url 'user-profile' %}" class="btnlogin nav-link"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a></div>
             <ul class="nav navbar-nav ml-auto">
               {% show_menu 0 100 0 100 "menu.html" %}
             </ul>
@@ -127,7 +127,6 @@
             <hr>
             <p class="text-uppercase"></p>
             <a href="mailto:estelcon@sociedadtolkien.org" class="btn btn-template-main">escríbenos aquí</a>
-            <hr class="d-block d-lg-none">
           </div>
           
         </div>

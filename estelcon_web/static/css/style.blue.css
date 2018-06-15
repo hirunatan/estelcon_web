@@ -52,10 +52,6 @@ p.lead {
   color: #467fbf;
 }
 
-.tooltip {
-  /* font-family: "Roboto", Helvetica, Arial, sans-serif; */
-}
-
 .bs-select .dropdown-menu .dropdown-menu {
   min-height: 20px;
   display: block;
@@ -534,12 +530,6 @@ ul.social a.email {
 
 table {
   font-size: 0.9rem;
-}
-
-table img {
-  /* min-width: 50px !important;
-  max-width: 50px !important;
-  height: 50px; */
 }
 
 table input[type="number"] {
