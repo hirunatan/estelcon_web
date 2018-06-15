@@ -146,6 +146,7 @@
   <script src="{% static 'vendor/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
   <script src="{% static 'vendor/jquery.scrollto/jquery.scrollTo.min.js' %}"></script>
   <script src="{% static 'js/front.js' %}"></script> 
+  {% render_block "js" %}
   {% block js %}{% endblock js %}
 </body>
 
