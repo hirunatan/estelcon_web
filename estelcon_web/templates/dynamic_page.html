@@ -4,20 +4,16 @@
 {% block title %}{% page_attribute "page_title" %}{% endblock title %}
 
 {% block content %}
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- <div class="col-sm-3">
-                <p>Subsecciones:</p>
-                <ul class="nav nav-pills nav-stacked">
-                    {% show_menu 1 1 0 100 "menu.html" %}
-                </ul>
-            </div> -->
-            <div class="col-sm-12">
-                <ol class="breadcrumb">
-                    {% show_breadcrumb %}
-                </ol>
-                {% block dynamic_content %}{% endblock dynamic_content %}
+<div class="container">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ol class="breadcrumb">
+                        {% show_breadcrumb %}
+                    </ol>
+                    {% block dynamic_content %}{% endblock dynamic_content %}
+                </div>
             </div>
         </div>
     </div>

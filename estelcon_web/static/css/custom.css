@@ -147,6 +147,12 @@ margin-bottom: 10px;
     position: relative;
     min-height: 64vh;
 }
+.main-content h2{
+    text-decoration: underline;
+}
+.main-content h4{
+    color: #005c9d;
+}
 h1{
     font-family: 'Uncial Antiqua', sans-serif;
     color: #005c9d;
@@ -181,6 +187,27 @@ h1{
     right: 0;
     margin: 0px auto;
 }
+/*Sidebar*/
+.side_menu_btn{
+    margin-bottom:5px;
+    width: 100%;
+}
+@media (min-width: 992px) {
+    .side_menu_btn{
+        display: none;
+    }
+    .side_nav{
+        display: flex!important;
+        flex-basis: auto;
+    }
+}
+@media (max-width: 991px) {
+    .side_nav{
+        border:1px solid #d9e2ec;
+        margin-bottom:10px;
+    }
+}
+
 /* Footer */
 footer{
     position: relative;
