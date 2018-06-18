@@ -224,6 +224,8 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters'
 )
 
+APPEND_SLASH = False
+
 # Application specific
 
 PRE_SIGNUP_FORM = False
