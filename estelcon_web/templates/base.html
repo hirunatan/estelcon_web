@@ -1,4 +1,4 @@
-{% load cms_tags staticfiles sekizai_tags menu_tags %}
+{% load cms_tags staticfiles sekizai_tags menu_tags fullurl %}
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +11,7 @@
   <meta name="robots" content="all,follow">
   <!-- Open graph tags -->
   <meta property='og:title' content="Estelcon 2018 - {% page_attribute "page_title" %}"/>
-  <meta property='og:image' content="{% static "img/banner1.png" %}"/>
+  <meta property='og:image' content="{% fullstatic "img/banner1.png" %}"/>
   <meta name='og:description' content="{% page_attribute "meta_description" %}"/>
   <!-- Bootstrap CSS-->
   <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
