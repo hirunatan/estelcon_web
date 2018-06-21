@@ -6,9 +6,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{% block title %}This is my new project home page{% endblock title %}</title>
-  <meta name="description" content="">
+  <meta name="description" content="{% page_attribute "meta_description" %}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
+  <!-- Open graph tags -->
+  <meta property='og:title' content="Estelcon 2018 - {% page_attribute "page_title" %}"/>
+  <meta property='og:image' content="{% static "img/banner1.png" %}"/>
+  <meta name='og:description' content="{% page_attribute "meta_description" %}"/>
   <!-- Bootstrap CSS-->
   <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
   <!-- Font Awesome CSS-->
