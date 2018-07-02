@@ -9,7 +9,7 @@
 <p>Si modificas tu nombre de usuario o contraseña, tendrás que usarlos para volver
 a entrar a la página.</p>
 
-<form method="post" action=".">
+<form method="post" action="{% url 'user-profile-edit-personal' %}">
   {% csrf_token %}
   <div class="row justify-content-center">
       <div class="col-4">

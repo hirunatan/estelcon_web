@@ -64,7 +64,7 @@ inscripción</a>.</p>
         <div class="alert alert-danger" role="alert">El usuario o contraseña son incorrectos. Por favor intentalo de nuevo.</div>
         {% endif %}
 
-        <form method="post" action=".">
+        <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="form-group">
             <label for="id_username">Usuario:</label>

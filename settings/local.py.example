@@ -6,3 +6,11 @@ SCHEDULE_HIDDEN = False
 
 SIGNUP_CLOSED = False
 
+ADMINS = [
+    ('Admin', 'webmaster@sociedadtolkien.org')
+]
+
+MANAGERS = [
+    ('Estelcon', 'estelcon@sociedadtolkien.org')
+]
+

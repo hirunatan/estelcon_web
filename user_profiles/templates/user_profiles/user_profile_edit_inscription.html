@@ -12,7 +12,7 @@ de asistencia. Si deseas cambiar este dato contacta con la organización.</p>
 (como el tipo de alojamiento), te agradeceremos que contactes con la organización para ver cómo
 podemos compensar la diferencia.</p>
 
-<form method="post" action=".">
+<form method="post" action="{% url 'user-profile-edit-inscription' %}">
   {% csrf_token %}
   <div class="row justify-content-center">
     <div class="col-4">
@@ -57,16 +57,10 @@ podemos compensar la diferencia.</p>
   </div>
   <div class="row justify-content-center">
     <div class="col-8">
-      <p>En esta Estelcon, ¡por supuesto!, presentaremos unas nuevas y bonitas camisetas Mereth Aderthad. Para
-      optimizar su producción, y asegurar que nadie se quede sin la suya, queremos ofrecerlas mediante reserva.
-      Hay dos tipos de camisetas, unisex y de mujer (para camisetas de niñ@s por favor consultad a la organización). Para ver
-      cómo son y las distintas tallas, pulsa en el enlace que se muestra un poco más abajo junto al precio de la misma. Si
-      vas a querer alguna camiseta, indícanos aquí la talla. Recuerda que debes indicar si quieres el modelo Mujer en el
-      apartado &quot;¿Alguna otra necesidad(...)?&quot; al hacer tu inscripción. Si no por defecto se facilitará el modelo Unisex.
-      También puedes, si lo deseas, reservar más de una, simplemente indicando la cantidad que quieres en la casilla o casillas
-      correspondientes.</p>
-      <p>El precio de <a href="/mereth-aderthad/camiseta">las camisetas</a> es de 12€, se entregarán junto con el Maratulmë
-      de la EstelCon, cuando os registréis nada más llegar.</p>
+      <p>Hay tres tipos de camisetas, unisex, mujer y niño. Para ver cómo son y las distintas tallas, <a href="/camisetas">pulsa aquí</a>.</p>
+      <p>Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de una,
+      simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
+      <p>El precio de las camisetas es de 10€, se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis nada más llegar.</p>
       <table title="Indica cuántas camisetas quieres de esta talla.">
         <tr>
           <td><label for="id_shirts_S">Camisetas talla S: <label></td>
@@ -95,7 +89,7 @@ podemos compensar la diferencia.</p>
       <p>
         <input type="submit" value="enviar" class="btn btn-template-outlined"/>
         <a href="{% url 'user-profile' %}" class="btn btn-template-outlined">Cancelar</a>
-      </p>  
+      </p>
     </div>
   </div>
 </form>

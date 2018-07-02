@@ -37,7 +37,7 @@ artículos a vender y cualquier otro comentario.</p>
 
 <p>MANTÉN INMÓVIL DURANTE 1 SEG. EL CURSOR DEL RATÓN SOBRE LOS RECUADROS DE TEXTO PARA OBTENER MÁS INFORMACIÓN.</p>
 
-<form method="post" action=".">
+<form method="post" action="{% url 'proposal' %}">
   {% csrf_token %}
   <div class="row">
     <div class="col-md-6">

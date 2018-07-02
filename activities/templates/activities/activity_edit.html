@@ -17,7 +17,7 @@ recuadro de comentarios para la organización de la EC.</p>
 
 <p>MANTÉN INMÓVIL DURANTE 1 SEG. EL CURSOR DEL RATÓN SOBRE LOS RECUADROS DE TEXTO PARA OBTENER MÁS INFORMACIÓN.</p>
 
-<form method="post" action=".">
+<form method="post" action="{% url 'activity-edit' %}">
   {% csrf_token %}
   {{ form.id }}
   <div class="row justify-content-center">

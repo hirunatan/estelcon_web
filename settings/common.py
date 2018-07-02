@@ -34,12 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 
-
-
-
 ROOT_URLCONF = 'estelcon_web.urls'
-
-
 
 
 # Internationalization

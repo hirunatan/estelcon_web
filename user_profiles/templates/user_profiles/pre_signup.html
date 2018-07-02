@@ -17,7 +17,7 @@ alojamiento.</p>
 con tus hijos, puedes indicar sus nombres en la casilla de comentarios, para que podamos relacionar
 las fichas.</p>
 
-<form method="post" action=".">
+<form method="post" action="{% url 'signup' %}">
   {% csrf_token %}
   <table style="vertical-align:top">
     <tr>

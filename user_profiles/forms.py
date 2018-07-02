@@ -104,7 +104,6 @@ class SignupForm(forms.Form):
             ('carne', 'Carne'),
             ('pescado', 'Pescado'),
             ('otros', 'Otros'),
-            ('sin-cena', 'No voy a ir a la cena de gala'),
         )
     )
     notes_food = forms.CharField(
@@ -128,19 +127,18 @@ class SignupForm(forms.Form):
         required = True, widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             (
-                'Albergue (litera y baño comunitario)', (
-                    ('albergue-completa', '(litera) completa'),
-                    ('albergue-v-a-d', '(litera) viernes a domingo'),
-                    ('albergue-s-y-d', '(litera) sábado y domingo'),
+                'Habitación standard', (
+                    ('standard-completa', '(standard) completa'),
+                    ('standard-v-a-d', '(standard) viernes a domingo'),
+                    ('standard-s-y-d', '(standard) sábado y domingo'),
                 )
             ),(
-                'Habitación doble con baño propio', (
-                    ('doble-completa', '(doble) completa'),
-                    ('doble-v-a-d', '(doble) viernes a domingo'),
-                    ('doble-s-y-d', '(doble) sábado y domingo'),
+                'Habitación con suplemento', (
+                    ('suplemento-completa', '(suplemento) completa'),
+                    ('suplemento-v-a-d', '(suplemento) viernes a domingo'),
+                    ('suplemento-s-y-d', '(suplemento) sábado y domingo'),
                 )
             ),
-            ('sin-alojamiento', 'No voy a pernoctar en el seminario'),
             ('otros', 'Otros'),
         )
     )
@@ -171,7 +169,7 @@ class SignupForm(forms.Form):
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
-    want_boat = forms.BooleanField(
+    want_bus = forms.BooleanField(
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
@@ -179,23 +177,63 @@ class SignupForm(forms.Form):
         required = False,
         widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
-    shirts_S = forms.IntegerField(
+    shirts_S_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_M = forms.IntegerField(
+    shirts_M_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_L = forms.IntegerField(
+    shirts_L_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_XL = forms.IntegerField(
+    shirts_XL_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_XXL = forms.IntegerField(
+    shirts_XXL_1 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_S_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_M_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_L_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XL_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XXL_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_S_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_M_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_L_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XL_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XXL_3 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
@@ -218,6 +256,7 @@ class SignupForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
+        print('antes', cleaned_data)
 
         self._clean_passwords(cleaned_data)
         self._clean_days(cleaned_data)
@@ -225,6 +264,7 @@ class SignupForm(forms.Form):
         self._clean_ste_member(cleaned_data)
         self._clean_room_dinner(cleaned_data)
 
+        print('limpio', cleaned_data)
         return cleaned_data
 
     def _clean_passwords(self, cleaned_data):
@@ -241,15 +281,15 @@ class SignupForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == 'albergue-completa' or room_choice == 'doble-completa':
+        if room_choice == 'standard-completa' or room_choice == 'suplemento-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'albergue-v-a-d' or room_choice == 'doble-v-a-d':
+        elif room_choice == 'standard-v-a-d' or room_choice == 'suplemento-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'albergue-s-y-d' or room_choice == 'doble-s-y-d':
+        elif room_choice == 'standard-s-y-d' or room_choice == 'suplemento-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True
@@ -487,9 +527,7 @@ class UserProfileEditInscriptionForm(forms.Form):
             ('carne', 'Carne'),
             ('pescado', 'Pescado'),
             ('otros', 'Otros'),
-            ('sin-cena', 'No voy a ir a la cena de gala'),
         )
-        
     )
     notes_transport = forms.CharField(
         required = False,
@@ -500,19 +538,18 @@ class UserProfileEditInscriptionForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             (
-                'Albergue (litera y baño comunitario)', (
-                    ('albergue-completa', '(litera) completa'),
-                    ('albergue-v-a-d', '(litera) viernes a domingo'),
-                    ('albergue-s-y-d', '(litera) sábado y domingo'),
+                'Habitación standard', (
+                    ('standard-completa', '(standard) completa'),
+                    ('standard-v-a-d', '(standard) viernes a domingo'),
+                    ('standard-s-y-d', '(standard) sábado y domingo'),
                 )
             ),(
-                'Habitación doble con baño propio', (
-                    ('doble-completa', '(doble) completa'),
-                    ('doble-v-a-d', '(doble) viernes a domingo'),
-                    ('doble-s-y-d', '(doble) sábado y domingo'),
+                'Habitación con suplemento', (
+                    ('suplemento-completa', '(suplemento) completa'),
+                    ('suplemento-v-a-d', '(suplemento) viernes a domingo'),
+                    ('suplemento-s-y-d', '(suplemento) sábado y domingo'),
                 )
             ),
-            ('sin-alojamiento', 'No voy a pernoctar en el seminario'),
             ('otros', 'Otros'),
         )
     )
@@ -528,7 +565,7 @@ class UserProfileEditInscriptionForm(forms.Form):
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
-    want_boat = forms.BooleanField(
+    want_bus = forms.BooleanField(
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
@@ -536,23 +573,63 @@ class UserProfileEditInscriptionForm(forms.Form):
         required = False,
         widget = forms.Textarea(attrs={'class': 'form-control'}),
     )
-    shirts_S = forms.IntegerField(
+    shirts_S_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_M = forms.IntegerField(
+    shirts_M_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_L = forms.IntegerField(
+    shirts_L_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_XL = forms.IntegerField(
+    shirts_XL_1 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
-    shirts_XXL = forms.IntegerField(
+    shirts_XXL_1 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_S_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_M_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_L_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XL_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XXL_2 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_S_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_M_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_L_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XL_3 = forms.IntegerField(
+        min_value = 0, initial = 0, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    shirts_XXL_3 = forms.IntegerField(
         min_value = 0, initial = 0, required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
@@ -575,15 +652,15 @@ class UserProfileEditInscriptionForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == 'albergue-completa' or room_choice == 'doble-completa':
+        if room_choice == 'standard-completa' or room_choice == 'suplemento-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'albergue-v-a-d' or room_choice == 'doble-v-a-d':
+        elif room_choice == 'standard-v-a-d' or room_choice == 'suplemento-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'albergue-s-y-d' or room_choice == 'doble-s-y-d':
+        elif room_choice == 'standard-s-y-d' or room_choice == 'suplemento-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True
