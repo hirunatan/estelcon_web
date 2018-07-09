@@ -5,7 +5,7 @@
 <h1>Formulario de inscripción</h1>
 </div>
 {% if not signup_closed %}
-
+  
     {% if form.errors %}
     <div class="card bg-light border-danger mb-3"><div class="card-body"><p>Ha habido algún problema, consulta los mensajes de error más abajo.</p></div></div>
     {% endif %}
@@ -113,7 +113,7 @@
 
     <p><b>El proceso de inscripción es el siguiente:</b></p>
     <ol>
-      <li>Leer las <a href="/cuestiones-practicas/normas">normas de la EstelCon</a>.</li>
+      <li>Leer las <a href="/normas">normas de la EstelCon</a>.</li>
       <li>Rellenar este formulario. Los campos marcados con un * son obligatorios. Hay que indicar un
         usuario y contraseña que servirá para acceder después a la ficha personal, apuntarse a las
         actividades y modificar los datos si se desea.</li>
@@ -227,15 +227,15 @@
           </div>
         </div>
         <hr>
-        <div class="row">
-          <div class="form-group col-md-6">
+
+          <div class="form-group">
             <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
               <label for="id_notes_transport">¿Cómo vas a venir?</label>
               {{ form.notes_transport }}
               {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
             </p>
           </div>
-        </div>
+
         <div class="form-check">
           <p title="Indicanos si vas a hacer el viaje a la Estelcon con nuestro autobús">
             {{ form.want_bus }}
@@ -243,6 +243,7 @@
             {% if form.want_bus.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.want_bus.errors|join:", " }}&nbsp;</b>{% endif %}
           </p>
         </div>
+        <hr>
         <div class="row">
           <div class="form-group col-md-6">
             <p title="Indica qué días te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
@@ -326,6 +327,7 @@
             </p>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="form-group col-md-6">
             <p title="Si traes niños a tu cargo, indica aquí cuántos son y sus nombres. Luego tendrás que rellenar una inscripción por cada uno (si tienen 3 años o más). Si venis los dos padres, sólo hace falta rellenar esta información una vez.">
@@ -334,11 +336,14 @@
               {{ form.children_count }}
               {% if form.children_count.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_count.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
             </p>
-            <label for="id_children_names">Nombres (uno por fila)</label>
-            {{ form.children_names }}
-            {% if form.children_names.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_names.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="id_children_names">Nombres (uno por fila)</label>
+              {{ form.children_names }}
+              {% if form.children_names.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.children_names.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
           </div>
         </div>  
+        <hr>
         <div class="form-check">
           <p title="Indica si ya eres socio/a, con la cuota al día.">
             {{ form.is_ste_member }}
@@ -376,7 +381,7 @@
         </div>
         <br>
         <hr>
-        <p>Hay tres tipos de camisetas, unisex, mujer y niño. Para ver cómo son y las distintas tallas, <a href="/camisetas">pulsa aquí</a>.</p>
+        <p>Hay tres tipos de camisetas, unisex, mujer y niño. Para ver cómo son y las distintas tallas,<a href="#shirt-modal" data-toggle="modal" data-target="#shirt-modal" class="">pulsa aquí</a>.</p>
         <p>Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de una,
         simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
         <p>El precio de las camisetas es de 10€, se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis nada más llegar.</p>
@@ -396,6 +401,7 @@
               <label for="id_shirts_XL_1">Camisetas talla XL: </label>
             </div>
             <div class="col-md-2">
+                <label for="id_shirts_XXL_1">Camisetas talla XXL: </label>
             </div>
           </div>
           <div class="row">

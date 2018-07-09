@@ -20,7 +20,7 @@
   <!-- Google fonts - Roboto-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
   <!-- Google fonts - Uncial-->
-  <link href="https://fonts.googleapis.com/css?family=Lora|Uncial+Antiqua" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i|Uncial+Antiqua" rel="stylesheet">
   <!-- Bootstrap Select-->
   <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
   <!-- owl carousel-->
@@ -43,6 +43,21 @@
 <body class="bg">
   {% cms_toolbar %}
   <div id="all">
+    <!-- Shirt Modal-->
+<div id="shirt-modal" tabindex="-1" role="dialog" aria-labelledby="shirt-modalLabel" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="shirt-modalLabel" class="modal-title">Tallas Camisetas</h4>
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <img src="../static/img/Camisetas.jpg" alt="" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Shirt modal end-->
     <!-- Navbar Start-->
     <header class="nav-holder make-sticky sticky bg">
       <div id="navbar" role="navigation" class="navbar navbar-expand-lg"> 

@@ -269,3 +269,15 @@ footer.main-footer hr{
     padding-right: 5px;
     color: rgb(70, 127, 191, 0.8);
 }
+@media (min-width: 576px) {
+    .modal-dialog {
+      max-width: 850px;
+      margin: 1.75rem auto;
+    }
+    .modal-dialog-centered {
+      min-height: calc(100% - (1.75rem * 2));
+    }
+    .modal-sm {
+      max-width: 300px;
+    }
+  }
