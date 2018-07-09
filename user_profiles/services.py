@@ -118,8 +118,9 @@ def create_new_user(user_data, home_url):
 #''' % (profile.quota, profile.payment_code)
             profile.payment = \
 '''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caixabank
-ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el ingreso el código %s.
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta del Banco Santander
+0049 1736 71 2190087291, a nombre de Helios De Rosario Martínez y Santiago Álvarez Muñoz, indicando en
+el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
@@ -173,8 +174,8 @@ Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
 La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-cuenta de Caixabank ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el
-ingreso el código %s.
+cuenta del Banco Santander 0049 1736 71 2190087291, a nombre de Helios De Rosario Martínez y
+Santiago Álvarez Muñoz, indicando en el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
