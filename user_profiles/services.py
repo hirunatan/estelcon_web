@@ -383,10 +383,11 @@ def change_user_personal_data(user, new_data, home_url):
             setattr(profile, field_name, new_data[field_name])
     profile.save()
 
-    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
-    mail_managers(
-        subject = '[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
-        message =
+    if changed_fields:
+        changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
+        mail_managers(
+            subject = '[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
+            message =
 '''
 %s, con usuario %s y email %s, ha modificado sus datos personales en la web:
 
@@ -395,7 +396,7 @@ def change_user_personal_data(user, new_data, home_url):
 Su ficha puede consultarse directamente en %s
 '''
 % (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
-    )
+        )
 
     send_mail(
         subject = '[Estelcon] Notificación de modificación de ficha personal',
@@ -431,10 +432,11 @@ def change_user_inscription_data(user, new_data, home_url):
             setattr(profile, field_name, new_data[field_name])
     profile.save()
 
-    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
-    mail_managers(
-        subject = '[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
-        message =
+    if changed_fields:
+        changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
+        mail_managers(
+            subject = '[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
+            message =
 '''
 %s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web:
 
@@ -443,7 +445,7 @@ def change_user_inscription_data(user, new_data, home_url):
 Su ficha puede consultarse directamente en %s
 '''
 % (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
-    )
+        )
 
     send_mail(
         subject = '[Estelcon] Notificación de modificación de ficha personal',
