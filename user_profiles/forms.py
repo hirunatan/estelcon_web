@@ -518,7 +518,7 @@ class UserProfileEditPersonalForm(forms.Form): # Cannot be a ModelForm because e
 class UserProfileEditInscriptionForm(forms.Form):
     notes_food = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control', 'rows':5}),
     )
     dinner_menu = forms.ChoiceField(
         required = False,
@@ -531,7 +531,7 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     notes_transport = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control', 'rows':5}),
     )
     room_choice = forms.ChoiceField(
         required = True,
@@ -555,7 +555,7 @@ class UserProfileEditInscriptionForm(forms.Form):
     )
     room_preferences = forms.CharField(
         required = False,
-        widget = forms.Textarea(attrs={'class': 'form-control'}),
+        widget = forms.Textarea(attrs={'class': 'form-control', 'rows':5}),
     )
     squire = forms.BooleanField(
         initial = False, required = False,

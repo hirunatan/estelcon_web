@@ -5,7 +5,7 @@
 <h1>Formulario de inscripción</h1>
 </div>
 {% if not signup_closed %}
-  
+
     {% if form.errors %}
     <div class="card bg-light border-danger mb-3"><div class="card-body"><p>Ha habido algún problema, consulta los mensajes de error más abajo.</p></div></div>
     {% endif %}
@@ -229,15 +229,16 @@
             </p>
           </div>
         </div>
+
         <hr>
 
-          <div class="form-group">
-            <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
-              <label for="id_notes_transport">¿Cómo vas a venir?</label>
-              {{ form.notes_transport }}
-              {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
-            </p>
-          </div>
+        <div class="form-group">
+          <p title="Indica si vendrás en transporte privado o público, y en este caso, lugar y horario de llegada.">
+            <label for="id_notes_transport">¿Cómo vas a venir?</label>
+            {{ form.notes_transport }}
+            {% if form.notes_transport.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.notes_transport.errors|join:", " }}&nbsp;</b>{% endif %}
+          </p>
+        </div>
 
         <div class="form-check">
           <p title="Indicanos si vas a hacer el viaje a la Estelcon con nuestro autobús">
@@ -246,16 +247,19 @@
             {% if form.want_bus.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.want_bus.errors|join:", " }}&nbsp;</b>{% endif %}
           </p>
         </div>
+
         <hr>
+
         <div class="row">
           <div class="form-group col-md-6">
-            <p title="Indica qué días te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
+            <p title="Indica en qué tipo de habitación te vas a alojar. Si no te sirve ninguna de las opciones, pon 'otros' y contacta con la organización para ver el precio.">
               <label for="id_room_choice">Elige un tipo de alojamiento.</label>
               {{ form.room_choice }}
               {% if form.room_choice.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.room_choice.errors|join:", " }}&nbsp;</b>{% endif %}
             </p>
           </div>
         </div>
+
           {% comment %}
           <script type="text/javascript">
             check_days = function() {
@@ -290,19 +294,19 @@
           {% comment %}
           <p>Indica las noches que vas a pasar en el hotel:</p>
           <table title="Si asistes a la Estelcon completa, marca todo. Si no, dinos qué noches pernoctas en el hotel, incluyendo las comidas como se indica arriba. Si eliges la opción sin alojamiento, no marques nada.">
-            
+
               <label for="id_day_1">Viernes/Sábado<label>
               {{ form.day_1 }}
               {% if form.day_1.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_1.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
-            
+
               <label for="id_day_2">Sábado/Domingo<label>
               {{ form.day_2 }}
               {% if form.day_2.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_2.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
-            
+
               <label for="id_day_3">Domingo/Lunes + Cena de gala<label>
               {{ form.day_3 }}
               {% if form.day_3.errors %} <b style="color:white;background-color:red">&nbsp;{{ form.day_3.errors|join:", " }}&nbsp;</b>{% endif %}<br/>
-            
+
           <br/>
           {% endcomment %}
         <div class="row">
