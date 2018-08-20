@@ -99,9 +99,9 @@ def _build_block(activ_with_hour, block_hour, pending_cols):
             columns = [pending_cols[0].column]
         else:
             columns = []
-        if pending_cols[1].column.activities:
+        if pending_cols[1].column.activities and columns:
             columns[0].activities.extend(pending_cols[1].column.activities)
-        if pending_cols[2].column.activities:
+        if pending_cols[2].column.activities and columns:
             columns[0].activities.extend(pending_cols[2].column.activities)
     else:
         columns = []
