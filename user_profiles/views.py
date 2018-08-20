@@ -140,7 +140,10 @@ class UserProfileView(TemplateView):
         context['owned_by'] = services.get_activities_owned_by(user)
         context['organized_by'] = services.get_activities_organized_by(user)
         context['participant_in'] = services.get_activities_in_which_participates(user)
-        context['activities_to_participate'] = services.get_activities_to_participate_by(user)
+        if not settings.SCHEDULE_HIDDEN:
+            context['activities_to_participate'] = services.get_activities_to_participate_by(user)
+        else:
+            context['activities_to_participate'] = []
 
         return context
 
