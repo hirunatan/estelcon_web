@@ -10,6 +10,8 @@ import locale
 from .models import UserProfile
 from functools import reduce
 
+from activities.models import Activity
+
 MAX_USERS = 150
 
 #TODO: usar templates para los textos de los correos
@@ -345,23 +347,19 @@ def change_user_password(user, password):
 
 
 def get_activities_owned_by(user):
-    return []
-    # return Activity.objects.filter(owners = user)
+    return Activity.objects.filter(owners = user)
 
 
 def get_activities_organized_by(user):
-    return []
-    # return Activity.objects.filter(organizers = user)
+    return Activity.objects.filter(organizers = user)
 
 
 def get_activities_in_which_participates(user):
-    return []
-    # return Activity.objects.filter(participants = user)
+    return Activity.objects.filter(participants = user)
 
 
 def get_activities_to_participate_by(user):
-    return []
-    # return Activity.objects.filter(requires_inscription = True).exclude(participants = user)
+    return Activity.objects.filter(requires_inscription = True).exclude(participants = user)
 
 
 def change_user_personal_data(user, new_data, home_url):

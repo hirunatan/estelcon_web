@@ -5,111 +5,117 @@
   <h1>Actividad</h1>
 </div>
 {% if messages %}
-    {% for message in messages %}
-        <h3 class="message">{{ message }}</h3>
-    {% endfor %}
+  {% for message in messages %}
+    <h3 class="message">{{ message }}</h3>
+  {% endfor %}
 {% endif %}
 
 {% if not activity %}
 
-  <p>No se encuentra la actividad</p>
+  <p>No se encuentra la actividad.</p>
 
 {% else %}
 <div class="row">
   <div class="col-6">
-  {% if is_owner %}
-  <div class="alert alert-primary" role="alert">(Eres el RESPONSABLE de esta actividad. Puedes ver toda la información y además modificarla.)</div>
-  {% endif %}
-  {% if is_organizer %}
-  <div class="alert alert-primary" role="alert">(Eres un ORGANIZADOR de esta actividad. Puedes ver toda la información.)</div>
-  {% endif %}
-  {% if is_participant %}
-  <div class="alert alert-secondary" role="alert">(Estás inscrito en esta actividad.)</div>
-  {% endif %}
-
-  {% if is_owner %}
-    <a href="/actividad-editar/{{ activity.id }}" class="btn btn-template-outlined">Modificar datos de esta actividad</a>
-    <hr>
-  {% endif %}
-
-
-  <h2>{{ activity.title }}</h2>
-  {% if activity.subtitle %}
-    <h3>{{ activity.subtitle }}</h3>
-  {% endif %}
-
-  {% if activity.show_owners %}
-    Por: <em>
-    {% for owner in activity.owners.all %}
-      {% if not forloop.first and not forloop.last %}, {% endif %}
-      {% if not forloop.first and forloop.last %} y {% endif %}
-      {{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}
-    {% endfor %}
-    </em>
-  {% endif %}
-
-  {% if activity.text %}
-    <p>{{ activity.text|safe|linebreaks }}</p>
-  {% endif %}
-
-  {% if is_owner or is_organizer or is_admin %}
-
-    {% if activity.duration %}
-    <h4>Duración: {{ activity.duration }}.</h4>
+    {% if is_owner %}
+      <div class="alert alert-primary" role="alert">(Eres el RESPONSABLE de esta actividad. Puedes ver toda la información y además modificarla.)</div>
+    {% endif %}
+    {% if is_organizer %}
+      <div class="alert alert-primary" role="alert">(Eres un ORGANIZADOR de esta actividad. Puedes ver toda la información.)</div>
+    {% endif %}
+    {% if is_participant %}
+      <div class="alert alert-secondary" role="alert">(Estás inscrito en esta actividad.)</div>
     {% endif %}
 
-    {% if activity.max_places %}
-    <h4>Nº máximo de plazas: {{ activity.max_places }}.</h4>
+    {% if is_owner %}
+      <a href="/actividad-editar/{{ activity.id }}" class="btn btn-template-outlined">Modificar datos de esta actividad</a>
+      <hr>
     {% endif %}
 
-    {% if activity.logistics %}
-      <h4>Necesidades logísticas:</h4>
-      <p>{{ activity.logistics|linebreaks }}</p>
+    <h2>{{ activity.title }}</h2>
+    {% if activity.subtitle %}
+      <h3>{{ activity.subtitle }}</h3>
     {% endif %}
 
-    {% if activity.notes_organization %}
-      <h4>Comentarios de o hacia la organización:</h4>
-      <p>{{ activity.notes_organization|linebreaks }}</p>
+    {% if activity.show_owners and activity.owners.all %}
+      Por: <em>
+      {% for owner in activity.owners.all %}
+        {% if not forloop.first and not forloop.last %}, {% endif %}
+        {% if not forloop.first and forloop.last %} y {% endif %}
+        {{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}
+      {% endfor %}
+      </em>
+    {% endif %}
+
+    {% if activity.text %}
+      <p>{{ activity.text|safe|linebreaks }}</p>
+    {% endif %}
+
+    {% if is_owner or is_organizer or is_admin %}
+
+      {% if activity.duration %}
+      <h4>Duración: {{ activity.duration }}.</h4>
+      {% endif %}
+
+      {% if activity.max_places %}
+      <h4>Nº máximo de plazas: {{ activity.max_places }}.</h4>
+      {% endif %}
+
+      {% if activity.logistics %}
+        <h4>Necesidades logísticas:</h4>
+        <p>{{ activity.logistics|linebreaks }}</p>
+      {% endif %}
+
+      {% if activity.notes_organization %}
+        <h4>Comentarios de o hacia la organización:</h4>
+        <p>{{ activity.notes_organization|linebreaks }}</p>
+      {% endif %}
+
     {% endif %}
   </div>
+
   <div class="col-6">
-    {% if activity.owners.all %}
-      <h4>Responsables:</h4>
-      <p>
-      {% for owner in activity.owners.all %}
-        <a href="mailto:{{ owner.email }}">
-	{{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}
-	      </a><br/>
-      {% endfor %}
-      </p>
+    {% if is_owner or is_organizer or is_admin %}
+      {% if activity.owners.all %}
+        <h4>Responsables:</h4>
+        <p>
+        {% for owner in activity.owners.all %}
+          <a href="mailto:{{ owner.email }}">
+            {{ owner.get_full_name }} {% if owner.profile.alias %}"{{ owner.profile.alias }}"{% endif %}
+          </a><br/>
+        {% endfor %}
+        </p>
+      {% endif %}
+
+      {% if activity.organizers.all %}
+        <h4>Organizadores:</h4>
+        <p>
+          {% for organizer in activity.organizers.all %}
+            <a href="mailto:{{ organizer.email }}">
+              {{ organizer.get_full_name }} {% if organizer.profile.alias %}"{{ organizer.profile.alias }}"{% endif %}
+            </a><br/>
+          {% endfor %}
+        </p>
+      {% endif %}
+
+      {% if activity.participants.all %}
+        <h4>Lista de personas inscritas:</h4>
+        <p>
+          {% for participant in activity.participants.all %}
+            <a href="mailto:{{ participant.email }}">
+              {{ participant.get_full_name }} {% if participant.profile.alias %}"{{ participant.profile.alias }}"{% endif %}
+            </a><br/>
+          {% endfor %}
+        </p>
+        <p>Para enviar un mail a todos (se recomienda poner las direcciones en copia oculta, CCO o BCC):</p>
+        <p><textarea class="form-control" rows="3">{% for participant in activity.participants.all %}{% if not forloop.first %}, {% endif %}{{ participant.email }}{% endfor %}</textarea></p>
+      {% endif %}
     {% endif %}
-
-    {% if activity.organizers.all %}
-
-    <h4>Organizadores:</h4>
-    <p>
-      {% for organizer in activity.organizers.all %}
-        <a href="mailto:{{ organizer.email }}">
-        {{ organizer.get_full_name }} {% if organizer.profile.alias %}"{{ organizer.profile.alias }}"{% endif %}
-	</a><br/>
-      {% endfor %}
-      </p>
+    {% if activity.requires_inscription and not is_owner and not is_organizer and not is_participant %}
+      <p>Esta actividad necesita que te inscribas previamente antes de poder participar, puesto que sus
+      organizadores deben saber cuánta gente la quiere realizar.<p>
+      <a href="/actividad-inscribir/{{ activity.id }}" class="btn btn-template-outlined">Inscribirte en la actividad</a>
     {% endif %}
-
-    {% if activity.participants.all %}
-    <h4>Lista de personas inscritas:</h4>
-    <p>
-      {% for participant in activity.participants.all %}
-        <a href="mailto:{{ participant.email }}">
-        {{ participant.get_full_name }} {% if participant.profile.alias %}"{{ participant.profile.alias }}"{% endif %}
-	</a><br/>
-      {% endfor %}
-    </p>
-      <p>Para enviar un mail a todos (se recomienda poner las direcciones en copia oculta, CCO o BCC):</p>
-      <p><textarea class="form-control" rows="3">{% for participant in activity.participants.all %}{% if not forloop.first %}, {% endif %}{{ participant.email }}{% endfor %}</textarea></p>
-    {% endif %}
-
-  {% endif %}
   </div>
 </div>
 {% endif %}

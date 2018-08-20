@@ -7,28 +7,28 @@
 <div class="btn_salir"><a href="/salida">Desconectar</a></div>
 
 {% if messages %}
-    {% for message in messages %}
-        <h3 class="message">{{ message }}</h3>
-    {% endfor %}
+  {% for message in messages %}
+    <h3 class="message">{{ message }}</h3>
+  {% endfor %}
 {% endif %}
 <div class="row">
   <div class="col-md-6">
     <h4>DATOS PERSONALES (<a href="{% url 'user-profile-edit-personal' %}">modificar</a>):</h4>
     <p>
-    <b>Nombre y apellidos</b>: {{ user.first_name }} {{ user.last_name }}<br/>
-    <b>Correo electrónico</b>: {{ user.email }}<br/>
-    <b>Nombre de usuario en la web</b>: {{ user.username }}<br/>
-    {% if profile.alias %}
-      <b>Pseudónimo en la STE</b>: {{ profile.alias }}<br/>
-    {% endif %}
-    {% if profile.smial %}
-      <b>Smial</b>: {{ profile.smial }}<br/>
-    {% endif %}
-    <b>Teléfono</b>: {{ profile.phone }}<br/>
-    {% if profile.city %}
-      <b>Población</b>: {{ profile.city }}<br/>
-    {% endif %}
-    <b>Edad</b>: {{ profile.age }}
+      <b>Nombre y apellidos</b>: {{ user.first_name }} {{ user.last_name }}<br/>
+      <b>Correo electrónico</b>: {{ user.email }}<br/>
+      <b>Nombre de usuario en la web</b>: {{ user.username }}<br/>
+      {% if profile.alias %}
+        <b>Pseudónimo en la STE</b>: {{ profile.alias }}<br/>
+      {% endif %}
+      {% if profile.smial %}
+        <b>Smial</b>: {{ profile.smial }}<br/>
+      {% endif %}
+      <b>Teléfono</b>: {{ profile.phone }}<br/>
+      {% if profile.city %}
+        <b>Población</b>: {{ profile.city }}<br/>
+      {% endif %}
+      <b>Edad</b>: {{ profile.age }}
     </p>
 
     {% if owned_by or organized_by or participant_in %}
@@ -36,47 +36,49 @@
     {% endif %}
 
     {% if owned_by %}
-    <div class="card">
-      <div class="card-header">
-        <h4>Eres RESPONSABLE de las siguientes actividades</h4>:
-      </div>  
-      <div class="card-body">
-        {% for activity in owned_by %}
-        <br/><a href="/actividad/{{ activity.id }}">{{ activity.title }}</a>
-        {% endfor %}
-      </div>
-    </div>  
-          {% endif %}
-          
-    {% if organized_by %}
-    <div class="card">
+      <div class="card">
         <div class="card-header">
-      <h4>Eres ORGANIZADOR de las siguientes actividades</h4>:
-    </div>  
-    <div class="card-body">
-      {% for activity in organized_by %}
-      <br/><a href="/actividad/{{ activity.id }}">{{ activity.title }}</a>
-      {% endfor %}
-    </div>
-  </div> 
+          <h4>Eres RESPONSABLE de las siguientes actividades:</h4>
+        </div>
+        <div class="card-body">
+          {% for activity in owned_by %}
+            {% if not forloop.first %}<br/>{% endif %}
+            <a href="/actividad/{{ activity.id }}">{{ activity.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if organized_by %}
+      <div class="card">
+        <div class="card-header">
+          <h4>Eres ORGANIZADOR de las siguientes actividades:</h4>
+        </div>
+        <div class="card-body">
+          {% for activity in organized_by %}
+            {% if not forloop.first %}<br/>{% endif %}
+            <a href="/actividad/{{ activity.id }}">{{ activity.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
     {% endif %}
 
     {% if participant_in %}
-    <div class="card">
+      <div class="card">
         <div class="card-header">
-      <h4>Estás inscrito en las siguientes actividades</h4>:
-    </div>  
-    <div class="card-body">
-      {% for activity in participant_in %}
-      <br/><a href="/actividad/{{ activity.id }}">{{ activity.title }}</a>
-      {% endfor %}
-    </div>
-  </div> 
+          <h4>Estás inscrito en las siguientes actividades:</h4>
+        </div>
+        <div class="card-body">
+          {% for activity in participant_in %}
+            {% if not forloop.first %}<br/>{% endif %}
+            <a href="/actividad/{{ activity.id }}">{{ activity.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
     {% endif %}
 
     {% if activities_to_participate %}
       <hr>
-
       <p><b>Actividades que requieren inscripción</b>:</p>
       <p>Las siguientes actividades necesitan que te inscribas previamente antes de poder participar, puesto que
       sus organizadores deben saber cuánta gente las quiere realizar. Desde aquí puedes consultar las actividades
@@ -84,25 +86,29 @@
       <p>
         {% for activity in activities_to_participate %}
         {% if not forloop.first %}<br/>{% endif %}
-        {{ activity.title }} (<a href="/actividad-inscribir/{{ activity.id }}">ver e inscribir</a>)
+        <b>{{ activity.title }}</b> (<a href="/actividad-inscribir/{{ activity.id }}">ver e inscribir</a>)
         {% endfor %}
       </p>
     {% else %}
-    <p><b>En la actualidad, no hay actividades que requieren inscripción.</b></p>
+      {% if not participant_in %}
+        <p><b>En la actualidad, no hay actividades que requieren inscripción.</b></p>
+      {% else %}
+        <p><b>Ya no hay más actividades que requieren inscripción.</b></p>
+      {% endif %}
     {% endif %}
 
     <hr>
 
     <h4>¿Quieres participar?</h4>
     <div class="card">
-        <div class="card-body">
-          ¡No te limites a mirar! ¿Te apetece unirte a los organizadores de esta fiesta? Asegúrate de leer
-          la sección <a href="/mereth-aderthad/como-participar">¿Cómo participar?</a>, y luego haznos una
-          <a href="/propuesta">propuesta de actividad</a>.
-          {% comment %}
-          <p>También puedes usar este formulario para informarnos de artículos para su venta en la Esteltienda.</p>
-          {% endcomment %}
-        </div>
+      <div class="card-body">
+        ¡No te limites a mirar! ¿Te apetece unirte a los organizadores de esta fiesta? Asegúrate de leer
+        la sección <a href="/mereth-aderthad/como-participar">¿Cómo participar?</a>, y luego haznos una
+        <a href="/propuesta">propuesta de actividad</a>.
+        {% comment %}
+        <p>También puedes usar este formulario para informarnos de artículos para su venta en la Esteltienda.</p>
+        {% endcomment %}
+      </div>
     </div>
 
   </div>
