@@ -29,6 +29,9 @@ body {
 header.bg:before,header.bg:after{
     position: absolute;
 }
+.cms-toolbar-expanded header.nav-holder.sticky{
+    top: 46px;
+}
 .navbar-brand{
     width: 260px;
     padding-top: 1.1rem;
