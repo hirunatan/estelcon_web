@@ -206,9 +206,9 @@ El usuario %s (%s) se ha inscrito en la actividad %s.
             subject = '[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
             message =
 '''
-El usuario %s (%s) se ha inscrito en la actividad %s.
+El usuario %s (%s, %s) se ha inscrito en la actividad %s.
 '''
-% (user.username, user.get_full_name(), activity.title),
+% (user.username, user.get_full_name(), user.email, activity.title),
             from_email = settings.MAIL_FROM,
             recipient_list = [owner.email],
             fail_silently = False
