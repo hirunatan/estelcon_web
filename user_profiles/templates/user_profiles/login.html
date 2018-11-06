@@ -1,8 +1,9 @@
 {% extends "dynamic_page.html" %}
 
 {% block dynamic_content %}
-<h1><span>La Mereth Aderthad</span> Ficha personal</h1>
-
+<div class="heading">
+    <h1>Ficha personal</h1>
+</div>
 {% if messages %}
     {% for message in messages %}
         <h3 class="message">{{ message }}</h3>
@@ -15,8 +16,9 @@
 
   <p>¡Bienvenido/a a la Mereth Aderthad!</p>
   <p>Tu inscripción ha sido procesada, te hemos enviado un correo de confirmación. Si no lo ves, consulta tu bandeja de spam.</p>
-  <p>El siguiente paso es realizar el pago. Debes realizar un ingreso de {{ quota }}€ en la cuenta de Caixabank
-  ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el ingreso el código {{ payment_code }}.</p>
+  <p>El siguiente paso es realizar el pago. Debes realizar un ingreso de {{ quota }}€ en la cuenta del Banco Santander
+  ES63 0049 1736 7121 9008 7291, a nombre de Helios De Rosario Martínez y Santiago Álvarez Muñoz, indicando en el ingreso el
+  código {{ payment_code }}.</p>
   <p>Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con anterioridad a esa fecha, tu
   plaza quedará anulada.</p>
   <p>Cuando hayamos verificado el pago, lo reflejaremos así en tu ficha.</p>
@@ -53,38 +55,35 @@ tus actividades y tendrás aceso a la información completa de las actividades q
 
 <p>Para poder ver todo esto, debes introducir ahora tu nombre de usuario y contraseña,
 tal como los indicaste al rellenar el formulario. Si no lo has rellenado aún, puedes
-hacerlo ahora entrando en el <a href="/mereth-aderthad/inscripcion">Formulario de
+hacerlo ahora entrando en el <a href="/inscripcion">Formulario de
 inscripción</a>.</p>
 
 {% endif %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">El usuario o contraseña son incorrectos. Por favor intentalo de nuevo.</div>
+        {% endif %}
 
-{% if form.errors %}
-<p><b>El usuario o contraseña son incorrectos. Por favor intentalo de nuevo.</b></p>
-{% endif %}
+        <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_username">Usuario:</label>
+            {{ form.username }}
+            {% if form.username.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.username.errors|join:", " }}&nbsp;</b>{% endif %}
+        </div>
+        <div class="form-group">
+            <label for="id_password">Contraseña:</label>
+            {{ form.password }}
+            {% if form.password.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.password.errors|join:", " }}&nbsp;</b>{% endif %}
+        </div>
+        <div class="text-center">
+            <input type="submit" value="entrar" class="btn btn-template-outlined" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
 
-<form method="post" action=".">
-{% csrf_token %}
-<table>
-<tr>
-    <td><label for="id_username">Usuario:</label></td>
-    <td>
-        {{ form.username }}
-        {% if form.username.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.username.errors|join:", " }}&nbsp;</b>{% endif %}
-    </td>
-</tr>
-<tr>
-    <td><label for="id_password">Contraseña:</label></td>
-    <td>
-        {{ form.password }}
-        {% if form.password.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.password.errors|join:", " }}&nbsp;</b>{% endif %}
-    </td>
-</tr>
-</table>
-
-<input type="submit" value="entrar" />
-<input type="hidden" name="next" value="{{ next }}" />
-
-<p>&nbsp;</p>
-<p><a href="/mereth-aderthad/olvido">¿Olvidaste la contraseña?</a></p>
-</form>
+        <p><a href="/olvido">¿Olvidaste la contraseña?</a></p>
+        </form>
+    </div>
+</div>
 {% endblock %}

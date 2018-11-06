@@ -16,7 +16,7 @@ from .forms import (
 
 
 class PreSignupView(FormView):
-    template_name = 'user_profiles/pre_signup.html'
+    template_name = 'user_profiles/signup_off.html'
     form_class = PreSignupForm
 
     def form_valid(self, form):
@@ -140,7 +140,10 @@ class UserProfileView(TemplateView):
         context['owned_by'] = services.get_activities_owned_by(user)
         context['organized_by'] = services.get_activities_organized_by(user)
         context['participant_in'] = services.get_activities_in_which_participates(user)
-        context['activities_to_participate'] = services.get_activities_to_participate_by(user)
+        if not settings.SCHEDULE_HIDDEN:
+            context['activities_to_participate'] = services.get_activities_to_participate_by(user)
+        else:
+            context['activities_to_participate'] = []
 
         return context
 
@@ -191,11 +194,21 @@ class UserProfileEditInscriptionView(FormView):
             'room_preferences': profile.room_preferences,
             'squire': profile.squire,
             'notes_general': profile.notes_general,
-            'shirts_S': profile.shirts_S,
-            'shirts_M': profile.shirts_M,
-            'shirts_L': profile.shirts_L,
-            'shirts_XL': profile.shirts_XL,
-            'shirts_XXL': profile.shirts_XXL
+            'shirts_S_1': profile.shirts_S_1,
+            'shirts_M_1': profile.shirts_M_1,
+            'shirts_L_1': profile.shirts_L_1,
+            'shirts_XL_1': profile.shirts_XL_1,
+            'shirts_XXL_1': profile.shirts_XXL_1,
+            'shirts_S_2': profile.shirts_S_2,
+            'shirts_M_2': profile.shirts_M_2,
+            'shirts_L_2': profile.shirts_L_2,
+            'shirts_XL_2': profile.shirts_XL_2,
+            'shirts_XXL_2': profile.shirts_XXL_2,
+            'shirts_S_3': profile.shirts_S_3,
+            'shirts_M_3': profile.shirts_M_3,
+            'shirts_L_3': profile.shirts_L_3,
+            'shirts_XL_3': profile.shirts_XL_3,
+            'shirts_XXL_3': profile.shirts_XXL_3,
         }
 
     def form_valid(self, form):

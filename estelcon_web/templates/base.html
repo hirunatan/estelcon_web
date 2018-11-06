@@ -1,37 +1,127 @@
-{% load cms_tags staticfiles sekizai_tags menu_tags %}
-<!doctype html>
+{% load cms_tags staticfiles sekizai_tags menu_tags fullurl %}
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}This is my new project home page{% endblock title %}</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'styles/custom.css' %}">
-        {% render_block "css" %}
-    </head>
-    <body>
-        {% cms_toolbar %}
-        <div class="container">
-            <div class="navbar navbar-default" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/"><img src="{% static 'img/header_logo.png' %}"></a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        {% show_menu 0 0 0 0 "menu.html" %}
-                    </ul>
-                </div>
-            </div>
-            {% block content %}{% endblock content %}
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block title %}This is my new project home page{% endblock title %}</title>
+  <meta name="description" content="{% page_attribute "meta_description" %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <!-- Open graph tags -->
+  <meta property='og:title' content="Estelcon 2018 - {% page_attribute "page_title" %}"/>
+  <meta property='og:image' content="{% fullstatic "img/banner1.png" %}"/>
+  <meta name='og:description' content="{% page_attribute "meta_description" %}"/>
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+  <!-- Font Awesome CSS-->
+  <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+  <!-- Google fonts - Roboto-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
+  <!-- Google fonts - Uncial-->
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i|Uncial+Antiqua" rel="stylesheet">
+  <!-- Bootstrap Select-->
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+  <!-- owl carousel-->
+  <link rel="stylesheet" href="{% static 'vendor/owl.carousel/assets/owl.carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/owl.carousel/assets/owl.theme.default.css' %}">
+  <!-- theme stylesheet-->
+  <link rel="stylesheet" href="{% static 'css/style.blue.css' %}" id="theme-stylesheet">
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <!-- Favicon and apple touch icons-->
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+  <!-- Tweaks for older IEs-->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  {% render_block "css" %}
+</head>
+
+<body class="bg">
+  {% cms_toolbar %}
+  <div id="all">
+    <!-- Shirt Modal-->
+<div id="shirt-modal" tabindex="-1" role="dialog" aria-labelledby="shirt-modalLabel" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="shirt-modalLabel" class="modal-title">Tallas Camisetas</h4>
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        {% render_block "js" %}
-    </body>
+        <div class="modal-body">
+          <img src="../static/img/Camisetas.jpg" alt="" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Shirt modal end-->
+    <!-- Navbar Start-->
+    <header class="nav-holder make-sticky sticky bg">
+      <div id="navbar" role="navigation" class="navbar navbar-expand-lg"> 
+        <div class="container-fluid posBack">
+          <a href="/" class="navbar-brand home">
+            <img src="{% static 'img/logo.png' %}" alt="Universal logo" class="d-none d-md-inline-block">
+            <img src="{% static 'img/logo-small.png' %}" alt="Universal logo" class="d-inline-block d-md-none">
+            <span class="sr-only">Inicio</span>
+          </a>
+          <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-toggle-main">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-align-justify"></i>
+          </button>
+          <div id="navigation" class="navbar-collapse collapse flex-column">
+            <div class="box_ficha ml-auto"><a href="{% url 'user-profile' %}" class="btnlogin nav-link"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a></div>
+            <ul class="nav navbar-nav ml-auto">
+              {% show_menu 0 100 0 100 "menu.html" %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Navbar End-->
+
+    {% block content %}{% endblock content %}
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <h4 class="h6">Accesos Rápidos</h4>
+            <hr> {% static_placeholder "footer1" %}
+          </div>
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-3">
+            <h4 class="h6">Contacto</h4>
+            <hr>
+            <p class="text-uppercase"></p>
+            <a href="mailto:estelcon@sociedadtolkien.org" class="btn btn-template-main">escríbenos aquí</a>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+  <!-- Javascript files-->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"> </script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+  <!-- <script src="{% static 'vendor/waypoints/lib/jquery.waypoints.min.js' %}"> </script> -->
+  <script src="{% static 'vendor/jquery.counterup/jquery.counterup.min.js' %}"> </script>
+  <script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js' %}"></script>
+  <script src="{% static 'js/jquery.parallax-1.1.3.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollto/jquery.scrollTo.min.js' %}"></script>
+  <script src="{% static 'js/front.js' %}"></script> 
+  {% render_block "js" %}
+  {% block js %}{% endblock js %}
+</body>
+
 </html>

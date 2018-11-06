@@ -1,8 +1,9 @@
 {% extends "dynamic_page.html" %}
 
 {% block dynamic_content %}
-<h1><span>La Mereth Aderthad</span> <span>Ficha personal</span> Propuesta de actividad</h1>
-
+<div class="heading">
+    <h1>Propuesta de actividad</h1>
+</div>
 {% if messages %}
     {% for message in messages %}
         <h3 class="message">{{ message }}</h3>

@@ -1,8 +1,9 @@
 {% extends "dynamic_page.html" %}
 
 {% block dynamic_content %}
-<h1><span>La Mereth Aderthad</span> Formulario de pre inscripción</h1>
-
+<div class="heading">
+<h1>Formulario de pre inscripción</h1>
+</div>
 <p><em>Muchas gracias por decidirte a asistir a la XX Mereth Aderthad 2017. Recuerda que las fechas
 son <b>9, 10, 11 y 12 de octubre de este a&ntilde;o 2017</b>.</em></p>
 <p><b>En unos días estará disponible la inscripción oficial</b>, pero ya puedes preinscribirte
@@ -16,7 +17,7 @@ alojamiento.</p>
 con tus hijos, puedes indicar sus nombres en la casilla de comentarios, para que podamos relacionar
 las fichas.</p>
 
-<form method="post" action=".">
+<form method="post" action="{% url 'signup' %}">
   {% csrf_token %}
   <table style="vertical-align:top">
     <tr>

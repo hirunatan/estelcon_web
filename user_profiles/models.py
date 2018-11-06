@@ -20,7 +20,6 @@ class UserProfile(models.Model):
             ('carne', 'Carne'),
             ('pescado', 'Pescado'),
             ('otros', 'Otros'),
-            ('sin-cena', 'No voy a ir a la cena de gala'),
         )
     )
     notes_food = models.TextField('Comentarios comida', blank = True)  # (vegetariano, celiaco...)
@@ -31,19 +30,18 @@ class UserProfile(models.Model):
     room_choice = models.CharField('Elige un tipo de alojamiento', max_length=50,
         choices=(
             (
-                'Albergue (litera y baño comunitario)', (
-                    ('albergue-completa', '(litera) completa'),
-                    ('albergue-v-a-d', '(litera) viernes a domingo'),
-                    ('albergue-s-y-d', '(litera) sábado y domingo'),
+                'Habitación standard', (
+                    ('standard-completa', '(standard) completa'),
+                    ('standard-v-a-d', '(standard) viernes a domingo'),
+                    ('standard-s-y-d', '(standard) sábado y domingo'),
                 )
             ),(
-                'Habitación doble con baño propio', (
-                    ('doble-completa', '(doble) completa'),
-                    ('doble-v-a-d', '(doble) viernes a domingo'),
-                    ('doble-s-y-d', '(doble) sábado y domingo'),
+                'Habitación con suplemento', (
+                    ('suplemento-completa', '(suplemento) completa'),
+                    ('suplemento-v-a-d', '(suplemento) viernes a domingo'),
+                    ('suplemento-s-y-d', '(suplemento) sábado y domingo'),
                 )
             ),
-            ('sin-alojamiento', 'No voy a pernoctar en el seminario'),
             ('otros', 'Otros'),
         )
     )
@@ -54,13 +52,23 @@ class UserProfile(models.Model):
     want_ste_member = models.BooleanField('En caso de que no, ¿quieres asociarte por 2€ más?', default=False)
     squire = models.BooleanField('¿Quieres ser escudero?', default=False)
     first_estelcon = models.BooleanField('¿Es tu primera Estelcon?', default=False)
-    want_boat = models.BooleanField('¿Quieres remontar en barco por el río?', default=False)
+    want_bus = models.BooleanField('¿Vas a utilizar el autobús de Valencia?', default=False)
     notes_general = models.TextField('Comentarios general', blank = True)
-    shirts_S = models.IntegerField('Camisetas talla S', default=0)
-    shirts_M = models.IntegerField('Camisetas talla M', default=0)
-    shirts_L = models.IntegerField('Camisetas talla L', default=0)
-    shirts_XL = models.IntegerField('Camisetas talla XL', default=0)
-    shirts_XXL = models.IntegerField('Camisetas talla XXL', default=0)
+    shirts_S_1 = models.IntegerField('Camisetas talla S (1)', default=0)
+    shirts_M_1 = models.IntegerField('Camisetas talla M (1)', default=0)
+    shirts_L_1 = models.IntegerField('Camisetas talla L (1)', default=0)
+    shirts_XL_1 = models.IntegerField('Camisetas talla XL (1)', default=0)
+    shirts_XXL_1 = models.IntegerField('Camisetas talla XXL (1)', default=0)
+    shirts_S_2 = models.IntegerField('Camisetas talla S (2)', default=0)
+    shirts_M_2 = models.IntegerField('Camisetas talla M (2)', default=0)
+    shirts_L_2 = models.IntegerField('Camisetas talla L (2)', default=0)
+    shirts_XL_2 = models.IntegerField('Camisetas talla XL (2)', default=0)
+    shirts_XXL_2 = models.IntegerField('Camisetas talla XXL (2)', default=0)
+    shirts_S_3 = models.IntegerField('Camisetas talla S (3)', default=0)
+    shirts_M_3 = models.IntegerField('Camisetas talla M (3)', default=0)
+    shirts_L_3 = models.IntegerField('Camisetas talla L (3)', default=0)
+    shirts_XL_3 = models.IntegerField('Camisetas talla XL (3)', default=0)
+    shirts_XXL_3 = models.IntegerField('Camisetas talla XXL (3)', default=0)
     quota = models.IntegerField('Cuota')
     payed = models.IntegerField('Pagado')
     payment = models.TextField('Estado de pago') # (u'pendiente de pago', u'pago confirmado', <texto de problema>)
@@ -89,7 +97,7 @@ class UserProfile(models.Model):
                 reverse('admin:auth_user_change', args=(self.user.id,))
 
     def generate_reminder_code(self):
-        chars = string.letters + string.digits
+        chars = string.ascii_letters + string.digits
         self.lost = ''.join([choice(chars) for i in range(50)])
 
     def reset_reminder_code(self):

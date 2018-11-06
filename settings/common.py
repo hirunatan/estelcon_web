@@ -34,12 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 
-
-
-
 ROOT_URLCONF = 'estelcon_web.urls'
-
-
 
 
 # Internationalization
@@ -127,6 +122,7 @@ INSTALLED_APPS = (
     'menus',
     'sekizai',
     'treebeard',
+    'fullurl',
     'djangocms_text_ckeditor',
     'filer',
     'easy_thumbnails',
@@ -193,7 +189,9 @@ CMS_LANGUAGES = {
 CMS_TEMPLATES = (
     ## Customize this
     ('page.html', 'Page'),
-    ('home_page.html', 'Home Page')
+    ('home_page.html', 'Home Page'),
+    ('page_full.html', 'Full width page'),
+    ('page_map.html', 'Map page')
 )
 
 CMS_PERMISSION = True
@@ -213,7 +211,6 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {
-    
 }
 
 THUMBNAIL_PROCESSORS = (
@@ -222,6 +219,8 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters'
 )
+
+APPEND_SLASH = False
 
 # Application specific
 
@@ -233,3 +232,4 @@ SIGNUP_CLOSED = False
 
 MAIL_FROM = 'Estelcon <estelcon@sociedadtolkien.org>'
 
+LOGIN_URL = '/entrada'

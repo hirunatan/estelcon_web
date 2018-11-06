@@ -10,6 +10,8 @@ import locale
 from .models import UserProfile
 from functools import reduce
 
+from activities.models import Activity
+
 MAX_USERS = 150
 
 #TODO: usar templates para los textos de los correos
@@ -86,13 +88,23 @@ def create_new_user(user_data, home_url):
         want_ste_member = user_data['want_ste_member'],
         squire = user_data['squire'],
         first_estelcon = user_data['first_estelcon'],
-        want_boat = user_data['want_boat'],
+        want_bus = user_data['want_bus'],
         notes_general = user_data['notes_general'],
-        shirts_S = user_data['shirts_S'],
-        shirts_M = user_data['shirts_M'],
-        shirts_L = user_data['shirts_L'],
-        shirts_XL = user_data['shirts_XL'],
-        shirts_XXL = user_data['shirts_XXL'],
+        shirts_S_1 = user_data['shirts_S_1'],
+        shirts_M_1 = user_data['shirts_M_1'],
+        shirts_L_1 = user_data['shirts_L_1'],
+        shirts_XL_1 = user_data['shirts_XL_1'],
+        shirts_XXL_1 = user_data['shirts_XXL_1'],
+        shirts_S_2 = user_data['shirts_S_2'],
+        shirts_M_2 = user_data['shirts_M_2'],
+        shirts_L_2 = user_data['shirts_L_2'],
+        shirts_XL_2 = user_data['shirts_XL_2'],
+        shirts_XXL_2 = user_data['shirts_XXL_2'],
+        shirts_S_3 = user_data['shirts_S_3'],
+        shirts_M_3 = user_data['shirts_M_3'],
+        shirts_L_3 = user_data['shirts_L_3'],
+        shirts_XL_3 = user_data['shirts_XL_3'],
+        shirts_XXL_3 = user_data['shirts_XXL_3'],
         quota = quota,
         payed = 0,
         payment = '',
@@ -108,8 +120,9 @@ def create_new_user(user_data, home_url):
 #''' % (profile.quota, profile.payment_code)
             profile.payment = \
 '''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de Caixabank
-ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el ingreso el código %s.
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta del Banco Santander
+ES63 0049 1736 7121 9008 7291, a nombre de Helios De Rosario Martínez y Santiago Álvarez Muñoz, indicando en
+el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
@@ -163,8 +176,8 @@ Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
 La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-cuenta de Caixabank ES15 2100 0435 5702 0039 4933 a nombre de Juan Carlos Sauri, indicando en el
-ingreso el código %s.
+cuenta del Banco Santander ES63 0049 1736 7121 9008 7291, a nombre de Helios De Rosario Martínez y
+Santiago Álvarez Muñoz, indicando en el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
@@ -222,25 +235,36 @@ El equipo organizador.
 
 
 def _calculate_quota(user_data):
-    if user_data['room_choice'] == 'albergue-completa':
-        quota = 175.0
-    elif user_data['room_choice'] == 'albergue-v-a-d':
-        quota = 150.0
-    elif user_data['room_choice'] == 'albergue-s-y-d':
-        quota = 125.0
-    elif user_data['room_choice'] == 'doble-completa':
-        quota = 195.0
-    elif user_data['room_choice'] == 'doble-v-a-d':
-        quota = 175.0
-    elif user_data['room_choice'] == 'doble-s-y-d':
-        quota = 140.0
-    elif user_data['room_choice'] == 'sin-alojamiento':
-        quota = 120.0
+    if user_data['age'] > 5:
+        if user_data['room_choice'] == 'standard-completa':
+            quota = 115.0
+        elif user_data['room_choice'] == 'standard-v-a-d':
+            quota = 85.0
+        elif user_data['room_choice'] == 'standard-s-y-d':
+            quota = 55.0
+        elif user_data['room_choice'] == 'suplemento-completa':
+            quota = 140.0
+        elif user_data['room_choice'] == 'suplemento-v-a-d':
+            quota = 100.0
+        elif user_data['room_choice'] == 'suplemento-s-y-d':
+            quota = 63.0
+        else:
+            return 0.0
     else:
-        return 0.0
-
-    if user_data['age'] <= 12:
-        quota = quota * 0.75
+        if user_data['room_choice'] == 'standard-completa':
+            quota = 58.0
+        elif user_data['room_choice'] == 'standard-v-a-d':
+            quota = 43.0
+        elif user_data['room_choice'] == 'standard-s-y-d':
+            quota = 28.0
+        elif user_data['room_choice'] == 'suplemento-completa':
+            quota = 70.0
+        elif user_data['room_choice'] == 'suplemento-v-a-d':
+            quota = 50.0
+        elif user_data['room_choice'] == 'suplemento-s-y-d':
+            quota = 32.0
+        else:
+            return 0.0
 
     if not user_data['is_ste_member'] and user_data['room_choice'] != 'sin-alojamiento':
         quota += 10.0
@@ -251,58 +275,25 @@ def _calculate_quota(user_data):
         else:
             quota += 12.0
 
-    if user_data['want_boat']:
-        quota += 15.0
+    if user_data['want_bus']:
+        quota += 20.0
 
-    num_shirts = user_data['shirts_S'] + \
-                 user_data['shirts_M'] + \
-                 user_data['shirts_L'] + \
-                 user_data['shirts_XL'] + \
-                 user_data['shirts_XXL']
-    quota += num_shirts * 12.0
-
-    #if user_data['room_choice'] == 'sin-alojamiento':
-
-    #    if user_data['dinner_menu'] == 'sin-cena':
-    #        quota += 12
-    #    else:
-    #        quota += 36
-
-    #else:
-
-    #    if user_data['room_choice'].startswith('triple') or user_data['room_choice'] == 'otros':
-    #        quota += 11.2
-    #        if user_data['day_1']:
-    #            quota += 39.6
-    #        if user_data['day_2']:
-    #            quota += 39.6
-    #        if user_data['day_3']:
-    #            quota += 54.6
-
-    #    if user_data['room_choice'].startswith('doble'):
-    #        quota += 11.2
-    #        if user_data['day_1']:
-    #            quota += 46.6
-    #        if user_data['day_2']:
-    #            quota += 46.6
-    #        if user_data['day_3']:
-    #            quota += 61.6
-
-    #    if user_data['age'] <= 12:
-    #        quota = quota * 0.75
-
-    #    if not user_data['is_ste_member'] and user_data['age'] > 12:
-    #        quota += 10.0
-
-    #    if user_data['want_ste_member'] and user_data['age'] > 12:
-    #        quota += 2.0
-
-    #num_shirts = user_data['shirts_S'] + \
-    #             user_data['shirts_M'] + \
-    #             user_data['shirts_L'] + \
-    #             user_data['shirts_XL'] + \
-    #             user_data['shirts_XXL']
-    #quota += num_shirts * 10.0
+    num_shirts = user_data['shirts_S_1'] + \
+                 user_data['shirts_M_1'] + \
+                 user_data['shirts_L_1'] + \
+                 user_data['shirts_XL_1'] + \
+                 user_data['shirts_XXL_1'] + \
+                 user_data['shirts_S_2'] + \
+                 user_data['shirts_M_2'] + \
+                 user_data['shirts_L_2'] + \
+                 user_data['shirts_XL_2'] + \
+                 user_data['shirts_XXL_2'] + \
+                 user_data['shirts_S_3'] + \
+                 user_data['shirts_M_3'] + \
+                 user_data['shirts_L_3'] + \
+                 user_data['shirts_XL_3'] + \
+                 user_data['shirts_XXL_3']
+    quota += num_shirts * 10.0
 
     return round(quota)
 
@@ -356,23 +347,19 @@ def change_user_password(user, password):
 
 
 def get_activities_owned_by(user):
-    return []
-    # return Activity.objects.filter(owners = user)
+    return Activity.objects.filter(owners = user)
 
 
 def get_activities_organized_by(user):
-    return []
-    # return Activity.objects.filter(organizers = user)
+    return Activity.objects.filter(organizers = user)
 
 
 def get_activities_in_which_participates(user):
-    return []
-    # return Activity.objects.filter(participants = user)
+    return Activity.objects.filter(participants = user)
 
 
 def get_activities_to_participate_by(user):
-    return []
-    # return Activity.objects.filter(requires_inscription = True).exclude(participants = user)
+    return Activity.objects.filter(requires_inscription = True).exclude(participants = user)
 
 
 def change_user_personal_data(user, new_data, home_url):
@@ -383,21 +370,22 @@ def change_user_personal_data(user, new_data, home_url):
 
     for field_name in ['username', 'email', 'first_name', 'last_name']:
         if getattr(user, field_name) != new_data[field_name]:
-            changed_fields.append(str(user._meta.get_field_by_name(field_name)[0].verbose_name))
+            changed_fields.append(str(user._meta.get_field(field_name).verbose_name))
             setattr(user, field_name, new_data[field_name])
     user.save()
 
     profile = user.profile
     for field_name in ['alias', 'smial', 'phone', 'city', 'age']:
         if getattr(profile, field_name) != new_data[field_name]:
-            changed_fields.append(str(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            changed_fields.append(str(profile._meta.get_field(field_name).verbose_name))
             setattr(profile, field_name, new_data[field_name])
     profile.save()
 
-    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
-    mail_managers(
-        subject = '[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
-        message =
+    if changed_fields:
+        changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
+        mail_managers(
+            subject = '[Estelcon Admin] Modificación de datos personales de usuario %s' % (user.get_full_name()),
+            message =
 '''
 %s, con usuario %s y email %s, ha modificado sus datos personales en la web:
 
@@ -406,7 +394,7 @@ def change_user_personal_data(user, new_data, home_url):
 Su ficha puede consultarse directamente en %s
 '''
 % (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
-    )
+        )
 
     send_mail(
         subject = '[Estelcon] Notificación de modificación de ficha personal',
@@ -432,18 +420,21 @@ def change_user_inscription_data(user, new_data, home_url):
 
     profile = user.profile
     for field_name in ['notes_food', 'dinner_menu', 'notes_transport', 'room_choice',
-                'room_preferences', 'squire', 'notes_general', 'shirts_S', 'shirts_M',
-                'shirts_L', 'shirts_XL', 'shirts_XXL',
+                'room_preferences', 'squire', 'notes_general',
+                'shirts_S_1', 'shirts_M_1', 'shirts_L_1', 'shirts_XL_1', 'shirts_XXL_1',
+                'shirts_S_2', 'shirts_M_2', 'shirts_L_2', 'shirts_XL_2', 'shirts_XXL_2',
+                'shirts_S_3', 'shirts_M_3', 'shirts_L_3', 'shirts_XL_3', 'shirts_XXL_3',
             ]:
         if getattr(profile, field_name) != new_data[field_name]:
-            changed_fields.append(str(profile._meta.get_field_by_name(field_name)[0].verbose_name))
+            changed_fields.append(str(profile._meta.get_field(field_name).verbose_name))
             setattr(profile, field_name, new_data[field_name])
     profile.save()
 
-    changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
-    mail_managers(
-        subject = '[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
-        message =
+    if changed_fields:
+        changed_text = '\n'.join(['* %s' % (field) for field in changed_fields])
+        mail_managers(
+            subject = '[Estelcon Admin] Modificación de datos de inscripción de usuario %s' % (user.get_full_name()),
+            message =
 '''
 %s, con usuario %s y email %s, ha modificado sus datos de inscripción en la web:
 
@@ -452,7 +443,7 @@ def change_user_inscription_data(user, new_data, home_url):
 Su ficha puede consultarse directamente en %s
 '''
 % (user.get_full_name(), user.username, user.email, changed_text, profile.get_admin_url()),
-    )
+        )
 
     send_mail(
         subject = '[Estelcon] Notificación de modificación de ficha personal',
@@ -495,7 +486,7 @@ def user_listing(listing_id):
     elif listing_id == 10:
         return listing_users_with_shirts()
     elif listing_id == 11:
-        return listing_umbarians()
+        return listing_edhelbus()
     elif listing_id == 12:
         return listing_everything()
     else:
@@ -564,7 +555,7 @@ def listing_squires():
 
 
 def listing_children():
-    profiles = UserProfile.objects.filter(age__lt = 15).order_by('user__first_name', 'user__last_name')
+    profiles = UserProfile.objects.filter(age__lt = 6).order_by('user__first_name', 'user__last_name')
 
     rows = [(
         p.user.get_full_name(),
@@ -616,15 +607,27 @@ def listing_paid_users():
 def listing_reserved_shirts():
     profiles = UserProfile.objects.all()
 
-    sums = reduce(lambda sums, row: (sums[0]+row.shirts_S,
-                                     sums[1]+row.shirts_M,
-                                     sums[2]+row.shirts_L,
-                                     sums[3]+row.shirts_XL,
-                                     sums[4]+row.shirts_XXL),
+    sums = reduce(lambda sums, row: (sums[0]+row.shirts_S_1,
+                                     sums[1]+row.shirts_M_1,
+                                     sums[2]+row.shirts_L_1,
+                                     sums[3]+row.shirts_XL_1,
+                                     sums[4]+row.shirts_XXL_1,
+                                     sums[5]+row.shirts_S_2,
+                                     sums[6]+row.shirts_M_2,
+                                     sums[7]+row.shirts_L_2,
+                                     sums[8]+row.shirts_XL_2,
+                                     sums[9]+row.shirts_XXL_2,
+                                     sums[10]+row.shirts_S_3,
+                                     sums[11]+row.shirts_M_3,
+                                     sums[12]+row.shirts_L_3,
+                                     sums[13]+row.shirts_XL_3,
+                                     sums[14]+row.shirts_XXL_3),
                   profiles,
-                  (0, 0, 0, 0, 0))
+                  (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
 
-    rows = [("TallaS", "TallaM", "TallaL", "TallaXL", "TallaXXL"), sums]
+    rows = [("TallaS-1", "TallaM-1", "TallaL-1", "TallaXL-1", "TallaXXL-1",
+             "TallaS-2", "TallaM-2", "TallaL-2", "TallaXL-2", "TallaXXL-2",
+             "TallaS-3", "TallaM-3", "TallaL-3", "TallaXL-3", "TallaXXL-3", ), sums]
     return (None, rows)
 
 
@@ -633,31 +636,71 @@ def listing_users_with_shirts():
 
     rows = []
 
-    rows1 = [("talla S", p.user.get_full_name(), p.shirts_S) for p in profiles if p.shirts_S > 0]
+    rows1 = [("talla S (1)", p.user.get_full_name(), p.shirts_S_1) for p in profiles if p.shirts_S_1 > 0]
     rows1.sort(key=lambda p: p[1].lower())
     rows += rows1
 
-    rows1 = [("talla M", p.user.get_full_name(), p.shirts_M) for p in profiles if p.shirts_M > 0]
+    rows1 = [("talla M (1)", p.user.get_full_name(), p.shirts_M_1) for p in profiles if p.shirts_M_1 > 0]
     rows1.sort(key=lambda p: p[1].lower())
     rows += rows1
 
-    rows1 = [("talla L", p.user.get_full_name(), p.shirts_L) for p in profiles if p.shirts_L > 0]
+    rows1 = [("talla L (1)", p.user.get_full_name(), p.shirts_L_1) for p in profiles if p.shirts_L_1 > 0]
     rows1.sort(key=lambda p: p[1].lower())
     rows += rows1
 
-    rows1 = [("talla XL", p.user.get_full_name(), p.shirts_XL) for p in profiles if p.shirts_XL > 0]
+    rows1 = [("talla XL (1)", p.user.get_full_name(), p.shirts_XL_1) for p in profiles if p.shirts_XL_1 > 0]
     rows1.sort(key=lambda p: p[1].lower())
     rows += rows1
 
-    rows1 = [("talla XXL", p.user.get_full_name(), p.shirts_XXL) for p in profiles if p.shirts_XXL > 0]
+    rows1 = [("talla XXL (1)", p.user.get_full_name(), p.shirts_XXL_1) for p in profiles if p.shirts_XXL_1 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla S (2)", p.user.get_full_name(), p.shirts_S_2) for p in profiles if p.shirts_S_2 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla M (2)", p.user.get_full_name(), p.shirts_M_2) for p in profiles if p.shirts_M_2 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla L (2)", p.user.get_full_name(), p.shirts_L_2) for p in profiles if p.shirts_L_2 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla XL (2)", p.user.get_full_name(), p.shirts_XL_2) for p in profiles if p.shirts_XL_2 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla XXL (2)", p.user.get_full_name(), p.shirts_XXL_2) for p in profiles if p.shirts_XXL_2 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla S (3)", p.user.get_full_name(), p.shirts_S_3) for p in profiles if p.shirts_S_3 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla M (3)", p.user.get_full_name(), p.shirts_M_3) for p in profiles if p.shirts_M_3 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla L (3)", p.user.get_full_name(), p.shirts_L_3) for p in profiles if p.shirts_L_3 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla XL (3)", p.user.get_full_name(), p.shirts_XL_3) for p in profiles if p.shirts_XL_3 > 0]
+    rows1.sort(key=lambda p: p[1].lower())
+    rows += rows1
+
+    rows1 = [("talla XXL (3)", p.user.get_full_name(), p.shirts_XXL_3) for p in profiles if p.shirts_XXL_3 > 0]
     rows1.sort(key=lambda p: p[1].lower())
     rows += rows1
 
     rows = [("Talla", "Nombre", "Cantidad")] + rows
     return (None, rows)
 
-def listing_umbarians():
-    profiles = UserProfile.objects.filter(want_boat=True).order_by('user__first_name', 'user__last_name')
+def listing_edhelbus():
+    profiles = UserProfile.objects.filter(want_bus=True).order_by('user__first_name', 'user__last_name')
 
     rows = [(
         p.user.get_full_name(),
@@ -696,13 +739,23 @@ def listing_everything():
         'x' if p.want_ste_member else '',
         'x' if p.squire else '',
         'x' if p.first_estelcon else '',
-        'x' if p.want_boat else '',
+        'x' if p.want_bus else '',
         p.notes_general,
-        p.shirts_S,
-        p.shirts_M,
-        p.shirts_L,
-        p.shirts_XL,
-        p.shirts_XXL,
+        p.shirts_S_1,
+        p.shirts_M_1,
+        p.shirts_L_1,
+        p.shirts_XL_1,
+        p.shirts_XXL_1,
+        p.shirts_S_2,
+        p.shirts_M_2,
+        p.shirts_L_2,
+        p.shirts_XL_2,
+        p.shirts_XXL_2,
+        p.shirts_S_3,
+        p.shirts_M_3,
+        p.shirts_L_3,
+        p.shirts_XL_3,
+        p.shirts_XXL_3,
         p.payment_code,
         p.quota,
         p.payed,
@@ -711,8 +764,9 @@ def listing_everything():
 
     rows = [("Nombre", "Email", "Staff", "Pseudónimo", "Smial", "Teléfono", "Población", "Edad", "Menú",
              "Comida", "Viernes", "Sábado", "Domingo", "Transporte", "Habitación", "Dormir", "Nº hijos",
-             "Hijos", "Es socio", "Quiere ser", "Escudero", "Primera vez", "Barco", "Notas", "S", "M",
-             "L", "XL", "XXL", "Código", "Cuota", "Pagado", "Estado de pago")] + rows
+             "Hijos", "Es socio", "Quiere ser", "Escudero", "Primera vez", "Autobús", "Notas", "S1", "M1",
+             "L1", "XL1", "XXL1", "S2", "M2", "L2", "XL2", "XXL2", "S3", "M3", "L3", "XL3", "XXL3",
+             "Código", "Cuota", "Pagado", "Estado de pago")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
 

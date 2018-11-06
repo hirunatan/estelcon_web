@@ -99,9 +99,9 @@ def _build_block(activ_with_hour, block_hour, pending_cols):
             columns = [pending_cols[0].column]
         else:
             columns = []
-        if pending_cols[1].column.activities:
+        if pending_cols[1].column.activities and columns:
             columns[0].activities.extend(pending_cols[1].column.activities)
-        if pending_cols[2].column.activities:
+        if pending_cols[2].column.activities and columns:
             columns[0].activities.extend(pending_cols[2].column.activities)
     else:
         columns = []
@@ -129,7 +129,7 @@ def _get_block_activities(activ_with_hour, block_hour, ncol):
     for activity in activ_with_hour:
         if (activity.start >= block_hour) and \
            (activity.start < (block_hour + timedelta(minutes=30))) and \
-           (activity.start.second == ncol):
+           (activity.column == ncol):
 
             activities.append(activity)
 
@@ -206,9 +206,9 @@ El usuario %s (%s) se ha inscrito en la actividad %s.
             subject = '[Estelcon] Inscripción en actividad de la Estelcon que tú organizas',
             message =
 '''
-El usuario %s (%s) se ha inscrito en la actividad %s.
+El usuario %s (%s, %s) se ha inscrito en la actividad %s.
 '''
-% (user.username, user.get_full_name(), activity.title),
+% (user.username, user.get_full_name(), user.email, activity.title),
             from_email = settings.MAIL_FROM,
             recipient_list = [owner.email],
             fail_silently = False

@@ -1,0 +1,286 @@
+/* your styles go here */
+body {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+  }
+.bg:before, .bg:after{
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+.bg:before{
+    left: 0;
+    background: url(../img/back_arbol_l.png)no-repeat left top;
+    background-size: 40%;
+    z-index: 1;
+}
+.bg:after{
+    background: url(../img/back_arbol_r.png)no-repeat right top;
+    right: 0;
+    background-size: 40%;
+}
+/* Header */
+header.bg:before,header.bg:after{
+    position: absolute;
+}
+.cms-toolbar-expanded header.nav-holder.sticky{
+    top: 46px;
+}
+.navbar-brand{
+    width: 260px;
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+    padding-left: 1rem;
+}
+.box_ficha{
+    text-align: center;
+}
+.btnlogin{
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-family: 'Lora', serif;
+    padding: 6px 12px;
+    border:1px solid rgba(158, 183, 200, 0.9);
+    color:rgba(255, 255, 255, 0.6);
+    display: inline-block;
+}
+.btnlogin:hover{
+    border:1px solid rgba(158, 183, 200, 1);
+    color:rgba(255, 255, 255, 0.9);
+}
+header #navbar{
+    background-color: #005c9d;
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+.btn-toggle-main {
+    background: rgb(70, 127, 191, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    border-radius: 0;
+    text-decoration: none;
+  }
+  
+  .btn-toggle-main:hover, .btn-toggle-main:focus {
+    background: #3d72af;
+    color: #fff ;
+    border-color: #3d72af;
+  }
+header #navigation{
+    font-family: 'Uncial Antiqua', sans-serif;
+}
+header #navigation .nav{
+    flex-wrap: nowrap;
+}
+@media (max-width: 1220px) {
+
+    #navbar .navbar-nav > li {
+        max-width: 150px;
+        text-align: center;
+    }
+    #navbar .navbar-nav > li > a{
+        padding: 1.3rem 1rem 1.3rem;
+        height: 100%;
+    }
+}
+@media (max-width: 991px) {
+    #navbar {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    #navbar .navbar-nav > li {
+      max-width: 100%;
+    }
+    #navbar .navbar-nav > li > a{
+        padding: 0 !important;
+      }
+    #navbar .dropdown-menu {
+      border: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+.posBack{
+    z-index: 1001;
+}
+#navbar .navbar-nav > li > a{
+    color: #fff;
+    padding: 1.3rem 1rem 1.3rem;
+    font-size: 0.8rem;
+    letter-spacing: 0rem;
+}
+ /* Banner */
+.owl-carousel .owl-stage-outer {
+    background:rgba(158, 183, 200, 0.9);
+}
+.home-carousel .container-fluid{
+    padding: 0;
+}
+.owl-carousel .owl-item {
+    padding: 40px 20px 0;
+}
+.owl-item .img-fluid{
+    margin-top:-20px;
+}
+.home-carousel h1{
+    font-size: 2.4rem;
+  }
+.home-carousel li, .home-carousel p {
+text-transform: uppercase;
+letter-spacing: 0.1em;
+font-weight: 700;
+font-size: 1.3rem;
+margin-bottom: 10px;
+}
+/* Contenedor principal general */
+.main-content{
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 20px;
+    padding:20px 0;
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    position: relative;
+    min-height: 64vh;
+}
+.main-content h2{
+    text-decoration: underline;
+}
+.main-content h4{
+    color: #005c9d;
+}
+h1{
+    font-family: 'Uncial Antiqua', sans-serif;
+    color: #005c9d;
+    font-size: 2rem;
+}
+.programtable th{
+    font-family: 'Uncial Antiqua', sans-serif;
+    font-size: 20px;
+    border-width: 0 0 3px 0;
+    color:rgb(0, 92, 157,0.7);
+}
+.breadcrumb{
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    margin: 0.5rem 0;
+    
+}
+#main-column{
+    padding-bottom: 60px;   
+    position: relative;
+    border-left:1px dashed #dddddd;
+}
+#main-column:after{
+    content: url(../img/detalle1.png);
+    position: absolute;
+    width: 83px;
+    height: 48px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0px auto;
+}
+/*Sidebar*/
+.side_menu_btn{
+    margin-bottom:5px;
+    width: 100%;
+}
+@media (min-width: 992px) {
+    .side_menu_btn{
+        display: none;
+    }
+    .side_nav{
+        display: flex!important;
+        flex-basis: auto;
+    }
+}
+@media (max-width: 991px) {
+    .side_nav{
+        border:1px solid #d9e2ec;
+        margin-bottom:10px;
+    }
+}
+
+/* Footer */
+footer{
+    position: relative;
+    z-index: 5;
+}
+footer.main-footer{
+    padding:20px 0;
+}
+footer.main-footer h4{
+    color: #8cafd8;
+}
+footer.main-footer hr{
+    border-color: #8cafd8;
+    margin-top: 0;
+}
+.blockquote {
+    padding: 2rem 3rem;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    position: relative;
+    display: inline-block;
+    font-family: 'Uncial Antiqua', sans-serif;
+    text-align: left;
+    color: rgb(70, 127, 191, 0.5);
+}
+.blockquote:before, .blockquote:after{
+    font-family: Georgia, serif;
+    position: absolute;
+    font-weight: normal;
+    color: rgb(70, 127, 191, 0.8);
+    line-height: 20px;
+    top: 50px;
+}
+.blockquote:before {
+    content: "“";
+    left: 10px;
+    font-size: 5rem;   
+}
+.blockquote:after {
+    content: "”";
+    right: 0;
+    font-size: 5rem;
+}
+.container_premios img{
+    width: 100%;
+    padding: 25px;
+}
+.btn_salir{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: 10px 20px;
+    border: 1px solid rgb(70, 127, 191, 0.8);
+}
+.btn_salir:before{
+    font-family: 'FontAwesome';
+    content: '\f011';
+    padding-right: 5px;
+    color: rgb(70, 127, 191, 0.8);
+}
+@media (min-width: 576px) {
+    .modal-dialog {
+      max-width: 850px;
+      margin: 1.75rem auto;
+    }
+    .modal-dialog-centered {
+      min-height: calc(100% - (1.75rem * 2));
+    }
+    .modal-sm {
+      max-width: 300px;
+    }
+  }

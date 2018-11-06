@@ -9,6 +9,13 @@ class Activity(models.Model):
     text = models.TextField('Descripción', blank = True)
     start = models.DateTimeField('Empieza en', blank = True, null = True)
     end = models.DateTimeField('Termina en', blank = True, null = True)
+    column = models.IntegerField('Columna', default = 0,
+        choices = (
+            (0, 'Ancho completo'),
+            (1, 'Columna 1'),
+            (2, 'Columna 2')
+        )
+    )
     duration = models.CharField('Duración aproximada', max_length = 50)
     max_places = models.IntegerField('Nº máximo de plazas', default = 0)
     logistics = models.TextField('Necesidades logísticas', blank = True)
