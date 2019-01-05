@@ -665,6 +665,7 @@ header.nav-holder.sticky {
   background: #fff;
   padding-top: 0;
   padding-bottom: 0;
+  padding-left: 0;
 }
 
 #navbar .navbar-toggler {
@@ -759,7 +760,7 @@ header.nav-holder.sticky {
 
 #navbar .navbar-nav > li > a:focus {
   background: #467fbf !important;
-  color: #fff !important;
+  color: red !important;
   text-decoration: none !important;
   border-color: #36669c !important;
 }

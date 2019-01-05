@@ -1,7 +1,7 @@
 /* your styles go here */
 body {
-    font-family: 'Lora', serif;
-    font-size: 1rem;
+    font-family: 'Dosis', serif;
+    font-size: 1.3rem;
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
@@ -17,11 +17,11 @@ body {
 .bg:before{
     left: 0;
     background: url(../img/back_arbol_l.png)no-repeat left top;
-    background-size: 40%;
+    background-size: 100%;
     z-index: 1;
 }
 .bg:after{
-    background: url(../img/back_arbol_r.png)no-repeat right top;
+    background: url()no-repeat right top;
     right: 0;
     background-size: 40%;
 }
@@ -34,9 +34,9 @@ header.bg:before,header.bg:after{
 }
 .navbar-brand{
     width: 260px;
-    padding-top: 1.1rem;
+    padding-top: 0rem;
     padding-bottom: 1.1rem;
-    padding-left: 1rem;
+    padding-left: 0rem;
 }
 .box_ficha{
     text-align: center;
@@ -46,18 +46,19 @@ header.bg:before,header.bg:after{
     margin-top: 10px;
     margin-bottom: 12px;
     font-size: 13px;
-    font-family: 'Lora', serif;
+    font-family: 'Dosis', serif;
     padding: 6px 12px;
     border:1px solid rgba(158, 183, 200, 0.9);
-    color:rgba(255, 255, 255, 0.6);
+    color:#bb2365;
+    background-color:#fff;
     display: inline-block;
 }
 .btnlogin:hover{
     border:1px solid rgba(158, 183, 200, 1);
-    color:rgba(255, 255, 255, 0.9);
+    color:#651336;
 }
 header #navbar{
-    background-color: #005c9d;
+    /*background-color: #005c9d;*/
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 .btn-toggle-main {
@@ -74,7 +75,8 @@ header #navbar{
     border-color: #3d72af;
   }
 header #navigation{
-    font-family: 'Uncial Antiqua', sans-serif;
+    font-family: 'Cormorant Infant', sans-serif;
+    
 }
 header #navigation .nav{
     flex-wrap: nowrap;
@@ -84,10 +86,12 @@ header #navigation .nav{
     #navbar .navbar-nav > li {
         max-width: 150px;
         text-align: center;
+        
     }
     #navbar .navbar-nav > li > a{
         padding: 1.3rem 1rem 1.3rem;
         height: 100%;
+        font-size: 5em;
     }
 }
 @media (max-width: 991px) {
@@ -109,11 +113,15 @@ header #navigation .nav{
   }
 .posBack{
     z-index: 1001;
+    padding-left: 0px;
 }
 #navbar .navbar-nav > li > a{
-    color: #fff;
-    padding: 1.3rem 1rem 1.3rem;
-    font-size: 0.8rem;
+    color: white;
+    padding: 0rem 1em 0.3rem;
+    
+    background-color: rgba(32, 1, 14, 0.7);
+    
+    font-size: 1.2rem;
     letter-spacing: 0rem;
 }
  /* Banner */
@@ -157,9 +165,9 @@ margin-bottom: 10px;
     color: #005c9d;
 }
 h1{
-    font-family: 'Uncial Antiqua', sans-serif;
+    font-family: 'Cormorant Infant', regular;
     color: #005c9d;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 .programtable th{
     font-family: 'Uncial Antiqua', sans-serif;
@@ -230,10 +238,10 @@ footer.main-footer hr{
 .blockquote {
     padding: 2rem 3rem;
     margin-bottom: 0;
-    font-size: 1.5rem;
+    font-size: 2.1rem;
     position: relative;
     display: inline-block;
-    font-family: 'Uncial Antiqua', sans-serif;
+    font-family: 'Cormorant Infant', sans-serif;
     text-align: left;
     color: rgb(70, 127, 191, 0.5);
 }
@@ -248,7 +256,7 @@ footer.main-footer hr{
 .blockquote:before {
     content: "“";
     left: 10px;
-    font-size: 5rem;   
+
 }
 .blockquote:after {
     content: "”";
