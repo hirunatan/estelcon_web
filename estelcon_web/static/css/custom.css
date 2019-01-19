@@ -1,6 +1,6 @@
 /* your styles go here */
 body {
-    font-family: 'Dosis', serif;
+    font-family: 'Gentium Basic', serif;
     font-size: 1.3rem;
     font-weight: 400;
     line-height: 1.5;
@@ -117,16 +117,17 @@ header #navigation .nav{
 }
 #navbar .navbar-nav > li > a{
     color: white;
-    padding: 0rem 1em 0.3rem;
+    padding: 0rem 1.5rem 0.3rem;
     
     background-color: rgba(32, 1, 14, 0.7);
     
-    font-size: 1.2rem;
+  font-size: 1.3rem;
+
     letter-spacing: 0rem;
 }
  /* Banner */
 .owl-carousel .owl-stage-outer {
-    background:rgba(158, 183, 200, 0.9);
+    background:rgba(0, 0, 0, 0.5); 
 }
 .home-carousel .container-fluid{
     padding: 0;
@@ -241,7 +242,8 @@ footer.main-footer hr{
     font-size: 2.1rem;
     position: relative;
     display: inline-block;
-    font-family: 'Cormorant Infant', sans-serif;
+    font-family: 'Alegreya', regular serif;
+    font-style: italic;
     text-align: left;
     color: rgb(70, 127, 191, 0.5);
 }
@@ -249,7 +251,7 @@ footer.main-footer hr{
     font-family: Georgia, serif;
     position: absolute;
     font-weight: normal;
-    color: rgb(70, 127, 191, 0.8);
+    color: rgba(70, 127, 191, 0.8);
     line-height: 20px;
     top: 50px;
 }
@@ -272,7 +274,7 @@ footer.main-footer hr{
     top: 0;
     right: 20px;
     padding: 10px 20px;
-    border: 1px solid rgb(70, 127, 191, 0.8);
+    border: 1px solid rgba(70, 127, 191, 0.8);
 }
 .btn_salir:before{
     font-family: 'FontAwesome';

@@ -746,9 +746,8 @@ header.nav-holder.sticky {
   padding: 1.4rem 1rem 1.6rem;
   color: #555;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 0.9rem;
+  font-size: 1.6rem;
   text-decoration: none;
   border-top: .3rem solid transparent;
 }
@@ -993,7 +992,8 @@ header.nav-holder.sticky {
 } */
 
 .home-carousel h1, .home-carousel h2 {
-  text-transform: uppercase;
+    color: white;
+  /*text-transform: uppercase;*/
   /* letter-spacing: 0.1em; */
 }
 
