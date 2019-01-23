@@ -137,7 +137,7 @@
       <p><b>¿Cómo vas a venir?</b>:<br/>
       {{ profile.notes_transport|linebreaksbr }}<p>
     {% endif %}
-    <p><b>¿Vas a utilizar el autobús desde Valencia?</b>: {% if profile.want_bus %}sí{% else %}no{% endif %}</p>
+    <p><b>¿Vas a ser mentora o mentor?</b>: {% if profile.want_mentor %}sí{% else %}no{% endif %}</p>
     {% if profile.room_choice %}
       <p><b>Tipo de alojamiento</b>:<br/>
       {{ profile.room_choice }}<p>
@@ -156,6 +156,7 @@
     {% endif %}
     <p><b>¿Quieres ser escudero?</b>: {% if profile.squire %}sí{% else %}no{% endif %}</p>
     <p><b>¿Es tu primera Estelcon?</b>: {% if profile.first_estelcon %}sí{% else %}no{% endif %}</p>
+    <p><b>¿Autorizas a la STE a usar tu imagen en material audiovisual posterior?</b>: {% if profile.want_media %}sí{% else %}no{% endif %}</p>
     {% if profile.notes_general %}
       <p><b>¿Algún otro comentario?</b>:<br/>
       {{ profile.notes_general|linebreaksbr }}<>

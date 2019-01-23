@@ -58,12 +58,22 @@ podemos compensar la diferencia.</p>
         </div>
       </div>
       <div class="form-check">
+        <p title="Ayudar a las personas que asisten por primera vez a una EstelCon es una gran idea.">
+          {{ form.want_mentor }}
+          <label for="id_mentor" class="form-check-label">¿Quieres ser mentora o mentor en esta Estelcon?</label>
+          {% if form.mentor.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.mentor.errors|join:", " }}&nbsp;</b>{% endif %}
+        </p>
+      </div>
+
+      <div class="form-check">
         <p title="Los escuderos son ayudantes voluntarios para echar una mano a la organización en tareas sencillas.">
           {{ form.squire }}
           <label for="id_squire" class="form-check-label">¿Quieres ser escudero en esta Estelcon?</label>
           {% if form.squire.errors %}<br/><b style="color:white;background-color:red">&nbsp;{{ form.squire.errors|join:", " }}&nbsp;</b>{% endif %}
         </p>
       </div>
+
+
       <div class="form-group">
         <p title="Escribe cualquier otra consideración que nos quieras comentar respecto de tu inscripción.">
           <label for="id_notes_general">¿Alguna otra necesidad que quieras compartir, o comentario?</label>
@@ -72,7 +82,7 @@ podemos compensar la diferencia.</p>
         </p>
       </div>
       <br/>
-      <p>Hay tres tipos de camisetas, unisex, mujer y niño. Para ver cómo son y las distintas tallas,<a href="#shirt-modal" data-toggle="modal" data-target="#shirt-modal" class="">pulsa aquí</a>.</p>
+      <p>Hay tres tipos de camisetas, unisex, mujer y niño. Para ver cómo es el diseño principal, <a href="#shirt-modal" data-toggle="modal" data-target="#shirt-modal" class="">pulsa aquí</a>.</p>
       <p>Si vas a querer alguna camiseta, indícanos aquí la talla. También puedes, si lo deseas, reservar más de una,
       simplemente indicando la cantidad que quieres en la casilla o casillas correspondientes.</p>
       <p>El precio de las camisetas es de 10€, se entregarán junto con el Maratulmë de la EstelCon, cuando os registréis nada más llegar.</p>

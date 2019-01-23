@@ -88,7 +88,8 @@ def create_new_user(user_data, home_url):
         want_ste_member = user_data['want_ste_member'],
         squire = user_data['squire'],
         first_estelcon = user_data['first_estelcon'],
-        want_bus = user_data['want_bus'],
+        want_mentor = user_data['want_mentor'],
+        want_media = user_data['want_media'],
         notes_general = user_data['notes_general'],
         shirts_S_1 = user_data['shirts_S_1'],
         shirts_M_1 = user_data['shirts_M_1'],
@@ -120,8 +121,8 @@ def create_new_user(user_data, home_url):
 #''' % (profile.quota, profile.payment_code)
             profile.payment = \
 '''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta del Banco Santander
-ES63 0049 1736 7121 9008 7291, a nombre de Helios De Rosario Martínez y Santiago Álvarez Muñoz, indicando en
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta del BBVA
+  ES10 0182 7386 8102 0854 5237, a nombre de Juan Carlos González Romero, indicando en
 el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
@@ -170,27 +171,33 @@ Su ficha puede consultarse directamente en %s
 #''' % (user.first_name, profile.quota, profile.payment_code, home_url)
             message_user = \
 '''
-¡Gracias por inscribirte en la Mereth Aderthad, %s!.
+¡Gracias por inscribirte en la Mereth Aderthad, %s! Tu nombre de usuario es %s.
 
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
-La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la
-cuenta del Banco Santander ES63 0049 1736 7121 9008 7291, a nombre de Helios De Rosario Martínez y
-Santiago Álvarez Muñoz, indicando en el ingreso el código %s.
+La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la 
+cuenta del BBVA  ES10 0182 7386 8102 0854 5237, 
+a nombre de Juan Carlos González Romero, indicando en el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
+Aprovechamos este correo para animarte a que te apuntes al grupo de personas interesadas en cualquier 
+actividad musical dentro de la Mereth Aderthad (especialmente importante dada la temática) que luego 
+irá concretándose. Éste es el enlace (necesitas que hagas login, buena excusa si aún no lo has hecho):
+
+https://estelcon2019.sociedadtolkien.org/es/actividad/19
+
 El equipo organizador.
 %s
-''' % (user.first_name, profile.quota, profile.payment_code, home_url)
+''' % (user.first_name, profile.alias, profile.quota, profile.payment_code, home_url)
         else:
             message_user = \
 '''
-¡Gracias por inscribirte en la Mereth Aderthad, %s!.
+¡Gracias por inscribirte en la Mereth Aderthad, %s! Tu nombre de usuario es %s.
 
 Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder a la web, ver y
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
@@ -200,14 +207,21 @@ con la organización para que te indiquemos el importe a abonar y la forma de pa
 
 Esperamos que esta Mereth Aderthad sea una experiencia inolvidable.
 
+Aprovechamos este correo para animarte a que te apuntes al grupo de personas interesadas en cualquier 
+actividad musical dentro de la Mereth Aderthad (especialmente importante dada la temática) que luego 
+irá concretándose. Éste es el enlace (necesitas que hagas login, buena excusa si aún no lo has hecho):
+
+https://estelcon2019.sociedadtolkien.org/es/actividad/19
+
+
 El equipo organizador.
 %s
-''' % (user.first_name, home_url)
+''' % (user.first_name, profile.alias, home_url)
 
     else:
         message_user = \
 '''
-¡Gracias por inscribirte en la Mereth Aderthad, %s!.
+¡Gracias por inscribirte en la Mereth Aderthad, %s!
 
 Sin embargo, lamentamos comunicarte que el número de plazas máximo que tenemos ha sido alcanzado, por
 lo que no podemos garantizar tu alojamiento. ¡Lo sentimos muchísimo!
@@ -235,48 +249,60 @@ El equipo organizador.
 
 
 def _calculate_quota(user_data):
-    if user_data['age'] > 5:
-        if user_data['room_choice'] == 'standard-completa':
-            quota = 115.0
-        elif user_data['room_choice'] == 'standard-v-a-d':
-            quota = 85.0
-        elif user_data['room_choice'] == 'standard-s-y-d':
-            quota = 55.0
-        elif user_data['room_choice'] == 'suplemento-completa':
-            quota = 140.0
-        elif user_data['room_choice'] == 'suplemento-v-a-d':
-            quota = 100.0
-        elif user_data['room_choice'] == 'suplemento-s-y-d':
-            quota = 63.0
+    if user_data['age'] > 12:
+        if user_data['room_choice'] == 'compartida-completa':
+            quota = 160.0
+        elif user_data['room_choice'] == 'compartida-v-a-d':
+            quota = 119.0
+        elif user_data['room_choice'] == 'compartida-s-y-d':
+            quota = 89.0
+        elif user_data['room_choice'] == 'individual-completa':
+            quota = 170.0
+        elif user_data['room_choice'] == 'individual-v-a-d':
+            quota = 125.0
+        elif user_data['room_choice'] == 'individual-s-y-d':
+            quota = 92.0
         else:
             return 0.0
-    else:
-        if user_data['room_choice'] == 'standard-completa':
-            quota = 58.0
-        elif user_data['room_choice'] == 'standard-v-a-d':
-            quota = 43.0
-        elif user_data['room_choice'] == 'standard-s-y-d':
-            quota = 28.0
-        elif user_data['room_choice'] == 'suplemento-completa':
-            quota = 70.0
-        elif user_data['room_choice'] == 'suplemento-v-a-d':
-            quota = 50.0
-        elif user_data['room_choice'] == 'suplemento-s-y-d':
-            quota = 32.0
+    elif user_data['age'] > 8:
+        if user_data['room_choice'] == 'compartida-completa':
+            quota = 138.0
+        elif user_data['room_choice'] == 'compartida-v-a-d':
+            quota = 104.0
+        elif user_data['room_choice'] == 'compartida-s-y-d':
+            quota = 83.0
+        elif user_data['room_choice'] == 'individual-completa':
+            quota = 138.0
+        elif user_data['room_choice'] == 'individual-v-a-d':
+            quota = 104.0
+        elif user_data['room_choice'] == 'individual-s-y-d':
+            quota = 83.0
         else:
             return 0.0
 
-    if not user_data['is_ste_member'] and user_data['room_choice'] != 'sin-alojamiento':
-        quota += 10.0
+    elif user_data['age'] > 3:
+        if user_data['room_choice'] == 'compartida-completa':
+            quota = 103.0
+        elif user_data['room_choice'] == 'compartida-v-a-d':
+            quota = 82.0
+        elif user_data['room_choice'] == 'compartida-s-y-d':
+            quota = 73.0
+        elif user_data['room_choice'] == 'individual-completa':
+            quota = 103.0
+        elif user_data['room_choice'] == 'individual-v-a-d':
+            quota = 82.0
+        elif user_data['room_choice'] == 'individual-s-y-d':
+            quota = 73.0
+        else:
+            return 0.0
+
+        
+    else:
+        quota = 0.0
+
 
     if user_data['want_ste_member']:
-        if user_data['room_choice'] != 'sin-alojamiento':
-            quota += 2.0
-        else:
-            quota += 12.0
-
-    if user_data['want_bus']:
-        quota += 20.0
+        quota += 12.0
 
     num_shirts = user_data['shirts_S_1'] + \
                  user_data['shirts_M_1'] + \
@@ -293,7 +319,7 @@ def _calculate_quota(user_data):
                  user_data['shirts_L_3'] + \
                  user_data['shirts_XL_3'] + \
                  user_data['shirts_XXL_3']
-    quota += num_shirts * 10.0
+    quota += num_shirts * 12.0
 
     return round(quota)
 
@@ -486,9 +512,12 @@ def user_listing(listing_id):
     elif listing_id == 10:
         return listing_users_with_shirts()
     elif listing_id == 11:
-        return listing_edhelbus()
+        return listing_mentors()
     elif listing_id == 12:
         return listing_everything()
+    elif listing_id == 13:
+        return listing_media()
+
     else:
         return None
 
@@ -699,8 +728,21 @@ def listing_users_with_shirts():
     rows = [("Talla", "Nombre", "Cantidad")] + rows
     return (None, rows)
 
-def listing_edhelbus():
-    profiles = UserProfile.objects.filter(want_bus=True).order_by('user__first_name', 'user__last_name')
+def listing_mentors():
+    profiles = UserProfile.objects.filter(want_mentor=True).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+    ) for p in profiles]
+
+    rows = [("Nombre", "Pseudónimo", "Smial")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+def listing_media():
+    profiles = UserProfile.objects.filter(want_media=False).order_by('user__first_name', 'user__last_name')
 
     rows = [(
         p.user.get_full_name(),
@@ -739,7 +781,8 @@ def listing_everything():
         'x' if p.want_ste_member else '',
         'x' if p.squire else '',
         'x' if p.first_estelcon else '',
-        'x' if p.want_bus else '',
+        'x' if p.want_mentor else '',
+        'x' if p.want_media else '',
         p.notes_general,
         p.shirts_S_1,
         p.shirts_M_1,

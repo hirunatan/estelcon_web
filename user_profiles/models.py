@@ -30,16 +30,16 @@ class UserProfile(models.Model):
     room_choice = models.CharField('Elige un tipo de alojamiento', max_length=50,
         choices=(
             (
-                'Habitación standard', (
-                    ('standard-completa', '(standard) completa'),
-                    ('standard-v-a-d', '(standard) viernes a domingo'),
-                    ('standard-s-y-d', '(standard) sábado y domingo'),
+                'Habitación compartida', (
+                    ('compartida-completa', '(compartida) completa'),
+                    ('compartida-v-a-d', '(compartida) viernes a domingo'),
+                    ('compartida-s-y-d', '(compartida) sábado y domingo'),
                 )
             ),(
-                'Habitación con suplemento', (
-                    ('suplemento-completa', '(suplemento) completa'),
-                    ('suplemento-v-a-d', '(suplemento) viernes a domingo'),
-                    ('suplemento-s-y-d', '(suplemento) sábado y domingo'),
+                'Habitación individual', (
+                    ('individual-completa', '(individual) completa'),
+                    ('individual-v-a-d', '(individual) viernes a domingo'),
+                    ('individual-s-y-d', '(individual) sábado y domingo'),
                 )
             ),
             ('otros', 'Otros'),
@@ -52,7 +52,8 @@ class UserProfile(models.Model):
     want_ste_member = models.BooleanField('En caso de que no, ¿quieres asociarte por 2€ más?', default=False)
     squire = models.BooleanField('¿Quieres ser escudero?', default=False)
     first_estelcon = models.BooleanField('¿Es tu primera Estelcon?', default=False)
-    want_bus = models.BooleanField('¿Vas a utilizar el autobús de Valencia?', default=False)
+    want_mentor = models.BooleanField('¿Querrías participar en el programa de mentorazgo a nuevos asistentes?', default=False)
+    want_media = models.BooleanField('Autorizo el uso de material audiovisual generado durante el evento Mereth Aderthad 2019 en donde se me pueda identificar por parte de la Sociedad Tolkien Española en su labor de difusión de actividades', default=False)
     notes_general = models.TextField('Comentarios general', blank = True)
     shirts_S_1 = models.IntegerField('Camisetas talla S (1)', default=0)
     shirts_M_1 = models.IntegerField('Camisetas talla M (1)', default=0)

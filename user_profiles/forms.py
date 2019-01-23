@@ -127,16 +127,16 @@ class SignupForm(forms.Form):
         required = True, widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             (
-                'Habitación standard', (
-                    ('standard-completa', '(standard) completa'),
-                    ('standard-v-a-d', '(standard) viernes a domingo'),
-                    ('standard-s-y-d', '(standard) sábado y domingo'),
+                'Habitación compartida', (
+                    ('compartida-completa', '(compartida) completa'),
+                    ('compartida-v-a-d', '(compartida) viernes a domingo'),
+                    ('compartida-s-y-d', '(compartida) sábado y domingo'),
                 )
             ),(
-                'Habitación con suplemento', (
-                    ('suplemento-completa', '(suplemento) completa'),
-                    ('suplemento-v-a-d', '(suplemento) viernes a domingo'),
-                    ('suplemento-s-y-d', '(suplemento) sábado y domingo'),
+                'Habitación individual', (
+                    ('individual-completa', '(individual) completa'),
+                    ('individual-v-a-d', '(individual) viernes a domingo'),
+                    ('individual-s-y-d', '(individual) sábado y domingo'),
                 )
             ),
             ('otros', 'Otros'),
@@ -169,10 +169,16 @@ class SignupForm(forms.Form):
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
-    want_bus = forms.BooleanField(
+    want_mentor = forms.BooleanField(
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
+
+    want_media = forms.BooleanField(
+        initial = False, required = False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    )
+
     notes_general = forms.CharField(
         required = False,
         widget = forms.Textarea(attrs={'class': 'form-control'}),
@@ -281,15 +287,15 @@ class SignupForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == 'standard-completa' or room_choice == 'suplemento-completa':
+        if room_choice == 'compartida-completa' or room_choice == 'individual-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'standard-v-a-d' or room_choice == 'suplemento-v-a-d':
+        elif room_choice == 'compartida-v-a-d' or room_choice == 'individual-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'standard-s-y-d' or room_choice == 'suplemento-s-y-d':
+        elif room_choice == 'compartida-s-y-d' or room_choice == 'individual-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True
@@ -538,16 +544,16 @@ class UserProfileEditInscriptionForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'}),
         choices=(
             (
-                'Habitación standard', (
-                    ('standard-completa', '(standard) completa'),
-                    ('standard-v-a-d', '(standard) viernes a domingo'),
-                    ('standard-s-y-d', '(standard) sábado y domingo'),
+                'Habitación compartida', (
+                    ('compartida-completa', '(compartida) completa'),
+                    ('compartida-v-a-d', '(compartida) viernes a domingo'),
+                    ('compartida-s-y-d', '(compartida) sábado y domingo'),
                 )
             ),(
-                'Habitación con suplemento', (
-                    ('suplemento-completa', '(suplemento) completa'),
-                    ('suplemento-v-a-d', '(suplemento) viernes a domingo'),
-                    ('suplemento-s-y-d', '(suplemento) sábado y domingo'),
+                'Habitación individual', (
+                    ('individual-completa', '(individual) completa'),
+                    ('individual-v-a-d', '(individual) viernes a domingo'),
+                    ('individual-s-y-d', '(individual) sábado y domingo'),
                 )
             ),
             ('otros', 'Otros'),
@@ -565,10 +571,15 @@ class UserProfileEditInscriptionForm(forms.Form):
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
-    want_bus = forms.BooleanField(
+    want_mentor = forms.BooleanField(
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
+    want_media = forms.BooleanField(
+        initial = False, required = True,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    )
+
     notes_general = forms.CharField(
         required = False,
         widget = forms.Textarea(attrs={'class': 'form-control'}),
@@ -652,15 +663,15 @@ class UserProfileEditInscriptionForm(forms.Form):
 
     def _clean_days(self, cleaned_data):
         room_choice = cleaned_data.get('room_choice')
-        if room_choice == 'standard-completa' or room_choice == 'suplemento-completa':
+        if room_choice == 'compartida-completa' or room_choice == 'individual-completa':
             cleaned_data['day_1'] = True
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'standard-v-a-d' or room_choice == 'suplemento-v-a-d':
+        elif room_choice == 'compartida-v-a-d' or room_choice == 'individual-v-a-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = True
             cleaned_data['day_3'] = True
-        elif room_choice == 'standard-s-y-d' or room_choice == 'suplemento-s-y-d':
+        elif room_choice == 'compartida-s-y-d' or room_choice == 'individual-s-y-d':
             cleaned_data['day_1'] = False
             cleaned_data['day_2'] = False
             cleaned_data['day_3'] = True

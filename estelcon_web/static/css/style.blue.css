@@ -108,7 +108,7 @@ p.lead {
 }
 
 .text-sm, .form-group label, #blog-listing-big .date-comments a, #blog-listing-medium .date-comments a, #blog-listing-big p.intro, #blog-listing-medium p.intro {
-  font-size: 0.9rem;
+  font-size: 1.0rem;
 }
 
 .text-xs {
@@ -530,6 +530,7 @@ ul.social a.email {
 
 table {
   font-size: 0.9rem;
+  text-align: left;
 }
 
 table input[type="number"] {
@@ -3017,6 +3018,7 @@ body {
 a {
   color: #467fbf;
   text-decoration: none;
+  text-align: left;
 }
 
 a:focus, a:hover {
