@@ -14,7 +14,8 @@ class UserProfileInline(admin.StackedInline):
 
 
 class UserAdmin(auth_admin.UserAdmin):
-    list_display = ('username', 'email', 'get_full_name', 'is_staff', 'get_payment_code', 'get_is_under_age', 'get_quota', 'get_payed', 'get_payment')
+    list_display = ('username', 'get_full_name', 'is_staff', 'id', 'get_payment_code', 'get_is_under_age', 'get_quota', 'get_payed', 'get_payment')
+    ordering = ('-id',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'profile__dinner_menu', 'profile__room_choice', 'profile__want_mentor', 'profile__want_media')
     select_related = ('profile',)
     search_fields = ('username', 'email', 'first_name', 'last_name', 'profile__alias', 'profile__smial', 'profile__payment')
@@ -26,6 +27,10 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     inlines = (UserProfileInline, )
 
+
+    def payment_code_order(self, obj):
+        return obj.order__count
+    
     def get_payment_code(self, obj):
         return obj.profile.payment_code
 

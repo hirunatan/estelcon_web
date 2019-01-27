@@ -142,6 +142,7 @@ INSTALLED_APPS = (
 LANGUAGES = (
     ## Customize this
     ('es', gettext('es')),
+    ('en', gettext('en')),
     ('ca', gettext('ca')),
     ('eu', gettext('eu')),
     ('gl', gettext('gl')),
@@ -157,6 +158,14 @@ CMS_LANGUAGES = {
             'public': True,
             'hide_untranslated': False,
         },
+        {
+            'code': 'en',
+            'name': gettext('en'),
+            'redirect_on_fallback': True,
+            'public': True,
+            'hide_untranslated': False,
+        },
+
         {
             'code': 'ca',
             'name': gettext('ca'),

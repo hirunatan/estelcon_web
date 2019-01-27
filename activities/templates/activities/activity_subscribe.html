@@ -24,7 +24,7 @@
     {% endif %}
 
     {% if activity.show_owners and activity.owners.all %}
-      Por: <em>
+      Coordinada por: <em>
       {% for owner in activity.owners.all %}
         {% if not forloop.first and not forloop.last %}, {% endif %}
         {% if not forloop.first and forloop.last %} y {% endif %}
