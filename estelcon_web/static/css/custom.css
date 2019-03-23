@@ -42,6 +42,20 @@ header.bg:before,header.bg:after{
 .box_ficha{
     text-align: center;
 }
+
+.langlink{
+    margin-top: 10px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-family: 'Dosis', serif;
+    padding: 6px 12px;
+    border:1px solid rgba(158, 183, 200, 0.9);
+    color:blue;
+    background-color:#fff;
+    display: inline-block;
+}
+
+
 .btnlogin{
     text-transform: uppercase;
     margin-top: 10px;

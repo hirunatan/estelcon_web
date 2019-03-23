@@ -121,8 +121,8 @@ def create_new_user(user_data, home_url):
 #''' % (profile.quota, profile.payment_code)
             profile.payment = \
 '''
-Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta del BBVA
-  ES10 0182 7386 8102 0854 5237, a nombre de Juan Carlos González Romero, indicando en
+Pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la cuenta de ING
+ES62 1465 0100 98 1733764252, a nombre de Bárbara García Huertas, indicando en
 el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
@@ -177,8 +177,8 @@ Ya hemos registrado tus datos, y se ha creado un usuario para que puedas acceder
 cambiar tus datos personales, y apuntarte a actividades o proponernos las tuyas propias.
 
 La inscripción queda pendiente de verificación del pago. Debes realizar un ingreso de %d€ en la 
-cuenta del BBVA  ES10 0182 7386 8102 0854 5237, 
-a nombre de Juan Carlos González Romero, indicando en el ingreso el código %s.
+cuenta de ING ES62 1465 0100 98 1733764252, a nombre de Bárbara García Huertas, 
+indicando en el ingreso el código %s.
 
 Por favor recuerda hacer el ingreso antes de 5 días. Si no se recibe el pago con
 anterioridad a esa fecha, tu plaza quedará anulada.
@@ -443,15 +443,17 @@ El equipo organizador.
 
 def change_user_inscription_data(user, new_data, home_url):
     changed_fields = []
-
+    print("NEWDATA",new_data)
     profile = user.profile
     for field_name in ['notes_food', 'dinner_menu', 'notes_transport', 'room_choice',
-                'room_preferences', 'squire', 'notes_general',
+                       'room_preferences', 'squire', 'want_mentor', 'notes_general',
                 'shirts_S_1', 'shirts_M_1', 'shirts_L_1', 'shirts_XL_1', 'shirts_XXL_1',
                 'shirts_S_2', 'shirts_M_2', 'shirts_L_2', 'shirts_XL_2', 'shirts_XXL_2',
                 'shirts_S_3', 'shirts_M_3', 'shirts_L_3', 'shirts_XL_3', 'shirts_XXL_3',
             ]:
+        print(field_name,new_data[field_name])
         if getattr(profile, field_name) != new_data[field_name]:
+            print("-->",field_name)
             changed_fields.append(str(profile._meta.get_field(field_name).verbose_name))
             setattr(profile, field_name, new_data[field_name])
     profile.save()
@@ -517,7 +519,10 @@ def user_listing(listing_id):
         return listing_everything()
     elif listing_id == 13:
         return listing_media()
+    elif listing_id == 14:
+        return listing_firstec()
 
+    
     else:
         return None
 
@@ -569,6 +574,20 @@ def listing_non_members():
     rows = [("Nombre", "Quiere ser socio")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
+
+def listing_firstec():
+    profiles = UserProfile.objects.filter(first_estelcon = True).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        'x' if p.is_ste_member else '-',
+        'x' if p.want_ste_member else '-',
+    ) for p in profiles]
+
+    rows = [("Nombre", "Es socio/a", "Quiere ser socio/a")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
 
 
 def listing_squires():

@@ -18,6 +18,8 @@ Block = namedtuple('Block', ['hour', 'columns'])
 Column = namedtuple('Column', ['rowspan', 'colspan', 'activities'])
 PendingColumn = namedtuple('PendingColumn', ['current_row', 'column'])
 
+HiddenDay = datetime(2019,1,2)
+
 def get_schedule():
     # Obtain the list of all activities (they are already ordered by start date) and put them in
     # a table divided in days, and then in blocks of half hour, from 8:30h to 05:00h next day.
@@ -28,7 +30,7 @@ def get_schedule():
     locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
 
     # Get the complete list of activities, and split into those with hour and those without
-    activities = Activity.objects.all()
+    activities = Activity.objects.filter(start__gt=HiddenDay)
     activ_without_hour = [a for a in activities if a.start is None]
     activ_with_hour = [a for a in activities if a.start is not None]
 
@@ -37,9 +39,11 @@ def get_schedule():
     if len(activ_with_hour) > 0:
 
         first_day = activ_with_hour[0].start.replace(hour=0, minute=0, second=0, microsecond=0)
+
         last_day = activ_with_hour[-1].start.replace(hour=0, minute=0, second=0, microsecond=0)
 
         day = first_day
+        print("DAYS",first_day,last_day,day)
         while day <= last_day:
             day_blocks = _build_day_blocks(activ_with_hour, day)
             days.append(day_blocks)
@@ -220,6 +224,8 @@ El usuario %s (%s, %s) se ha inscrito en la actividad %s.
 '''
 Ponte en contacto con la organización, por favor, ya que tu actividad '%s' ya ha sobrepasado el máximo de plazas.
 Actualmente tienes %d inscritos en una actividad con un máximo establecido por ti de %d.
+Por defecto, a las personas que se inscriben superado el límite se les indica que están en lista de espera
+y que las personas responsables de la actividad se pondrán en contacto con ella.
 '''
 % (activity.title, len(activity.participants.all()), activity.max_places),
                 from_email = settings.MAIL_FROM,
@@ -233,6 +239,9 @@ Actualmente tienes %d inscritos en una actividad con un máximo establecido por 
 ATENCION, tu inscripción ha superado el número máximo de plazas disponibles. Los responsables
 ya han sido notificados de este hecho y tomarán una decisión en breve. Si no recibes
 contestación en pocos días no dudes en escribir directamente a la organización.
+Por defecto, se considera que tu inscripción en la actividad pasa a formar parte de una lista
+de espera y que esta lista de espera se resolverá con suficiente antelación a la celebración
+de la Mereth Aderthad.
 '''
     else:
         message_participants_maxplaces = 'Te encuentras dentro del número máximo de plazas.'

@@ -49,7 +49,7 @@ class UserProfile(models.Model):
     children_count = models.IntegerField('¿Traes niños a tu cargo? Si es así, indica cuántos', default=0)
     children_names = models.TextField('Indica sus nombres, uno en cada línea', blank = True)
     is_ste_member = models.BooleanField('¿Eres socio/a de la STE?', default=True)
-    want_ste_member = models.BooleanField('En caso de que no, ¿quieres asociarte por 2€ más?', default=False)
+    want_ste_member = models.BooleanField('En caso de que no, ¿quieres asociarte por 12€ más?', default=False)
     squire = models.BooleanField('¿Quieres ser escudero?', default=False)
     first_estelcon = models.BooleanField('¿Es tu primera Estelcon?', default=False)
     want_mentor = models.BooleanField('¿Querrías participar en el programa de mentorazgo a nuevos asistentes?', default=False)

@@ -193,6 +193,7 @@ class UserProfileEditInscriptionView(FormView):
             'room_choice': profile.room_choice,
             'room_preferences': profile.room_preferences,
             'squire': profile.squire,
+            'want_mentor': profile.want_mentor,
             'notes_general': profile.notes_general,
             'shirts_S_1': profile.shirts_S_1,
             'shirts_M_1': profile.shirts_M_1,

@@ -195,6 +195,10 @@ CMS_LANGUAGES = {
     },
 }
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
 CMS_TEMPLATES = (
     ## Customize this
     ('page.html', 'Page'),

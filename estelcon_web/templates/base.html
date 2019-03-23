@@ -86,7 +86,7 @@
             <i class="fa fa-align-justify"></i>
           </button>
           <div id="navigation" class="navbar-collapse collapse flex-column">
-            <div class="box_ficha ml-auto"><a href="{% url 'user-profile' %}" class="btnlogin nav-link"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a></div>
+            <div class="box_ficha ml-auto"><a href="/en/" class="langlink" >English</a> <a href="/es/" class="langlink" >Castellano</a>  <a href="{% url 'user-profile' %}" class="btnlogin nav-link"><i class="fa fa-user-circle"></i>&nbsp; Ficha Personal</a></div>
             <ul class="nav navbar-nav ml-auto">
               {% show_menu 0 100 0 100 "menu.html" %}
             </ul>

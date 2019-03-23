@@ -575,11 +575,13 @@ class UserProfileEditInscriptionForm(forms.Form):
         initial = False, required = False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
-    want_media = forms.BooleanField(
-        initial = False, required = True,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-    )
 
+#    want_media = forms.BooleanField(
+#        initial = False, required = False,
+#        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+#    )
+
+    
     notes_general = forms.CharField(
         required = False,
         widget = forms.Textarea(attrs={'class': 'form-control'}),
