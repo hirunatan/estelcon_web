@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-15 22:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: estelcon_web/templates/home_page.html:18
+msgid "Lugar del evento"
+msgstr "Venue"
+
+#: estelcon_web/templates/home_page.html:20
+msgid ""
+"La celebración de la Estelcon será en el Centro Espiritual de los Padres "
+"Paúles al lado de Salamanca"
+msgstr ""
+"The Estelcon event will take place at the Centro Espiritual de los Padres "
+"Paúles next to Salamanca"
+
+#: estelcon_web/templates/home_page.html:21
+#: estelcon_web/templates/home_page.html:45
+msgid "Más Info"
+msgstr "More Info"
+
+#: estelcon_web/templates/home_page.html:33
+msgid ""
+"La música y la naturaleza. ¿Cómo es la creación de un mundo a la vez coral y "
+"musical?"
+msgstr ""
+"Music and Nature. How is a world creation both collective and musical "
+"at the same time?"
+
+#: estelcon_web/templates/home_page.html:34
+msgid "¡Ven y descúbrelo en la XXIV Mereth Aderthad!"
+msgstr "Come and find it out at the XXIV Mereth Aderthad!"
+
+#: estelcon_web/templates/home_page.html:44
+msgid ""
+"Ven con nosotros a celebrar <br>la reunión anual de la STE<br>Del 9 al 12 de "
+"mayo</p>"
+msgstr ""
+"Come with us to celebrate <br>the annual gathering of the STE<br>From 9th to 12th of May</p>"
+
+
+#: settings/common.py:144 settings/common.py:156
+msgid "es"
+msgstr "es"
+
+#: settings/common.py:145 settings/common.py:163
+msgid "en"
+msgstr "en"
+
+#: settings/common.py:146 settings/common.py:171
+msgid "ca"
+msgstr ""
+
+#: settings/common.py:147 settings/common.py:178
+msgid "eu"
+msgstr ""
+
+#: settings/common.py:148 settings/common.py:185
+msgid "gl"
+msgstr ""
+
+#: user_profiles/admin.py:24
+msgid "Personal info"
+msgstr ""
+
+#: user_profiles/admin.py:25
+msgid "Permissions"
+msgstr ""
+
+#: user_profiles/admin.py:26
+msgid "Important dates"
+msgstr ""

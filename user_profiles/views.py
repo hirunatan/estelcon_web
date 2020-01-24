@@ -64,6 +64,39 @@ class SignupView(FormView):
             self.queue,
         )
 
+class SignupExtraView(FormView):
+    template_name = 'user_profiles/signup_extra.html'
+    form_class = SignupForm
+
+    def get_context_data(self, **kwargs):
+        context = super(SignupExtraView, self).get_context_data(**kwargs)
+        context['signup_closed'] = settings.SIGNUP_CLOSED
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if  settings.SIGNUP_CLOSED:
+            return super(SignupExtraView, self).post(request, *args, **kwargs)
+        else:
+            # If signup form is enabled, don't process anything and return the same page
+            return super(SignupExtraView, self).get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        (user, queue) = services.create_new_user(
+            user_data = form.cleaned_data,
+            home_url = settings.PROTOCOL + '://' + settings.SITE_URL,
+        )
+        self.user = user
+        self.queue = queue
+        return super(SignupExtraView, self).form_valid(form)
+
+    def get_success_url(self):
+        profile = self.user.profile
+        return reverse('login') + '?payment_code=%s&quota=%d&queue=%d' % (
+            profile.payment_code,
+            profile.quota,
+            self.queue,
+        )
+
 
 class LoginView(FormView):
     template_name = 'user_profiles/login.html'

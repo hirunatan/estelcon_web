@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 
 from .views import (
-    PreSignupView, SignupView, LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
+    PreSignupView, SignupView, SignupExtraView, LoginView, LogoutView, ForgotPasswordView, ChangePasswordView,
     UserProfileView, UserProfileEditPersonalView, UserProfileEditInscriptionView,
     UserListingsIndexView, UserListingView
 )
@@ -20,7 +20,10 @@ if settings.PRE_SIGNUP_FORM:
 else:
     urlpatterns = [
         url(r'^inscripcion$', SignupView.as_view(),
+            name='signup'),
+        url(r'^inscripcion-extra$', SignupExtraView.as_view(),
             name='signup')
+
     ]
 
 urlpatterns += [

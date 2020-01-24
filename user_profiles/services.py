@@ -521,6 +521,12 @@ def user_listing(listing_id):
         return listing_media()
     elif listing_id == 14:
         return listing_firstec()
+    elif listing_id == 15:
+        return listing_notfirstec()
+    elif listing_id == 16:
+        return listing_parents()
+    elif listing_id == 17:
+        return listing_yesmedia()
 
     
     else:
@@ -577,14 +583,29 @@ def listing_non_members():
 
 def listing_firstec():
     profiles = UserProfile.objects.filter(first_estelcon = True).order_by('user__first_name', 'user__last_name')
-
+    number = len(profiles)
     rows = [(
         p.user.get_full_name(),
+        p.smial,
         'x' if p.is_ste_member else '-',
         'x' if p.want_ste_member else '-',
     ) for p in profiles]
 
-    rows = [("Nombre", "Es socio/a", "Quiere ser socio/a")] + rows
+    rows = [("Número total", "%i"%(number), ""), ("Nombre", "Smial", "Es socio/a", "Quiere ser socio/a")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+def listing_notfirstec():
+    profiles = UserProfile.objects.filter(first_estelcon = False).order_by('user__first_name', 'user__last_name')
+    number = len(profiles)
+    rows = [(
+        p.user.get_full_name(),
+        p.smial,
+        'x' if p.is_ste_member else '-',
+        'x' if p.want_mentor else '-',
+    ) for p in profiles]
+
+    rows = [("Número total", "%i"%(number), ""), ("Nombre", "Smial", "Es socio/a", "Es YA mentor/a")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
 
@@ -613,6 +634,20 @@ def listing_children():
     ) for p in profiles]
 
     rows = [("Nombre", "Pseudónimo", "Smial", "Edad")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
+def listing_parents():
+    profiles = UserProfile.objects.filter(children_count__gt = 0).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+        p.children_count,
+    ) for p in profiles]
+
+    rows = [("Nombre Padre/Madre", "Pseudónimo", "Smial", "Número de niños/as")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
 
@@ -772,6 +807,20 @@ def listing_media():
     rows = [("Nombre", "Pseudónimo", "Smial")] + rows
     block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
     return (block, rows)
+
+def listing_yesmedia():
+    profiles = UserProfile.objects.filter(want_media=True).order_by('user__first_name', 'user__last_name')
+
+    rows = [(
+        p.user.get_full_name(),
+        p.alias,
+        p.smial,
+    ) for p in profiles]
+
+    rows = [("Nombre", "Pseudónimo", "Smial")] + rows
+    block = ", ".join(['"' + p.user.get_full_name() + '" <' + p.user.email + '>' for p in profiles])
+    return (block, rows)
+
 
 
 def listing_everything():
