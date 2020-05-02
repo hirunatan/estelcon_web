@@ -70,3 +70,6 @@ docs/_build/
 # Pipenv
 Pipfile
 Pipfile.lock
+
+#Nohup
+*nohup*

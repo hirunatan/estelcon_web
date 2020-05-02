@@ -189,7 +189,7 @@ Aprovechamos este correo para animarte a que te apuntes al grupo de personas int
 actividad musical dentro de la Mereth Aderthad (especialmente importante dada la temática) que luego 
 irá concretándose. Éste es el enlace (necesitas que hagas login, buena excusa si aún no lo has hecho):
 
-https://estelcon2019.sociedadtolkien.org/es/actividad/19
+https://estelcon2020.sociedadtolkien.org/es/actividad/19
 
 El equipo organizador.
 %s
